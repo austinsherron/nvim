@@ -7,9 +7,9 @@ o.mouse = nil
 
 ---- general settings ----------------------------------------------------------
 
-o.nu          = true             -- line numbers 
-o.syntax      = 'on'
-o.ruler       = true
+o.syntax        = 'on'
+o.ruler         = true
+o.formatoptions = 'tcrqn2lj'
 
 -- allows nvim to copy/paste to/from system clipboards
 opt.clipboard:append('unnamedplus')
@@ -32,9 +32,11 @@ o.smartcase  = true
 
 ---- display settings ----------------------------------------------------------
 
-o.showbreak = "↪ "
-o.scrolloff = 7
-o.termguicolors = true
+o.showbreak     = "↪ "           -- show at line break
+-- ensure 7 lines on either side of cursor always show
+o.scrolloff     = 7              
+o.termguicolors = true           -- enable truecolor
+o.nu            = true           -- line numbers 
 
 ---- functional settings -------------------------------------------------------
 
