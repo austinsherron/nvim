@@ -1,4 +1,5 @@
-km = require 'nvim.lua.mapper'
+local km = require 'nvim.lua.utils.mapper'
+local pm = require 'nvim.lua.utils.pluginmanager'
 
 
 ---- note: settings that should come before everything else
@@ -10,6 +11,10 @@ vim.g.maplocalleader = ' '
 
 ---- load settings
 
-require 'nvim.lua.settings'
-require 'nvim.lua.keymappings'
+require 'nvim.lua.config.keymappings.general'
+require 'nvim.lua.config.settings'
+require 'nvim.lua.config.treesitter'
 
+---- load plugins
+
+pm.init('plugins')

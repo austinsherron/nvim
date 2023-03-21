@@ -1,8 +1,6 @@
-local function init()
-    local pathbase = vim.fn.stdpath('data') 
-    local relpath = 'lua/plugins/lazy/lazy.nvim'
-
-    local lazypath = pathbase .. relpath
+local function init(plugins)
+    local pathbase = vim.fn.stdpath('data') .. '/packages'
+    local lazypath = pathbase .. '/lazy.nvim'
 
     if not vim.loop.fs_stat(lazypath) then
       vim.fn.system({
@@ -15,6 +13,11 @@ local function init()
       })
     end
     vim.opt.rtp:prepend(lazypath)
+
+    require('lazy').setup(plugins, {
+        root = pathbase,
+        lockfile = pathbase .. '/.lazy-lockfile.json'
+    })
 end
 
 

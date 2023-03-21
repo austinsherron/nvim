@@ -1,21 +1,17 @@
-km = require 'nvim.lua.mapper'
+km = require 'nvim.lua.utils.mapper'
 
 
 -- navigation -----------------------------------------------------------------
 
+-- easy buffer navigation
 km.map('<leader>bn', ':bn<cr>')
 km.map('<leader>bp', ':bp<cr>')
 
----- tmux/nvim navigator plugin settings: to easily navigate b/w tmux panes while
----- in nvim
-
-vim.g.tmux_navigator_no_mappings = 1
-
-km.noremap('<silent> <c-h>', ':<C-U>TmuxNavigateLeft<cr>')
-km.noremap('<silent> <c-j>', ':<C-U>TmuxNavigateDown<cr>')
-km.noremap('<silent> <c-k>', ':<C-U>TmuxNavigateUp<cr>')
-km.noremap('<silent> <c-l>', ':<C-U>TmuxNavigateRight<cr>')
-km.noremap('<silent> <c-;>', ':<C-U>TmuxNavigatePrevious<cr>')
+-- easy split navigation
+km.nnoremap('<C-h>', '<C-w>h')
+km.nnoremap('<C-j>', '<C-w>j')
+km.nnoremap('<C-k>', '<C-w>k')
+km.nnoremap('<C-l>', '<C-w>l')
 
 -- commands -------------------------------------------------------------------
 
@@ -23,7 +19,11 @@ km.noremap('<silent> <c-;>', ':<C-U>TmuxNavigatePrevious<cr>')
 
 km.inoremap('jk', '<Esc>')
 km.inoremap('kj', '<Esc>')
+
 km.nnoremap('<leader>r', '<c-r>')
+
+-- toggle relative line numbers
+km.nmap('<C-L><C-L>', ':set invrelativenumber<CR>')
 
 -- let's j and k move inside a visually wrapped line
 km.nnoremap('j', 'gj')
