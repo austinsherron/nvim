@@ -3,10 +3,6 @@ km = require 'nvim.lua.utils.mapper'
 
 -- navigation -----------------------------------------------------------------
 
--- easy buffer navigation
-km.map('<leader>bn', ':bn<cr>')
-km.map('<leader>bp', ':bp<cr>')
-
 -- easy split navigation
 km.nnoremap('<C-h>', '<C-w>h')
 km.nnoremap('<C-j>', '<C-w>j')
@@ -30,4 +26,15 @@ km.nnoremap('j', 'gj')
 km.nnoremap('k', 'gk')
 km.xnoremap('j', 'gj')
 km.xnoremap('k', 'gk')
+
+-- easy buffer interactions
+km.nnoremap('<leader>bn', ':bn<cr>')
+km.nnoremap('<leader>bp', ':bp<cr>')
+km.nnoremap('<leader>bd', ':bd<cr>')
+
+-- map misc ':' commands to <leader>c
+km.nnoremap('<leader>w', ':w<cr>')
+km.nnoremap('<leader>W', ':wq<cr>')
+km.nnoremap('<leader>q', ':q<cr>')
+km.nnoremap('<leader>Q', ':q!<cr>')
 
