@@ -1,5 +1,3 @@
-require 'lib.lua.functions'
-require 'lib.lua.meta'
 require 'lib.lua.string'
 
 
