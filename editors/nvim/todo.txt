@@ -1,0 +1,4 @@
+* Need plugins for:
+  * Undo tree
+  * Project manager
+  * Start screen? (probably not, kinda dumb)
