@@ -1,4 +1,23 @@
 * Need plugins for:
-  * Undo tree
+  * Auto-completion/correction
+  * Auto-imports
+  * Code generations (see snippets)
+  * Code searching utility
+  * Colorscheme
+  * --Comments--
+  * Filetree/explorer
+  * Find+Replace
+  * Formatting
+  * Git sidebar changes
+  * Inline docs/hints
+  * Notifications
   * Project manager
+  * Renaming/refactoring
+  * Snippets
   * Start screen? (probably not, kinda dumb)
+  * Status bar
+  * --Surround-
+  * Syntax checking
+  * --Tab/buffer bar--
+  * --Telescope--
+  * Undo tree

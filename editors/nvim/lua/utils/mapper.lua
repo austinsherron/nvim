@@ -40,7 +40,13 @@ local function do_mapping(mode, lhs, rhs, noremap, silent)
 
     local options = { noremap = true, silent = true }
 
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    if (type(rhs) == 'string') then
+        vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    elseif (type(rhs) == 'function') then
+	vim.keymap.set(mode, lhs, rhs, options)
+    else
+        error('rhs = ' .. tostring(rhs) .. ' is of an unrecognized type ' .. type(rhs))
+    end
 end
 
 
