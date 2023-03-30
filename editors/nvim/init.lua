@@ -13,8 +13,9 @@ vim.g.maplocalleader = ' '
 
 require 'nvim.lua.config.keymappings.general'
 require 'nvim.lua.config.settings'
-require 'nvim.lua.config.treesitter'
+-- require 'nvim.lua.config.treesitter'
 
 ---- load plugins
 
 pm.init('plugins')
+
