@@ -1,6 +1,7 @@
 local o = vim.o
 local opt = vim.opt
 
+
 ---- interaction settings ------------------------------------------------------
 
 o.mouse = nil
@@ -50,3 +51,4 @@ o.updatetime = 1000
 opt.completeopt = { "menuone", "noselect" }
 -- how many lines must change to report on # of lines changed (so, always)
 o.report = 0
+
