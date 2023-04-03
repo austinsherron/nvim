@@ -1,4 +1,4 @@
-function nvimtree_settings()
+function nvim_tree_settings()
   return {
     sort_by = 'case_sensitive',
     renderer = {

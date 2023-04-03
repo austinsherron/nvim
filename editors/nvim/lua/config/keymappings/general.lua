@@ -31,10 +31,14 @@ km.xnoremap('k', 'gk')
 km.nnoremap('<leader>bn', ':bn<cr>')
 km.nnoremap('<leader>bp', ':bp<cr>')
 km.nnoremap('<leader>bd', ':bd<cr>')
+km.nnoremap('<silent><leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>')
 
 -- map misc ':' commands to <leader>c
 km.nnoremap('<leader>w', ':w<cr>')
-km.nnoremap('<leader>W', ':wq<cr>')
+km.nnoremap('<leader>W', ':w!<cr>')
+km.nnoremap('<leader>wq', ':wq<cr>')
+km.nnoremap('<leader>wq', ':wq<cr>')
+km.nnoremap('<leader>wqa', ':wqa<cr>')
 km.nnoremap('<leader>q', ':q<cr>')
 km.nnoremap('<leader>Q', ':q!<cr>')
 

@@ -11,8 +11,6 @@ require('nvim.lua.utils.pluginmanager').init('plugins')
 -- keymappings -----------------------------------------------------------------
 
 require 'nvim.lua.config.keymappings'
--- require 'nvim.lua.config.keymappings.general'
--- require 'nvim.lua.config.keymappings.nvimtree'
 
 -- settings -------------------------------------------------------------------
 
