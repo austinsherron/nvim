@@ -34,11 +34,11 @@ end
 
 
 -- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim/lua/core/keymaps.lua
-local function do_mapping(mode, lhs, rhs, noremap, silent)
+local function do_mapping(mode, lhs, rhs, noremap, silent, buffer)
     local noremap = noremap and true
     local silent = silent and true
 
-    local options = { noremap = true, silent = true }
+    local options = { noremap = noremap, silent = silent, buffer = buffer }
 
     if (type(rhs) == 'string') then
         vim.api.nvim_set_keymap(mode, lhs, rhs, options)
@@ -59,9 +59,9 @@ end
 
 
 local function do_make_mapping_func(mode, noremap)
-    return function(lhs, rhs, silent) 
+    return function(lhs, rhs, buffer) 
         local silent = string.startswith(lhs, '<silent>')
-        return do_mapping(mode, lhs, rhs, noremap, silent)
+        return do_mapping(mode, lhs, rhs, noremap, silent, buffer)
     end
 end
 
