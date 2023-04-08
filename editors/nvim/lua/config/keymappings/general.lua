@@ -13,8 +13,11 @@ km.nnoremap('<C-l>', '<C-w>l')
 
 -- interactions ---------------------------------------------------------------
 
+km.inoremap('jh', '<Esc>')
+km.inoremap('hj', '<Esc>')
 km.inoremap('jk', '<Esc>')
 km.inoremap('kj', '<Esc>')
+km.inoremap('<C-c>', '<Esc>')
 
 km.nnoremap('<leader>r', '<c-r>')
 
@@ -28,17 +31,23 @@ km.xnoremap('j', 'gj')
 km.xnoremap('k', 'gk')
 
 -- easy buffer interactions
-km.nnoremap('<leader>bn', ':bn<cr>')
-km.nnoremap('<leader>bp', ':bp<cr>')
-km.nnoremap('<leader>bd', ':bd<cr>')
-km.nnoremap('<silent><leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>')
+km.nnoremap('<leader>n', ':bn<cr>')
+km.nnoremap('<leader>p', ':bp<cr>')
+km.nnoremap('<leader>x', ':bd<cr>:bn<cr>')
+-- km.nnoremap('<leader><M-Tab>', ':bn<cr>')
+-- km.nnoremap('<leader><M-S-Tab>', ':bp<cr>')
+-- km.nnoremap('<silent><leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>')
+
+-- resize buffers
+km.nnoremap('<leader>J', ':resize +10<cr>')
+km.nnoremap('<leader>K', ':resize -10<cr>')
+km.nnoremap('<leader>L', ':vertical resize +10<cr>')
+km.nnoremap('<leader>H', ':vertical resize -10<cr>')
 
 -- map misc ':' commands to <leader>c
 km.nnoremap('<leader>w', ':w<cr>')
-km.nnoremap('<leader>W', ':w!<cr>')
-km.nnoremap('<leader>wq', ':wq<cr>')
-km.nnoremap('<leader>wq', ':wq<cr>')
-km.nnoremap('<leader>wqa', ':wqa<cr>')
+km.nnoremap('<leader>W', ':wq<cr>')
+km.nnoremap('<leader>aW', ':wqa<cr>')
 km.nnoremap('<leader>q', ':q<cr>')
 km.nnoremap('<leader>Q', ':q!<cr>')
 
