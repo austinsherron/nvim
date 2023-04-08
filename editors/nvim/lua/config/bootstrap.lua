@@ -1,7 +1,24 @@
 local km = require 'nvim.lua.utils.mapper'
+require 'lib.lua.run'
 
 
 -- note: settings that should come before everything else
+
+-- internals -------------------------------------------------------------------
+
+---- setup dirs for misc. state
+
+local state_base = vim.fn.stdpath('state')
+
+-- for storing for storing backups
+local backup_path = state_base .. '/backup'
+mkdir(state_base .. '/backup')
+vim.o.backupdir = backup_path
+
+-- for storing undo history
+local undo_path = state_base .. '/undo'
+mkdir(state_base .. '/undo')
+vim.o.undodir = undo_path
 
 -- look & feel -----------------------------------------------------------------
 
@@ -20,3 +37,4 @@ km.nnoremap('<Space>', '<Nop>')
 -- remap leaders to space
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
