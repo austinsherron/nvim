@@ -32,7 +32,7 @@ end
 
 function project_opts()
   return {
-    patterns = get_patterns(),
+    -- patterns = get_patterns(),
   }
 end
 

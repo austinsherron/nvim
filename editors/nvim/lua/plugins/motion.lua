@@ -4,6 +4,8 @@
    control on-screen (as opposed to file-system) movement
 --]]
 
+require 'nvim.lua.plugins.config.nvimtmuxnav'
+
 
 return {
 ---- leap: fast movement w/in files
