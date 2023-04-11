@@ -31,7 +31,13 @@ return {
     enabled = false,
   },
 ---- lualine: status line
-  {'nvim-lualine/lualine.nvim'},
+  {
+    'nvim-lualine/lualine.nvim',
+
+    config = function()
+      require('lualine').setup()
+    end
+  },
 ---- undotree: visualize a file/buffer's change history
   {'mbbill/undotree'},
 }
