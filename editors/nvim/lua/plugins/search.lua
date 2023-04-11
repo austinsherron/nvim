@@ -4,7 +4,6 @@
   make it easier to find things
 --]]
 
-
 local km = require('nvim.lua.utils.mapper')
 require 'nvim.lua.plugins.config.telescope'
 
