@@ -13,6 +13,8 @@ return {
       require('Comment').setup() 
     end
   },
+---- neovim session-manager: persist open files/buffers b/w nvim sessions
+  'Shatur/neovim-session-manager',
 ---- surround: efficient manipulation of brackets, quotes, etc.
   {
     'kylechui/nvim-surround',

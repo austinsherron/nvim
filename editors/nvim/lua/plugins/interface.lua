@@ -30,7 +30,7 @@ return {
     'hrsh7th/cmp-cmdline',
     enabled = false,
   },
----- lualine: status line
+---- TODO: customize: lualine: status line
   {
     'nvim-lualine/lualine.nvim',
 
