@@ -20,7 +20,7 @@ km.inoremap('jk', '<Esc>')
 km.inoremap('kj', '<Esc>')
 km.inoremap('<C-c>', '<Esc>')
 
-km.nnoremap('<leader>r', '<c-r>')
+km.nnoremap('<leader>re', '<c-r>')
 
 -- toggle relative line numbers
 km.nmap('<C-L><C-L>', ':set invrelativenumber<CR>')

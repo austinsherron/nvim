@@ -1,3 +1,6 @@
+require 'nvim.lua.config.lsp.keymappings'
+
+
 local LSP_SERVERS = { 'lua_ls', 'pyright' }
 
 function lsp_servers()
@@ -17,5 +20,7 @@ function lspconfig_config()
     local config = get_config_for_server(lsp_server)
     lspconfig[lsp_server].setup(config)
   end
+
+  lsp_keymappings()
 end
 

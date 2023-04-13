@@ -31,9 +31,9 @@ function nvim_tree_opts()
           custom_only = false,
           list = {
               { key = 'l', action = 'edit', action_cb = edit_or_open },
-              { key = 'L', action = 'vsplit_preview', action_cb = vsplit_preview },
+              { key = 'L', action = 'cd', action_cb = cd },
               { key = 'h', action = 'close_node' },
-              { key = 'H', action = 'collapse_all', action_cb = collapse_all },
+              { key = 'H', action = 'dir_up', action_cb = dir_up },
           },
       },
 
