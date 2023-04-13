@@ -20,7 +20,11 @@ return {
 ---- diff view: for looking at diffs... 😄 (TODO: doesn't work...)
   {
     'sindrets/diffview.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim' },
+
+    config = function()
+      require('diffview').setup({})
+    end
   },
 ---- gitsigns: visual cues about what's changed/is changing 
   {

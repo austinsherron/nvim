@@ -39,7 +39,7 @@ function nvim_tree_opts()
 
       number = true,
       relativenumber = true,
-      width = 37,
+      width = 45,
     },
   }
 end
