@@ -12,12 +12,12 @@ local state_base = vim.fn.stdpath('state')
 
 -- for storing for storing backups
 local backup_path = state_base .. '/backup'
-mkdir(state_base .. '/backup')
+mkdir(backup_path, true)
 vim.o.backupdir = backup_path
 
 -- for storing undo history
 local undo_path = state_base .. '/undo'
-mkdir(state_base .. '/undo')
+mkdir(undo_path, true)
 vim.o.undodir = undo_path
 
 -- look & feel -----------------------------------------------------------------

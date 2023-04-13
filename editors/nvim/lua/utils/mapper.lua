@@ -61,6 +61,8 @@ end
 local function do_make_mapping_func(mode, noremap)
     return function(lhs, rhs, buffer) 
         local silent = string.startswith(lhs, '<silent>')
+        local lhs = lhs:gsub('<silent>', '')
+
         return do_mapping(mode, lhs, rhs, noremap, silent, buffer)
     end
 end
