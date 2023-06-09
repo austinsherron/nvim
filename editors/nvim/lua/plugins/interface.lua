@@ -1,7 +1,7 @@
 -- interface -------------------------------------------------------------------
 
 --[[
-  add, control, or augment interface elements; interface elements should do 
+  add, control, or augment interface elements; interface elements should do
   something, or at least be informational
 --]]
 
