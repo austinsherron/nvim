@@ -10,3 +10,34 @@ my setup. My goal is to move from IntelliJ to an nvim based, "homebaked" IDE. My
 
 There are definitely more, but this README, like my nvim journey in general, is a work in progress!
 
+## To-Do List
+
+- [ ] Auto-completion/correction
+- [ ] Auto-imports
+- [ ] Code generations (see snippets)
+- [ ] Code searching utility
+- [x] Colorscheme (but always evolving)
+- [x] Comments
+- [ ] Debugger
+- [ ] Diff viewer
+- [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
+- [ ] Find+Replace
+- [ ] Formatting
+- [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
+- [ ] Git sidebar changes
+- [ ] Inline docs/hints
+- [ ] Merge tool
+- [ ] Notifications
+- [x] Persistent undo history
+- [x] Project manager (still wanna see what other options are out there though)
+- [ ] Renaming/refactoring
+- [ ] Session manager
+- [ ] Snippets
+- [x] Start screen? (again, wanna explore)
+- [ ] Status bar
+- [x] Surround
+- [ ] Syntax checking
+- [x] Tab/buffer bar
+- [x] Telescope
+- [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
+
