@@ -10,7 +10,9 @@ my setup. My goal is to move from IntelliJ to an nvim based, "homebaked" IDE. My
 
 There are definitely more, but this README, like my nvim journey in general, is a work in progress!
 
-## To-Do List
+## To-Do Lists
+
+### Plugins/Tooling
 
 - [ ] Auto-completion/correction
 - [ ] Auto-imports
@@ -19,11 +21,13 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [x] Colorscheme (but always evolving)
 - [x] Comments
 - [ ] Debugger
-- [ ] Diff viewer
+- [x] Diff viewer (could be better though...)
 - [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
 - [ ] Find+Replace
 - [ ] Formatting
+- [ ] General prettiness (😅)
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
+- [ ] Git interactions
 - [ ] Git sidebar changes
 - [ ] Inline docs/hints
 - [ ] Merge tool
@@ -34,10 +38,24 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [ ] Session manager
 - [ ] Snippets
 - [x] Start screen? (again, wanna explore)
-- [ ] Status bar
+- [x] Status bar (would like to customize it more though)
 - [x] Surround
 - [ ] Syntax checking
 - [x] Tab/buffer bar
 - [x] Telescope
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
+
+### Tasks/Fixes
+
+- [ ] Re-install, or otherwise just fix, nvim-tmux-navigation
+- [ ] Enable spell-checker/grammar helper/etc.
+- [ ] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing
+      whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc.
+- [ ] I'm not totally happy w/ my tab/buffer management schemes and my
+      non-workflows that haven't really come to be w/ my current tooling (i.e.:
+      it'd be nice to have some visual labels of which buffer is which, and a
+      quick way to jump to that buffer
+- [ ] Fix buffer ordering
+- [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader
+      (`<space>`) once and hit `r` N times to get N redo operations
 
