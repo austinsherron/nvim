@@ -14,9 +14,9 @@ return {
       lazy = false,
 
       config = function()
-        require('leap').add_default_mappings()
-      end
-   },
+      require('leap').add_default_mappings()
+    end
+  },
 ---- nvim-tmux navigation: integration b/w nvim + tmux (pane nav shortcuts) (TODO: seems broken...)
   {
     'alexghergh/nvim-tmux-navigation',
