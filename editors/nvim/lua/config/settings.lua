@@ -18,12 +18,19 @@ o.inccommand    = 'nosplit'        -- incremental live completion
 
 -- allows nvim to copy/paste to/from system clipboards
 opt.clipboard:append({'unnamedplus'})
- 
+
+---- spellcheck setting --------------------------------------------------------
+
+o.spell = true
+o.spelllang = 'en_us'
+o.spellsuggest = 20
+o.spellfile = vim.fn.stdpath('config') .. '/.spell/en.utf-8.add'
+
 ---- indent settings -----------------------------------------------------------
 
 o.ai           = true            -- keep indentation from previous line
-o.autoindent   = true            -- need to se this and above?
-o.si 	       = true            -- smart indent
+o.autoindent   = true            -- need to set this and above?
+o.si           = true            -- smart indent
 o.smartlindent = true            -- must set both this and above
 
 -- tabs as spaces; default tab size = 4
@@ -44,8 +51,8 @@ o.smartcase  = true
 o.showbreak     = '↪ '           -- show at line break
 o.scrolloff     = 7              -- min 7 lines around cursor
 o.termguicolors = true           -- enable truecolor
-o.nu            = true           -- line numbers 
-o.signcolumn    = 'yes'          -- display the sign column    
+o.nu            = true           -- line numbers
+o.signcolumn    = 'yes'          -- display the sign column
 o.cursorline    = true           -- show the cursor line
 o.linebreak     = true           -- visually break lines at max width
 
@@ -57,7 +64,7 @@ opt.listchars = { ['tab'] = '>.', ['trail'] = '.' , ['nbsp'] = '‸' }
 
 o.hidden        = true                              -- hide, don't dump, buffers when switching
 opt.completeopt = { 'menuone', 'noselect' }         -- preview menu options for autocompletion
-o.report        = 0                                 -- min lines changed to report # lines changed 
+o.report        = 0                                 -- min lines changed to report # lines changed
 
 -- show diffs in vertical splits by default
 opt.diffopt:append({'vertical'})
