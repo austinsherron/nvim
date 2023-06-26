@@ -3,8 +3,8 @@ local km = require 'nvim.lua.utils.mapper'
 
 local function global_mappings()
   km.nnoremap('<leader>e', vim.diagnostic.open_float)
-  km.nnoremap('[d', vim.diagnostic.goto_prev)
-  km.nnoremap(']d', vim.diagnostic.goto_next)
+  km.nnoremap('[d',        vim.diagnostic.goto_prev)
+  km.nnoremap(']d',        vim.diagnostic.goto_next)
   km.nnoremap('<leader>l', vim.diagnostic.setloclist)
 end
 
@@ -23,20 +23,20 @@ local function after_attach_mappings(ev)
   -- enable completion triggered by <c-x><c-o>
   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  km.nnoremap('gD', vim.lsp.buf.declaration, ev.buf)
-  km.nnoremap('gd', vim.lsp.buf.definition, ev.buf)
-  km.nnoremap('K', vim.lsp.buf.hover, ev.buf)
-  km.nnoremap('gi', vim.lsp.buf.implementation, ev.buf)
-  km.nnoremap('<C-k>', vim.lsp.buf.signature_help, ev.buf)
-  km.nnoremap('<leader>wa', vim.lsp.buf.add_workspace_folder, ev.buf)
-  km.nnoremap('<leader>wr', vim.lsp.buf.remove_workspace_folder, ev.buf)
-  km.nnoremap('<leader>wl', inspect_wkspace_dirs, ev.buf)
-  km.nnoremap('<leader>D', vim.lsp.buf.type_definition, ev.buf)
-  km.nnoremap('<leader>rn', vim.lsp.buf.rename, ev.buf)
-  km.nnoremap('<leader>ca', vim.lsp.buf.code_action, ev.buf)
-  km.vnoremap('<leader>ca', vim.lsp.buf.code_action, ev.buf)
-  km.nnoremap('gr', vim.lsp.buf.references, ev.buf)
-  km.nnoremap('<leader>f', format, ev.buf)
+  km.nnoremap('gD',         vim.lsp.buf.declaration,             { buffer = ev.buf })
+  km.nnoremap('gd',         vim.lsp.buf.definition,              { buffer = ev.buf })
+  km.nnoremap('K',          vim.lsp.buf.hover,                   { buffer = ev.buf })
+  km.nnoremap('gi',         vim.lsp.buf.implementation,          { buffer = ev.buf })
+  km.nnoremap('<C-k>',      vim.lsp.buf.signature_help,          { buffer = ev.buf })
+  km.nnoremap('<leader>wa', vim.lsp.buf.add_workspace_folder,    { buffer = ev.buf })
+  km.nnoremap('<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf })
+  km.nnoremap('<leader>wl', inspect_wkspace_dirs,                { buffer = ev.buf })
+  km.nnoremap('<leader>D',  vim.lsp.buf.type_definition,         { buffer = ev.buf })
+  km.nnoremap('<leader>rn', vim.lsp.buf.rename,                  { buffer = ev.buf })
+  km.nnoremap('<leader>ca', vim.lsp.buf.code_action,             { buffer = ev.buf })
+  km.vnoremap('<leader>ca', vim.lsp.buf.code_action,             { buffer = ev.buf })
+  km.nnoremap('gr',         vim.lsp.buf.references,              { buffer = ev.buf })
+  km.nnoremap('<leader>f', format,                               { buffer = ev.buf })
 end
 
 

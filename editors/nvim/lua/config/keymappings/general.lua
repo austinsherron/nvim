@@ -1,31 +1,18 @@
 local km = require 'nvim.lua.utils.mapper'
 
--- display --------------------------------------------------------------------
-
-km.nnoremap('<leader>hx', ':noh<cr>')
-
--- spellcheck ------------------------------------------------------------------
-
-km.nnoremap('<leader>aw', 'zg')
-km.nnoremap('<leader>sw', 'z=')
-
--- navigation -----------------------------------------------------------------
-
--- easy split navigation
-km.nnoremap('<C-h>', '<C-w>h')
-km.nnoremap('<C-j>', '<C-w>j')
-km.nnoremap('<C-k>', '<C-w>k')
-km.nnoremap('<C-l>', '<C-w>l')
-
--- let's j and k move inside a visually wrapped line
-km.nnoremap('j', 'gj')
-km.nnoremap('k', 'gk')
-km.xnoremap('j', 'gj')
-km.xnoremap('k', 'gk')
-
 -- interactions ---------------------------------------------------------------
 
--- various `<esc>` remappings
+---- core ops
+
+-- save
+km.nnoremap('<leader>w', ':w<CR>')      -- one
+km.nnoremap('<leader>W', ':wqa<CR>')    -- all + quit
+
+-- close/quit
+km.nnoremap('<leader>q', ':q<CR>')      -- quit/close one (if saved)
+km.nnoremap('<leader>Q', ':qa!<CR>')    -- force quit all
+
+-- <esc>
 km.inoremap('jh', '<Esc>')
 km.inoremap('hj', '<Esc>')
 km.inoremap('jk', '<Esc>')
@@ -33,38 +20,37 @@ km.inoremap('kj', '<Esc>')
 km.inoremap('<C-c>', '<Esc>')
 
 -- redo
-km.nnoremap('<leader>r', '<c-r>')
+km.nnoremap('<leader>r', '<C-r>')
+
+---- misc ops
 
 -- toggle relative line numbers
 km.nmap('<C-L><C-L>', ':set invrelativenumber<CR>')
 
--- save/quit
-km.nnoremap('<leader>w', ':w<cr>')
-km.nnoremap('<leader>W', ':wqa<cr>')
-km.nnoremap('<leader>q', ':q<cr>')
-km.nnoremap('<leader>Q', ':q!<cr>')
+-- navigation -----------------------------------------------------------------
 
--- buffers ---------------------------------------------------------------------
+---- splits
 
--- switch buffers
-km.nnoremap('<leader>n', ':bn<cr>')
-km.nnoremap('<leader>p', ':bp<cr>')
-km.nnoremap('<silent><leader>x', ':bd<cr>:bn<cr>')
-km.nnoremap('<leader>bp', ':BufferPick<cr>')
+km.nnoremap('<C-h>', '<C-w>h')
+km.nnoremap('<C-j>', '<C-w>j')
+km.nnoremap('<C-k>', '<C-w>k')
+km.nnoremap('<C-l>', '<C-w>l')
 
--- resize buffers
-km.nnoremap('<leader>J', ':resize +10<cr>')
-km.nnoremap('<leader>K', ':resize -10<cr>')
-km.nnoremap('<leader>L', ':vertical resize +10<cr>')
-km.nnoremap('<leader>H', ':vertical resize -10<cr>')
+---- wrapped lines
 
--- reorder buffers
-km.nnoremap('<leader>bd', ':BufferOrderByDirectory<cr>')
-km.nnoremap('<leader>b#', ':BufferOrderByBufferNumber<cr>')
-km.nnoremap('<leader>bl', ':BufferOrderByLanguage<cr>')
+-- lets j and k move inside a visually wrapped line
+km.nnoremap('j', 'gj')
+km.nnoremap('k', 'gk')
 
--- close buffers
+-- display --------------------------------------------------------------------
 
-km.nnoremap('<leader>bx', ':BufferCloseAllButCurrent<cr>')
-km.nnoremap('<leader>bX', ':BufferWipeout<cr>')
+-- turn off highlight (i.e.: for search)
+km.nnoremap('<leader>hx', ':noh<CR>')
+
+-- spellcheck ------------------------------------------------------------------
+
+-- add word
+km.nnoremap('<leader>aw', 'zg')
+-- suggest words
+km.nnoremap('<leader>sw', 'z=')
 
