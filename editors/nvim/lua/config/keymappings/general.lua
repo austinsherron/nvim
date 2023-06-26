@@ -20,7 +20,7 @@ km.inoremap('kj', '<Esc>')
 km.inoremap('<C-c>', '<Esc>')
 
 -- redo
-km.nnoremap('<leader>r', '<C-r>')
+km.nnoremap('<leader>r', '<C-r>', { nowait = true })
 
 ---- misc ops
 

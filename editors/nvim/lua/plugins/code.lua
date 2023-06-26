@@ -6,7 +6,7 @@
 
 require 'nvim.lua.config.lsp'
 require 'nvim.lua.plugins.config.mason'
-require 'nvim.lua.plugins.config.treesitter'
+local ts_opts = require 'nvim.lua.plugins.config.treesitter'
 
 
 return {
@@ -38,14 +38,14 @@ return {
 ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = treesitter_opts(),
+    opts = ts_opts.config(),
 
-    build = function(_, opts)
-      require('nvim-treesitter.install').update(opts.build)
+    build = function()
+      require('nvim-treesitter.install').update(ts_opts.build())
     end,
 
     config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts.config)
+      require('nvim-treesitter.configs').setup(opts)
     end,
   },
 }
