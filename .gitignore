@@ -1,4 +1,4 @@
 *.netrwhist
-.spell/
+.spell
 packages/
-templates/
+templates

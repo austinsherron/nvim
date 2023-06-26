@@ -31,10 +31,10 @@ km.nmap('<C-N><C-N>', ':set invrelativenumber<CR>')
 
 ---- splits
 
-km.nnoremap('<C-h>', '<C-w>h')
-km.nnoremap('<C-j>', '<C-w>j')
-km.nnoremap('<C-k>', '<C-w>k')
-km.nnoremap('<C-l>', '<C-w>l')
+km.nnoremap('<silent><C-h>', ':NvimTmuxNavigateLeft<CR>')
+km.nnoremap('<silent><C-j>', ':NvimTmuxNavigateDown<CR>')
+km.nnoremap('<silent><C-k>', ':NvimTmuxNavigateUp<CR>')
+km.nnoremap('<silent><C-l>', ':NvimTmuxNavigateRight<CR>')
 
 ---- wrapped lines
 
