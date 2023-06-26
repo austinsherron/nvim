@@ -5,7 +5,7 @@
 --]]
 
 require 'lib.lua.table'
-require 'nvim.lua.config.keymappings.gitsigns'
+require 'nvim.lua.config.keymappings.plugins.gitsigns'
 require 'nvim.lua.plugins.config.gitsigns'
 
 

@@ -1,4 +1,4 @@
-local nvt = require 'nvim.lua.config.keymappings.nvimtree'
+local nvt = require 'nvim.lua.config.keymappings.plugins.nvimtree'
 
 
 function nvim_tree_opts()
