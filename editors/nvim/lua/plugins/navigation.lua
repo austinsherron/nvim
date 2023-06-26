@@ -26,10 +26,10 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = nvim_tree_opts(),
 
-    config = function (_, opts) 
-      require('nvim-tree').setup(opts) 
+    config = function (_, opts)
+      require('nvim-tree').setup(opts)
     end,
-  },  
+  },
 ---- project: project manager/navigator
   {
     'ahmedkhalf/project.nvim',

@@ -1,4 +1,5 @@
 require 'lib.lua.string'
+require 'lib.lua.table'
 
 
 local Mode = {
@@ -18,8 +19,8 @@ local NOREMAP = 'noremap'
 local MAP = 'map'
 
 
--- TODO: probably would be good to add validation logic, though if this just ends up being an 
---       internally used util, it's probalby fine...
+-- TODO: probably would be good to add validation logic, though if this just ends up being an
+--       internally used util, it's probably fine...
 
 
 local KeyMapper = {}
@@ -34,18 +35,13 @@ end
 
 
 -- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim/lua/core/keymaps.lua
-local function do_mapping(mode, lhs, rhs, noremap, silent, buffer)
-    local noremap = noremap and true
-    local silent = silent and true
-
-    local options = { noremap = noremap, silent = silent, buffer = buffer }
-
+local function do_mapping(mode, lhs, rhs, options)
     if (type(rhs) == 'string') then
         vim.api.nvim_set_keymap(mode, lhs, rhs, options)
     elseif (type(rhs) == 'function') then
-	vim.keymap.set(mode, lhs, rhs, options)
+        vim.keymap.set(mode, lhs, rhs, options)
     else
-        error('rhs = ' .. tostring(rhs) .. ' is of an unrecognized type ' .. type(rhs))
+        error('(lhs) ' .. tostring(lhs) .. ' = (rhs) ' .. tostring(rhs) .. ' is of an unrecognized type ' .. type(rhs))
     end
 end
 
@@ -53,17 +49,21 @@ end
 -- TODO: create "Indexable" class that implements python-like indexing for strings
 --       see `lib.lua.string.Indexable`
 local function is_noremap(func_name)
-    return string.startswith(func_name, NOREMAP) or 
+    return string.startswith(func_name, NOREMAP) or
            string.startswith(func_name:sub(2, #func_name),  NOREMAP)
 end
 
 
 local function do_make_mapping_func(mode, noremap)
-    return function(lhs, rhs, buffer) 
+    return function(lhs, rhs, opts)
         local silent = string.startswith(lhs, '<silent>')
         local lhs = lhs:gsub('<silent>', '')
 
-        return do_mapping(mode, lhs, rhs, noremap, silent, buffer)
+        local opts = opts or {}
+        local silent_and_noreamp = { noremap = noremap, silent = silent }
+        local options = table.combine(opts, silent_and_noreamp)
+
+        return do_mapping(mode, lhs, rhs, options)
     end
 end
 
@@ -78,7 +78,7 @@ local function make_mapping_func(func_name)
         return do_make_mapping_func(Mode.none, func_name == NOREMAP)
     end
 
-    mode, noremap = parse_func_name(func_name)
+    local mode, noremap = parse_func_name(func_name)
     return do_make_mapping_func(mode, noremap)
 end
 
@@ -114,7 +114,7 @@ function KeyMapper:__index(func_name)
     if (not is_func_name_format_valid(func_name)) then
         error('unrecognized mapping function=' .. func_name)
     end
-        
+
     return make_mapping_func(func_name)
 end
 

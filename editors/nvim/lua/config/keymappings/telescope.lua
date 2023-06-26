@@ -11,8 +11,8 @@ km.nmap('<leader>fh', telescope.help_tags)
 
 -- extensions ------------------------------------------------------------------
 
-km.nnoremap('<leader>fe', '<cmd>Telescope emoji<cr>')
-km.nnoremap('<leader>fp', '<cmd>Telescope projects<cr>')
-km.nnoremap('<leader>fr', '<cmd>Telescope frecency<cr>')
-km.nnoremap('<leader>fu', '<cmd>Telescope undo<cr>')
+km.nnoremap('<leader>fe', '<cmd>Telescope emoji<CR>')
+km.nnoremap('<leader>fp', '<cmd>Telescope projects<CR>')
+km.nnoremap('<leader>fr', '<cmd>Telescope frecency<CR>')
+km.nnoremap('<leader>fu', '<cmd>Telescope undo<CR>')
 
