@@ -25,7 +25,7 @@ km.nnoremap('<leader>r', '<C-r>', { nowait = true })
 ---- misc ops
 
 -- toggle relative line numbers
-km.nmap('<C-L><C-L>', ':set invrelativenumber<CR>')
+km.nmap('<C-N><C-N>', ':set invrelativenumber<CR>')
 
 -- navigation -----------------------------------------------------------------
 

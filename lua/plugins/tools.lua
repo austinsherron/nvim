@@ -14,5 +14,19 @@ return {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && yarn install'
   },
+---- TODO: template.nvim: file templates (I couldn't get this to work; revisit)
+  {
+    'glepnir/template.nvim',
+    enabled = false,
+    cmd = { 'Template', 'TemProject' },
+
+    config = function()
+      require('template').setup({
+        name = 'Austin Sherron',
+        email = 'dev@pryv.us',
+        temp_dir = vim.fn.stdpath('config') .. '/.templates',
+      })
+    end
+  },
 }
 

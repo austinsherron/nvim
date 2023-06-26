@@ -11,6 +11,9 @@ require 'nvim.lua.plugins.config.project'
 
 return {
 ---- nnn: file explorer w/ what seems like a cult-ish following
+
+---- note: didn't love the nnn interface; perhaps I need to use it a bit more
+----       to become accustomed to it
   {
     'luukvbaal/nnn.nvim',
     enabled = false,

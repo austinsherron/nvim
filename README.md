@@ -16,7 +16,7 @@ There are definitely more, but this README, like my nvim journey in general, is 
 
 - [ ] Auto-completion/correction
 - [ ] Auto-imports
-- [ ] Code generations (see snippets)
+- [ ] Code generation (see snippets)
 - [x] Code searching utility (always room for improvement here)
 - [x] Colorscheme (but always evolving)
 - [x] Comments
@@ -30,10 +30,9 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [ ] General prettiness (😅)
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
 - [ ] Git history interactions (i.e.: file history, git blame, etc.)
-- [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.)
-- [ ] Git sidebar changes
+- [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (neogit)
 - [ ] Inline docs/hints
-- [ ] Merge tool
+- [x] Merge tool (...at least needs further configuration)
 - [ ] Notifications
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [x] Persistent undo history
@@ -44,10 +43,24 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [x] Start screen? (again, wanna explore)
 - [x] Status bar (would like to customize it more though)
 - [x] Surround
-- [ ] Syntax checking
+- [x] Syntax checking (for a small set of languages, guts are there at least)
 - [x] Tab/buffer bar
 - [x] Telescope
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
+
+### LSP Support
+
+- [x] Python3
+- [x] Lua
+- [ ] Go
+- [ ] Java
+- [ ] Bash
+- [ ] Zsh
+- [ ] Fish
+- [ ] JavaScript
+- [ ] TypeScript
+- [ ] K8S Yaml
+- [ ] Terraform
 
 ### Tasks
 
@@ -72,8 +85,10 @@ There are definitely more, but this README, like my nvim journey in general, is 
       order)
 - [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`)
       once and hit `r` N times to get N redo operations
+- [ ] Fix "redo" custom mapping wait time
 - [x] Migrate nvimtree `view.mappings` to `on_attach`
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
-- [ ] Something seems to be wrong w/ treesitter plugin setup (opts is nil?)
+- [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?)
+      (I think this has been addressed; will know when next update is pushed)
 
