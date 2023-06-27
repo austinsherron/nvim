@@ -80,12 +80,12 @@ There are definitely more, but this README, like my nvim journey in general, is 
 
 ### Fixes
 
-- [ ] Re-install, or otherwise just fix, nvim-tmux-navigation
+- [x] Re-install, or otherwise just fix, nvim-tmux-navigation
 - [x] Fix buffer ordering (or fix sequential navigation, i.e.: navigate in visual
       order)
 - [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`)
       once and hit `r` N times to get N redo operations
-- [ ] Fix "redo" custom mapping wait time
+- [x] Fix "redo" custom mapping wait time
 - [x] Migrate nvimtree `view.mappings` to `on_attach`
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
