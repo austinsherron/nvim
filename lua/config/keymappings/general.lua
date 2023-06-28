@@ -1,56 +1,57 @@
 local km = require 'nvim.lua.utils.mapper'
 
+
+-- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
+--       function
+local function options(desc)
+    return { desc = 'core: ' .. desc, nowait = true }
+end
+
+
 -- interactions ---------------------------------------------------------------
 
 ---- core ops
 
 -- save
-km.nnoremap('<leader>w', ':w<CR>')      -- one
-km.nnoremap('<leader>W', ':wqa<CR>')    -- all + quit
+km.nnoremap('<leader>w', ':w<CR>',   options('save one'))
+km.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
 
 -- close/quit
-km.nnoremap('<leader>q', ':q<CR>')      -- quit/close one (if saved)
-km.nnoremap('<leader>Q', ':qa!<CR>')    -- force quit all
+km.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
+km.nnoremap('<leader>Q', ':qa!<CR>', options('force quit'))
 
 -- <esc>
-km.inoremap('jh', '<Esc>')
-km.inoremap('hj', '<Esc>')
-km.inoremap('jk', '<Esc>')
-km.inoremap('kj', '<Esc>')
-km.inoremap('<C-c>', '<Esc>')
+km.inoremap('jh',    '<Esc>',    options('exit/back'))
+km.inoremap('hj',    '<Esc>',    options('exit/back'))
+km.inoremap('jk',    '<Esc>',    options('exit/back'))
+km.inoremap('kj',    '<Esc>',    options('exit/back'))
+km.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 
 -- redo
-km.nnoremap('<leader>r', '<C-r>', { nowait = true })
+km.nnoremap('<leader>r', '<C-r>', options('redo'))
 
 ---- misc ops
 
 -- toggle relative line numbers
-km.nmap('<C-N><C-N>', ':set invrelativenumber<CR>')
+km.nmap('<C-N><C-N>', ':set invrelativenumber<CR>', options('toggle relative line #'))
 
--- navigation -----------------------------------------------------------------
-
----- splits
-
-km.nnoremap('<silent><C-h>', ':NvimTmuxNavigateLeft<CR>')
-km.nnoremap('<silent><C-j>', ':NvimTmuxNavigateDown<CR>')
-km.nnoremap('<silent><C-k>', ':NvimTmuxNavigateUp<CR>')
-km.nnoremap('<silent><C-l>', ':NvimTmuxNavigateRight<CR>')
+-- motion ----------------------------------------------------------------------
 
 ---- wrapped lines
 
 -- lets j and k move inside a visually wrapped line
-km.nnoremap('j', 'gj')
-km.nnoremap('k', 'gk')
+km.nnoremap('j', 'gj', options('cursor down'))
+km.nnoremap('k', 'gk', options('cursor up'))
 
 -- display --------------------------------------------------------------------
 
 -- turn off highlight (i.e.: for search)
-km.nnoremap('<leader>hx', ':noh<CR>')
+km.nnoremap('<leader>hx', ':noh<CR>', options('cancel highlight'))
 
 -- spellcheck ------------------------------------------------------------------
 
 -- add word
-km.nnoremap('<leader>aw', 'zg')
+km.nnoremap('<leader>aw', 'zg', options('add word to dict.'))
 -- suggest words
-km.nnoremap('<leader>sw', 'z=')
+km.nnoremap('<leader>sw', 'z=', options('suggest word(s) for typo'))
 

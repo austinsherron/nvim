@@ -6,6 +6,7 @@
 
 require 'nvim.lua.config.lsp'
 require 'nvim.lua.plugins.config.mason'
+
 local ts_opts = require 'nvim.lua.plugins.config.treesitter'
 
 

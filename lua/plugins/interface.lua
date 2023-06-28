@@ -1,7 +1,7 @@
 -- interface -------------------------------------------------------------------
 
 --[[
-  add, control, or augment interface elements; interface elements should do
+  add to, control, or augment interface elements; interface elements should do
   something, or at least be informational
 --]]
 
@@ -46,7 +46,7 @@ return {
     event = 'VeryLazy',
     init = function()
       vim.o.timeout = true
-      vim.o.timeoutlen = 300
+      vim.o.timeoutlen = 700
     end,
     opts = {
       -- your configuration comes here

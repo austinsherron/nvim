@@ -1,12 +1,19 @@
 local km = require 'nvim.lua.utils.mapper'
 
 
+-- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
+--       function
+local function options(desc, bufnr)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, silent = true, nowait = true }
+end
+
+
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>1',  ':NvimTreeFocus<CR>')
-km.nnoremap('<leader>t',  ':NvimTreeToggle<CR>')
-km.nnoremap('<leader>F',  ':NvimTreeFindFile<CR>')
-km.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>')
+km.nnoremap('<leader>1',  ':NvimTreeFocus<CR>',      options('focus'))
+km.nnoremap('<leader>t',  ':NvimTreeToggle<CR>',     options('toggle'))
+km.nnoremap('<leader>F',  ':NvimTreeFindFile<CR>',   options('find file in tree'))
+km.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>',  options('find file in tree!'))
 
 -- on_attach -------------------------------------------------------------------
 
@@ -14,14 +21,8 @@ km.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>')
     much of the code in this file from this point, or at least the underlying
     structure/logic of it, was automatically generated via :NvimTreeGenerateOnAttach
 
-    see https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attac for details
+    see https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach for details
 --]]
-
-
-local function options(desc, bufnr)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, silent = true, nowait = true }
-end
-
 
 --[[
     feel free to modify or remove as you wish (note from implementors of nvimtree),
@@ -35,7 +36,7 @@ local function default_mappings(bufnr, api)
   km.nnoremap('<C-r>', api.fs.rename_sub,                     options('Rename: Omit Filename', bufnr))
   km.nnoremap('<C-t>', api.node.open.tab,                     options('Open: New Tab', bufnr))
   km.nnoremap('<C-v>', api.node.open.vertical,                options('Open: Vertical Split', bufnr))
-  km.nnoremap('<C-x>', api.node.open.horizontal,              options('Open: Horizontal Split', bufnr))
+  -- km.nnoremap('<C-x>', api.node.open.horizontal,              options('Open: Horizontal Split', bufnr))
   km.nnoremap('<BS>',  api.node.navigate.parent_close,        options('Close Directory', bufnr))
   km.nnoremap('<CR>',  api.node.open.edit,                    options('Open', bufnr))
   km.nnoremap('<Tab>', api.node.open.preview,                 options('Open Preview', bufnr))
@@ -87,7 +88,8 @@ end
 
 
 local function remapped_defaults(bufnr, api)
-  km.nnoremap('I', api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
+  km.nnoremap('<C-h>', api.node.open.horizontal,      options('Open: Horizontal Split', bufnr))
+  km.nnoremap('I',     api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
 end
 
 
