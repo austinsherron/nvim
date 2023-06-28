@@ -1,4 +1,4 @@
-packages/
-.spell/
 *.netrwhist
-
+.spell
+packages/
+templates

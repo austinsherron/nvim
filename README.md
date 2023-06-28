@@ -3,12 +3,107 @@
 I'm a longtime vim user, recent nvim convert. I'm having a lot of fun (and probably spending too much time 😅) diving into the ecosystem and crafting
 my setup. My goal is to move from IntelliJ to an nvim based, "home-baked" IDE. My current big ticket items are:
 
-* Trying to find a file browser that feels right, or that I can hack easily enough to feel natural
-  * Still on nvim-tree after trying out nnn and not really digging it
-  * neo-tree seems promising, I just haven't gotten there yet
-* Getting the bare bones pickers there and natural feeling
+- [x] Trying to find a file browser that feels right, or that I can hack easily enough to feel natural
+- [x] Getting the bare bones pickers there and natural feeling
+- [ ] Setting up LSP related functionality, including: auto-completion, assisted refactoring, various "jump-to"/find commands, etc.
+- [ ] Tightening up git integration; I've installed [diffview.nvim](https://github.com/sindrets/diffview.nvim) and [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), but I need to further configure them. [Neogit](https://github.com/TimUntersberger/neogit) seems promising, for filling in some functional gaps, so I think I'll install that next
+- [ ] Installing and incorporating into my workflows one of the many snippets engines out there. I haven't made much use of snippets in the past, so this will be something a bit new for me.
 
 There are definitely more, but this README, like my nvim journey in general, is a work in progress!
+
+## Plugin Manifest
+
+I organize my plugins into the following categories:
+
+### Appearance
+
+"Appearance" plugins control how nvim looks: colors, icons, textures, menus, etc. These are distinct from interface plugins in that interface elements should be functional (and ideally useful). Appearance is the place for things that provide aesthetic value only.
+
+* [Catppuccin](https://github.com/catppuccin/nvim)
+* [KANAGAWA.nvim](https://github.com/rebelot/kanagawa.nvim)
+* [Nordic](https://github.com/AlexvZyl/nordic.nvim)
+* [Tokyo Night](https://github.com/folke/tokyonight.nvim)
+
+### Code
+
+"Code" plugins control nvim's ability to understand and interact w/ code.
+
+* [mason.nvim](https://github.com/williamboman/mason.nvim)
+* [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
+* [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+* [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+
+### Editor
+
+"Editor" plugins control core editor capabilities like commenting, general text manipulation, etc.
+
+* [Comment.nvim](https://github.com/numToStr/Comment.nvim)
+* [Neovim Session Manager](https://github.com/Shatur/neovim-session-manager)
+* [nvim-surround](https://github.com/kylechui/nvim-surround)
+
+### Git
+
+"Git" plugins enable nvim + git interactions/integrations.
+
+* [diffview.nvim](https://github.com/sindrets/diffview.nvim)
+* [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+
+### Interface
+
+"Interface" plugins add to, control, or augment interface elements. Interface elements should *do something*, or at least be informational, as opposed to being purely aesthetic.
+
+* [alpha-nvim](https://github.com/goolord/alpha-nvim)
+* [barbar.nvim](https://github.com/romgrk/barbar.nvim)
+* [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
+* [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
+* [undotree](https://github.com/mbbill/undotree)
+* [Which Key](https://github.com/folke/which-key.nvim)
+
+### Motion
+
+"Motion" plugins control on-screen (as opposed to file-system) movement.
+
+* [leap.nvim](https://github.com/ggandor/leap.nvim)
+* [nvim-tmux-navigationa](https://github.com/alexghergh/nvim-tmux-navigation)
+
+### Navigation
+
+"Navigation" plugins control (file) system (as opposed to on-screen) movement.
+
+* [nnn.nvim](https://github.com/luukvbaal/nnn.nvim)
+* [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
+* [project.nvim](https://github.com/hmedkhalf/project.nvim)
+
+### Search
+
+"Search" plugins make it easier to find things.
+
+* [nvim-spectre](https://github.com/nvim-pack/nvim-spectre) 
+* [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+* [telescope-emoji.nvim](https://github.com/xiyaowong/telescope-emoji.nvim)
+* [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)
+
+### Tools
+
+"Tools" plugins add misc. functionality to nvim; they add *explicitly new* functionality to nvim, as opposed to changing something about the way its core functions work. Tools here don't fit into any other categories.
+
+* [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
+* [template.nvim](https://github.com/glepnir/template.nvim)
+
+## Structure
+
+```
+.
+├── lua
+│   ├── config
+│   │   ├── keymappings
+│   │   │   └── plugins
+│   │   └── lsp
+│   ├── plugins
+│   │   └── config
+│   └── utils
+└── templates
+```
 
 ## To-Do Lists
 
@@ -16,7 +111,7 @@ There are definitely more, but this README, like my nvim journey in general, is 
 
 - [ ] Auto-completion/correction
 - [ ] Auto-imports
-- [ ] Code generations (see snippets)
+- [ ] Code generation (see snippets)
 - [x] Code searching utility (always room for improvement here)
 - [x] Colorscheme (but always evolving)
 - [x] Comments
@@ -30,10 +125,9 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [ ] General prettiness (😅)
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
 - [ ] Git history interactions (i.e.: file history, git blame, etc.)
-- [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.)
-- [ ] Git sidebar changes
+- [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (neogit)
 - [ ] Inline docs/hints
-- [ ] Merge tool
+- [x] Merge tool (...at least needs further configuration)
 - [ ] Notifications
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [x] Persistent undo history
@@ -44,17 +138,29 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [x] Start screen? (again, wanna explore)
 - [x] Status bar (would like to customize it more though)
 - [x] Surround
-- [ ] Syntax checking
+- [x] Syntax checking (for a small set of languages, guts are there at least)
 - [x] Tab/buffer bar
 - [x] Telescope
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
+
+### LSP Support
+
+- [x] Python3
+- [x] Lua
+- [ ] Go
+- [ ] Java
+- [ ] Bash
+- [ ] Zsh
+- [ ] Fish
+- [ ] JavaScript
+- [ ] TypeScript
+- [ ] K8S Yaml
+- [ ] Terraform
 
 ### Tasks
 
 - [x] Enable spell-checker/grammar helper/etc. (potentially investigate
       spellchecker plugins, i.e.: spelunker)
-- [ ] Add more words/better dictionaries ("suggest word(s)" action never actually
-      suggests anything)
 - [ ] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing
       whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc.
 - [ ] I'm not totally happy w/ my tab/buffer management schemes and my
@@ -64,16 +170,27 @@ There are definitely more, but this README, like my nvim journey in general, is 
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
 - [ ] (Not very concrete) Incorporate tabs (and windows?) into workflows
 - [ ] How can I open multiple files w/ nvimtree?
+- [ ] Change diff/merge view colors to something that makes for better UX
+- [ ] Make gitsigns symbols more obvious
+- [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
 
 ### Fixes
 
-- [ ] Re-install, or otherwise just fix, nvim-tmux-navigation
+- [x] Re-install, or otherwise just fix, nvim-tmux-navigation
 - [x] Fix buffer ordering (or fix sequential navigation, i.e.: navigate in visual
       order)
 - [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`)
       once and hit `r` N times to get N redo operations
+- [x] Fix "redo" custom mapping wait time
 - [x] Migrate nvimtree `view.mappings` to `on_attach`
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
-- [ ] Something seems to be wrong w/ treesitter plugin setup (opts is nil?)
+- [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?)
+      (I think this has been addressed; will know when next update is pushed)
+- [ ] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
+- [ ] Add more words/better dictionaries ("suggest word(s)" action never actually
+      suggests anything)
+- [ ] Update lua files/packages that export functions to encapsulate them in tables
+- [ ] Figure out why, even after changing the supposedly relevant vim configs., why
+      from a comment, above or below the commented line, continues the comment
 

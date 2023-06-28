@@ -27,8 +27,8 @@ local KeyMapper = {}
 KeyMapper.__index = {}
 
 
-local function KeyMapper_new()
-    local this = {}
+local function KeyMapper_new(defualt_options)
+    local this = { options = defualt_options }
     setmetatable(this, KeyMapper)
     return this
 end

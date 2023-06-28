@@ -1,36 +1,59 @@
-local km = require('nvim.lua.utils.mapper')
+local km = require 'nvim.lua.utils.mapper'
 
 
-local function gitsigns_actions(gs)
-  km.nnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>')
-  km.vnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>')
-  km.nnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>')
-  km.vnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>')
-
-  km.nnoremap('<leader>hS', gs.stage_buffer)
-  km.nnoremap('<leader>hu', gs.undo_stage_hunk)
-  km.nnoremap('<leader>hR', gs.reset_buffer)
-  km.nnoremap('<leader>hp', gs.preview_hunk)
-  km.nnoremap('<leader>hb', function() gs.blame_line{full=true} end)
-  km.nnoremap('<leader>tb', gs.toggle_current_line_blame)
-  km.nnoremap('<leader>hd', gs.diffthis)
-  km.nnoremap('<leader>hD', function() gs.diffthis('~') end)
-  km.nnoremap('<leader>td', gs.toggle_deleted)
+-- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
+--       function
+local function options(desc)
+    return { desc = 'gitsigns: ' .. desc, nowait = true }
 end
 
 
-local function gitsigns_text_objects()
-  km.onoremmap('ih', ':<C-U>Gitsigns select_hunk<CR>')
-  km.xnoremmap('ih', ':<C-U>Gitsigns select_hunk<CR>')
+local function blameline()
+    local gs = package.loaded.gitsigns
+
+    gs.blame_line { full = true }
 end
 
 
-function gitsigns_on_attach()
-  local gs = package.loaded.gitsigns
+local function diffthis()
+    local gs = package.loaded.gitsigns
 
-  return function(gs)
-    gitsigns_actions(gs)
-    gitsigns_text_objects(gs)
-  end
+    gs.diffthis('~')
 end
 
+-- TODO: revisit these mappings/descriptions once the gitsigns on_attach issue
+--       is resolved
+
+local function actions()
+    local gs = package.loaded.gitsigns
+
+    km.nnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>', options('stage hunk'))
+    km.nnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>', options('reset hunk'))
+    km.nnoremap('<leader>hp', gs.preview_hunk,            options('preview hunk'))
+    km.nnoremap('<leader>hu', gs.undo_stage_hunk,         options('undo stage hunk'))
+
+    km.nnoremap('<leader>hS', gs.stage_buffer, options('stage buffer'))
+    km.nnoremap('<leader>hR', gs.reset_buffer, options('reset buffer'))
+
+    km.nnoremap('<leader>hb', blameline,                    options('line git blame'))
+    km.nnoremap('<leader>tb', gs.toggle_current_line_blame, options('toggle line git blame'))
+
+    km.nnoremap('<leader>hd', gs.diffthis,       options('diff'))
+    km.nnoremap('<leader>hD', diffthis,          options('diff ~'))
+    km.nnoremap('<leader>td', gs.toggle_deleted, options('toggle deleted'))
+end
+
+
+local function text_objects()
+    km.onoremmap('ih', ':<C-U>Gitsigns select_hunk<CR>', options('select hunk'))
+end
+
+
+local function on_attach()
+    actions()
+    text_objects()
+end
+
+return {
+    on_attach,
+}

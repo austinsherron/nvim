@@ -5,12 +5,13 @@
 --]]
 
 require 'lib.lua.table'
-require 'nvim.lua.config.keymappings.plugins.gitsigns'
 require 'nvim.lua.plugins.config.gitsigns'
 
+local gs = require 'nvim.lua.config.keymappings.plugins.gitsigns'
 
-function gitsigns_config(_, opts)
-  local all_settings = table.combine({ on_attach = gitsigns_on_attach }, opts)
+
+local function gitsigns_config(_, opts)
+  local all_settings = table.combine({ on_attach = gs.on_attach }, opts)
 
   require('gitsigns').setup(all_settings)
 end
