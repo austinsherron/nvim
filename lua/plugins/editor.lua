@@ -6,11 +6,11 @@
 
 return {
 ---- comment: manipulate code comments easily
-  { 
+  {
     'numToStr/Comment.nvim',
 
-    config = function() 
-      require('Comment').setup() 
+    config = function()
+      require('Comment').setup()
     end
   },
 ---- neovim session-manager: persist open files/buffers b/w nvim sessions

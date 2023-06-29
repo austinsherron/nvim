@@ -27,10 +27,15 @@ local function get_buttons()
 end
 
 
--- function alphanvim_opts()
+-- local function opts()
 --   return {
---       dashboard.section.header.val = get_header(),
---       dashboard.section.buttons.val = get_buttons(),
+--     dashboard.section.header.val = get_header(),
+--     dashboard.section.buttons.val = get_buttons(),
 --   }
 -- end
+--
+--
+-- return {
+--   opts = opts,
+-- }
 

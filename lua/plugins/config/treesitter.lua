@@ -24,7 +24,7 @@ local function build()
 end
 
 
-local function config()
+local function opts()
   return {
     auto_install = false,
     context_commentstring = { enable = true, enable_autocmd = false },
@@ -39,6 +39,6 @@ end
 
 return {
   build = build,
-  config = config,
+  opts = opts,
 }
 

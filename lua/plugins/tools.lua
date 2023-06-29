@@ -7,6 +7,8 @@
   plugins
 --]]
 
+local tmpl = require 'nvim.lua.plugins.config.template'
+
 
 return {
 ---- markdown preview: for previewing markdown documents 🤔
@@ -19,13 +21,10 @@ return {
     'glepnir/template.nvim',
     enabled = false,
     cmd = { 'Template', 'TemProject' },
+    opts = tmpl.opts(),
 
-    config = function()
-      require('template').setup({
-        name = 'Austin Sherron',
-        email = 'dev@pryv.us',
-        temp_dir = vim.fn.stdpath('config') .. '/.templates',
-      })
+    config = function(_, opts)
+      require('template').setup(opts)
     end
   },
 }

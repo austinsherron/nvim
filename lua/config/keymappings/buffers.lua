@@ -22,19 +22,20 @@ km.nnoremap('<leader>p', ':BufferPrevious<CR>', options('previous'))
 
 ---- extended
 
--- chose arbitrary
-km.nnoremap('<leader>bp', ':BufferPick<CR>', options('pick'))
+km.nnoremap('<leader>b1', ':BufferFirst<CR>', options('choose first'))
+km.nnoremap('<leader>b9', ':BufferLast<CR>',  options('choose last'))
+km.nnoremap('<leader>ba', ':BufferPick<CR>',  options('choose any'))
 
 -- core ops --------------------------------------------------------------------
 
 ---- close/delete
 
 -- current
-km.nnoremap('<M-w>',     ':BufferDelete<CR>', options('delete'))
-km.nnoremap('<leader>x', ':BufferDelete<CR>', options('delete'))
+km.nnoremap('<M-w>',     ':BufferClose<CR>', options('delete'))
+km.nnoremap('<leader>x', ':BufferClose<CR>', options('delete'))
 
 -- all but current
-km.nnoremap('<leader>bX', ':BufferCloseAllButCurrent<CR>', options('close all but current'))
+km.nnoremap('<leader>X', ':BufferCloseAllButCurrent<CR>', options('close all but current'))
 
 -- restore
 km.nnoremap('<M-T>',      ':BufferRestore<CR>', options('restore'))
@@ -43,7 +44,7 @@ km.nnoremap('<leader>br', ':BufferRestore<CR>', options('restore'))
 -- misc ops --------------------------------------------------------------------
 
 -- pin
-km.nnoremap('<leader>bn', ':BufferPin<CR>', options('pin'))
+km.nnoremap('<leader>bp', ':BufferPin<CR>', options('pin'))
 
 -- resize
 km.nnoremap('<leader>J', ':resize +10<CR>',          options('resize "up" 10'))

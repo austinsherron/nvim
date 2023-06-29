@@ -4,9 +4,8 @@
    control (file) system (as opposed to on-screen) movement
 --]]
 
-require 'nvim.lua.plugins.config.nvimtmuxnav'
-require 'nvim.lua.plugins.config.nvimtree'
-require 'nvim.lua.plugins.config.project'
+local nvt = require 'nvim.lua.plugins.config.nvimtree'
+local proj = require 'nvim.lua.plugins.config.project'
 
 
 return {
@@ -25,9 +24,9 @@ return {
 ---- nvim-tree: file explorer
   {
     'nvim-tree/nvim-tree.lua',
-    version = '*',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = nvim_tree_opts(),
+    version = '*',
+    opts = nvt.opts(),
 
     config = function (_, opts)
       require('nvim-tree').setup(opts)
@@ -36,7 +35,7 @@ return {
 ---- project: project manager/navigator
   {
     'ahmedkhalf/project.nvim',
-    opts = project_opts(),
+    opts = proj.opts(),
 
     config = function(_, opts)
       require('project_nvim').setup(opts)

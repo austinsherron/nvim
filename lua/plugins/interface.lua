@@ -5,7 +5,8 @@
   something, or at least be informational
 --]]
 
-require 'nvim.lua.plugins.config.alphanvim'
+-- local alpha = require 'nvim.lua.plugins.config.alphanvim'
+local bb = require 'nvim.lua.plugins.config.barbar'
 
 
 return {
@@ -13,7 +14,7 @@ return {
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    -- opts = {}, -- alphanvim_opts(),
+    -- opts = {}, -- alpha.opts(),
 
     config = function()
       require('alpha').setup(require('alpha.themes.startify').config)
@@ -23,10 +24,22 @@ return {
   {
     'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    version = '^1.0.0',     -- optional: only update when a new 1.x version is released
+    opts = bb.opts(),
+  },
+---- bufferline: another buffer bar; note: disabled since barbar does what I want
+----             it to for now
+  {
+    'akinsho/bufferline.nvim',
+    enabled = false,
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    version = "*",
+
+    config = function()
+      require("bufferline").setup({})
+    end
   },
 ---- TODO: cmp-cmdline: fuzzy completion of commands
-  { 
+  {
     'hrsh7th/cmp-cmdline',
     enabled = false,
   },
@@ -44,15 +57,11 @@ return {
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
+
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 700
     end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
   }
 }
 

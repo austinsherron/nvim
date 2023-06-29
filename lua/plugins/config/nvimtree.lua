@@ -1,7 +1,7 @@
 local nvt = require 'nvim.lua.config.keymappings.plugins.nvimtree'
 
 
-function nvim_tree_opts()
+local function opts()
   return {
     actions = {
       open_file = {
@@ -32,20 +32,15 @@ function nvim_tree_opts()
     },
 
     view = {
-      mappings = {
-        custom_only = false,
-        list = {
-          { key = 'l', action = 'edit', action_cb = edit_or_open },
-          { key = 'L', action = 'cd', action_cb = cd },
-          { key = 'h', action = 'close_node' },
-          { key = 'H', action = 'dir_up', action_cb = dir_up },
-        },
-      },
-
       number = true,
       relativenumber = true,
       width = 45,
     },
   }
 end
+
+
+return {
+  opts = opts,
+}
 

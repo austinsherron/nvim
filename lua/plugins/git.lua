@@ -5,16 +5,9 @@
 --]]
 
 require 'lib.lua.table'
-require 'nvim.lua.plugins.config.gitsigns'
 
-local gs = require 'nvim.lua.config.keymappings.plugins.gitsigns'
-
-
-local function gitsigns_config(_, opts)
-  local all_settings = table.combine({ on_attach = gs.on_attach }, opts)
-
-  require('gitsigns').setup(all_settings)
-end
+local gs = require 'nvim.lua.plugins.config.gitsigns'
+local ng = require 'nvim.lua.plugins.config.neogit'
 
 
 return {
@@ -30,8 +23,21 @@ return {
 ---- gitsigns: visual cues about what's changed/is changing 
   {
     'lewis6991/gitsigns.nvim',
-    opts = gitsigns_opts(),
-    config = gitsigns_config,
+    opts = gs.opts(),
+
+    config = function(_, opts)
+      require('gitsigns').setup(opts)
+    end
+  },
+---- neogit: git interactions through neovim
+  {
+    'TimUntersberger/neogit',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = ng.opts(),
+
+    config = function(_, opts)
+      require('neogit').setup(opts)
+    end
   },
 }
 
