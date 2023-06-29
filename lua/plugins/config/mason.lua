@@ -1,9 +1,14 @@
-require 'nvim.lua.config.lsp'
+local lsp = require 'nvim.lua.config.lsp'
 
 
-function mason_lspconfig_opts()
+local function opts()
   return {
-    ensure_installed = lsp_servers()
+    ensure_installed = lsp.servers()
   }
 end
+
+
+return {
+  opts = opts,
+}
 

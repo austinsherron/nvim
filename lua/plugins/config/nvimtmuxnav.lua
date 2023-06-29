@@ -1,4 +1,5 @@
-function nvim_tmux_nav_opts()
+
+local function opts()
   return {
     disable_when_zoomed = false, -- defaults to false
 
@@ -13,4 +14,9 @@ function nvim_tmux_nav_opts()
     }
   }
 end
+
+
+return {
+  opts = opts,
+}
 

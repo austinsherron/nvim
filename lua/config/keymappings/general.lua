@@ -28,7 +28,7 @@ km.inoremap('kj',    '<Esc>',    options('exit/back'))
 km.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 
 -- redo
-km.nnoremap('<leader>r', '<C-r>', options('redo'))
+-- km.nnoremap('<leader>r', '<C-r>', options('redo'))   -- not sold on the mapping
 
 ---- misc ops
 
@@ -53,5 +53,5 @@ km.nnoremap('<leader>hx', ':noh<CR>', options('cancel highlight'))
 -- add word
 km.nnoremap('<leader>aw', 'zg', options('add word to dict.'))
 -- suggest words
-km.nnoremap('<leader>sw', 'z=', options('suggest word(s) for typo'))
+km.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 
