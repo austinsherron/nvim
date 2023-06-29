@@ -18,7 +18,8 @@ km.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
 
 -- close/quit
 km.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
-km.nnoremap('<leader>Q', ':qa!<CR>', options('force quit'))
+km.nnoremap('<leader>Q', ':q<CR>',   options('quit/close all'))
+km.nnoremap('<leader>Q!', ':qa!<CR>', options('force quit'))
 
 -- <esc>
 km.inoremap('jh',    '<Esc>',    options('exit/back'))
