@@ -1,14 +1,13 @@
 local lsp = require 'nvim.lua.config.lsp'
 
 
-local function opts()
+local Msn = {}
+
+function Msn.opts()
   return {
     ensure_installed = lsp.servers()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Msn
 

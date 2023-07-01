@@ -1,4 +1,7 @@
-local function opts()
+
+local Bb = {}
+
+function Bb.opts()
   return {
     -- visual
     animation = true,
@@ -10,8 +13,5 @@ local function opts()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Bb
 

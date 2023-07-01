@@ -1,11 +1,18 @@
 local km = require 'nvim.lua.utils.mapper'
 
 
+-- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
+--       function
+local function options(desc, bufnr)
+    return { desc = 'lsp: ' .. desc, buffer = bufnr }
+end
+
+
 local function global_mappings()
-  km.nnoremap('<leader>e', vim.diagnostic.open_float)
-  km.nnoremap('[d',        vim.diagnostic.goto_prev)
-  km.nnoremap(']d',        vim.diagnostic.goto_next)
-  km.nnoremap('<leader>l', vim.diagnostic.setloclist)
+  km.nnoremap('<leader>e', vim.diagnostic.open_float, options('open diagnostic hover'))
+  km.nnoremap('[d',        vim.diagnostic.goto_prev,  options('prev diagnostic'))
+  km.nnoremap(']d',        vim.diagnostic.goto_next,  options('next diagnostic'))
+  km.nnoremap('<leader>l', vim.diagnostic.setloclist, options('diagnostics list'))
 end
 
 
@@ -23,20 +30,21 @@ local function after_attach_mappings(ev)
   -- enable completion triggered by <c-x><c-o>
   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  km.nnoremap('gD',         vim.lsp.buf.declaration,             { buffer = ev.buf })
-  km.nnoremap('gd',         vim.lsp.buf.definition,              { buffer = ev.buf })
-  km.nnoremap('K',          vim.lsp.buf.hover,                   { buffer = ev.buf })
-  km.nnoremap('gi',         vim.lsp.buf.implementation,          { buffer = ev.buf })
-  km.nnoremap('<C-k>',      vim.lsp.buf.signature_help,          { buffer = ev.buf })
-  km.nnoremap('<leader>wa', vim.lsp.buf.add_workspace_folder,    { buffer = ev.buf })
-  km.nnoremap('<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = ev.buf })
-  km.nnoremap('<leader>wl', inspect_wkspace_dirs,                { buffer = ev.buf })
-  km.nnoremap('<leader>D',  vim.lsp.buf.type_definition,         { buffer = ev.buf })
-  km.nnoremap('<leader>rn', vim.lsp.buf.rename,                  { buffer = ev.buf })
-  km.nnoremap('<leader>ca', vim.lsp.buf.code_action,             { buffer = ev.buf })
-  km.vnoremap('<leader>ca', vim.lsp.buf.code_action,             { buffer = ev.buf })
-  km.nnoremap('gr',         vim.lsp.buf.references,              { buffer = ev.buf })
-  km.nnoremap('<leader>f', format,                               { buffer = ev.buf })
+  km.nnoremap('gD',         vim.lsp.buf.declaration,             options('jump to declaration', ev.buf))
+  km.nnoremap('gd',         vim.lsp.buf.definition,              options('jump to definition', ev.buf))
+  km.nnoremap('K',          vim.lsp.buf.hover,                   options('open hover', ev.buf))
+  km.nnoremap('gi',         vim.lsp.buf.implementation,          options('jump to implementation', ev.buf))
+  km.nnoremap('<C-k>',      vim.lsp.buf.signature_help,          options('signature help', ev.buf))
+  km.nnoremap('<leader>wa', vim.lsp.buf.add_workspace_folder,    options('add wkspce dir', ev.buf))
+  km.nnoremap('<leader>wr', vim.lsp.buf.remove_workspace_folder, options('rm wkspce dir', ev.buf))
+  km.nnoremap('<leader>wl', inspect_wkspace_dirs,                options('list wkspce dirs', ev.buf))
+  km.nnoremap('<leader>D',  vim.lsp.buf.type_definition,         options('type definition', ev.buf))
+  km.nnoremap('<leader>rn', vim.lsp.buf.rename,                  options('rename', ev.buf))
+  -- TODO: not sure exactly what these do
+  km.nnoremap('<leader>ca', vim.lsp.buf.code_action,             options('', ev.buf))
+  km.vnoremap('<leader>ca', vim.lsp.buf.code_action,             options('', ev.buf))
+  km.nnoremap('gr',         vim.lsp.buf.references,              options('', ev.buf))
+  km.nnoremap('<leader>f', format,                               options('', ev.buf))
 end
 
 
@@ -49,8 +57,12 @@ local function after_attach_autocmd()
   })
 end
 
-function lsp_keymappings()
+local Lsp = {}
+
+function Lsp.keymappings()
   global_mappings()
   after_attach_autocmd()
 end
+
+return Lsp
 

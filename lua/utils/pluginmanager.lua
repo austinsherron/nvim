@@ -1,4 +1,7 @@
-local function init(plugins)
+
+local Pm = {}
+
+function Pm.init(plugins)
   local base = vim.fn.stdpath('config')
   local pathbase = base .. '/packages'
   local lazypath = pathbase .. '/lazy.nvim'
@@ -21,8 +24,5 @@ local function init(plugins)
   })
 end
 
-
-return {
-    init = init
-}
+return Pm
 

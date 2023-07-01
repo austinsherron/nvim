@@ -1,4 +1,7 @@
-local function build()
+
+local Ts = {}
+
+function Ts.build()
   return {
     with_sync = true,
     ensure_installed = {
@@ -24,7 +27,7 @@ local function build()
 end
 
 
-local function opts()
+function Ts.opts()
   return {
     auto_install = false,
     context_commentstring = { enable = true, enable_autocmd = false },
@@ -36,9 +39,5 @@ local function opts()
   }
 end
 
-
-return {
-  build = build,
-  opts = opts,
-}
+return Ts
 

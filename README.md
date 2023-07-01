@@ -173,7 +173,7 @@ I organize my plugins into the following categories:
 - [ ] Change diff/merge view colors to something that makes for better UX
 - [ ] Make gitsigns symbols more obvious
 - [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
-- [ ] Add (relative) line numbers by default to diffview and undotree
+- [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
 
 ### Fixes
 
