@@ -26,16 +26,14 @@ local function get_buttons()
   }
 end
 
-
--- local function opts()
+-- local Alpha = {}
+--
+-- function Alpha.opts()
 --   return {
 --     dashboard.section.header.val = get_header(),
 --     dashboard.section.buttons.val = get_buttons(),
 --   }
 -- end
 --
---
--- return {
---   opts = opts,
--- }
+-- return Alpha
 

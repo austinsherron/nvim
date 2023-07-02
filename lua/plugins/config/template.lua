@@ -1,5 +1,7 @@
 
-local function opts()
+local Tmpl = {}
+
+function Tmpl.opts()
   return {
     -- TODO: I should probably see if I can source these from the environment,
     --       or something like that
@@ -9,8 +11,5 @@ local function opts()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Tmpl
 

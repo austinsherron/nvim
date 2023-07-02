@@ -1,7 +1,8 @@
 local gs = require 'nvim.lua.config.keymappings.plugins.gitsigns'
 
+local Gs = {}
 
-local function opts()
+function Gs.opts()
   return {
     on_attach = gs.on_attach,
     signs = {
@@ -47,8 +48,5 @@ local function opts()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Gs
 

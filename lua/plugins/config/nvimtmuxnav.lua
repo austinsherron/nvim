@@ -1,7 +1,9 @@
 
-local function opts()
+local Ntn = {}
+
+function Ntn.opts()
   return {
-    disable_when_zoomed = false, -- defaults to false
+    disable_when_zoomed = false,    -- defaults to false
 
     keybindings = {
       left  = '<C-h>',
@@ -15,8 +17,5 @@ local function opts()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Ntn
 

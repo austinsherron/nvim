@@ -1,5 +1,7 @@
 
-local function opts()
+local Ng = {}
+
+function Ng.opts()
   return {
     integrations = {
       -- enable integration w/ diffview plugin
@@ -8,8 +10,5 @@ local function opts()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Ng
 

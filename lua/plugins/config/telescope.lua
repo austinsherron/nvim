@@ -5,8 +5,9 @@ local function load_telescope_ext(name)
   require('telescope').load_extension(name)
 end
 
+local Tsc = {}
 
-local function config(_, opts)
+function Tsc.config(_, opts)
   require('telescope').setup(opts)
 
   for _, tsc_ext in ipairs(TELESCOPE_EXTENSIONS) do
@@ -15,7 +16,7 @@ local function config(_, opts)
 end
 
 
-local function opts()
+function Tsc.opts()
   return {
     extensions = {
       undo = {
@@ -29,9 +30,5 @@ local function opts()
   }
 end
 
-
-return {
-  config = config,
-  opts = opts,
-}
+return Tsc
 

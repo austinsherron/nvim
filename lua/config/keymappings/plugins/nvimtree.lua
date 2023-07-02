@@ -103,7 +103,9 @@ local function custom_mappings(bufnr, api)
 end
 
 
-local function on_attach(bufnr)
+local Nvt = {}
+
+function Nvt.on_attach(bufnr)
   local api = require('nvim-tree.api')
 
   default_mappings(bufnr, api)
@@ -111,8 +113,5 @@ local function on_attach(bufnr)
   custom_mappings(bufnr, api)
 end
 
-
-return {
-  on_attach = on_attach,
-}
+return Nvt
 

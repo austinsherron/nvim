@@ -1,7 +1,9 @@
 local nvt = require 'nvim.lua.config.keymappings.plugins.nvimtree'
 
 
-local function opts()
+local Nvt = {}
+
+function Nvt.opts()
   return {
     actions = {
       open_file = {
@@ -39,8 +41,5 @@ local function opts()
   }
 end
 
-
-return {
-  opts = opts,
-}
+return Nvt
 

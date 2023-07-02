@@ -36,24 +36,25 @@ local function actions()
     km.nnoremap('<leader>hR', gs.reset_buffer, options('reset buffer'))
 
     km.nnoremap('<leader>hb', blameline,                    options('line git blame'))
-    km.nnoremap('<leader>tb', gs.toggle_current_line_blame, options('toggle line git blame'))
+    km.nnoremap('<leader>lb', gs.toggle_current_line_blame, options('toggle line git blame'))
 
     km.nnoremap('<leader>hd', gs.diffthis,       options('diff'))
     km.nnoremap('<leader>hD', diffthis,          options('diff ~'))
-    km.nnoremap('<leader>td', gs.toggle_deleted, options('toggle deleted'))
+    km.nnoremap('<leader>sd', gs.toggle_deleted, options('toggle deleted'))
 end
 
 
 local function text_objects()
-    km.onoremmap('ih', ':<C-U>Gitsigns select_hunk<CR>', options('select hunk'))
+    km.onoremap('ih', ':<C-U>Gitsigns select_hunk<CR>', options('select hunk'))
 end
 
 
-local function on_attach()
+local Gs = {}
+
+function Gs.on_attach()
     actions()
     text_objects()
 end
 
-return {
-    on_attach,
-}
+return Gs
+
