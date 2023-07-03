@@ -31,7 +31,7 @@ return {
   },
 ---- neogit: git interactions through neovim
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = ng.opts(),
 
