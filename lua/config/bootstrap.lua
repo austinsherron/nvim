@@ -33,7 +33,7 @@ vim.opt.termguicolors = true
 
 -- remap space to no-op
 km.nnoremap('<Space>', '<Nop>')
- 
+
 -- remap leaders to space
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

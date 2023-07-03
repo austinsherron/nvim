@@ -32,16 +32,11 @@ return {
     'akinsho/bufferline.nvim',
     enabled = false,
     dependencies = 'nvim-tree/nvim-web-devicons',
-    version = "*",
+    version = '*',
 
     config = function()
-      require("bufferline").setup({})
+      require('bufferline').setup({})
     end
-  },
----- TODO: cmp-cmdline: fuzzy completion of commands
-  {
-    'hrsh7th/cmp-cmdline',
-    enabled = false,
   },
 ---- TODO: customize: lualine: status line
   {

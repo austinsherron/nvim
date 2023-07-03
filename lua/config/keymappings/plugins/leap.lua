@@ -10,6 +10,7 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap("'", '<Plug>(leap-forward-till)',  options('forward'))
-km.nnoremap('"', '<Plug>(leap-backward-till)', options('backward'))
+-- TODO: figure out better mapping for these
+-- km.nnoremap("'", '<Plug>(leap-forward-till)',  options('forward'))
+-- km.nnoremap('"', '<Plug>(leap-backward-till)', options('backward'))
 

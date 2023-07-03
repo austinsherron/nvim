@@ -31,8 +31,8 @@ km.nnoremap('<leader>ba', ':BufferPick<CR>',  options('choose any'))
 ---- close/delete
 
 -- current
-km.nnoremap('<M-w>',     ':BufferClose<CR>', options('delete'))
-km.nnoremap('<leader>x', ':BufferClose<CR>', options('delete'))
+km.nnoremap('<M-w>',     ':BufferClose<CR>', options('close'))
+km.nnoremap('<leader>x', ':BufferClose<CR>', options('close'))
 
 -- all but current
 km.nnoremap('<leader>X', ':BufferCloseAllButCurrent<CR>', options('close all but current'))

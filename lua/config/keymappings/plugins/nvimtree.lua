@@ -91,6 +91,7 @@ end
 local function remapped_defaults(bufnr, api)
   km.nnoremap('<C-h>', api.node.open.horizontal,      options('Open: Horizontal Split', bufnr))
   km.nnoremap('I',     api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
+  km.nnoremap('s',     cnvt.silent_open,              options('Open silently', bufnr))
 end
 
 
@@ -99,9 +100,7 @@ local function custom_mappings(bufnr, api)
   km.nnoremap('L',     api.tree.change_root_to_node,   options('CD', bufnr))
   km.nnoremap('h',     api.node.navigate.parent_close, options('Close Directory', bufnr))
   km.nnoremap('H',     api.tree.change_root_to_parent, options('Up', bufnr))
-  km.nnoremap('s',     cnvt.silent_open,               options('Open silently', bufnr))
 end
-
 
 local Nvt = {}
 
