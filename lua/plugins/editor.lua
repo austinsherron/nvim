@@ -8,6 +8,11 @@ local cmp = require 'nvim.lua.plugins.config.cmp.cmp'
 
 
 return {
+---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+  },
 ---- comment: manipulate code comments easily
   {
     'numToStr/Comment.nvim',
