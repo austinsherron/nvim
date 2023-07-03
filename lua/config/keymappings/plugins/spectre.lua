@@ -22,6 +22,7 @@ end
 -- TODO: consider a more complete remapping of available actions: 
 --       https://github.com/nvim-pack/nvim-spectre
 km.nmap('<leader>S',  spectre_cmd('open', false),                 options('open'))
+km.nmap('<leader>sx', spectre_cmd('close', false),                options('close'))
 km.nmap('<leader>sw', spectre_cmd('open_visual', true),           options('search current word'))
 km.vmap('<leader>sw', spectre_cmd('open_visual', false, '<esc>'), options('search current word'))
 km.nmap('<leader>sp', spectre_cmd('open_file_search', true),      options('search on current file'))
