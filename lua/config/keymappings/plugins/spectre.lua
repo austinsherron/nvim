@@ -19,7 +19,7 @@ end
 
 -- interactions ----------------------------------------------------------------
 
--- TODO: consider a more complete remapping of available actions: 
+-- TODO: consider a more complete remapping of available actions:
 --       https://github.com/nvim-pack/nvim-spectre
 km.nmap('<leader>S',  spectre_cmd('open', false),                 options('open'))
 km.nmap('<leader>sx', spectre_cmd('close', false),                options('close'))

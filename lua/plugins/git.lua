@@ -20,7 +20,7 @@ return {
       require('diffview').setup({})
     end
   },
----- gitsigns: visual cues about what's changed/is changing 
+---- gitsigns: visual cues about what's changed/is changing
   {
     'lewis6991/gitsigns.nvim',
     opts = gs.opts(),

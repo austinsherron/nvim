@@ -18,7 +18,7 @@ km.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
 
 -- close/quit
 km.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
-km.nnoremap('<leader>Q', ':q<CR>',   options('quit/close all'))
+km.nnoremap('<leader>Q', ':qa<CR>',   options('quit/close all'))
 km.nnoremap('<leader>!', ':qa!<CR>', options('force quit'))
 
 -- <esc>
@@ -29,7 +29,7 @@ km.inoremap('kj',    '<Esc>',    options('exit/back'))
 km.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 
 -- redo
--- km.nnoremap('<leader>r', '<C-r>', options('redo'))   -- not sold on the mapping
+km.nnoremap("'r", '<C-r>', options('redo'))     -- experimenting w/ "'" as secondary leader 
 
 ---- misc ops
 

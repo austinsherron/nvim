@@ -78,7 +78,7 @@ I organize my plugins into the following categories:
 
 "Search" plugins make it easier to find things.
 
-* [nvim-spectre](https://github.com/nvim-pack/nvim-spectre) 
+* [nvim-spectre](https://github.com/nvim-pack/nvim-spectre)
 * [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 * [telescope-emoji.nvim](https://github.com/xiyaowong/telescope-emoji.nvim)
 * [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)
@@ -109,7 +109,8 @@ I organize my plugins into the following categories:
 
 ### Plugins/Tooling
 
-- [ ] Auto-completion/correction
+- [x] Auto-completion (revisit for advanced configuration)
+- [ ] Auto-correction (?)
 - [ ] Auto-imports
 - [ ] Code generation (see snippets)
 - [x] Code searching utility (always room for improvement here)
@@ -119,7 +120,7 @@ I organize my plugins into the following categories:
 - [x] Diff viewer (could be better though...)
 - [ ] File templates
 - [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
-- [ ] Find+Replace
+- [x] Find+Replace
 - [ ] Fuzzy-find commands
 - [ ] Formatting
 - [ ] General prettiness (😅)
@@ -194,4 +195,5 @@ I organize my plugins into the following categories:
 - [ ] Update lua files/packages that export functions to encapsulate them in tables
 - [ ] Figure out why, even after changing the supposedly relevant vim configs., why
       from a comment, above or below the commented line, continues the comment
+- [ ] Issue upgrading LuaSnip
 
