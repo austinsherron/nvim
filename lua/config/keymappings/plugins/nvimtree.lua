@@ -1,5 +1,5 @@
 local km = require 'nvim.lua.utils.mapper'
-local cnvt = require 'nvim.lua.plugins.custom.nvimtree'
+local cnvt = require 'nvim.lua.plugins.extensions.nvimtree'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -75,7 +75,7 @@ local function default_mappings(bufnr, api)
   km.nnoremap('q',     api.tree.close,                        options('Close', bufnr))
   km.nnoremap('r',     api.fs.rename,                         options('Rename', bufnr))
   km.nnoremap('R',     api.tree.reload,                       options('Refresh', bufnr))
-  km.nnoremap('s',     api.node.run.system,                   options('Run System', bufnr))
+  -- km.nnoremap('s',     api.node.run.system,                   options('Run System', bufnr))
   km.nnoremap('S',     api.tree.search_node,                  options('Search', bufnr))
   -- km.nnoremap('U',     api.tree.toggle_custom_filter,         options('Toggle Hidden', bufnr))
   km.nnoremap('W',     api.tree.collapse_all,                 options('Collapse', bufnr))
@@ -99,7 +99,7 @@ local function custom_mappings(bufnr, api)
   km.nnoremap('L',     api.tree.change_root_to_node,   options('CD', bufnr))
   km.nnoremap('h',     api.node.navigate.parent_close, options('Close Directory', bufnr))
   km.nnoremap('H',     api.tree.change_root_to_parent, options('Up', bufnr))
-  km.nnoremap('<C-s>', cnvt.silent_open,               options('Open silently', bufnr))
+  km.nnoremap('s',     cnvt.silent_open,               options('Open silently', bufnr))
 end
 
 
