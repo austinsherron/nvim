@@ -118,6 +118,7 @@ I organize my plugins into the following categories:
 - [x] Comments
 - [ ] Debugger
 - [x] Diff viewer (could be better though...)
+- [x] Docstring template insertion (explore configuration options)
 - [ ] File templates
 - [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
 - [x] Find+Replace
@@ -137,7 +138,7 @@ I organize my plugins into the following categories:
 - [x] Session manager
 - [ ] Snippets
 - [x] Start screen? (again, wanna explore)
-- [x] Status bar (would like to customize it more though)
+- [x] Status bar (would like to customize it more though) (and investigate extensions)
 - [x] Surround
 - [x] Syntax checking (for a small set of languages, guts are there at least)
 - [x] Tab/buffer bar
@@ -160,14 +161,9 @@ I organize my plugins into the following categories:
 
 ### Tasks
 
-- [x] Enable spell-checker/grammar helper/etc. (potentially investigate
-      spellchecker plugins, i.e.: spelunker)
-- [ ] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing
-      whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc.
-- [ ] I'm not totally happy w/ my tab/buffer management schemes and my
-      non-workflows that haven't really come to be w/ my current tooling (i.e.:
-      it'd be nice to have some visual labels of which buffer is which, and a
-      quick way to jump to that buffer
+- [x] Enable spell-checker/grammar helper/etc. (potentially investigate spellchecker plugins, i.e.: spelunker)
+- [ ] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc.
+- [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling (i.e.: it'd be nice to have some visual labels of which buffer is which, and a quick way to jump to that buffer
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
 - [ ] (Not very concrete) Incorporate tabs (and windows?) into workflows
 - [ ] How can I open multiple files w/ nvimtree?
@@ -179,21 +175,16 @@ I organize my plugins into the following categories:
 ### Fixes
 
 - [x] Re-install, or otherwise just fix, nvim-tmux-navigation
-- [x] Fix buffer ordering (or fix sequential navigation, i.e.: navigate in visual
-      order)
-- [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`)
-      once and hit `r` N times to get N redo operations
+- [x] Fix buffer ordering (or fix sequential navigation, i.e.: navigate in visual order)
+- [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`) once and hit `r` N times to get N redo operations
 - [x] Fix "redo" custom mapping wait time
 - [x] Migrate nvimtree `view.mappings` to `on_attach`
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
-- [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?)
-      (I think this has been addressed; will know when next update is pushed)
+- [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?) (I think this has been addressed; will know when next update is pushed)
 - [ ] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
-- [ ] Add more words/better dictionaries ("suggest word(s)" action never actually
-      suggests anything)
+- [ ] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything)
 - [ ] Update lua files/packages that export functions to encapsulate them in tables
-- [ ] Figure out why, even after changing the supposedly relevant vim configs., why
-      from a comment, above or below the commented line, continues the comment
+- [ ] Figure out why, even after changing the supposedly relevant vim configs., why from a comment, above or below the commented line, continues the comment
 - [ ] Issue upgrading LuaSnip
 

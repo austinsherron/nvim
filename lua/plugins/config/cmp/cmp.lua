@@ -1,6 +1,5 @@
 local km = require 'nvim.lua.config.keymappings.plugins.cmp'
 local ls = require 'nvim.lua.plugins.config.luasnip'
-local lsp = require 'nvim.lua.config.lsp'
 local src = require 'nvim.lua.plugins.config.cmp.sources'
 
 -- base config -----------------------------------------------------------------
