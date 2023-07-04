@@ -1,7 +1,7 @@
 -- code ------------------------------------------------------------------------
 
 --[[
-  control nvim's ability to understand and interact w/ code
+  control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
 local ls = require 'nvim.lua.plugins.config.luasnip'
@@ -37,6 +37,13 @@ return {
       require('mason-lspconfig').setup(opts)
     end
   },
+---- nvim lsp-config: makes it easier to configure nvim's built in lsp (code semantics)
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = { 'williamboman/mason-lspconfig.nvim' },
+    config = lsp.config,
+  },
+---- nvim navic: show code context in statusline
   {
     'SmiteshP/nvim-navic',
     dependencies = 'neovim/nvim-lspconfig',
@@ -44,12 +51,6 @@ return {
     config = function ()
       require('nvim-navic')
     end
-  },
----- nvim lsp-config: makes it easier to configure nvim's built in lsp (code semantics)
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = { 'williamboman/mason-lspconfig.nvim' },
-    config = lsp.config,
   },
 ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
   {
