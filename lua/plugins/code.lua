@@ -37,6 +37,14 @@ return {
       require('mason-lspconfig').setup(opts)
     end
   },
+  {
+    'SmiteshP/nvim-navic',
+    dependencies = 'neovim/nvim-lspconfig',
+
+    config = function ()
+      require('nvim-navic')
+    end
+  },
 ---- nvim lsp-config: makes it easier to configure nvim's built in lsp (code semantics)
   {
     'neovim/nvim-lspconfig',
