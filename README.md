@@ -15,80 +15,15 @@ There are definitely more, but this README, like my nvim journey in general, is 
 
 I organize my plugins into the following categories:
 
-### Appearance
-
-"Appearance" plugins control how nvim looks: colors, icons, textures, menus, etc. These are distinct from interface plugins in that interface elements should be functional (and ideally useful). Appearance is the place for things that provide aesthetic value only.
-
-* [Catppuccin](https://github.com/catppuccin/nvim)
-* [KANAGAWA.nvim](https://github.com/rebelot/kanagawa.nvim)
-* [Nordic](https://github.com/AlexvZyl/nordic.nvim)
-* [Tokyo Night](https://github.com/folke/tokyonight.nvim)
-
-### Code
-
-"Code" plugins control nvim's ability to understand and interact w/ code.
-
-* [mason.nvim](https://github.com/williamboman/mason.nvim)
-* [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
-* [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-* [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-
-### Editor
-
-"Editor" plugins control core editor capabilities like commenting, general text manipulation, etc.
-
-* [Comment.nvim](https://github.com/numToStr/Comment.nvim)
-* [Neovim Session Manager](https://github.com/Shatur/neovim-session-manager)
-* [nvim-surround](https://github.com/kylechui/nvim-surround)
-
-### Git
-
-"Git" plugins enable nvim + git interactions/integrations.
-
-* [diffview.nvim](https://github.com/sindrets/diffview.nvim)
-* [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-
-### Interface
-
-"Interface" plugins add to, control, or augment interface elements. Interface elements should *do something*, or at least be informational, as opposed to being purely aesthetic.
-
-* [alpha-nvim](https://github.com/goolord/alpha-nvim)
-* [barbar.nvim](https://github.com/romgrk/barbar.nvim)
-* [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
-* [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
-* [undotree](https://github.com/mbbill/undotree)
-* [Which Key](https://github.com/folke/which-key.nvim)
-
-### Motion
-
-"Motion" plugins control on-screen (as opposed to file-system) movement.
-
-* [leap.nvim](https://github.com/ggandor/leap.nvim)
-* [nvim-tmux-navigationa](https://github.com/alexghergh/nvim-tmux-navigation)
-
-### Navigation
-
-"Navigation" plugins control (file) system (as opposed to on-screen) movement.
-
-* [nnn.nvim](https://github.com/luukvbaal/nnn.nvim)
-* [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
-* [project.nvim](https://github.com/hmedkhalf/project.nvim)
-
-### Search
-
-"Search" plugins make it easier to find things.
-
-* [nvim-spectre](https://github.com/nvim-pack/nvim-spectre)
-* [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-* [telescope-emoji.nvim](https://github.com/xiyaowong/telescope-emoji.nvim)
-* [telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)
-
-### Tools
-
-"Tools" plugins add misc. functionality to nvim; they add *explicitly new* functionality to nvim, as opposed to changing something about the way its core functions work. Tools here don't fit into any other categories.
-
-* [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
-* [template.nvim](https://github.com/glepnir/template.nvim)
+* **Appearance** - Appearance plugins control how nvim looks: colors, icons, textures, menus, etc. These are distinct from interface plugins in that interface elements should be functional (and ideally useful). Appearance is the place for things that provide aesthetic value only.
+* **Code** - Code plugins control nvim's ability to understand, generate, and generally interact w/ code.
+* **Editor** - Editor plugins control core editor capabilities like commenting, general text manipulation, etc.
+* **Git** - Git plugins enable nvim + git interactions/integrations.
+* **Interface** - Interface plugins add to, control, or augment interface elements. Interface elements should *do something*, or at least be informational, as opposed to being purely aesthetic.
+* **Motion** - Motion plugins control on-screen (as opposed to file-system) movement.
+* **Navigation** - Navigation plugins control (file) system (as opposed to on-screen) movement.
+* **Search** - Search plugins make it easier to find things.
+* **Tools** - Tools plugins add misc. functionality to nvim; they add *explicitly new* functionality to nvim, as opposed to changing something about the way its core functions work. Tools here don't fit into any other categories.
 
 ## Structure
 
@@ -99,10 +34,14 @@ I organize my plugins into the following categories:
 │   │   ├── keymappings
 │   │   │   └── plugins
 │   │   └── lsp
+│   │       └── servers
 │   ├── plugins
-│   │   └── config
+│   │   ├── config
+│   │   │   └── cmp
+│   │   └── extensions
 │   └── utils
 └── templates
+
 ```
 
 ## To-Do Lists
@@ -112,6 +51,7 @@ I organize my plugins into the following categories:
 - [x] Auto-completion (revisit for advanced configuration)
 - [ ] Auto-correction (?)
 - [ ] Auto-imports
+- [ ] Auto-pairs
 - [ ] Code generation (see snippets)
 - [x] Code searching utility (always room for improvement here)
 - [x] Colorscheme (but always evolving)
@@ -143,6 +83,7 @@ I organize my plugins into the following categories:
 - [x] Syntax checking (for a small set of languages, guts are there at least)
 - [x] Tab/buffer bar
 - [x] Telescope
+- [ ] The Line - a stylized indicator that a line is (almost) too long
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
 
 ### LSP Support
@@ -151,7 +92,7 @@ I organize my plugins into the following categories:
 - [x] Lua
 - [ ] Go
 - [ ] Java
-- [ ] Bash
+- [x] Bash
 - [ ] Zsh
 - [ ] Fish
 - [ ] JavaScript
@@ -182,7 +123,7 @@ I organize my plugins into the following categories:
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
 - [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?) (I think this has been addressed; will know when next update is pushed)
-- [ ] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
+- [x] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
 - [ ] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything)
 - [ ] Update lua files/packages that export functions to encapsulate them in tables
 - [ ] Figure out why, even after changing the supposedly relevant vim configs., why from a comment, above or below the commented line, continues the comment

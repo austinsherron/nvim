@@ -49,6 +49,10 @@ return {
   {
     'f3fora/cmp-spell',
   },
+---- editor config: language specific file formatting
+  {
+    'gpanders/editorconfig.nvim',
+  },
 ---- neovim session-manager: persist open files/buffers b/w nvim sessions
     'Shatur/neovim-session-manager',
 ---- surround: efficient manipulation of brackets, quotes, etc.
