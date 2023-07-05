@@ -24,6 +24,10 @@ function Ll.opts()
       lualine_b = { 'filetype', 'fileformat', 'encoding' },
       lualine_c = { { get_location, cond = is_available, draw_empty = true } },
     },
+    inactive_winbar = {
+      lualine_a = { { 'tabs', mode = 0, use_mode_colors = true } },
+      lualine_b = { 'filetype', 'fileformat', 'encoding' },
+    },
   }
 end
 
