@@ -64,7 +64,7 @@ end
 
 local Lsp = {}
 
-function Lsp.keymappings()
+function Lsp.keymap()
   global_mappings()
   after_attach_autocmd()
 end

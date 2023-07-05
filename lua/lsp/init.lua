@@ -38,7 +38,7 @@ function Lsp.config()
     lspconfig[lsp_server].setup(conf)
   end
 
-  lsp.keymappings()
+  lsp.keymap()
 end
 
 return Lsp

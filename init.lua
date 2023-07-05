@@ -5,7 +5,7 @@ require 'nvim.lua.core.bootstrap'
 
 -- plugins ---------------------------------------------------------------------
 
--- note: settings/keymappings may have dependency(ies) on plugins, so load these first
+-- note: settings/keymap may have dependency(ies) on plugins, so load these first
 require('nvim.lua.utils.pluginmanager').init('plugins')
 
 -- keymap ---------------------------------------------------------------------
