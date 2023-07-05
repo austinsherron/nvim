@@ -40,7 +40,9 @@ end
 
 local function make_select_with_enter(cmp)
   return function(fallback)
-    if cmp.visible() and cmp.get_active_entry() then
+    if cmp.visible() and not cmp.get_active_entry() then
+      cmp.select_next_item()
+    elseif cmp.visible() and cmp.get_active_entry() then
       cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
     else
       fallback()

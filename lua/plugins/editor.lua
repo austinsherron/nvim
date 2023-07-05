@@ -1,7 +1,7 @@
 -- editor ----------------------------------------------------------------------
 
 --[[
-  control core editor capabilities like commenting, general text manipulation, etc.
+  control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
 local cmp = require 'nvim.lua.plugins.config.cmp.cmp'

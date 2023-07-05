@@ -12,5 +12,7 @@ return {
   'rebelot/kanagawa.nvim',
   'AlexvZyl/nordic.nvim',
   'folke/tokyonight.nvim',
+---- nui: ui components
+  'MunifTanjim/nui.nvim',
 }
 

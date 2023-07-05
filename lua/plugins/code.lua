@@ -4,14 +4,28 @@
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
+local aer = require 'nvim.lua.plugins.config.aerial'
 local ls = require 'nvim.lua.plugins.config.luasnip'
 local lsp = require 'nvim.lua.config.lsp'
 local mlsp = require 'nvim.lua.plugins.config.mason'
 local ts = require 'nvim.lua.plugins.config.treesitter'
 
 
----- LuaSnip: snippets engine (...written in Lua)
 return {
+---- aerial: code outlines
+  {
+    'stevearc/aerial.nvim',
+    opts = aer.opts(),
+    dependencies = {
+       'nvim-treesitter/nvim-treesitter',
+       'nvim-tree/nvim-web-devicons'
+    },
+
+    config = function(_, opts)
+      require('aerial').setup(opts)
+    end
+  },
+---- LuaSnip: snippets engine (...written in Lua)
   {
     'L3MON4D3/LuaSnip',
     version = '<1>.*',
@@ -43,7 +57,7 @@ return {
     dependencies = { 'williamboman/mason-lspconfig.nvim' },
     config = lsp.config,
   },
----- nvim navic: show code context in statusline
+---- nvim navic: for showing code context in status bar(s)
   {
     'SmiteshP/nvim-navic',
     dependencies = 'neovim/nvim-lspconfig',

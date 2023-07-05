@@ -19,8 +19,9 @@ km.nmap('<leader>fl', telescope.lsp_references,  options('search lsp references'
 
 -- extensions ------------------------------------------------------------------
 
+km.nnoremap('<leader>fc', '<cmd>Telescope aerial<CR>',   options('search code symbols'))
 km.nnoremap('<leader>fe', '<cmd>Telescope emoji<CR>',    options('search emojis'))
 km.nnoremap('<leader>fp', '<cmd>Telescope projects<CR>', options('search projects'))
 km.nnoremap('<leader>fr', '<cmd>Telescope frecency<CR>', options('find "frecent"'))
-km.nnoremap('<leader>fu', '<cmd>Telescope undo<CR>',     options('search undo history'))
+km.nnoremap('<leader>fn', '<cmd>Telescope undo<CR>',     options('search undo history'))
 
