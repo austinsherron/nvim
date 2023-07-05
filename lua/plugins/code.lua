@@ -6,7 +6,7 @@
 
 local aer = require 'nvim.lua.plugins.config.aerial'
 local ls = require 'nvim.lua.plugins.config.luasnip'
-local lsp = require 'nvim.lua.config.lsp'
+local lsp = require 'nvim.lua.lsp'
 local mlsp = require 'nvim.lua.plugins.config.mason'
 local ts = require 'nvim.lua.plugins.config.treesitter'
 

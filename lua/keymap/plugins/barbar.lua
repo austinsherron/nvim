@@ -46,12 +46,6 @@ km.nnoremap('<leader>br', ':BufferRestore<CR>', options('restore'))
 -- pin
 km.nnoremap('<leader>bp', ':BufferPin<CR>', options('pin'))
 
--- resize
-km.nnoremap('<leader>J', ':resize +10<CR>',          options('resize "up" 10'))
-km.nnoremap('<leader>K', ':resize -10<CR>',          options('resize "down" 10'))
-km.nnoremap('<leader>L', ':vertical resize +10<CR>', options('resize "right" 10'))
-km.nnoremap('<leader>H', ':vertical resize -10<CR>', options('resize "left" 10'))
-
 -- reorder
 km.nnoremap('<leader>bd', ':BufferOrderByDirectory<CR>',    options('order by dir'))
 km.nnoremap('<leader>b#', ':BufferOrderByBufferNumber<CR>', options('order by #'))
