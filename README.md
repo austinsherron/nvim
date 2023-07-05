@@ -17,7 +17,7 @@ I organize my plugins into the following categories:
 
 * **Appearance** - Appearance plugins control how nvim looks: colors, icons, textures, menus, etc. These are distinct from interface plugins in that interface elements should be functional (and ideally useful). Appearance is the place for things that provide aesthetic value only.
 * **Code** - Code plugins control nvim's ability to understand, generate, and generally interact w/ code.
-* **Editor** - Editor plugins control core editor capabilities like commenting, general text manipulation, etc.
+* **Editor** - Editor plugins control core editor capabilities like commenting, completion, general text manipulation, etc.
 * **Git** - Git plugins enable nvim + git interactions/integrations.
 * **Interface** - Interface plugins add to, control, or augment interface elements. Interface elements should *do something*, or at least be informational, as opposed to being purely aesthetic.
 * **Motion** - Motion plugins control on-screen (as opposed to file-system) movement.
@@ -54,6 +54,7 @@ I organize my plugins into the following categories:
 - [ ] Auto-pairs
 - [ ] Code generation (see snippets)
 - [x] Code searching utility (always room for improvement here)
+- [x] Code outline (still exploring other options)
 - [x] Colorscheme (but always evolving)
 - [x] Comments
 - [ ] Debugger
@@ -62,7 +63,7 @@ I organize my plugins into the following categories:
 - [ ] File templates
 - [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
 - [x] Find+Replace
-- [ ] Fuzzy-find commands
+- [x] Fuzzy-find commands
 - [ ] Formatting
 - [ ] General prettiness (😅)
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
@@ -112,6 +113,7 @@ I organize my plugins into the following categories:
 - [ ] Make gitsigns symbols more obvious
 - [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
 - [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
+- [ ] Create lualine extensions for diffview, undotree, and spectre
 
 ### Fixes
 
