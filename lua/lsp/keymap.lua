@@ -30,19 +30,26 @@ local function after_attach_mappings(ev)
   -- enable completion triggered by <c-x><c-o>
   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  km.nnoremap('gD',    vim.lsp.buf.declaration,             options('jump to declaration', ev.buf))
-  km.nnoremap('gd',    vim.lsp.buf.definition,              options('jump to definition', ev.buf))
-  km.nnoremap("'h",    vim.lsp.buf.hover,                   options('open hover', ev.buf))
-  km.nnoremap('gi',    vim.lsp.buf.implementation,          options('jump to implementation', ev.buf))
-  km.nnoremap('<C-k>', vim.lsp.buf.signature_help,          options('signature help', ev.buf))
-  km.nnoremap("'wa",   vim.lsp.buf.add_workspace_folder,    options('add wkspce dir', ev.buf))
-  km.nnoremap("'wr",   vim.lsp.buf.remove_workspace_folder, options('rm wkspce dir', ev.buf))
-  km.nnoremap("'wl",   inspect_wkspace_dirs,                options('list wkspce dirs', ev.buf))
-  km.nnoremap("'D",    vim.lsp.buf.type_definition,         options('type definition', ev.buf))
-  km.nnoremap("'r",    vim.lsp.buf.rename,                  options('rename', ev.buf))
-  km.nnoremap("'ca",   vim.lsp.buf.code_action,             options('code action', ev.buf))
-  km.nnoremap('gr',    vim.lsp.buf.references,              options('show references', ev.buf))
-  km.nnoremap("'f",    format,                              options('format', ev.buf))
+  -- go to...
+  km.nnoremap('gD', vim.lsp.buf.declaration,     options('jump to declaration', ev.buf))
+  km.nnoremap('gd', vim.lsp.buf.definition,      options('jump to definition', ev.buf))
+  km.nnoremap('gi', vim.lsp.buf.implementation,  options('jump to implementation', ev.buf))
+  km.nnoremap('gr', vim.lsp.buf.references,      options('show references', ev.buf))
+  km.nnoremap("gT", vim.lsp.buf.type_definition, options('type definition', ev.buf))
+
+  -- semantic info
+  km.nnoremap("'h", vim.lsp.buf.hover,          options('open hover', ev.buf))
+  km.nnoremap("'S", vim.lsp.buf.signature_help, options('signature help', ev.buf))
+
+  -- workspace manipulation
+  km.nnoremap("'wa", vim.lsp.buf.add_workspace_folder,    options('add wkspce dir', ev.buf))
+  km.nnoremap("'wr", vim.lsp.buf.remove_workspace_folder, options('rm wkspce dir', ev.buf))
+  km.nnoremap("'wl", inspect_wkspace_dirs,                options('list wkspce dirs', ev.buf))
+
+  -- do...
+  km.nnoremap("'r",  vim.lsp.buf.rename,      options('rename', ev.buf))
+  km.nnoremap("'f",  format,                  options('format', ev.buf))
+  km.nnoremap("'ca", vim.lsp.buf.code_action, options('code action', ev.buf))
 end
 
 
@@ -57,7 +64,7 @@ end
 
 local Lsp = {}
 
-function Lsp.keymappings()
+function Lsp.keymap()
   global_mappings()
   after_attach_autocmd()
 end

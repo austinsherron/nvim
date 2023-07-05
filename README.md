@@ -30,14 +30,13 @@ I organize my plugins into the following categories:
 ```
 .
 ├── lua
-│   ├── config
-│   │   ├── keymappings
-│   │   │   └── plugins
-│   │   └── lsp
-│   │       └── servers
+│   ├── core
+│   ├── keymap
+│   │   └── plugins
+│   ├── lsp
+│   │   └── servers
 │   ├── plugins
 │   │   ├── config
-│   │   │   └── cmp
 │   │   └── extensions
 │   └── utils
 └── templates

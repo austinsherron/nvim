@@ -34,7 +34,7 @@ local function KeyMapper_new(defualt_options)
 end
 
 
--- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim/lua/core/keymaps.lua
+-- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim.lua.keymaps.lua
 local function do_mapping(mode, lhs, rhs, options)
     if (type(rhs) == 'string') then
         vim.api.nvim_set_keymap(mode, lhs, rhs, options)
