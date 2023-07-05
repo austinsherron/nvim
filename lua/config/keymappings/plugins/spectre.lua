@@ -1,5 +1,4 @@
-require 'lib.lua.bool'
-
+local bool = require 'lib.lua.core.bool'
 local km = require 'nvim.lua.utils.mapper'
 
 
@@ -11,8 +10,8 @@ end
 
 
 local function spectre_cmd(cmd, select_word, prepend)
-  local select_word_str = ternary(select_word, '{select_word=true}', '')
-  local prepend = prepend or ''
+  local select_word_str = bool.ternary(select_word, '{select_word=true}', '')
+  prepend = prepend or ''
 
   return prepend .. '<cmd>lua require("spectre").' .. cmd .. '(' .. select_word_str .. ')<CR>'
 end

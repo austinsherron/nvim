@@ -4,7 +4,7 @@
   enable nvim git interactions/integrations
 --]]
 
-require 'lib.lua.table'
+require 'lib.lua.core.table'
 
 local gs = require 'nvim.lua.plugins.config.gitsigns'
 local ng = require 'nvim.lua.plugins.config.neogit'

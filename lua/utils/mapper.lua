@@ -1,5 +1,5 @@
-require 'lib.lua.string'
-require 'lib.lua.table'
+local str = require 'lib.lua.core.string'
+local tbl = require 'lib.lua.core.table'
 
 
 local Mode = {
@@ -47,21 +47,21 @@ end
 
 
 -- TODO: create "Indexable" class that implements python-like indexing for strings
---       see `lib.lua.string.Indexable`
+--       see `lib.lua.core.string.Indexable`
 local function is_noremap(func_name)
-    return string.startswith(func_name, NOREMAP) or
-           string.startswith(func_name:sub(2, #func_name),  NOREMAP)
+    return str.startswith(func_name, NOREMAP) or
+           str.startswith(func_name:sub(2, #func_name),  NOREMAP)
 end
 
 
 local function do_make_mapping_func(mode, noremap)
     return function(lhs, rhs, opts)
-        local silent = string.startswith(lhs, '<silent>')
+        local silent = str.startswith(lhs, '<silent>')
         local lhs = lhs:gsub('<silent>', '')
 
         local opts = opts or {}
         local silent_and_noreamp = { noremap = noremap, silent = silent }
-        local options = table.combine(opts, silent_and_noreamp)
+        local options = tbl.combine(opts, silent_and_noreamp)
 
         return do_mapping(mode, lhs, rhs, options)
     end
