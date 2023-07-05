@@ -36,7 +36,7 @@ function Nvt.opts()
     view = {
       number = true,
       relativenumber = true,
-      width = 45,
+      width = 40,
     },
   }
 end

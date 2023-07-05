@@ -1,7 +1,7 @@
 -- editor ----------------------------------------------------------------------
 
 --[[
-  control core editor capabilities like commenting, general text manipulation, etc.
+  control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
 local cmp = require 'nvim.lua.plugins.config.cmp.cmp'
@@ -53,6 +53,10 @@ return {
 ---- cmp-spell: fuzzy completion of spelling suggestions
   {
     'f3fora/cmp-spell',
+  },
+---- editor config: language specific file formatting
+  {
+    'gpanders/editorconfig.nvim',
   },
 ---- neovim session-manager: persist open files/buffers b/w nvim sessions
     'Shatur/neovim-session-manager',

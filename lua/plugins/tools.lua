@@ -16,6 +16,12 @@ return {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && yarn install'
   },
+---- neogen: docstring generation
+  {
+    'danymat/neogen',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = true,
+  },
 ---- TODO: template.nvim: file templates (I couldn't get this to work; revisit)
   {
     'glepnir/template.nvim',

@@ -8,7 +8,7 @@ local tsc = require 'nvim.lua.plugins.config.telescope'
 
 
 return {
----- spectre: fuzzy pop-out search
+---- spectre: pop-out search + optional replace
   {
     'nvim-pack/nvim-spectre'
   },

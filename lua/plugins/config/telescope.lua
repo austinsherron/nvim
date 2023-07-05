@@ -1,5 +1,5 @@
 
-local TELESCOPE_EXTENSIONS = { 'emoji', 'frecency', 'projects', 'undo' }
+local TELESCOPE_EXTENSIONS = { 'aerial', 'emoji', 'frecency', 'projects', 'undo' }
 
 local function load_telescope_ext(name)
   require('telescope').load_extension(name)

@@ -1,17 +1,31 @@
 -- code ------------------------------------------------------------------------
 
 --[[
-  control nvim's ability to understand and interact w/ code
+  control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
+local aer = require 'nvim.lua.plugins.config.aerial'
 local ls = require 'nvim.lua.plugins.config.luasnip'
 local lsp = require 'nvim.lua.config.lsp'
 local mlsp = require 'nvim.lua.plugins.config.mason'
 local ts = require 'nvim.lua.plugins.config.treesitter'
 
 
----- LuaSnip: snippets engine (...written in Lua)
 return {
+---- aerial: code outlines
+  {
+    'stevearc/aerial.nvim',
+    opts = aer.opts(),
+    dependencies = {
+       'nvim-treesitter/nvim-treesitter',
+       'nvim-tree/nvim-web-devicons'
+    },
+
+    config = function(_, opts)
+      require('aerial').setup(opts)
+    end
+  },
+---- LuaSnip: snippets engine (...written in Lua)
   {
     'L3MON4D3/LuaSnip',
     version = '<1>.*',
@@ -42,6 +56,15 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = { 'williamboman/mason-lspconfig.nvim' },
     config = lsp.config,
+  },
+---- nvim navic: for showing code context in status bar(s)
+  {
+    'SmiteshP/nvim-navic',
+    dependencies = 'neovim/nvim-lspconfig',
+
+    config = function ()
+      require('nvim-navic')
+    end
   },
 ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
   {

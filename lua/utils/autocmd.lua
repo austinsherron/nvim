@@ -4,7 +4,7 @@ local AutoCmd = {}
 AutoCmd.__index = AutoCmd
 
 function AutoCmd.new()
-  this = {}
+  local this = {}
 
   setmetatable(this, AutoCmd)
 

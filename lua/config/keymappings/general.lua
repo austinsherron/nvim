@@ -52,7 +52,7 @@ km.nnoremap('<leader>hx', ':noh<CR>', options('cancel highlight'))
 -- spellcheck ------------------------------------------------------------------
 
 -- add word
-km.nnoremap('<leader>aw', 'zg', options('add word to dict.'))
+km.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
 -- suggest words
 km.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 

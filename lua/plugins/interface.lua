@@ -7,6 +7,7 @@
 
 -- local alpha = require 'nvim.lua.plugins.config.alphanvim'
 local bb = require 'nvim.lua.plugins.config.barbar'
+local ll = require 'nvim.lua.plugins.config.lualine'
 
 
 return {
@@ -41,13 +42,14 @@ return {
 ---- TODO: customize: lualine: status line
   {
     'nvim-lualine/lualine.nvim',
+    opts = ll.opts(),
 
-    config = function()
-      require('lualine').setup()
+    config = function(_, opts)
+      require('lualine').setup(opts)
     end
   },
 ---- undotree: visualize a file/buffer's change history
-  {'mbbill/undotree'},
+  { 'mbbill/undotree' },
 ---- which-key: visualize keybindings based on what's typed
   {
     'folke/which-key.nvim',
@@ -57,6 +59,10 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 700
     end,
-  }
+
+    config = function(_, opts)
+      require('which-key').setup(opts)
+    end
+  },
 }
 
