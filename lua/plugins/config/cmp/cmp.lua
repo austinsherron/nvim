@@ -51,7 +51,8 @@ function Cmp.config()
 
   base(cmp)
   filetype(cmp)
-  searchline(cmp)
+  -- note: I found it rather annoying to have auto-completion in the searchline
+  -- searchline(cmp)
   cmdline(cmp)
 end
 

@@ -4,13 +4,20 @@
   make it easier to find things
 --]]
 
+local spctr = require 'nvim.lua.plugins.config.spectre'
 local tsc = require 'nvim.lua.plugins.config.telescope'
 
 
 return {
+---- searchbox: ui/ux enhancements for standard search/replace
+  {
+    'VonHeikemen/searchbox.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+  },
 ---- spectre: pop-out search + optional replace
   {
-    'nvim-pack/nvim-spectre'
+    'nvim-pack/nvim-spectre',
+    opts = spctr.opts(),
   },
 ---- telescope: fuzzy pop-out search
   {

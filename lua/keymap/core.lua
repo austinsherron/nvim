@@ -28,9 +28,6 @@ km.inoremap('jk',    '<Esc>',    options('exit/back'))
 km.inoremap('kj',    '<Esc>',    options('exit/back'))
 km.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 
--- redo
-km.nnoremap("'r", '<C-r>', options('redo'))     -- experimenting w/ "'" as secondary leader
-
 ---- misc ops
 
 -- toggle relative line numbers
@@ -46,8 +43,8 @@ km.nnoremap('k', 'gk', options('cursor up'))
 
 -- display --------------------------------------------------------------------
 
--- turn off highlight (i.e.: for search)
-km.nnoremap('<leader>hx', ':noh<CR>', options('cancel highlight'))
+-- turn off highlight (i.e.: for search, as wall as for searchbox.nvim plugin)
+km.nnoremap('<leader>hx', ':noh | :SearchBoxClear<CR>', options('cancel highlight'))
 
 -- spellcheck ------------------------------------------------------------------
 
