@@ -6,12 +6,24 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
+local lk = require 'nvim.lua.plugins.config.lspkind'
+
+
 return {
 ---- colorschemes
   'catppuccin/nvim',
   'rebelot/kanagawa.nvim',
   'AlexvZyl/nordic.nvim',
   'folke/tokyonight.nvim',
+---- lspkind: icons for lsp completion items
+  {
+    'onsails/lspkind.nvim',
+    opts = lk.opts(),
+
+    config = function(_, opts)
+      require('lspkind').init(opts)
+    end
+  },
 ---- nui: ui components
   'MunifTanjim/nui.nvim',
 }
