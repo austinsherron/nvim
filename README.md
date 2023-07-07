@@ -52,6 +52,7 @@ I organize my plugins into the following categories:
 - [ ] Auto-imports
 - [ ] Auto-pairs
 - [ ] Code generation (see snippets)
+- [ ] Code actions
 - [x] Code searching utility (always room for improvement here)
 - [x] Code outline (still exploring other options)
 - [x] Colorscheme (but always evolving)
@@ -70,7 +71,7 @@ I organize my plugins into the following categories:
 - [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (neogit)
 - [ ] Inline docs/hints
 - [x] Merge tool (...at least needs further configuration)
-- [ ] Notifications
+- [x] Notifications
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [x] Persistent undo history
 - [x] Project manager (still wanna see what other options are out there though)
@@ -113,6 +114,9 @@ I organize my plugins into the following categories:
 - [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
 - [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
 - [ ] Create lualine extensions for diffview, undotree, and spectre
+- [ ] Add ability to refactor imports on file move
+- [ ] Better nvim init error handling
+- [ ] Notifications/modals/confirmation menus on nvim init error
 
 ### Fixes
 

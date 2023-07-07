@@ -27,6 +27,11 @@ return {
     dependencies = 'nvim-tree/nvim-web-devicons',
     opts = bb.opts(),
   },
+---- bqf (better quickfix window): makes quickfix window more user-friendly
+  {
+    'kevinhwang91/nvim-bqf',
+    dependencies = { 'junegunn/fzf.vim' },
+  },
 ---- bufferline: another buffer bar; note: disabled since barbar does what I want
 ----             it to for now
   {
@@ -39,13 +44,34 @@ return {
       require('bufferline').setup({})
     end
   },
----- TODO: customize: lualine: status line
+---- fzf: fuzzy-finder
+  {
+    'junegunn/fzf',
+
+    build = function()
+      vim.fn['fzf#install']()
+    end
+  },
+---- fzf.vim: collection of fzf vim integrations/utilities
+  {
+    'junegunn/fzf.vim',
+  },
+---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',
     opts = ll.opts(),
 
     config = function(_, opts)
       require('lualine').setup(opts)
+    end
+  },
+---- notify: pretty notifications
+  {
+    'rcarriga/nvim-notify',
+
+    -- substitute all native vim notifications
+    config = function()
+      vim.notify = require('notify')
     end
   },
 ---- undotree: visualize a file/buffer's change history

@@ -39,7 +39,7 @@ local function after_attach_mappings(ev)
 
   -- semantic info
   km.nnoremap("'h", vim.lsp.buf.hover,          options('open hover', ev.buf))
-  km.nnoremap("'S", vim.lsp.buf.signature_help, options('signature help', ev.buf))
+  km.nnoremap("'s", vim.lsp.buf.signature_help, options('signature help', ev.buf))
 
   -- workspace manipulation
   km.nnoremap("'wa", vim.lsp.buf.add_workspace_folder,    options('add wkspce dir', ev.buf))
