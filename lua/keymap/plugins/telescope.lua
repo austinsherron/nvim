@@ -15,7 +15,7 @@ km.nmap('<leader>ff', telescope.find_files,      options('find files'))
 km.nmap('<leader>fg', telescope.live_grep,       options('grep in files'))
 km.nmap('<leader>fb', telescope.buffers,         options('search buffers'))
 km.nmap('<leader>fh', telescope.help_tags,       options('search help tags'))
-km.nmap('<leader>fl', telescope.lsp_references,  options('search lsp references'))
+km.nmap('<leader>fu', telescope.lsp_references,  options('search lsp references'))
 
 -- extensions ------------------------------------------------------------------
 

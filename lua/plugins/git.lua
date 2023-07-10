@@ -6,6 +6,7 @@
 
 require 'lib.lua.core.table'
 
+local dv = require 'nvim.lua.plugins.config.diffview'
 local gs = require 'nvim.lua.plugins.config.gitsigns'
 local ng = require 'nvim.lua.plugins.config.neogit'
 
@@ -15,9 +16,11 @@ return {
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    -- FIXME: these don't seem to be respected below...
+    opts = dv.opts(),
 
-    config = function()
-      require('diffview').setup({})
+    config = function(_, opts)
+      require('diffview').setup(opts)
     end
   },
 ---- gitsigns: visual cues about what's changed/is changing

@@ -8,9 +8,14 @@ local tsc = require 'nvim.lua.plugins.config.telescope'
 
 
 return {
+---- searchbox: ui/ux enhancements for standard search/replace
+  {
+    'VonHeikemen/searchbox.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+  },
 ---- spectre: pop-out search + optional replace
   {
-    'nvim-pack/nvim-spectre'
+    'nvim-pack/nvim-spectre',
   },
 ---- telescope: fuzzy pop-out search
   {

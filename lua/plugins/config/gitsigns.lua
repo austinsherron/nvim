@@ -1,4 +1,4 @@
-local gs = require 'nvim.lua.config.keymappings.plugins.gitsigns'
+local gs = require 'nvim.lua.keymap.plugins.gitsigns'
 
 local Gs = {}
 

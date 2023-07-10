@@ -1,4 +1,4 @@
-local km = require 'nvim.lua.config.keymappings.plugins.cmp'
+local km = require 'nvim.lua.keymap.plugins.cmp'
 local ls = require 'nvim.lua.plugins.config.luasnip'
 local src = require 'nvim.lua.plugins.config.cmp.sources'
 
@@ -46,12 +46,13 @@ end
 local Cmp = {}
 
 function Cmp.config()
-  -- note: lsp cmp setup happens in nvim:lua/config/lsp/init.lua
+  -- note: lsp cmp setup happens in nvim:lua/lsp/init.lua
   local cmp = require 'cmp'
 
   base(cmp)
   filetype(cmp)
-  searchline(cmp)
+  -- note: I found it rather annoying to have auto-completion in the searchline
+  -- searchline(cmp)
   cmdline(cmp)
 end
 

@@ -28,9 +28,6 @@ km.inoremap('jk',    '<Esc>',    options('exit/back'))
 km.inoremap('kj',    '<Esc>',    options('exit/back'))
 km.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 
--- redo
-km.nnoremap("'r", '<C-r>', options('redo'))     -- experimenting w/ "'" as secondary leader 
-
 ---- misc ops
 
 -- toggle relative line numbers
@@ -46,8 +43,8 @@ km.nnoremap('k', 'gk', options('cursor up'))
 
 -- display --------------------------------------------------------------------
 
--- turn off highlight (i.e.: for search)
-km.nnoremap('<leader>hx', ':noh<CR>', options('cancel highlight'))
+-- turn off highlight (i.e.: for search, as wall as for searchbox.nvim plugin)
+km.nnoremap('<leader>hx', ':noh | :SearchBoxClear<CR>', options('cancel highlight'))
 
 -- spellcheck ------------------------------------------------------------------
 
@@ -55,4 +52,15 @@ km.nnoremap('<leader>hx', ':noh<CR>', options('cancel highlight'))
 km.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
 -- suggest words
 km.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
+
+-- buffers ---------------------------------------------------------------------
+
+-- note: since all other buffer key bindings are dependent on the barbar plugin,
+--       they're defined w/ the barbar plugin keymap
+
+-- resize
+km.nnoremap('<leader>J', ':resize +10<CR>',          options('resize "up" 10'))
+km.nnoremap('<leader>K', ':resize -10<CR>',          options('resize "down" 10'))
+km.nnoremap('<leader>L', ':vertical resize +10<CR>', options('resize "right" 10'))
+km.nnoremap('<leader>H', ':vertical resize -10<CR>', options('resize "left" 10'))
 
