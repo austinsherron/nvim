@@ -51,6 +51,7 @@ I organize my plugins into the following categories:
 - [ ] Auto-correction (?)
 - [ ] Auto-imports
 - [ ] Auto-pairs
+- [ ] Case Changer (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
 - [ ] Code generation (see snippets)
 - [ ] Code actions
 - [x] Code searching utility (always room for improvement here)
@@ -115,8 +116,12 @@ I organize my plugins into the following categories:
 - [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
 - [ ] Create lualine extensions for diffview, undotree, and spectre
 - [ ] Add ability to refactor imports on file move
-- [ ] Better nvim init error handling
+- [x] Better nvim init error handling (unclear if it actually works, but it's there-ish)
 - [ ] Notifications/modals/confirmation menus on nvim init error
+- [ ] Logger should write to nvim application logs
+- [ ] Update nvim alias to include writing to logs
+- [ ] Refactor KeyMapper to use state so as to avoid duplication "options" functions, etc.
+- [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
 
 ### Fixes
 
@@ -133,4 +138,7 @@ I organize my plugins into the following categories:
 - [ ] Update lua files/packages that export functions to encapsulate them in tables
 - [ ] Figure out why, even after changing the supposedly relevant vim configs., why from a comment, above or below the commented line, continues the comment
 - [ ] Issue upgrading LuaSnip
+- [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
+- [ ] DiffviewClose doesn't consistently close all diffview buffers/windows
+- [ ] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc....
 

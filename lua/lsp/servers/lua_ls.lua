@@ -5,24 +5,27 @@ local stream = require('lib.lua.utils.stream')
 
 
 local function get_lua_path_components()
+---@diagnostic disable-next-line: undefined-field
   local lua_path = env.lua_path()
   local split_lua_path = str.split(lua_path, ';')
 
   return stream(split_lua_path)
+---@diagnostic disable-next-line: undefined-field
       :filter(function(i) return i ~= '' end)
       :get()
 end
 
 
 local function make_wkspace_library()
-  local local_modules = stream(get_lua_path_components())
-      :map(path.dirname)
-      :get()
+---@diagnostic disable-next-line: undefined-field
+  local projects_root = env.projects_root()
+---@diagnostic disable-next-line: undefined-field
+  local nvim_root = env.nvim_root()
 
-  table.insert(local_modules, '/usr/local/share/lua/5.3')
-  table.insert(local_modules, '/usr/local/bin/lua')
-
-  return local_modules
+  return {
+    nvim_root,
+    projects_root .. '/lua/',
+  }
 end
 
 
@@ -32,13 +35,13 @@ return {
       diagnostics = {
         globals = { 'vim' },
       },
-      -- runtime = {
-      --   version = 'Lua 5.3',
-      --   path = get_lua_path_components(),
-      -- },
-      -- workspace = {
-      --   library = make_wkspace_library(),
-      -- }
+      runtime = {
+        version = 'Lua 5.3',
+        path = get_lua_path_components(),
+      },
+      workspace = {
+        library = make_wkspace_library(),
+      }
     }
   }
 }

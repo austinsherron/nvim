@@ -1,19 +1,18 @@
--- git -------------------------------------------------------------------------
+-- g(it -------------------------------------------------------------------------
 
 --[[
   enable nvim git interactions/integrations
 --]]
 
-require 'lib.lua.core.table'
-
 local dv = require 'nvim.lua.plugins.config.diffview'
 local gs = require 'nvim.lua.plugins.config.gitsigns'
 local ng = require 'nvim.lua.plugins.config.neogit'
+local plugin = require 'nvim.lua.utils.plugin'
 
 
 return {
 ---- diff view: for looking at diffs...
-  {
+  plugin({
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     -- FIXME: these don't seem to be respected below...
@@ -22,18 +21,18 @@ return {
     config = function(_, opts)
       require('diffview').setup(opts)
     end
-  },
+  }),
 ---- gitsigns: visual cues about what's changed/is changing
-  {
+  plugin({
     'lewis6991/gitsigns.nvim',
     opts = gs.opts(),
 
     config = function(_, opts)
       require('gitsigns').setup(opts)
     end
-  },
+  }),
 ---- neogit: git interactions through neovim
-  {
+  plugin({
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = ng.opts(),
@@ -41,6 +40,6 @@ return {
     config = function(_, opts)
       require('neogit').setup(opts)
     end
-  },
+  }),
 }
 
