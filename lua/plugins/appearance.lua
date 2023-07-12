@@ -7,24 +7,25 @@
 --]]
 
 local lk = require 'nvim.lua.plugins.config.lspkind'
+local plugin = require 'nvim.lua.utils.plugin'
 
 
 return {
 ---- colorschemes
-  'catppuccin/nvim',
-  'rebelot/kanagawa.nvim',
-  'AlexvZyl/nordic.nvim',
-  'folke/tokyonight.nvim',
+  plugin({ 'catppuccin/nvim' }),
+  plugin({ 'rebelot/kanagawa.nvim' }),
+  plugin({ 'AlexvZyl/nordic.nvim' }),
+  plugin({ 'folke/tokyonight.nvim' }),
 ---- lspkind: icons for lsp completion items
-  {
+  plugin({
     'onsails/lspkind.nvim',
     opts = lk.opts(),
 
     config = function(_, opts)
       require('lspkind').init(opts)
     end
-  },
+  }),
 ---- nui: ui components
-  'MunifTanjim/nui.nvim',
+  plugin({ 'MunifTanjim/nui.nvim' }),
 }
 
