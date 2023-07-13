@@ -1,25 +1,25 @@
-local safe_require = require('nvim.lua.utils.import').safe_require
+local safe = require 'nvim.lua.utils.safe'
 
 
 -- init ------------------------------------------------------------------------
 
 -- "bootstrap" settings must come first
-safe_require('nvim.lua.core.bootstrap', 'notify')
+safe.require('nvim.lua.core.bootstrap')
 
 -- plugins ---------------------------------------------------------------------
 
 -- note: settings/keymap may have dependency(ies) on plugins, so load these first
-safe_require('nvim.lua.utils.pluginmanager', 'notify').init('plugins')
+safe.call(function() safe.require('nvim.lua.utils.pluginmanager').init('plugins') end)
 
 -- keymap ---------------------------------------------------------------------
 
-safe_require('nvim.lua.keymap', 'notify')
+safe.require('nvim.lua.keymap')
 
 -- settings -------------------------------------------------------------------
 
-safe_require('nvim.lua.core.settings', 'notify')
+safe.require('nvim.lua.core.settings')
 
 -- appearance ------------------------------------------------------------------
 
-safe_require('nvim.lua.core.appearance', 'notify')
+safe.require('nvim.lua.core.appearance')
 

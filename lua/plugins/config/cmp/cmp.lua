@@ -2,6 +2,7 @@ local km = require 'nvim.lua.keymap.plugins.cmp'
 local ls = require 'nvim.lua.plugins.config.luasnip'
 local src = require 'nvim.lua.plugins.config.cmp.sources'
 
+
 -- base config -----------------------------------------------------------------
 
 local function base(cmp)
@@ -16,7 +17,11 @@ end
 
 local function filetype(cmp)
   cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({ src.buffer(), src.git() })
+    sources = cmp.config.sources({
+      src.buffer(),
+      src.git(),
+      src.emoji(),
+    })
   })
 end
 
@@ -51,7 +56,7 @@ function Cmp.config()
 
   base(cmp)
   filetype(cmp)
-  -- note: I found it rather annoying to have auto-completion in the searchline
+  -- note: I found it rather annoying to have auto-completion in the searchline, hence...
   -- searchline(cmp)
   cmdline(cmp)
 end

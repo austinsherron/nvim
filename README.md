@@ -48,6 +48,8 @@ I organize my plugins into the following categories:
 ### Plugins/Tooling
 
 - [x] Auto-completion (revisit for advanced configuration)
+- [ ] Auto-completion: `cmp-conventionalcommits`
+- [ ] Auto-completion: `cmp-dictionary`
 - [ ] Auto-correction (?)
 - [ ] Auto-imports
 - [ ] Auto-pairs

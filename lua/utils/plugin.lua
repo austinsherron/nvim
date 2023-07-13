@@ -1,6 +1,7 @@
 require 'lazy.types'
 
 local onerr = require 'nvim.lua.utils.onerr'
+local stream = require 'lib.lua.utils.stream'
 
 
 --- Internal helper that exists to clear a plugin's __index function and avoid infinite recursion.
@@ -23,12 +24,22 @@ Plugin.__index = Plugin
 
 --- Constructor
 --
----@param this LazyPluginBase: a lazy.nvim plugin definition
----@return Plugin
-function Plugin.new(this)
-  setmetatable(this, Plugin)
+---@param plugins LazyPlugin: a lazy.nvim plugin definition
+---@return Plugin: a new Plugin instance
+function Plugin.new(plugins)
+  setmetatable(plugins, Plugin)
 ---@diagnostic disable-next-line: return-type-mismatch
-  return this
+  return plugins
+end
+
+
+--- Constructs multiple plugins for plugin array.
+---@param plugins LazyPlugin[]
+---@return
+function Plugin.all(plugins)
+  return stream(plugins)
+    :map(Plugin.new)
+    :get()
 end
 
 
@@ -55,8 +66,21 @@ function Plugin:__index(key)
   end
 end
 
-return function(def)
+--- Exported Plugin constructors.
+--
+---@class Plgn
+local Plgn = {}
+
+---@see Plugin.new
+function Plgn.plugin(def)
   return Plugin.new(def)
 end
 
+
+---@see Plugin.all
+function Plgn.plugins(def)
+  return Plugin.all(def)
+end
+
+return Plgn
 
