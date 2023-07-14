@@ -26,7 +26,7 @@ o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
 o.spell = true
 o.spelllang = 'en_us'
 o.spellsuggest = 20
-o.spellfile = vim.fn.stdpath('config') .. '/.spell/en.utf-8.add'
+o.spellfile = vim.fn.stdpath('config') .. '/spell/en.utf-8.add'
 
 ---- indent settings -----------------------------------------------------------
 
