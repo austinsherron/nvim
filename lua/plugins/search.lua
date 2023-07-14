@@ -4,7 +4,7 @@
   make it easier to find things
 --]]
 
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 local tsc = require 'nvim.lua.plugins.config.telescope'
 
 

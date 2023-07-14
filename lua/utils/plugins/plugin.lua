@@ -1,6 +1,6 @@
 require 'lazy.types'
 
-local onerr = require 'nvim.lua.utils.onerr'
+local onerr = require 'nvim.lua.utils.errorhandling.onerr'
 local stream = require 'lib.lua.utils.stream'
 
 

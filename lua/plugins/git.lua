@@ -7,7 +7,7 @@
 local dv = require 'nvim.lua.plugins.config.diffview'
 local gs = require 'nvim.lua.plugins.config.gitsigns'
 local ng = require 'nvim.lua.plugins.config.neogit'
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 
 
 return plugins({

@@ -1,7 +1,14 @@
 
-local Pm = {}
+--- Responsible for plugin orchestration, as well as hiding the impl details of the Neovim
+--  plugin manager.
+--
+---@class PluginMgr
+local PluginMgr = {}
 
-function Pm.init(plugins)
+--- Initializes the neovim plugin manager.
+--
+---@param plugins string|table: a string
+function PluginMgr.init(plugins)
   local base = vim.fn.stdpath('config')
   local pathbase = base .. '/packages'
   local lazypath = pathbase .. '/lazy.nvim'
@@ -24,5 +31,5 @@ function Pm.init(plugins)
   })
 end
 
-return Pm
+return PluginMgr
 

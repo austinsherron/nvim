@@ -1,5 +1,5 @@
 local import = require 'lib.lua.utils.import'
-local onerr = require 'nvim.lua.utils.onerr'
+local onerr = require 'nvim.lua.utils.errorhandling.onerr'
 local path = require 'lib.lua.system.path'
 
 

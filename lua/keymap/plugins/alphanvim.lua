@@ -1,4 +1,4 @@
-local km = require 'nvim.lua.utils.mapper'
+local km = require 'nvim.lua.utils.core.mapper'
 
 
 -- interactions ----------------------------------------------------------------

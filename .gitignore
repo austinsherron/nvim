@@ -1,4 +1,4 @@
 .luarc.json
 *.netrwhist
-.spell
+spell
 packages/
