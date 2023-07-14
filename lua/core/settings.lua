@@ -17,7 +17,9 @@ o.formatoptions = 'tcrqn2lj'
 o.inccommand    = 'nosplit'        -- incremental live completion
 
 -- allows nvim to copy/paste to/from system clipboards
-opt.clipboard:append({'unnamedplus'})
+opt.clipboard:append({ 'unnamedplus' })
+-- sessions save/restore these things
+o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
 
 ---- spellcheck setting --------------------------------------------------------
 
@@ -63,7 +65,7 @@ opt.listchars = { ['tab'] = '>.', ['trail'] = '.' , ['nbsp'] = '‸' }
 ---- functional settings -------------------------------------------------------
 
 o.hidden        = true                              -- hide, don't dump, buffers when switching
-opt.completeopt = { 'menuone', 'noselect' }         -- preview menu options for autocompletion
+opt.completeopt = { 'menuone', 'noselect' }         -- preview menu options for auto-completion
 o.report        = 0                                 -- min lines changed to report # lines changed
 
 -- show diffs in vertical splits by default

@@ -7,24 +7,24 @@
   plugins
 --]]
 
-local plugin = require 'nvim.lua.utils.plugin'
+local plugins = require('nvim.lua.utils.plugin').plugins
 local tmpl = require 'nvim.lua.plugins.config.template'
 
 
-return {
+return plugins({
 ---- markdown preview: for previewing markdown documents 🤔
-  plugin({
+  {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && yarn install'
-  }),
+  },
 ---- neogen: docstring generation
-  plugin({
+  {
     'danymat/neogen',
     dependencies = 'nvim-treesitter/nvim-treesitter',
     config = true,
-  }),
+  },
 ---- TODO: template.nvim: file templates (I couldn't get this to work; revisit)
-  plugin({
+  {
     'glepnir/template.nvim',
     enabled = false,
     cmd = { 'Template', 'TemProject' },
@@ -33,6 +33,6 @@ return {
     config = function(_, opts)
       require('template').setup(opts)
     end
-  }),
-}
+  },
+})
 

@@ -48,6 +48,8 @@ I organize my plugins into the following categories:
 ### Plugins/Tooling
 
 - [x] Auto-completion (revisit for advanced configuration)
+- [ ] Auto-completion: `cmp-conventionalcommits`
+- [ ] Auto-completion: `cmp-dictionary`
 - [ ] Auto-correction (?)
 - [ ] Auto-imports
 - [ ] Auto-pairs
@@ -106,10 +108,10 @@ I organize my plugins into the following categories:
 
 - [x] Enable spell-checker/grammar helper/etc. (potentially investigate spellchecker plugins, i.e.: spelunker)
 - [ ] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc.
-- [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling (i.e.: it'd be nice to have some visual labels of which buffer is which, and a quick way to jump to that buffer
+- [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
 - [ ] (Not very concrete) Incorporate tabs (and windows?) into workflows
-- [ ] How can I open multiple files w/ nvimtree?
+- [ ] How can I open multiple files at once w/ nvimtree?
 - [ ] Change diff/merge view colors to something that makes for better UX
 - [ ] Make gitsigns symbols more obvious
 - [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
@@ -127,7 +129,7 @@ I organize my plugins into the following categories:
 
 - [x] Re-install, or otherwise just fix, nvim-tmux-navigation
 - [x] Fix buffer ordering (or fix sequential navigation, i.e.: navigate in visual order)
-- [ ] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`) once and hit `r` N times to get N redo operations
+- [x] Fix "redo" custom mapping repeatability, i.e.: I can't hit leader (`<space>`) once and hit `r` N times to get N redo operations (got rid of mapping altogether)
 - [x] Fix "redo" custom mapping wait time
 - [x] Migrate nvimtree `view.mappings` to `on_attach`
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
@@ -136,7 +138,7 @@ I organize my plugins into the following categories:
 - [x] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
 - [ ] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything)
 - [ ] Update lua files/packages that export functions to encapsulate them in tables
-- [ ] Figure out why, even after changing the supposedly relevant vim configs., why from a comment, above or below the commented line, continues the comment
+- [ ] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
 - [ ] DiffviewClose doesn't consistently close all diffview buffers/windows
