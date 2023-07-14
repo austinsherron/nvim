@@ -10,10 +10,10 @@ local proj = require 'nvim.lua.plugins.config.project'
 
 
 return plugins({
-  ---- nnn: file explorer w/ what seems like a cult-ish following
+---- nnn: file explorer w/ what seems like a cult-ish following
 
-  ---- note: didn't love the nnn interface; perhaps I need to use it a bit more
-  ----       to become accustomed to it
+---- note: didn't love the nnn interface; perhaps I need to use it a bit more
+----       to become accustomed to it
   {
     'luukvbaal/nnn.nvim',
     enabled = false,
@@ -22,7 +22,7 @@ return plugins({
       require('nnn').setup()
     end
   },
-  ---- nvim-tree: file explorer
+---- nvim-tree: file explorer
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -33,7 +33,7 @@ return plugins({
       require('nvim-tree').setup(opts)
     end,
   },
-  ---- project: project manager/navigator
+---- project: project manager/navigator
   {
     'ahmedkhalf/project.nvim',
     opts = proj.opts(),
