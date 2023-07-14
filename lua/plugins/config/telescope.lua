@@ -5,18 +5,8 @@ local function load_telescope_ext(name)
   require('telescope').load_extension(name)
 end
 
-local Tsc = {}
 
-function Tsc.config(_, opts)
-  require('telescope').setup(opts)
-
-  for _, tsc_ext in ipairs(TELESCOPE_EXTENSIONS) do
-    load_telescope_ext(tsc_ext)
-  end
-end
-
-
-function Tsc.opts()
+local function opts()
   return {
     extensions = {
       undo = {
@@ -30,5 +20,19 @@ function Tsc.opts()
   }
 end
 
-return Tsc
+--- Contains functions for configuring the telescope plugin and its extensions.
+--
+---@class Telescope
+local Telescope = {}
+
+--- Configures the telescope plugin.
+function Telescope.config()
+  require('telescope').setup(opts())
+
+  for _, tsc_ext in ipairs(TELESCOPE_EXTENSIONS) do
+    load_telescope_ext(tsc_ext)
+  end
+end
+
+return Telescope
 

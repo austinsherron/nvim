@@ -24,7 +24,6 @@ return plugins({
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
     },
-    opts = tsc.opts(),
     config = tsc.config,
   },
 ---- telescope-emoji: telescearch for emojis!

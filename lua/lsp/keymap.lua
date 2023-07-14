@@ -30,7 +30,7 @@ local function after_attach_mappings(ev)
   -- enable completion triggered by <c-x><c-o>
   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  -- go to...
+  -- find/go to...
   km.nnoremap('gD', vim.lsp.buf.declaration,     options('jump to declaration', ev.buf))
   km.nnoremap('gd', vim.lsp.buf.definition,      options('jump to definition', ev.buf))
   km.nnoremap('gi', vim.lsp.buf.implementation,  options('jump to implementation', ev.buf))
