@@ -1,5 +1,5 @@
 local bool = require 'lib.lua.core.bool'
-local km = require 'nvim.lua.utils.mapper'
+local km = require 'nvim.lua.utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this

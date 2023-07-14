@@ -1,6 +1,9 @@
-local onerr = require 'nvim.lua.utils.onerr'
+local onerr = require 'nvim.lua.utils.errorhandling.onerr'
 
 
+--- Provides methods for "safely" performing various actions. In this context, "safely"
+--  means "w/ error handling".
+--
 ---@class Safe
 local Safe = {}
 
@@ -10,7 +13,7 @@ local Safe = {}
 --
 ---@param to_call fun(): r: any?: the function to call
 ---@param error_handler OnErrStrategy?: how to handle errors; defaults to "notify"
----@return any?: the value returned by the to_call
+---@return any?: the value returned by to_call
 function Safe.call(to_call, error_handler)
   error_handler = error_handler or 'notify'
   return onerr[error_handler](to_call, error_handler)

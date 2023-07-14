@@ -5,7 +5,7 @@
 --]]
 
 local cmp = require 'nvim.lua.plugins.config.cmp.cmp'
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 
 
 return plugins({

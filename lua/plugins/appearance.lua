@@ -7,7 +7,7 @@
 --]]
 
 local lk = require 'nvim.lua.plugins.config.lspkind'
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 
 
 return plugins({
