@@ -8,7 +8,7 @@
 -- local alpha = require 'nvim.lua.plugins.config.alphanvim'
 local bb = require 'nvim.lua.plugins.config.barbar'
 local ll = require 'nvim.lua.plugins.config.lualine'
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 
 
 return plugins({

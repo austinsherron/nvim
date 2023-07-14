@@ -5,7 +5,7 @@
 --]]
 
 local nvt = require 'nvim.lua.plugins.config.nvimtree'
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 local proj = require 'nvim.lua.plugins.config.project'
 
 

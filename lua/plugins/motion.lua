@@ -5,7 +5,7 @@
 --]]
 
 local ntn = require 'nvim.lua.plugins.config.nvimtmuxnav'
-local plugins = require('nvim.lua.utils.plugin').plugins
+local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 
 
 return plugins({
