@@ -12,7 +12,7 @@ local plugins = require('nvim.lua.utils.plugin').plugins
 
 
 return plugins({
-  ---- alpha: landing page
+---- alpha: landing page
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -22,19 +22,19 @@ return plugins({
       require('alpha').setup(require('alpha.themes.startify').config)
     end,
   },
-  ---- barbar: buffer bar
+---- barbar: buffer bar
   {
     'romgrk/barbar.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
     opts = bb.opts(),
   },
-  ---- bqf (better quickfix window): makes quickfix window more user-friendly
+---- bqf (better quickfix window): makes quickfix window more user-friendly
   {
     'kevinhwang91/nvim-bqf',
     dependencies = { 'junegunn/fzf.vim' },
   },
-  ---- bufferline: another buffer bar; note: disabled since barbar does what I want
-  ----             it to for now
+---- bufferline: another buffer bar; note: disabled since barbar does what I want
+----             it to for now
   ({
     'akinsho/bufferline.nvim',
     enabled = false,
@@ -45,7 +45,7 @@ return plugins({
       require('bufferline').setup({})
     end
   }),
-  ---- fzf: fuzzy-finder
+---- fzf: fuzzy-finder
   {
     'junegunn/fzf',
 
@@ -53,9 +53,9 @@ return plugins({
       vim.fn['fzf#install']()
     end
   },
-  ---- fzf.vim: collection of fzf vim integrations/utilities
+---- fzf.vim: collection of fzf vim integrations/utilities
   { 'junegunn/fzf.vim' },
-  ---- lualine: status line; TODO: customize
+---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',
     opts = ll.opts(),
@@ -64,7 +64,7 @@ return plugins({
       require('lualine').setup(opts)
     end
   },
-  ---- notify: pretty notifications
+---- notify: pretty notifications
   {
     'rcarriga/nvim-notify',
 
@@ -73,9 +73,9 @@ return plugins({
       vim.notify = require('notify')
     end
   },
-  ---- undotree: visualize a file/buffer's change history
+---- undotree: visualize a file/buffer's change history
   { 'mbbill/undotree' },
-  ---- which-key: visualize keybindings based on what's typed
+---- which-key: visualize keybindings based on what's typed
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
