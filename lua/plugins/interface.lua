@@ -9,6 +9,7 @@
 local bb = require 'nvim.lua.plugins.config.barbar'
 local ll = require 'nvim.lua.plugins.config.lualine'
 local plugins = require('nvim.lua.utils.plugins.plugin').plugins
+local priority = require 'nvim.lua.utils.plugins.priority'
 
 
 return plugins({
@@ -67,6 +68,12 @@ return plugins({
 ---- notify: pretty notifications
   {
     'rcarriga/nvim-notify',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+
+    lazy = false,
+    -- we load this second since we want nvim-notify as early as possible; this comes after
+    -- nui.nvim since that is a dependency of this
+    priority = priority.SECOND,
 
     -- substitute all native vim notifications
     config = function()

@@ -17,14 +17,6 @@ return plugins({
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = ap.config
   },
----- comment: manipulate code comments easily
-  {
-    'numToStr/Comment.nvim',
-
-    config = function()
-      require('Comment').setup()
-    end
-  },
 ---- cmp: completion engine
   {
     'hrsh7th/nvim-cmp',
@@ -79,6 +71,14 @@ return plugins({
   {
     'f3fora/cmp-spell',
     dependencies = { 'hrsh7th/nvim-cmp' },
+  },
+---- comment: manipulate code comments easily
+  {
+    'numToStr/Comment.nvim',
+
+    config = function()
+      require('Comment').setup()
+    end
   },
 ---- editor config: language specific file formatting
   { 'gpanders/editorconfig.nvim' },

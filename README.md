@@ -107,7 +107,7 @@ I organize my plugins into the following categories:
 ### Tasks
 
 - [x] Enable spell-checker/grammar helper/etc. (potentially investigate spellchecker plugins, i.e.: spelunker)
-- [ ] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc.
+- [x] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc. (editorconfig got me a lot of the way there, but I can still do better -> neoformat)
 - [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
 - [ ] (Not very concrete) Incorporate tabs (and windows?) into workflows
@@ -137,7 +137,7 @@ I organize my plugins into the following categories:
 - [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?) (I think this has been addressed; will know when next update is pushed)
 - [x] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
 - [ ] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything)
-- [ ] Update lua files/packages that export functions to encapsulate them in tables
+- [x] Update lua files/packages that export functions to encapsulate them in tables
 - [ ] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)

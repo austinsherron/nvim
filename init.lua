@@ -9,11 +9,7 @@ safe.require('nvim.lua.core.bootstrap')
 -- plugins ---------------------------------------------------------------------
 
 -- note: settings/keymap has dependencies on plugins, so load them first
-safe.call(
-  function()
-    safe.require('nvim.lua.utils.plugins.pluginmanager').init('plugins')
-  end
-)
+safe.require('nvim.lua.utils.plugins.pluginmanager', function(m) m.init('plugins') end)
 
 -- keymap ---------------------------------------------------------------------
 
