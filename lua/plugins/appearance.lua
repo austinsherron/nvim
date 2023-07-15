@@ -8,14 +8,36 @@
 
 local lk = require 'nvim.lua.plugins.config.lspkind'
 local plugins = require('nvim.lua.utils.plugins.plugin').plugins
+local priority = require 'nvim.lua.utils.plugins.priority'
 
 
 return plugins({
----- colorschemes
-  { 'catppuccin/nvim' },
-  { 'rebelot/kanagawa.nvim' },
-  { 'AlexvZyl/nordic.nvim' },
-  { 'folke/tokyonight.nvim' },
+---- colorschemes: loaded w/ high priority as discussed here:
+----               https://github.com/folke/lazy.nvim > Plugin Spec > priority
+  {
+    'catppuccin/nvim',
+
+    lazy = false,
+    priority = priority.THIRD,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+
+    lazy = false,
+    priority = priority.THIRD,
+  },
+  {
+    'AlexvZyl/nordic.nvim',
+
+    lazy = false,
+    priority = priority.THIRD,
+  },
+  {
+    'folke/tokyonight.nvim',
+
+    lazy = false,
+    priority = priority.THIRD,
+  },
 ---- lspkind: icons for lsp completion items
   {
     'onsails/lspkind.nvim',
@@ -26,6 +48,13 @@ return plugins({
     end
   },
 ---- nui: ui components
-  { 'MunifTanjim/nui.nvim' },
+  {
+    'MunifTanjim/nui.nvim',
+
+    lazy = false,
+    -- we load this first since we want nvim-notify as early as possible; this comes before
+    -- nvim-notify since this is a dependency of the latter
+    priority = priority.FIRST,
+  },
 })
 

@@ -1,7 +1,13 @@
+local env = require 'lib.lua.system.env'
 
-local Ts = {}
 
-function Ts.build()
+--- Contains functions for configuring the treesitter plugin.
+--
+---@class Treesitter
+local Treesitter = {}
+
+---@return table: build opts for treesitter plugin
+function Treesitter.build()
   return {
     with_sync = true,
     ensure_installed = {
@@ -27,17 +33,27 @@ function Ts.build()
 end
 
 
-function Ts.opts()
+---@return table: configures the treesitter plugin
+function Treesitter.opts()
   return {
     auto_install = false,
-    context_commentstring = { enable = true, enable_autocmd = false },
-    highlight = { enable = true },
+
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    },
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+
     ignore_install = {},
-    indent = { enable = true }, -- , disable = { "python" } },
-    parser_install_dir = os.getenv('NVUNDLE'),
+    parser_install_dir = env.nvundle(),
     sync_install = false,
   }
 end
 
-return Ts
+return Treesitter
 

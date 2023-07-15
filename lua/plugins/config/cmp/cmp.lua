@@ -16,6 +16,7 @@ function _Cmp.base(cmp)
     snippet = { expand = ls.expand },
     mapping = km.make_mapping(),
     sources = cmp.config.sources({
+      src.buffer(),
       src.emoji(),
       src.lsp(),
       src.lsp_signature(),
@@ -78,6 +79,7 @@ end
 ---@param cmp table: the cmp module
 function _Cmp.autopairs(cmp)
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+
   cmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
