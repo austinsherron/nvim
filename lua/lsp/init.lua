@@ -24,12 +24,12 @@ local function get_config_for_server(lsp_server, capabilities, navic_attach)
   local cmp_conf = { capabilities = capabilities }
   local navic_conf = { on_attach = navic_attach }
 
-  return tbl.combine_many({ cmp_conf, navic_conf, server_conf})
+  return tbl.combine_many({ cmp_conf, navic_conf, server_conf })
 end
 
 
 function Lsp.config()
-  local lspconfig = require('lspconfig')
+  local lspconfig = require 'lspconfig'
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   local navic_attach = require('nvim-navic').attach
 

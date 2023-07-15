@@ -61,7 +61,7 @@ return plugins({
 ---- nvim navic: for showing code context in status bar(s)
   {
     'SmiteshP/nvim-navic',
-    dependencies = 'neovim/nvim-lspconfig',
+    dependencies = { 'neovim/nvim-lspconfig' },
 
     config = function()
       require('nvim-navic')

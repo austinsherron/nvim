@@ -57,7 +57,6 @@ function Src.buffer()
     trigger_length = TriggerLength.BUFFER,
 
     option = {
-      -- keyword_length = 3,
       get_bufnrs = get_all_bufs,
     }
   }
@@ -74,27 +73,27 @@ function Src.calc()
 end
 
 
--- TODO
+-- TODO: set this up
 ---@return table: configuration for conventional commits (i.e.: standard commit message
 -- terms) completion source
--- function Src.conventionalcommits()
---   return {
---     name = 'conventionalcommits',
---     group_index = GroupIndex.CONVCOMMITS,
---     trigger_length = TriggerLength.CONVCOMMITS,
---   }
--- end
+local function conventionalcommits()
+  return {
+    name = 'conventionalcommits',
+    group_index = GroupIndex.CONVCOMMITS,
+    trigger_length = TriggerLength.CONVCOMMITS,
+  }
+end
 
 
--- TODO
+-- TODO: set this up
 ---@return table: configuration for dictionary completion source
--- function Src.dictionary()
---   return {
---     name = 'dictionary',
---     group_index = GroupIndex.DICTIONARY,
---     trigger_length = TriggerLength.DICTIONARY,
---   }
--- end
+local function dictionary()
+  return {
+    name = 'dictionary',
+    group_index = GroupIndex.DICTIONARY,
+    trigger_length = TriggerLength.DICTIONARY,
+  }
+end
 
 
 ---@return table: configuration for emoji completion source
@@ -157,7 +156,8 @@ function Src.path()
 end
 
 
----@return table: configuration for spellcheck suggestions (TODO: ?) completion source
+-- TODO: set this up
+---@return table: configuration for spellcheck suggestions completion source
 function Src.spell()
   return {
     name = 'spell',
@@ -167,7 +167,8 @@ function Src.spell()
 end
 
 
----@return table: configuration for treesitter (TODO: ?) completion source
+-- TODO: set this up
+---@return table: configuration for treesitter completion source
 function Src.treesitter()
   return {
     name = 'treesitter',
@@ -177,7 +178,7 @@ function Src.treesitter()
 end
 
 
----@return table:
+---@return table: all completion sources
 function Src.all()
   return stream(tbl.keys(Src))
     :filter(function(i) return i ~= 'all' end)

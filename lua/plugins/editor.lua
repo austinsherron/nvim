@@ -4,11 +4,19 @@
   control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
+local ap = require 'nvim.lua.plugins.config.autopairs'
 local cmp = require 'nvim.lua.plugins.config.cmp.cmp'
 local plugins = require('nvim.lua.utils.plugins.plugin').plugins
 
 
 return plugins({
+---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = ap.config
+  },
 ---- comment: manipulate code comments easily
   {
     'numToStr/Comment.nvim',
@@ -25,17 +33,17 @@ return plugins({
 ---- cmp-buffer: fuzzy completion of buffer contents
   {
     'hrsh7th/cmp-buffer',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-calc: fuzzy completion of math calculation
   {
     'hrsh7th/cmp-calc',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-cmdline: fuzzy completion of commands
   {
     'hrsh7th/cmp-cmdline',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 -- cmp-"conventional commits": auto-completion for conventional git commit message terms
   {
@@ -45,32 +53,32 @@ return plugins({
 ---- cmp-dictionary: fuzzy completion words in dictionary
   {
     'uga-rosa/cmp-dictionary',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-emoji: fuzzy completion of emojis
   {
     'hrsh7th/cmp-emoji',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-lsp: fuzzy completion based on available lsp servers
   {
     'hrsh7th/cmp-nvim-lsp',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-lsp-signature-help: displays function signature hover-help during relevant completion events
   {
     'hrsh7th/cmp-nvim-lsp-signature-help',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-path: fuzzy completion of file system paths
   {
     'hrsh7th/cmp-path',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- cmp-spell: fuzzy completion of spelling suggestions
   {
     'f3fora/cmp-spell',
-    dependencies = 'hrsh7th/nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- editor config: language specific file formatting
   { 'gpanders/editorconfig.nvim' },

@@ -20,7 +20,7 @@ return plugins({
 ---- neogen: docstring generation
   {
     'danymat/neogen',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = true,
   },
 ---- TODO: template.nvim: file templates (I couldn't get this to work; revisit)

@@ -25,7 +25,7 @@ return plugins({
 ---- barbar: buffer bar
   {
     'romgrk/barbar.nvim',
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = bb.opts(),
   },
 ---- bqf (better quickfix window): makes quickfix window more user-friendly
@@ -38,7 +38,7 @@ return plugins({
   ({
     'akinsho/bufferline.nvim',
     enabled = false,
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     version = '*',
 
     config = function()
