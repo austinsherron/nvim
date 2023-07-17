@@ -6,9 +6,9 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
-local lk = require 'nvim.lua.plugins.config.lspkind'
-local plugins = require('nvim.lua.utils.plugins.plugin').plugins
-local priority = require 'nvim.lua.utils.plugins.priority'
+local lk       = require 'config.lspkind'
+local plugins  = require('utils.plugins.plugin').plugins
+local priority = require 'utils.plugins.priority'
 
 
 return plugins({
@@ -37,6 +37,14 @@ return plugins({
 
     lazy = false,
     priority = priority.THIRD,
+  },
+---- dressing.nvim: ui/ux treatments for vim input/select
+  {
+    'stevearc/dressing.nvim',
+
+    config = function()
+      require('dressing').setup()
+    end
   },
 ---- lspkind: icons for lsp completion items
   {

@@ -1,4 +1,4 @@
-local km = require 'nvim.lua.utils.core.mapper'
+local km = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -17,7 +17,7 @@ end
 
 
 local function inspect_wkspace_dirs()
-  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end
 
 

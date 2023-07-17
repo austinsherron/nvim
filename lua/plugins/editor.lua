@@ -4,9 +4,9 @@
   control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
-local ap = require 'nvim.lua.plugins.config.autopairs'
-local cmp = require 'nvim.lua.plugins.config.cmp.cmp'
-local plugins = require('nvim.lua.utils.plugins.plugin').plugins
+local ap      = require 'config.autopairs'
+local cmp     = require 'config.cmp.cmp'
+local plugins = require('utils.plugins.plugin').plugins
 
 
 return plugins({
@@ -84,6 +84,11 @@ return plugins({
   { 'gpanders/editorconfig.nvim' },
 ---- neovim session-manager: persist open files/buffers b/w nvim sessions
   { 'Shatur/neovim-session-manager' },
+---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
+  {
+    'HiPhish/nvim-ts-rainbow2',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
 ---- surround: efficient manipulation of brackets, quotes, etc.
   {
     'kylechui/nvim-surround',
@@ -93,6 +98,17 @@ return plugins({
     config = function()
       require('nvim-surround').setup()
     end
+  },
+---- treesitter-endwise: automatically close various semantic structures, i.e.: if-then-end, etc.
+  {
+    'RRethy/nvim-treesitter-endwise',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'InsertEnter',
+  },
+---- treesitter-playground: view treesitter functional info in nvim
+  {
+    'nvim-treesitter/playground',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 })
 

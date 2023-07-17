@@ -1,6 +1,6 @@
-local km = require 'nvim.lua.keymap.plugins.cmp'
-local ls = require 'nvim.lua.plugins.config.luasnip'
-local src = require 'nvim.lua.plugins.config.cmp.sources'
+local src = require 'config.cmp.sources'
+local ls  = require 'config.luasnip'
+local km  = require 'keymap.plugins.cmp'
 
 
 --- For internal use: allows us to reference cmp config methods dynamically.

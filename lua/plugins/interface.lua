@@ -5,11 +5,11 @@
   something, or at least be informational
 --]]
 
--- local alpha = require 'nvim.lua.plugins.config.alphanvim'
-local bb = require 'nvim.lua.plugins.config.barbar'
-local ll = require 'nvim.lua.plugins.config.lualine'
-local plugins = require('nvim.lua.utils.plugins.plugin').plugins
-local priority = require 'nvim.lua.utils.plugins.priority'
+-- local alpha = require 'config.alphanvim'
+local bb       = require 'config.barbar'
+local ll       = require 'config.lualine'
+local plugins  = require('utils.plugins.plugin').plugins
+local priority = require 'utils.plugins.priority'
 
 
 return plugins({

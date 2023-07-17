@@ -1,5 +1,5 @@
-local km = require 'nvim.lua.utils.core.mapper'
-local cnvt = require 'nvim.lua.plugins.extensions.nvimtree'
+local cnvt = require 'plugins.extensions.nvimtree'
+local km   = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this

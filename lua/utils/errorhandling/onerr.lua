@@ -1,5 +1,5 @@
 local bool = require 'lib.lua.core.bool'
-local log = require 'nvim.lua.utils.log'
+local log  = require 'utils.log'
 
 
 local function make_err_msg(err_res, prefix)

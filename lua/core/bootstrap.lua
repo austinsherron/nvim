@@ -1,6 +1,11 @@
-local km = require 'nvim.lua.utils.core.mapper'
 local shell = require 'lib.lua.system.shell'
+local km    = require 'utils.core.mapper'
 
+
+-- globals ---------------------------------------------------------------------
+
+-- load global variables for use by the initialization process
+require 'core.globals'
 
 -- note: settings that should come before everything else
 

@@ -1,4 +1,4 @@
-local onerr = require 'nvim.lua.utils.errorhandling.onerr'
+local onerr = require 'utils.errorhandling.onerr'
 
 
 --- Provides methods for "safely" performing various actions. In this context, "safely"

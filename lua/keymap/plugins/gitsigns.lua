@@ -1,4 +1,4 @@
-local km = require 'nvim.lua.utils.core.mapper'
+local km = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -26,7 +26,6 @@ end
 local function actions()
   local gs = package.loaded.gitsigns
 
-
   -- "hunk" ops: stage, unstage, etc. reset chunks of changes
   km.nnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>', options('stage hunk'))
   km.nnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>', options('reset hunk'))
@@ -53,6 +52,9 @@ local function text_objects()
 end
 
 
+--- Contains methods for configuring key bindings for gitsigns.
+--
+---@class
 local Gs = {}
 
 function Gs.on_attach()

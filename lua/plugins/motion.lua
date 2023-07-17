@@ -4,8 +4,8 @@
    control on-screen (as opposed to file-system) movement
 --]]
 
-local ntn = require 'nvim.lua.plugins.config.nvimtmuxnav'
-local plugins = require('nvim.lua.utils.plugins.plugin').plugins
+local ntn     = require 'config.nvimtmuxnav'
+local plugins = require('utils.plugins.plugin').plugins
 
 
 return plugins({

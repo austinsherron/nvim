@@ -1,5 +1,5 @@
+local tbl    = require 'lib.lua.core.table'
 local stream = require 'lib.lua.utils.stream'
-local tbl = require 'lib.lua.core.table'
 
 
 --- Relative order of completion results in auto-complete menu based on source groups.

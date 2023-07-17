@@ -4,12 +4,12 @@
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
-local aer = require 'nvim.lua.plugins.config.aerial'
-local ls = require 'nvim.lua.plugins.config.luasnip'
-local lsp = require 'nvim.lua.lsp'
-local mlsp = require 'nvim.lua.plugins.config.mason'
-local plugins = require('nvim.lua.utils.plugins.plugin').plugins
-local ts = require 'nvim.lua.plugins.config.treesitter'
+local aer     = require 'config.aerial'
+local ls      = require 'config.luasnip'
+local mlsp    = require 'config.mason'
+local ts      = require 'config.treesitter'
+local lsp     = require 'lsp'
+local plugins = require('utils.plugins.plugin').plugins
 
 
 return plugins({
