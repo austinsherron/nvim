@@ -2,3 +2,5 @@
 *.netrwhist
 spell
 packages/
+*.tmp
+*.bak

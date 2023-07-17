@@ -1,4 +1,4 @@
-local lsp = require 'nvim.lua.lsp'
+local lsp = require 'lsp'
 
 
 local Msn = {}

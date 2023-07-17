@@ -6,41 +6,48 @@ local env = require 'lib.lua.system.env'
 ---@class Treesitter
 local Treesitter = {}
 
----@return table: build opts for treesitter plugin
+---@return table: build (install/update workflow) opts for treesitter plugin
 function Treesitter.build()
-  return {
-    with_sync = true,
-    ensure_installed = {
-      'bash',
-      'go',
-      'gomod',
-      'gosum',
-      'hcl',
-      'help',
-      'javascript',
-      'json',
-      'lua',
-      'markdown',
-      'python',
-      'query',
-      'sql',
-      'terraform',
-      'typescript',
-      'vim',
-      'yaml'
-    },
-  }
+  return { with_sync = true }
 end
 
 
 ---@return table: configures the treesitter plugin
 function Treesitter.opts()
   return {
+    -- parser install options
     auto_install = false,
+    -- TODO: figure out why treesitter installs these every time nvim is started
+    -- ensure_installed = {
+    --   'bash',
+    --   'go',
+    --   'gomod',
+    --   'gosum',
+    --   'hcl',
+    --   'help',
+    --   'javascript',
+    --   'json',
+    --   'lua',
+    --   'markdown',
+    --   'python',
+    --   'query',
+    --   'sql',
+    --   'terraform',
+    --   'typescript',
+    --   'vim',
+    --   'yaml'
+    -- },
+    ignore_install = {},
+    parser_install_dir = env.nvundle(),
+    sync_install = false,
 
+    -- features
     context_commentstring = {
       enable = true,
       enable_autocmd = false,
+    },
+    endwise = {
+      enable = true,
     },
     highlight = {
       enable = true,
@@ -48,10 +55,9 @@ function Treesitter.opts()
     indent = {
       enable = true,
     },
-
-    ignore_install = {},
-    parser_install_dir = env.nvundle(),
-    sync_install = false,
+    rainbow = {
+      enable = true,
+    },
   }
 end
 

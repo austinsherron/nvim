@@ -1,7 +1,4 @@
-require 'lib.lua.system.shell'
-
-
-local o = vim.o
+local o   = vim.o
 local opt = vim.opt
 
 

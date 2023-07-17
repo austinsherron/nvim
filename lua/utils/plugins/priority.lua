@@ -6,11 +6,11 @@ local MAX = 1000
 --
 ---@enum Priority
 local Priority = {
-  FIRST = MAX - 0,
+  FIRST  = MAX - 0,
   SECOND = MAX - 1,
-  THIRD = MAX - 2,
+  THIRD  = MAX - 2,
   FOURTH = MAX - 3,
-  FIFTH = MAX - 4,
+  FIFTH  = MAX - 4,
 }
 
 return Priority

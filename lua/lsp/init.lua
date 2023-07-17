@@ -1,4 +1,4 @@
-local lsp = require 'nvim.lua.lsp.keymap'
+local lsp = require 'lsp.keymap'
 local tbl = require 'lib.lua.core.table'
 
 
@@ -12,7 +12,7 @@ end
 
 
 local function require_config_for_server(lsp_server)
-  return require('nvim.lua.lsp.servers.' .. lsp_server)
+  return require('lsp.servers.' .. lsp_server)
 end
 
 

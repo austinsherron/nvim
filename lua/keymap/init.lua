@@ -1,12 +1,12 @@
+local path   = require 'lib.lua.system.path'
 local import = require 'lib.lua.utils.import'
-local onerr = require 'nvim.lua.utils.errorhandling.onerr'
-local path = require 'lib.lua.system.path'
+local onerr  = require 'utils.errorhandling.onerr'
 
 
 -- require recursively all lua files in this dir
 import.require_for_init(
   path.script_path(),
-  'nvim.lua.keymap',
+  'keymap',
   onerr.notify
 )
 

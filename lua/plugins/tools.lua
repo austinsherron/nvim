@@ -7,8 +7,8 @@
   plugins
 --]]
 
-local plugins = require('nvim.lua.utils.plugins.plugin').plugins
-local tmpl = require 'nvim.lua.plugins.config.template'
+local tmpl    = require 'config.template'
+local plugins = require('utils.plugins.plugin').plugins
 
 
 return plugins({

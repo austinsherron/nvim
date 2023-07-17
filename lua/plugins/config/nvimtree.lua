@@ -1,4 +1,4 @@
-local nvt = require 'nvim.lua.keymap.plugins.nvimtree'
+local nvt = require 'keymap.plugins.nvimtree'
 
 
 local Nvt = {}

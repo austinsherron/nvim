@@ -1,7 +1,7 @@
 require 'lazy.types'
 
-local onerr = require 'nvim.lua.utils.errorhandling.onerr'
 local stream = require 'lib.lua.utils.stream'
+local onerr  = require 'utils.errorhandling.onerr'
 
 
 --- Internal helper that exists to clear a plugin's __index function and avoid infinite recursion.

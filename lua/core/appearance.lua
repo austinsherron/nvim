@@ -1,4 +1,4 @@
 -- colorscheme -----------------------------------------------------------------
 
-vim.cmd.colorscheme 'nordic'
+vim.cmd.colorscheme 'kanagawa'
 
