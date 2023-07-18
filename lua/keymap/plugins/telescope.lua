@@ -13,6 +13,7 @@ end
 
 km.nnoremap('<leader>fa', tsc.builtin,                   options('search telescope built-ins'))
 km.nnoremap('<leader>fb', tsc.buffers,                   options('search buffers'))
+km.nnoremap('<leader>fC', tsc.colorscheme,               options('search colorschemes'))
 km.nnoremap('<leader>fc', '<cmd>Telescope aerial<CR>',   options('search code symbols'))
 km.nnoremap('<leader>fe', '<cmd>Telescope emoji<CR>',    options('search emojis'))
 km.nnoremap('<leader>ff', tsc.find_files,                options('search files'))

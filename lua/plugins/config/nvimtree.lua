@@ -11,6 +11,10 @@ function Nvt.opts()
       },
     },
 
+    diagnostics = {
+      enable = true,
+    },
+
     filters = {
       dotfiles = true,
     },
@@ -34,7 +38,6 @@ function Nvt.opts()
     },
 
     view = {
-      number = true,
       relativenumber = true,
       width = 40,
     },

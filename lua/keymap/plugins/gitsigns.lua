@@ -54,7 +54,7 @@ end
 
 --- Contains methods for configuring key bindings for gitsigns.
 --
----@class
+---@class Gs
 local Gs = {}
 
 function Gs.on_attach()
