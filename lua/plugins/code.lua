@@ -52,10 +52,22 @@ return plugins({
       require('mason-lspconfig').setup(opts)
     end
   }),
+---- neodev: make lsp aware of (n)vim apis and plugins
+  {
+    'folke/neodev.nvim',
+    opts = {},
+
+    config = function(_, opts)
+      require('neodev').setup(opts)
+    end
+  },
 ---- nvim lsp-config: makes it easier to configure nvim's built in lsp (code semantics)
   {
     'neovim/nvim-lspconfig',
-    dependencies = { 'williamboman/mason-lspconfig.nvim' },
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim',
+      'folke/neodev.nvim',
+    },
     config = lsp.config,
   },
 ---- nvim navic: for showing code context in status bar(s)

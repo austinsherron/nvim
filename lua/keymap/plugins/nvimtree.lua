@@ -1,3 +1,4 @@
+local lp   = require 'keymap.plugins.leap'
 local cnvt = require 'plugins.extensions.nvimtree'
 local km   = require 'utils.core.mapper'
 
@@ -72,7 +73,7 @@ local function default_mappings(bufnr, api)
   km.nnoremap('O',     api.node.open.no_window_picker,        options('Open: No Window Picker', bufnr))
   km.nnoremap('p',     api.fs.paste,                          options('Paste', bufnr))
   km.nnoremap('P',     api.node.navigate.parent,              options('Parent Directory', bufnr))
-  km.nnoremap('q',     api.tree.close,                        options('Close', bufnr))
+  -- km.nnoremap('q',     api.tree.close,                        options('Close', bufnr))
   km.nnoremap('r',     api.fs.rename,                         options('Rename', bufnr))
   km.nnoremap('R',     api.tree.reload,                       options('Refresh', bufnr))
   -- km.nnoremap('s',     api.node.run.system,                   options('Run System', bufnr))
@@ -92,14 +93,18 @@ local function remapped_defaults(bufnr, api)
   km.nnoremap('<C-h>', api.node.open.horizontal,      options('Open: Horizontal Split', bufnr))
   km.nnoremap('I',     api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
   km.nnoremap('s',     cnvt.silent_open,              options('Open silently', bufnr))
+
+  -- note: important to know that this is 'q' at the time of writing: we need to remove
+  -- the 'q' default mapping above
+  km.nnoremap(lp.bidirectional_leap_key(), lp.bidirectional_leap, options('Leap', bufnr))
 end
 
 
 local function custom_mappings(bufnr, api)
-  km.nnoremap('l',     api.node.open.edit,             options('Open', bufnr))
-  km.nnoremap('L',     api.tree.change_root_to_node,   options('CD', bufnr))
-  km.nnoremap('h',     api.node.navigate.parent_close, options('Close Directory', bufnr))
-  km.nnoremap('H',     api.tree.change_root_to_parent, options('Up', bufnr))
+  km.nnoremap('l', api.node.open.edit,             options('Open', bufnr))
+  km.nnoremap('L', api.tree.change_root_to_node,   options('CD', bufnr))
+  km.nnoremap('h', api.node.navigate.parent_close, options('Close Directory', bufnr))
+  km.nnoremap('H', api.tree.change_root_to_parent, options('Up', bufnr))
 end
 
 local Nvt = {}

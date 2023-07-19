@@ -52,7 +52,7 @@ I organize my plugins into the following categories:
 - [ ] Auto-completion: `cmp-dictionary`
 - [ ] Auto-correction (?)
 - [ ] Auto-imports
-- [ ] Auto-pairs
+- [x] Auto-pairs
 - [ ] Case Changer (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
 - [ ] Code generation (see snippets)
 - [ ] Code actions
@@ -119,11 +119,15 @@ I organize my plugins into the following categories:
 - [ ] Create lualine extensions for diffview, undotree, and spectre
 - [ ] Add ability to refactor imports on file move
 - [x] Better nvim init error handling (unclear if it actually works, but it's there-ish)
-- [ ] Notifications/modals/confirmation menus on nvim init error
+- [x] Notifications/modals/confirmation menus on nvim init error
 - [ ] Logger should write to nvim application logs
 - [ ] Update nvim alias to include writing to logs
 - [ ] Refactor KeyMapper to use state so as to avoid duplication "options" functions, etc.
 - [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
+- [x] Bi-directional leap
+- [x] Leap in nvimtree
+- [ ] Packages telescope picker
+- [ ] Homegrown session manager
 
 ### Fixes
 

@@ -1,31 +1,31 @@
-
-
-local function get_header()
-  return {
-    " █████   █████          ████  ████                █████████                       █████     ███            ",
-    "░░███   ░░███          ░░███ ░░███              ░███░░░░░███                     ░░███     ░░░             ",
-    " ░███    ░███   ██████  ░███  ░███   ██████     ░███    ░███  █████ ████  █████  ███████   ████  ████████  ",
-    " ░███████████  ███░░███ ░███  ░███  ███░░███    ░███████████ ░░███ ░███  ███░░   ░░███░   ░░███ ░░███░░███ ",
-    " ░███░░░░░███ ░███████  ░███  ░███ ░███ ░███    ░███░░░░░███  ░███ ░███ ░░█████   ░███     ░███  ░███ ░███ ",
-    " ░███    ░███ ░███░░░   ░███  ░███ ░███ ░███    ░███    ░███  ░███ ░███  ░░░░███  ░███ ███ ░███  ░███ ░███ ",
-    " █████   █████░░██████  █████ █████░░██████     █████   █████ ░░████████ ██████   ░░█████  █████ ████ █████",
-    "░░░░░   ░░░░░  ░░░░░░  ░░░░░ ░░░░░  ░░░░░░     ░░░░░   ░░░░░   ░░░░░░░░ ░░░░░░     ░░░░░  ░░░░░ ░░░░ ░░░░░ "
-  }
-end
-
-
-local function get_buttons()
-  return {
-    dashboard.button('n', '   > new' , ':ene <BAR> startinsert <CR>'),
-    dashboard.button('fp', '  > find file', ':Telescope projects<CR>'),
-    dashboard.button('ff', '  > find file', ':Telescope find_files<CR>'),
-    dashboard.button('fw', '  > find word', ':Telescope live_grep<CR>'),
-    dashboard.button('fr', '  > Recent'   , ':Telescope frecent<CR>'),
-    dashboard.button('c', '   > config' , ':e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>'),
-    dashboard.button('q', '   > nvm', ':qa<CR>'),
-  }
-end
-
+--
+--
+-- local function get_header()
+--   return {
+--     " █████   █████          ████  ████                █████████                       █████     ███            ",
+--     "░░███   ░░███          ░░███ ░░███              ░███░░░░░███                     ░░███     ░░░             ",
+--     " ░███    ░███   ██████  ░███  ░███   ██████     ░███    ░███  █████ ████  █████  ███████   ████  ████████  ",
+--     " ░███████████  ███░░███ ░███  ░███  ███░░███    ░███████████ ░░███ ░███  ███░░   ░░███░   ░░███ ░░███░░███ ",
+--     " ░███░░░░░███ ░███████  ░███  ░███ ░███ ░███    ░███░░░░░███  ░███ ░███ ░░█████   ░███     ░███  ░███ ░███ ",
+--     " ░███    ░███ ░███░░░   ░███  ░███ ░███ ░███    ░███    ░███  ░███ ░███  ░░░░███  ░███ ███ ░███  ░███ ░███ ",
+--     " █████   █████░░██████  █████ █████░░██████     █████   █████ ░░████████ ██████   ░░█████  █████ ████ █████",
+--     "░░░░░   ░░░░░  ░░░░░░  ░░░░░ ░░░░░  ░░░░░░     ░░░░░   ░░░░░   ░░░░░░░░ ░░░░░░     ░░░░░  ░░░░░ ░░░░ ░░░░░ "
+--   }
+-- end
+--
+--
+-- local function get_buttons()
+--   return {
+--     dashboard.button('n', '   > new' , ':ene <BAR> startinsert <CR>'),
+--     dashboard.button('fp', '  > find file', ':Telescope projects<CR>'),
+--     dashboard.button('ff', '  > find file', ':Telescope find_files<CR>'),
+--     dashboard.button('fw', '  > find word', ':Telescope live_grep<CR>'),
+--     dashboard.button('fr', '  > Recent'   , ':Telescope frecent<CR>'),
+--     dashboard.button('c', '   > config' , ':e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>'),
+--     dashboard.button('q', '   > nvm', ':qa<CR>'),
+--   }
+-- end
+--
 -- local Alpha = {}
 --
 -- function Alpha.opts()

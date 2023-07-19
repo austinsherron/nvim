@@ -5,6 +5,7 @@
 --]]
 
 local ntn     = require 'config.nvimtmuxnav'
+local lp      = require 'keymap.plugins.leap'
 local plugins = require('utils.plugins.plugin').plugins
 
 
@@ -15,7 +16,7 @@ return plugins({
     lazy = false,
 
     config = function()
-      require('leap').add_default_mappings()
+      lp.add_keymap()
     end
   },
 ---- nvim-tmux navigation: integration b/w nvim + tmux (pane nav shortcuts)
