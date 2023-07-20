@@ -7,13 +7,16 @@ local Barbar = {}
 ---@return table: a table that contains configuration values for the barbar plugin
 function Barbar.opts()
   return {
-    -- visual
     animation = true,
     clickable = false,
-
-    -- behavior
     focus_on_close = 'previous',
-    no_name_title  = 'unnamed'
+    no_name_title  = 'unnamed',
+
+    icons = {
+      diagnostics = {
+        enabled = true,
+      }
+    }
   }
 end
 

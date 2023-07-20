@@ -24,19 +24,19 @@ Plugin.__index = Plugin
 
 --- Constructor
 --
----@param plugins LazyPlugin: a lazy.nvim plugin definition
+---@param plugin LazyPlugin: a lazy.nvim plugin definition
 ---@return Plugin: a new Plugin instance
-function Plugin.new(plugins)
-  setmetatable(plugins, Plugin)
+function Plugin.new(plugin)
+  setmetatable(plugin, Plugin)
 ---@diagnostic disable-next-line: return-type-mismatch
-  return plugins
+  return plugin
 end
 
 
 --- Constructs multiple plugins from an array of plugin definitions.
 --
----@param plugins LazyPlugin[]: an array of lazy.nvim plugin definitions
----@return Plugin[]: an array of new Plugin instances
+---@param plugins LazyPlugin: an array-like table of lazy.nvim plugin definitions
+---@return Plugin[]: an array-like table of Plugin instances
 function Plugin.all(plugins)
   return Stream(plugins)
     :map(Plugin.new)

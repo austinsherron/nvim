@@ -29,20 +29,20 @@ local function actions()
   -- "hunk" ops: stage, unstage, etc. reset chunks of changes
   KM.nnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>', options('stage hunk'))
   KM.nnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>', options('reset hunk'))
-  KM.nnoremap('<leader>hp', gs.preview_hunk, options('preview hunk'))
-  KM.nnoremap('<leader>hu', gs.undo_stage_hunk, options('undo stage hunk'))
+  KM.nnoremap('<leader>hp', gs.preview_hunk,            options('preview hunk'))
+  KM.nnoremap('<leader>hu', gs.undo_stage_hunk,         options('undo stage hunk'))
 
   -- buffer ops
   KM.nnoremap('<leader>hS', gs.stage_buffer, options('stage buffer'))
   KM.nnoremap('<leader>hR', gs.reset_buffer, options('reset buffer'))
 
   -- git blame ops
-  KM.nnoremap('<leader>hb', blameline, options('line git blame'))
+  KM.nnoremap('<leader>hb', blameline,                    options('line git blame'))
   KM.nnoremap('<leader>ht', gs.toggle_current_line_blame, options('toggle line git blame'))
 
   -- "changed" (diff/deleted) ops:
-  KM.nnoremap('<leader>hd', gs.diffthis, options('diff'))
-  KM.nnoremap('<leader>hD', diffthis, options('diff ~'))
+  KM.nnoremap('<leader>hd', gs.diffthis,       options('diff'))
+  KM.nnoremap('<leader>hD', diffthis,          options('diff ~'))
   KM.nnoremap('<leader>he', gs.toggle_deleted, options('toggle deleted'))
 end
 

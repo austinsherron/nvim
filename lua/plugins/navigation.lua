@@ -5,7 +5,7 @@
    control (file) system (as opposed to on-screen) movement
 --]]
 
-local Nvimtree = require 'config.nvimtree'
+local NvimTree = require 'config.nvimtree'
 local Project  = require 'config.project'
 local Plugins  = require('utils.plugins.plugin').plugins
 
@@ -28,7 +28,7 @@ return Plugins({
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     version      = '*',
-    opts         = Nvimtree.opts(),
+    opts         = NvimTree.opts(),
 
     config = function(_, opts)
       require('nvim-tree').setup(opts)
