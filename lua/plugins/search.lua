@@ -22,6 +22,7 @@ return Plugins({
     'nvim-telescope/telescope.nvim',
     tag          = '0.1.1',
     dependencies = {
+      'nvim-tree/nvim-tree.lua',
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
     },

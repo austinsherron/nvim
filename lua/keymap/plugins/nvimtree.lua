@@ -90,10 +90,15 @@ local function default_mappings(bufnr, api)
 end
 
 
+local function silent_open(node)
+  NvTree:silent_open(node)
+end
+
+
 local function remapped_defaults(bufnr, api)
   KM.nnoremap('<C-h>', api.node.open.horizontal,      options('Open: Horizontal Split', bufnr))
   KM.nnoremap('I',     api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
-  KM.nnoremap('s',     NvTree.silent_open,            options('Open silently', bufnr))
+  KM.nnoremap('s',     silent_open,                   options('Open silently', bufnr))
 
   -- note: important to know that this is 'q' at the time of writing: we need to remove
   -- the 'q' default mapping above

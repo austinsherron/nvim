@@ -55,6 +55,14 @@ local function add_defaults()
   require('leap').add_default_mappings()
 end
 
+
+local function add_repeats()
+  require('leap').add_repeat_mappings(';', ',', {
+    relative_directions = true,
+    modes               = { 'n', 'x', 'o' },
+  })
+end
+
 -- interactions ----------------------------------------------------------------
 
 --- Creates key bindings for leap.nvim.
@@ -65,16 +73,26 @@ end
 --
 ---@param should_add_defaults boolean?: if true, default key bindings will be added; defaults
 -- to false
-function Leap.add_keymap(should_add_defaults)
+---@param should_add_repeats boolean?: if true, key bindings for "repeat" motions will be
+-- added (think `f` -> `,`|`;`); defaults to false
+function Leap.add_keymap(should_add_defaults, should_add_repeats)
   should_add_defaults = should_add_defaults or false
+  should_add_repeats = should_add_repeats or false
 
-  KM.nnoremap("'", leap_forward,  options('forward'))
-  KM.nnoremap('"', leap_backward, options('backward'))        -- FIXME: this doesn't work...
+  KM.nnoremap("'", leap_forward,                 options('forward'))
+-- FIXME: this works, but we're not able to pass `inclusive_op`, which means the jump
+--        misses by a few chars; we can't use the above format, because it just straight
+--        up doesn't work (jumps forward)
+  KM.nnoremap('"', '<Plug>(leap-backward-till)', options('backward'))
 
   KM.nnoremap(Leap.bidirectional_leap_key(), Leap.bidirectional_leap, options('bi-directional'))
 
   if should_add_defaults then
     add_defaults()
+  end
+
+  if should_add_repeats then
+    add_repeats()
   end
 end
 
