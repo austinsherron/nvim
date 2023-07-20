@@ -1,5 +1,5 @@
-local bool = require 'lib.lua.core.bool'
-local km   = require 'utils.core.mapper'
+local Bool = require 'lib.lua.core.bool'
+local KM   = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -10,7 +10,7 @@ end
 
 
 local function spectre_cmd(cmd, select_word, prepend)
-  local select_word_str = bool.ternary(select_word, '{select_word=true}', '')
+  local select_word_str = Bool.ternary(select_word, '{select_word=true}', '')
   prepend = prepend or ''
 
   return prepend .. '<cmd>lua require("spectre").' .. cmd .. '(' .. select_word_str .. ')<CR>'
@@ -20,9 +20,9 @@ end
 
 -- TODO: consider a more complete remapping of available actions:
 --       https://github.com/nvim-pack/nvim-spectre
-km.nmap('<leader>S',  spectre_cmd('open', false),                 options('open'))
-km.nmap('<leader>sx', spectre_cmd('close', false),                options('close'))
-km.nmap('<leader>sw', spectre_cmd('open_visual', true),           options('search current word'))
-km.vmap('<leader>sw', spectre_cmd('open_visual', false, '<esc>'), options('search current word'))
-km.nmap('<leader>sp', spectre_cmd('open_file_search', true),      options('search on current file'))
+KM.nmap('<leader>S',  spectre_cmd('open', false),                 options('open'))
+KM.nmap('<leader>sx', spectre_cmd('close', false),                options('close'))
+KM.nmap('<leader>sw', spectre_cmd('open_visual', true),           options('search current word'))
+KM.vmap('<leader>sw', spectre_cmd('open_visual', false, '<esc>'), options('search current word'))
+KM.nmap('<leader>sp', spectre_cmd('open_file_search', true),      options('search on current file'))
 

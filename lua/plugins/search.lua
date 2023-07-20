@@ -1,14 +1,15 @@
+
 -- search ----------------------------------------------------------------------
 
 --[[
   make it easier to find things
 --]]
 
-local tsc     = require 'config.telescope'
-local plugins = require('utils.plugins.plugin').plugins
+local Telescope = require 'config.telescope'
+local Plugins   = require('utils.plugins.plugin').plugins
 
 
-return plugins({
+return Plugins({
 ---- searchbox: ui/ux enhancements for standard search/replace
   {
     'VonHeikemen/searchbox.nvim',
@@ -19,12 +20,12 @@ return plugins({
 ---- telescope: fuzzy pop-out search
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag          = '0.1.1',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
     },
-    config = tsc.config,
+    config = Telescope.config,
   },
 ---- telescope-emoji: telescearch for emojis!
   { 'xiyaowong/telescope-emoji.nvim' },
@@ -34,3 +35,4 @@ return plugins({
     dependencies = { 'kkharji/sqlite.lua' },
   }
 })
+

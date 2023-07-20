@@ -1,4 +1,4 @@
-local onerr = require 'utils.errorhandling.onerr'
+local OnErr = require 'utils.errorhandling.onerr'
 
 
 --- Provides methods for "safely" performing various actions. In this context, "safely"
@@ -17,7 +17,7 @@ local Safe = {}
 ---@return any?: the value returned by to_call
 function Safe.call(to_call, error_handler, prefix)
   error_handler = error_handler or 'notify'
-  return onerr[error_handler](to_call, prefix)
+  return OnErr[error_handler](to_call, prefix)
 end
 
 

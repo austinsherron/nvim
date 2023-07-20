@@ -1,26 +1,27 @@
+
 -- editor ----------------------------------------------------------------------
 
 --[[
   control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
-local ap      = require 'config.autopairs'
-local cmp     = require 'config.cmp.cmp'
-local plugins = require('utils.plugins.plugin').plugins
+local AutoPairs = require 'config.autopairs'
+local Cmp       = require 'config.cmp.cmp'
+local Plugins   = require('utils.plugins.plugin').plugins
 
 
-return plugins({
+return Plugins({
 ---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
   {
     'windwp/nvim-autopairs',
-    event = 'InsertEnter',
+    event        = 'InsertEnter',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = ap.config
+    config       = AutoPairs.config
   },
 ---- cmp: completion engine
   {
     'hrsh7th/nvim-cmp',
-    config = cmp.config,
+    config = Cmp.config,
   },
 ---- cmp-buffer: fuzzy completion of buffer contents
   {
@@ -93,7 +94,7 @@ return plugins({
   {
     'kylechui/nvim-surround',
     version = '*', -- use for stability; omit to use `main` branch for the latest features
-    event = 'VeryLazy',
+    event   = 'VeryLazy',
 
     config = function()
       require('nvim-surround').setup()
@@ -103,7 +104,7 @@ return plugins({
   {
     'RRethy/nvim-treesitter-endwise',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    event = 'InsertEnter',
+    event        = 'InsertEnter',
   },
 ---- treesitter-playground: view treesitter functional info in nvim
   {

@@ -1,10 +1,12 @@
 
-local Ntn = {}
+--- Contains functions for configuring the nvim-tmux nav plugin.
+--
+---@class NvimTmuxNav
+local NvimTmuxNav = {}
 
-function Ntn.opts()
+---@return table: a table that contains configuration values for the nvim-tmux nav plugin
+function NvimTmuxNav.opts()
   return {
-    disable_when_zoomed = false,    -- defaults to false
-
     keybindings = {
       left  = '<C-h>',
       down  = '<C-j>',
@@ -17,5 +19,5 @@ function Ntn.opts()
   }
 end
 
-return Ntn
+return NvimTmuxNav
 

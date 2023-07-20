@@ -1,3 +1,4 @@
+
 -- tools -----------------------------------------------------------------------
 
 --[[
@@ -7,11 +8,11 @@
   plugins
 --]]
 
-local tmpl    = require 'config.template'
-local plugins = require('utils.plugins.plugin').plugins
+local Template = require 'config.template'
+local Plugins  = require('utils.plugins.plugin').plugins
 
 
-return plugins({
+return Plugins({
 ---- markdown preview: for previewing markdown documents 🤔
   {
     'iamcco/markdown-preview.nvim',
@@ -21,14 +22,14 @@ return plugins({
   {
     'danymat/neogen',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = true,
+    config       = true,
   },
 ---- TODO: template.nvim: file templates (I couldn't get this to work; revisit)
   {
     'glepnir/template.nvim',
     enabled = false,
-    cmd = { 'Template', 'TemProject' },
-    opts = tmpl.opts(),
+    cmd     = { 'Template', 'TemProject' },
+    opts    = Template.opts(),
 
     config = function(_, opts)
       require('template').setup(opts)

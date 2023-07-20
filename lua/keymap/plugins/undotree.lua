@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -7,9 +7,8 @@ local function options(desc)
   return { desc = 'undotree: ' .. desc, nowait = true }
 end
 
-
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>u', ':UndotreeToggle | UndotreeFocus<CR>', options('toggle'))
-km.nnoremap('<leader>2', ':UndotreeShow | UndotreeFocus<CR>',   options('open'))
+KM.nnoremap('<leader>u', ':UndotreeToggle | UndotreeFocus<CR>', options('toggle'))
+KM.nnoremap('<leader>2', ':UndotreeShow | UndotreeFocus<CR>',   options('open'))
 

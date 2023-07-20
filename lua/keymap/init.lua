@@ -1,12 +1,12 @@
-local path   = require 'lib.lua.system.path'
-local import = require 'lib.lua.utils.import'
-local onerr  = require 'utils.errorhandling.onerr'
+local Path   = require 'lib.lua.system.path'
+local Import = require 'lib.lua.utils.import'
+local OnErr  = require 'utils.errorhandling.onerr'
 
 
 -- require recursively all lua files in this dir
-import.require_for_init(
-  path.script_path(),
+Import.require_for_init(
+  Path.script_path(),
   'keymap',
-  onerr.notify
+  OnErr.notify
 )
 

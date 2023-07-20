@@ -1,12 +1,19 @@
 
-local Dv = {}
+--- Contains functions for configuring diffview.
+--
+---@class Diffview
+local Diffview = {}
 
-function Dv.opts()
+---@return table: a table that contains configuration values for the diffview plugin
+function Diffview.opts()
   return {
     enhanced_diff_hl = true,
-    view = { layout = 'diff2_horizontal' },
+    view = {
+      layout = 'diff2_horizontal',
+    },
+    ['-'] = false,
   }
 end
 
-return Dv
+return Diffview
 

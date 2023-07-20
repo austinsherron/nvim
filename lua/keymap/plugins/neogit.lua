@@ -1,7 +1,7 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>G', ':Neogit<CR>', { desc = 'neogit: open' })
+KM.nnoremap('<leader>G', ':Neogit<CR>', { desc = 'neogit: open' })
 

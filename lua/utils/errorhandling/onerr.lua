@@ -1,9 +1,11 @@
-local bool = require 'lib.lua.core.bool'
-local log  = require 'utils.log'
+local Bool = require 'lib.lua.core.bool'
+local Log  = require 'utils.log'
+
+local ERROR = vim.log.levels.ERROR
 
 
 local function make_err_msg(err_res, prefix)
-  prefix = bool.ternary(prefix == nil, '', function() return prefix .. ': ' end)
+  prefix = Bool.ternary(prefix == nil, '', function() return prefix .. ': ' end)
   return prefix .. (err_res or '')
 end
 
@@ -35,7 +37,7 @@ function OnErr.log(f, prefix)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  log.error(err_msg)
+  Log.error(err_msg)
 end
 
 
@@ -51,7 +53,7 @@ function OnErr.notify(f, prefix)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  vim.notify(err_msg, 'error', { title = 'Error' })
+  vim.notify(err_msg, ERROR, { title = 'Error' })
 end
 
 return OnErr

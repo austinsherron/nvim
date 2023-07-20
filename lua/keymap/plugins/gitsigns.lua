@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -27,39 +27,40 @@ local function actions()
   local gs = package.loaded.gitsigns
 
   -- "hunk" ops: stage, unstage, etc. reset chunks of changes
-  km.nnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>', options('stage hunk'))
-  km.nnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>', options('reset hunk'))
-  km.nnoremap('<leader>hp', gs.preview_hunk, options('preview hunk'))
-  km.nnoremap('<leader>hu', gs.undo_stage_hunk, options('undo stage hunk'))
+  KM.nnoremap('<leader>hs', ':Gitsigns stage_hunk<CR>', options('stage hunk'))
+  KM.nnoremap('<leader>hr', ':Gitsigns reset_hunk<CR>', options('reset hunk'))
+  KM.nnoremap('<leader>hp', gs.preview_hunk, options('preview hunk'))
+  KM.nnoremap('<leader>hu', gs.undo_stage_hunk, options('undo stage hunk'))
 
   -- buffer ops
-  km.nnoremap('<leader>hS', gs.stage_buffer, options('stage buffer'))
-  km.nnoremap('<leader>hR', gs.reset_buffer, options('reset buffer'))
+  KM.nnoremap('<leader>hS', gs.stage_buffer, options('stage buffer'))
+  KM.nnoremap('<leader>hR', gs.reset_buffer, options('reset buffer'))
 
   -- git blame ops
-  km.nnoremap('<leader>hb', blameline, options('line git blame'))
-  km.nnoremap('<leader>ht', gs.toggle_current_line_blame, options('toggle line git blame'))
+  KM.nnoremap('<leader>hb', blameline, options('line git blame'))
+  KM.nnoremap('<leader>ht', gs.toggle_current_line_blame, options('toggle line git blame'))
 
   -- "changed" (diff/deleted) ops:
-  km.nnoremap('<leader>hd', gs.diffthis, options('diff'))
-  km.nnoremap('<leader>hD', diffthis, options('diff ~'))
-  km.nnoremap('<leader>he', gs.toggle_deleted, options('toggle deleted'))
+  KM.nnoremap('<leader>hd', gs.diffthis, options('diff'))
+  KM.nnoremap('<leader>hD', diffthis, options('diff ~'))
+  KM.nnoremap('<leader>he', gs.toggle_deleted, options('toggle deleted'))
 end
 
 
 local function text_objects()
-  km.onoremap('ih', ':<C-U>Gitsigns select_hunk<CR>', options('select hunk'))
+  KM.onoremap('ih', ':<C-U>Gitsigns select_hunk<CR>', options('select hunk'))
 end
-
 
 --- Contains methods for configuring key bindings for gitsigns.
 --
----@class Gs
-local Gs = {}
+---@class Gitsigns
+local Gitsigns = {}
 
-function Gs.on_attach()
+--- Function that is called when gitsigns "attaches" to a buffer. Calls keymapping functions.
+function Gitsigns.on_attach()
   actions()
   text_objects()
 end
 
-return Gs
+return Gitsigns
+

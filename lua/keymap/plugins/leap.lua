@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -68,10 +68,10 @@ end
 function Leap.add_keymap(should_add_defaults)
   should_add_defaults = should_add_defaults or false
 
-  km.nnoremap("'", leap_forward,  options('forward'))
-  km.nnoremap('"', leap_backward, options('backward'))        -- FIXME: this doesn't work...
+  KM.nnoremap("'", leap_forward,  options('forward'))
+  KM.nnoremap('"', leap_backward, options('backward'))        -- FIXME: this doesn't work...
 
-  km.nnoremap(Leap.bidirectional_leap_key(), Leap.bidirectional_leap, options('bi-directional'))
+  KM.nnoremap(Leap.bidirectional_leap_key(), Leap.bidirectional_leap, options('bi-directional'))
 
   if should_add_defaults then
     add_defaults()

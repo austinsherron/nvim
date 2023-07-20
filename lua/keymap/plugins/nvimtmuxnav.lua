@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -7,13 +7,12 @@ local function options(desc)
     return { desc = 'nvim-tmux: ' .. desc, nowait = true }
 end
 
-
 -- motion ----------------------------------------------------------------------
 
 ---- splits/panes
 
-km.nnoremap('<silent><C-h>', ':NvimTmuxNavigateLeft<CR>',  options('mv left'))
-km.nnoremap('<silent><C-j>', ':NvimTmuxNavigateDown<CR>',  options('mv down'))
-km.nnoremap('<silent><C-k>', ':NvimTmuxNavigateUp<CR>',    options('mv up'))
-km.nnoremap('<silent><C-l>', ':NvimTmuxNavigateRight<CR>', options('mv right'))
+KM.nnoremap('<silent><C-h>', ':NvimTmuxNavigateLeft<CR>',  options('mv left'))
+KM.nnoremap('<silent><C-j>', ':NvimTmuxNavigateDown<CR>',  options('mv down'))
+KM.nnoremap('<silent><C-k>', ':NvimTmuxNavigateUp<CR>',    options('mv up'))
+KM.nnoremap('<silent><C-l>', ':NvimTmuxNavigateRight<CR>', options('mv right'))
 

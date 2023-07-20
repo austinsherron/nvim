@@ -7,7 +7,9 @@ local PluginMgr = {}
 
 --- Initializes the neovim plugin manager.
 --
----@param plugins string|table: a string
+---@param plugins string|table: a string the path (relative or absolute [?]) to a lua
+-- importable source (file or directory) of plugin definitions, or a table that already contains
+-- plugin definitions.
 function PluginMgr.init(plugins)
   local base = vim.fn.stdpath('config')
   local pathbase = base .. '/packages'

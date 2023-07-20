@@ -1,10 +1,15 @@
-local gs = require 'keymap.plugins.gitsigns'
+local GitsignsKM = require 'keymap.plugins.gitsigns'
 
-local Gs = {}
 
-function Gs.opts()
+--- Contains functions for configuring the gitsigns plugin.
+--
+---@class Gitsigns
+local Gitsigns = {}
+
+---@return table: a table that contains configuration values for the gitsigns plugin
+function Gitsigns.opts()
   return {
-    on_attach = gs.on_attach,
+    on_attach = GitsignsKM.on_attach,
     signs = {
       add          = { text = '│' },
       change       = { text = '│' },
@@ -48,5 +53,5 @@ function Gs.opts()
   }
 end
 
-return Gs
+return Gitsigns
 

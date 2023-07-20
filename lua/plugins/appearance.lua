@@ -1,3 +1,4 @@
+
 -- appearance ------------------------------------------------------------------
 
 --[[
@@ -6,37 +7,37 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
-local lk       = require 'config.lspkind'
-local plugins  = require('utils.plugins.plugin').plugins
-local priority = require 'utils.plugins.priority'
+local LspKind  = require 'config.lspkind'
+local Plugins  = require('utils.plugins.plugin').plugins
+local Priority = require 'utils.plugins.priority'
 
 
-return plugins({
+return Plugins({
 ---- colorschemes: loaded w/ high priority as discussed here:
 ----               https://github.com/folke/lazy.nvim > Plugin Spec > priority
   {
     'catppuccin/nvim',
 
-    lazy = false,
-    priority = priority.THIRD,
+    lazy     = false,
+    priority = Priority.THIRD,
   },
   {
     'rebelot/kanagawa.nvim',
 
-    lazy = false,
-    priority = priority.THIRD,
+    lazy     = false,
+    priority = Priority.THIRD,
   },
   {
     'AlexvZyl/nordic.nvim',
 
-    lazy = false,
-    priority = priority.THIRD,
+    lazy     = false,
+    priority = Priority.THIRD,
   },
   {
     'folke/tokyonight.nvim',
 
-    lazy = false,
-    priority = priority.THIRD,
+    lazy     = false,
+    priority = Priority.THIRD,
   },
 ---- dressing.nvim: ui/ux treatments for vim input/select
   {
@@ -49,7 +50,7 @@ return plugins({
 ---- lspkind: icons for lsp completion items
   {
     'onsails/lspkind.nvim',
-    opts = lk.opts(),
+    opts = LspKind.opts(),
 
     config = function(_, opts)
       require('lspkind').init(opts)
@@ -62,7 +63,7 @@ return plugins({
     lazy = false,
     -- we load this first since we want nvim-notify as early as possible; this comes before
     -- nvim-notify since this is a dependency of the latter
-    priority = priority.FIRST,
+    priority = Priority.FIRST,
   },
 })
 

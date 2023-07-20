@@ -10,9 +10,13 @@ local function is_available()
   return navic.is_available()
 end
 
-local Ll = {}
+--- Contains functions for configuring the lualine plugin.
+--
+---@class Lualine
+local Lualine = {}
 
-function Ll.opts()
+---@return table: a table that contains configuration values for the lualine plugin
+function Lualine.opts()
   return {
     extensions = { 'aerial', 'nvim-tree' },
     sections = {
@@ -35,5 +39,5 @@ function Ll.opts()
   }
 end
 
-return Ll
+return Lualine
 

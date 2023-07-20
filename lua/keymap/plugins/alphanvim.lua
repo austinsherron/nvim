@@ -1,7 +1,7 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>0', ':Alpha<CR>', { desc = 'alpha: open startpage' })
+KM.nnoremap('<leader>0', ':Alpha<CR>', { desc = 'alpha: open startpage' })
 
