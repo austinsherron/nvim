@@ -20,9 +20,8 @@ o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
 
 ---- spellcheck setting --------------------------------------------------------
 
-o.spell = true
+o.spell     = true
 o.spelllang = 'en_us'
-o.spellsuggest = 20
 o.spellfile = vim.fn.stdpath('config') .. '/spell/en.utf-8.add'
 
 ---- indent settings -----------------------------------------------------------
@@ -33,10 +32,10 @@ o.si           = true            -- smart indent
 o.smartlindent = true            -- must set both this and above
 
 -- tabs as spaces; default tab size = 4
-o.expandtab    = true
-o.shiftwidth   = 4
-o.softtabstop  = o.shiftwidth
-o.tabstop      = o.shiftwidth
+o.expandtab   = true
+o.shiftwidth  = 4
+o.softtabstop = o.shiftwidth
+o.tabstop     = o.shiftwidth
 
 ---- search settings -----------------------------------------------------------
 

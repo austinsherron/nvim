@@ -1,5 +1,5 @@
-local shell = require 'lib.lua.system.shell'
-local km    = require 'utils.core.mapper'
+local Shell = require 'lib.lua.system.shell'
+local KM    = require 'utils.core.mapper'
 
 
 -- globals ---------------------------------------------------------------------
@@ -17,12 +17,12 @@ local state_base = vim.fn.stdpath('state')
 
 -- for storing for storing backups
 local backup_path = state_base .. '/backup'
-shell.mkdir(backup_path, true)
+Shell.mkdir(backup_path, true)
 vim.o.backupdir = backup_path
 
 -- for storing undo history
 local undo_path = state_base .. '/undo'
-shell.mkdir(undo_path, true)
+Shell.mkdir(undo_path, true)
 vim.o.undodir = undo_path
 
 -- look & feel -----------------------------------------------------------------
@@ -37,7 +37,7 @@ vim.opt.termguicolors = true
 -- interactions ----------------------------------------------------------------
 
 -- remap space to no-op
-km.nnoremap('<Space>', '<Nop>')
+KM.nnoremap('<Space>', '<Nop>')
 
 -- remap leaders to space
 vim.g.mapleader = ' '

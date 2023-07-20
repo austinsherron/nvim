@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -9,6 +9,6 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>a',  ':AerialToggle<CR>',    options('open sidebar'))
-km.nnoremap('<leader>A',  ':AerialNavToggle<CR>', options('open popup'))
+KM.nnoremap('<leader>a',  ':AerialToggle<CR>',    options('open sidebar'))
+KM.nnoremap('<leader>A',  ':AerialNavToggle<CR>', options('open popup'))
 

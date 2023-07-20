@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -9,7 +9,7 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>D',  ':Neogen func<CR>',  options('function docstring'))
-km.nnoremap('<leader>Df', ':Neogen func<CR>',  options('function docstring'))
-km.nnoremap('<leader>Dc', ':Neogen class<CR>', options('class docstring'))
+KM.nnoremap('<leader>D',  ':Neogen func<CR>',  options('function docstring'))
+KM.nnoremap('<leader>Df', ':Neogen func<CR>',  options('function docstring'))
+KM.nnoremap('<leader>Dc', ':Neogen class<CR>', options('class docstring'))
 

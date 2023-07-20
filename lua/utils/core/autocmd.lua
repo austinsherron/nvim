@@ -1,6 +1,6 @@
 -- WIP
 
-local tbl = require 'lib.lua.core.table'
+local Table = require 'lib.lua.core.table'
 
 local create_autocmd = vim.api.nvim_create_autocmd
 
@@ -14,7 +14,7 @@ local AutoCmd = {}
 AutoCmd.__index = AutoCmd
 
 function AutoCmd.new(default_options)
-  local this = tbl.shallow_copy(default_options)
+  local this = Table.shallow_copy(default_options)
   setmetatable(this, AutoCmd)
   return this
 end

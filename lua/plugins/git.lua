@@ -1,22 +1,23 @@
--- g(it -------------------------------------------------------------------------
+
+-- git -------------------------------------------------------------------------
 
 --[[
   enable nvim git interactions/integrations
 --]]
 
-local dv      = require 'config.diffview'
-local gs      = require 'config.gitsigns'
-local ng      = require 'config.neogit'
-local plugins = require('utils.plugins.plugin').plugins
+local Diffview = require 'config.diffview'
+local Gitsigns = require 'config.gitsigns'
+local Neogit   = require 'config.neogit'
+local Plugins  = require('utils.plugins.plugin').plugins
 
 
-return plugins({
+return Plugins({
 ---- diff view: for looking at diffs...
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     -- FIXME: these don't seem to be respected below...
-    opts = dv.opts(),
+    opts         = Diffview.opts(),
 
     config = function(_, opts)
       require('diffview').setup(opts)
@@ -25,7 +26,7 @@ return plugins({
 ---- gitsigns: visual cues about what's changed/is changing
   {
     'lewis6991/gitsigns.nvim',
-    opts = gs.opts(),
+    opts = Gitsigns.opts(),
 
     config = function(_, opts)
       require('gitsigns').setup(opts)
@@ -35,7 +36,7 @@ return plugins({
   {
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = ng.opts(),
+    opts         = Neogit.opts(),
 
     config = function(_, opts)
       require('neogit').setup(opts)

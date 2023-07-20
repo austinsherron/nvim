@@ -1,5 +1,5 @@
-local tbl    = require 'lib.lua.core.table'
-local stream = require 'lib.lua.utils.stream'
+local Table  = require 'lib.lua.core.table'
+local Stream = require 'lib.lua.utils.stream'
 
 
 --- Relative order of completion results in auto-complete menu based on source groups.
@@ -52,8 +52,8 @@ local Src = {}
 ---@return table: configuration for buffer completion source
 function Src.buffer()
   return {
-    name = 'buffer',
-    group_index = GroupIndex.BUFFER,
+    name           = 'buffer',
+    group_index    = GroupIndex.BUFFER,
     trigger_length = TriggerLength.BUFFER,
 
     option = {
@@ -66,8 +66,8 @@ end
 ---@return table: configuration for calc (math-y type stuff) completion source
 function Src.calc()
   return {
-    name = 'calc',
-    group_index = GroupIndex.CALC,
+    name           = 'calc',
+    group_index    = GroupIndex.CALC,
     trigger_length = TriggerLength.CALC,
   }
 end
@@ -78,8 +78,8 @@ end
 -- terms) completion source
 local function conventionalcommits()
   return {
-    name = 'conventionalcommits',
-    group_index = GroupIndex.CONVCOMMITS,
+    name           = 'conventionalcommits',
+    group_index    = GroupIndex.CONVCOMMITS,
     trigger_length = TriggerLength.CONVCOMMITS,
   }
 end
@@ -89,8 +89,8 @@ end
 ---@return table: configuration for dictionary completion source
 local function dictionary()
   return {
-    name = 'dictionary',
-    group_index = GroupIndex.DICTIONARY,
+    name           = 'dictionary',
+    group_index    = GroupIndex.DICTIONARY,
     trigger_length = TriggerLength.DICTIONARY,
   }
 end
@@ -99,8 +99,8 @@ end
 ---@return table: configuration for emoji completion source
 function Src.emoji()
   return {
-    name = 'emoji',
-    group_index = GroupIndex.EMOJI,
+    name           = 'emoji',
+    group_index    = GroupIndex.EMOJI,
     trigger_length = TriggerLength.EMOJI,
   }
 end
@@ -109,8 +109,8 @@ end
 ---@return table: configuration for git completion source
 function Src.git()
   return {
-    name = 'git',
-    group_index = GroupIndex.GIT,
+    name           = 'git',
+    group_index    = GroupIndex.GIT,
     trigger_length = TriggerLength.GIT,
   }
 end
@@ -119,8 +119,8 @@ end
 ---@return table: configuration for lsp completion source
 function Src.lsp()
   return {
-    name = 'nvim_lsp',
-    group_index = GroupIndex.LSP,
+    name           = 'nvim_lsp',
+    group_index    = GroupIndex.LSP,
     trigger_length = TriggerLength.LSP,
   }
 end
@@ -129,8 +129,8 @@ end
 ---@return table: configuration for lsp signature completion source
 function Src.lsp_signature()
   return {
-    name = 'nvim_lsp_signature',
-    group_index = GroupIndex.LSP_SIGNATURE,
+    name           = 'nvim_lsp_signature',
+    group_index    = GroupIndex.LSP_SIGNATURE,
     trigger_length = TriggerLength.LSP_SIGNATURE,
   }
 end
@@ -139,8 +139,8 @@ end
 ---@return table: configuration for luasnip (snippets engine) completion source
 function Src.luasnip()
   return {
-    name = 'luasnip',
-    group_index = GroupIndex.LUASNIP,
+    name           = 'luasnip',
+    group_index    = GroupIndex.LUASNIP,
     trigger_length = TriggerLength.LUASNIP,
   }
 end
@@ -149,8 +149,8 @@ end
 ---@return table: configuration for file-system path completion source
 function Src.path()
   return {
-    name = 'path',
-    group_index = GroupIndex.PATH,
+    name           = 'path',
+    group_index    = GroupIndex.PATH,
     trigger_length = TriggerLength.PATH,
   }
 end
@@ -160,8 +160,8 @@ end
 ---@return table: configuration for spellcheck suggestions completion source
 function Src.spell()
   return {
-    name = 'spell',
-    group_index = GroupIndex.SPELL,
+    name           = 'spell',
+    group_index    = GroupIndex.SPELL,
     trigger_length = TriggerLength.SPELL,
   }
 end
@@ -171,8 +171,8 @@ end
 ---@return table: configuration for treesitter completion source
 function Src.treesitter()
   return {
-    name = 'treesitter',
-    group_index = GroupIndex.TREESITTER,
+    name           = 'treesitter',
+    group_index    = GroupIndex.TREESITTER,
     trigger_length = TriggerLength.TREESITTER,
   }
 end
@@ -180,7 +180,7 @@ end
 
 ---@return table: all completion sources
 function Src.all()
-  return stream(tbl.keys(Src))
+  return Stream(Table.keys(Src))
     :filter(function(i) return i ~= 'all' end)
     :map(function(i) return Src[i]() end)
     :collect()

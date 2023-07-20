@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -7,51 +7,53 @@ local function options(desc)
     return { desc = 'core: ' .. desc, nowait = true }
 end
 
-
 -- interactions ---------------------------------------------------------------
 
 ---- core ops
 
 -- save
-km.nnoremap('<leader>w', ':w<CR>',   options('save one'))
-km.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
+KM.nnoremap('<leader>w', ':w<CR>',   options('save one'))
+KM.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
 
 -- close/quit
-km.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
-km.nnoremap('<leader>Q', ':qa<CR>',   options('quit/close all'))
-km.nnoremap('<leader>!', ':qa!<CR>', options('force quit'))
+KM.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
+KM.nnoremap('<leader>Q', ':qa<CR>',   options('quit/close all'))
+KM.nnoremap('<leader>!', ':qa!<CR>', options('force quit'))
 
 -- <esc>
-km.inoremap('jh',    '<Esc>',    options('exit/back'))
-km.inoremap('hj',    '<Esc>',    options('exit/back'))
-km.inoremap('jk',    '<Esc>',    options('exit/back'))
-km.inoremap('kj',    '<Esc>',    options('exit/back'))
-km.inoremap('<C-c>', '<Esc>',    options('exit/back'))
+KM.inoremap('jh',    '<Esc>',    options('exit/back'))
+KM.inoremap('hj',    '<Esc>',    options('exit/back'))
+KM.inoremap('jk',    '<Esc>',    options('exit/back'))
+KM.inoremap('kj',    '<Esc>',    options('exit/back'))
+KM.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 
 ---- misc ops
 
 -- toggle relative line numbers
-km.nmap('<C-N><C-N>', ':set invrelativenumber<CR>', options('toggle relative line #'))
+KM.nmap('<C-N><C-N>', ':set invrelativenumber<CR>', options('toggle relative line #'))
+
+-- close quickfix window
+KM.nmap('<leader>cq', ':cclose<CR>', options('close quickfix window'))
 
 -- motion ----------------------------------------------------------------------
 
 ---- wrapped lines
 
 -- lets j and k move inside a visually wrapped line
-km.nnoremap('j', 'gj', options('cursor down'))
-km.nnoremap('k', 'gk', options('cursor up'))
+KM.nnoremap('j', 'gj', options('cursor down'))
+KM.nnoremap('k', 'gk', options('cursor up'))
 
 -- display --------------------------------------------------------------------
 
 -- turn off highlight (i.e.: for search, as wall as for searchbox.nvim plugin)
-km.nnoremap('<leader>hx', ':noh | :SearchBoxClear<CR>', options('cancel highlight'))
+KM.nnoremap('<leader>hx', ':noh | :SearchBoxClear<CR>', options('cancel highlight'))
 
 -- spellcheck ------------------------------------------------------------------
 
 -- add word
-km.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
+KM.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
 -- suggest words
-km.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
+KM.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 
 -- buffers ---------------------------------------------------------------------
 
@@ -59,8 +61,8 @@ km.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 --       they're defined w/ the barbar plugin keymap
 
 -- resize
-km.nnoremap('<leader>J', ':resize +10<CR>',          options('resize "up" 10'))
-km.nnoremap('<leader>K', ':resize -10<CR>',          options('resize "down" 10'))
-km.nnoremap('<leader>L', ':vertical resize +10<CR>', options('resize "right" 10'))
-km.nnoremap('<leader>H', ':vertical resize -10<CR>', options('resize "left" 10'))
+KM.nnoremap('<leader>J', ':resize +10<CR>',          options('resize "up" 10'))
+KM.nnoremap('<leader>K', ':resize -10<CR>',          options('resize "down" 10'))
+KM.nnoremap('<leader>L', ':vertical resize +10<CR>', options('resize "right" 10'))
+KM.nnoremap('<leader>H', ':vertical resize -10<CR>', options('resize "left" 10'))
 

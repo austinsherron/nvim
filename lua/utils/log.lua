@@ -4,8 +4,8 @@
 ---@enum LogLevel
 local LogLevel = {
   DEBUG = vim.log.levels.DEBUG,
-  INFO = vim.log.levels.INFO,
-  WARN = vim.log.levels.WARN,
+  INFO  = vim.log.levels.INFO,
+  WARN  = vim.log.levels.WARN,
   ERROR = vim.log.levels.ERROR,
 }
 

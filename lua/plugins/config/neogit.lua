@@ -1,7 +1,11 @@
 
-local Ng = {}
+--- Contains functions for configuring the neogit plugin.
+--
+---@class Neogit
+local Neogit = {}
 
-function Ng.opts()
+---@return table: a table that contains configuration values for the neogit plugin
+function Neogit.opts()
   return {
     integrations = {
       -- enable integration w/ diffview plugin
@@ -10,5 +14,5 @@ function Ng.opts()
   }
 end
 
-return Ng
+return Neogit
 

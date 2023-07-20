@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- interactions ----------------------------------------------------------------
@@ -9,5 +9,5 @@ local options = {
     silent = true,
 }
 
-km.nnoremap('<leader>M', ':Mason<CR>', options)
+KM.nnoremap('<leader>M', ':Mason<CR>', options)
 

@@ -1,4 +1,7 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
+
+local create_autocmd = vim.api.nvim_create_autocmd
+local create_augroup = vim.api.nvim_create_augroup
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -9,10 +12,10 @@ end
 
 
 local function global_mappings()
-  km.nnoremap("'e", vim.diagnostic.open_float, options('open diagnostic hover'))
-  km.nnoremap('[d', vim.diagnostic.goto_prev,  options('prev diagnostic'))
-  km.nnoremap(']d', vim.diagnostic.goto_next,  options('next diagnostic'))
-  km.nnoremap("'l", vim.diagnostic.setloclist, options('diagnostics list'))
+  KM.nnoremap("'e", vim.diagnostic.open_float, options('open diagnostic hover'))
+  KM.nnoremap('[d', vim.diagnostic.goto_prev,  options('prev diagnostic'))
+  KM.nnoremap(']d', vim.diagnostic.goto_next,  options('next diagnostic'))
+  KM.nnoremap("'l", vim.diagnostic.setloclist, options('diagnostics list'))
 end
 
 
@@ -31,39 +34,43 @@ local function after_attach_mappings(ev)
   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
   -- find/go to...
-  km.nnoremap('gD', vim.lsp.buf.declaration,     options('jump to declaration', ev.buf))
-  km.nnoremap('gd', vim.lsp.buf.definition,      options('jump to definition', ev.buf))
-  km.nnoremap('gi', vim.lsp.buf.implementation,  options('jump to implementation', ev.buf))
-  km.nnoremap('gr', vim.lsp.buf.references,      options('show references', ev.buf))
-  km.nnoremap("gT", vim.lsp.buf.type_definition, options('type definition', ev.buf))
+  KM.nnoremap('gD', vim.lsp.buf.declaration,     options('jump to declaration', ev.buf))
+  KM.nnoremap('gd', vim.lsp.buf.definition,      options('jump to definition', ev.buf))
+  KM.nnoremap('gi', vim.lsp.buf.implementation,  options('jump to implementation', ev.buf))
+  KM.nnoremap('gr', vim.lsp.buf.references,      options('show references', ev.buf))
+  KM.nnoremap("gT", vim.lsp.buf.type_definition, options('type definition', ev.buf))
 
   -- semantic info
-  km.nnoremap("'h", vim.lsp.buf.hover,          options('open hover', ev.buf))
-  km.nnoremap("'s", vim.lsp.buf.signature_help, options('signature help', ev.buf))
+  KM.nnoremap("'h", vim.lsp.buf.hover,          options('open hover', ev.buf))
+  KM.nnoremap("'s", vim.lsp.buf.signature_help, options('signature help', ev.buf))
 
   -- workspace manipulation
-  km.nnoremap("'wa", vim.lsp.buf.add_workspace_folder,    options('add wkspce dir', ev.buf))
-  km.nnoremap("'wr", vim.lsp.buf.remove_workspace_folder, options('rm wkspce dir', ev.buf))
-  km.nnoremap("'wl", inspect_wkspace_dirs,                options('list wkspce dirs', ev.buf))
+  KM.nnoremap("'wa", vim.lsp.buf.add_workspace_folder,    options('add wkspce dir', ev.buf))
+  KM.nnoremap("'wr", vim.lsp.buf.remove_workspace_folder, options('rm wkspce dir', ev.buf))
+  KM.nnoremap("'wl", inspect_wkspace_dirs,                options('list wkspce dirs', ev.buf))
 
   -- do...
-  km.nnoremap("'r",  vim.lsp.buf.rename,      options('rename', ev.buf))
-  km.nnoremap("'f",  format,                  options('format', ev.buf))
-  km.nnoremap("'ca", vim.lsp.buf.code_action, options('code action', ev.buf))
+  KM.nnoremap("'r",  vim.lsp.buf.rename,      options('rename', ev.buf))
+  KM.nnoremap("'f",  format,                  options('format', ev.buf))
+  KM.nnoremap("'ca", vim.lsp.buf.code_action, options('code action', ev.buf))
 end
 
 
 local function after_attach_autocmd()
   -- use LspAttach autocommand to only map the following keys after the language
   -- server attaches to the current buffer
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  create_autocmd('LspAttach', {
+    group    = create_augroup('UserLspConfig', {}),
     callback = after_attach_mappings
   })
 end
 
+--- Contains methods for configuring key bindings for core LSP related functionality.
+--
+---@class Lsp
 local Lsp = {}
 
+--- Entry point for configuring key bindings for core LSP related functionality.
 function Lsp.keymap()
   global_mappings()
   after_attach_autocmd()

@@ -1,7 +1,11 @@
 
-local Lk = {}
+--- Contains functions for configuring the LSP Kind plugin.
+--
+---@class LspKind
+local LspKind = {}
 
-function Lk.opts()
+---@return table: a table that contains configuration values for the lsp kind plugin
+function LspKind.opts()
   return {
     mode = 'symbol_text',
     preset = 'codicons',
@@ -36,4 +40,5 @@ function Lk.opts()
   }
 end
 
-return Lk
+return LspKind
+

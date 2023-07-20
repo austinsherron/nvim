@@ -1,4 +1,4 @@
-local km = require 'utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
@@ -7,10 +7,9 @@ local function options(desc)
     return { desc = 'session mgr.' .. desc }
 end
 
-
 -- interactions ----------------------------------------------------------------
 
-km.nnoremap('<leader>ss', ':SessionManager save_current_session<CR>',     options('save current'))
-km.nnoremap('<leader>sl', ':SessionManager load_last_session<CR>',        options('load last'))
-km.nnoremap('<leader>sd', ':SessionManager load_current_dir_session<CR>', options('load current dir'))
+KM.nnoremap('<leader>ss', ':SessionManager save_current_session<CR>',     options('save current'))
+KM.nnoremap('<leader>sl', ':SessionManager load_last_session<CR>',        options('load last'))
+KM.nnoremap('<leader>sd', ':SessionManager load_current_dir_session<CR>', options('load current dir'))
 

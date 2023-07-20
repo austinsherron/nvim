@@ -1,3 +1,4 @@
+
 -- interface -------------------------------------------------------------------
 
 --[[
@@ -6,13 +7,13 @@
 --]]
 
 -- local alpha = require 'config.alphanvim'
-local bb       = require 'config.barbar'
-local ll       = require 'config.lualine'
-local plugins  = require('utils.plugins.plugin').plugins
-local priority = require 'utils.plugins.priority'
+local Babar    = require 'config.barbar'
+local Lualine  = require 'config.lualine'
+local Plugins  = require('utils.plugins.plugin').plugins
+local Priority = require 'utils.plugins.priority'
 
 
-return plugins({
+return Plugins({
 ---- alpha: landing page
   {
     'goolord/alpha-nvim',
@@ -27,7 +28,7 @@ return plugins({
   {
     'romgrk/barbar.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = bb.opts(),
+    opts = Babar.opts(),
   },
 ---- bqf (better quickfix window): makes quickfix window more user-friendly
   {
@@ -59,7 +60,7 @@ return plugins({
 ---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',
-    opts = ll.opts(),
+    opts = Lualine.opts(),
 
     config = function(_, opts)
       require('lualine').setup(opts)
@@ -73,7 +74,7 @@ return plugins({
     lazy = false,
     -- we load this second since we want nvim-notify as early as possible; this comes after
     -- nui.nvim since that is a dependency of this
-    priority = priority.SECOND,
+    priority = Priority.SECOND,
 
     -- substitute all native vim notifications
     config = function()

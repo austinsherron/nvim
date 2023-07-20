@@ -1,15 +1,16 @@
+
 -- navigation ------------------------------------------------------------------
 
 --[[
    control (file) system (as opposed to on-screen) movement
 --]]
 
-local nvt     = require 'config.nvimtree'
-local proj    = require 'config.project'
-local plugins = require('utils.plugins.plugin').plugins
+local Nvimtree = require 'config.nvimtree'
+local Project  = require 'config.project'
+local Plugins  = require('utils.plugins.plugin').plugins
 
 
-return plugins({
+return Plugins({
 ---- nnn: file explorer w/ what seems like a cult-ish following
 
 ---- note: didn't love the nnn interface; perhaps I need to use it a bit more
@@ -26,8 +27,8 @@ return plugins({
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version = '*',
-    opts = nvt.opts(),
+    version      = '*',
+    opts         = Nvimtree.opts(),
 
     config = function(_, opts)
       require('nvim-tree').setup(opts)
@@ -36,7 +37,7 @@ return plugins({
 ---- project: project manager/navigator
   {
     'ahmedkhalf/project.nvim',
-    opts = proj.opts(),
+    opts = Project.opts(),
 
     config = function(_, opts)
       require('project_nvim').setup(opts)

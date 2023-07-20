@@ -1,7 +1,11 @@
 
-local Bb = {}
+--- Contains functions for configuring barbar.
+--
+---@class Barbar
+local Barbar = {}
 
-function Bb.opts()
+---@return table: a table that contains configuration values for the barbar plugin
+function Barbar.opts()
   return {
     -- visual
     animation = true,
@@ -13,5 +17,5 @@ function Bb.opts()
   }
 end
 
-return Bb
+return Barbar
 

@@ -1,9 +1,12 @@
-local lsp = require 'lsp.keymap'
-local tbl = require 'lib.lua.core.table'
+local LspKM = require 'lsp.keymap'
+local Table = require 'lib.lua.core.table'
 
 
 local LSP_SERVERS = { 'bashls', 'lua_ls', 'pyright' }
 
+--- Configures neovim LSP and related functionality.
+--
+---@class Lsp
 local Lsp = {}
 
 function Lsp.servers()
@@ -24,12 +27,13 @@ local function get_config_for_server(lsp_server, capabilities, navic_attach)
   local cmp_conf = { capabilities = capabilities }
   local navic_conf = { on_attach = navic_attach }
 
-  return tbl.combine_many({ cmp_conf, navic_conf, server_conf })
+  return Table.combine_many({ cmp_conf, navic_conf, server_conf })
 end
 
 
+--- Entry point to LSP configuration.
 function Lsp.config()
-  local lspconfig = require 'lspconfig'
+  local lspconfig    = require 'lspconfig'
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   local navic_attach = require('nvim-navic').attach
 
@@ -38,7 +42,7 @@ function Lsp.config()
     lspconfig[lsp_server].setup(conf)
   end
 
-  lsp.keymap()
+  LspKM.keymap()
 end
 
 return Lsp
