@@ -11,8 +11,7 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<leader>1',  ':NvimTreeFocus<CR>',     options('focus'))
-KM.nnoremap('<leader>t',  ':NvimTreeToggle<CR>',    options('toggle'))
+KM.nnoremap('<leader>1',  ':NvimTreeToggle<CR>',    options('toggle'))
 KM.nnoremap('<leader>F',  ':NvimTreeFindFile<CR>',  options('find file in tree'))
 KM.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>', options('find file in tree!'))
 

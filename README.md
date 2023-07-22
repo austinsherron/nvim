@@ -147,4 +147,5 @@ I organize my plugins into the following categories:
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
 - [ ] DiffviewClose doesn't consistently close all diffview buffers/windows
 - [ ] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc....
+- [ ] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/
 
