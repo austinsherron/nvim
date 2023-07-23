@@ -7,6 +7,7 @@
 
 local AutoPairs = require 'config.autopairs'
 local Cmp       = require 'config.cmp.cmp'
+local Indent    = require 'config.indent'
 local Plugins   = require('utils.plugins.plugin').plugins
 
 
@@ -83,6 +84,15 @@ return Plugins({
   },
 ---- editor config: language specific file formatting
   { 'gpanders/editorconfig.nvim' },
+---- indent-blankline: indentation guides
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    opts = Indent.opts(),
+
+    config = function(_, opts)
+      require('indent_blankline').setup(opts)
+    end
+  },
 ---- neovim session-manager: persist open files/buffers b/w nvim sessions
   { 'Shatur/neovim-session-manager' },
 ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈

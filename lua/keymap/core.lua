@@ -61,8 +61,8 @@ KM.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 --       they're defined w/ the barbar plugin keymap
 
 -- resize
-KM.nnoremap('<leader>J', ':resize +10<CR>',          options('resize "up" 10'))
-KM.nnoremap('<leader>K', ':resize -10<CR>',          options('resize "down" 10'))
-KM.nnoremap('<leader>L', ':vertical resize +10<CR>', options('resize "right" 10'))
-KM.nnoremap('<leader>H', ':vertical resize -10<CR>', options('resize "left" 10'))
+KM.nnoremap('<leader>J', ':resize -10<CR>',          options('resize "up" 10'))
+KM.nnoremap('<leader>K', ':resize +10<CR>',          options('resize "down" 10'))
+KM.nnoremap('<leader>L', ':vertical resize -10<CR>', options('resize "right" 10'))
+KM.nnoremap('<leader>H', ':vertical resize +10<CR>', options('resize "left" 10'))
 
