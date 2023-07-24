@@ -44,7 +44,7 @@ local function default_mappings(bufnr, api)
   KM.nnoremap('>',     api.node.navigate.sibling.next,        options('Next Sibling', bufnr))
   KM.nnoremap('<',     api.node.navigate.sibling.prev,        options('Previous Sibling', bufnr))
   KM.nnoremap('.',     api.node.run.cmd,                      options('Run Command', bufnr))
-  KM.nnoremap('-',     api.tree.change_root_to_parent,        options('Up', bufnr))
+  -- KM.nnoremap('-',     api.tree.change_root_to_parent,        options('Up', bufnr))
   KM.nnoremap('a',     api.fs.create,                         options('Create', bufnr))
   KM.nnoremap('bd',    api.marks.bulk.delete,                 options('Delete Bookmarked', bufnr))
   KM.nnoremap('bmv',   api.marks.bulk.move,                   options('Move Bookmarked', bufnr))
@@ -76,7 +76,7 @@ local function default_mappings(bufnr, api)
   KM.nnoremap('r',     api.fs.rename,                         options('Rename', bufnr))
   KM.nnoremap('R',     api.tree.reload,                       options('Refresh', bufnr))
   -- km.nnoremap('s',     api.node.run.system,                   options('Run System', bufnr))
-  KM.nnoremap('S',     api.tree.search_node,                  options('Search', bufnr))
+  -- KM.nnoremap('S',     api.tree.search_node,                  options('Search', bufnr))
   -- km.nnoremap('U',     api.tree.toggle_custom_filter,         options('Toggle Hidden', bufnr))
   KM.nnoremap('W',     api.tree.collapse_all,                 options('Collapse', bufnr))
   KM.nnoremap('x',     api.fs.cut,                            options('Cut', bufnr))
@@ -97,11 +97,31 @@ end
 local function remapped_defaults(bufnr, api)
   KM.nnoremap('<C-h>', api.node.open.horizontal,      options('Open: Horizontal Split', bufnr))
   KM.nnoremap('I',     api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
-  KM.nnoremap('s',     silent_open,                   options('Open silently', bufnr))
+  KM.nnoremap('<C-s>', silent_open,                   options('Open silently', bufnr))
 
   -- note: important to know that this is 'q' at the time of writing: we need to remove
   -- the 'q' default mapping above
   KM.nnoremap(Leap.bidirectional_leap_key(), Leap.bidirectional_leap, options('Leap', bufnr))
+end
+
+
+local function stage()
+  NvTree:stage()
+end
+
+
+local function stage_all()
+  NvTree:stage(true)
+end
+
+
+local function unstage()
+  NvTree:unstage()
+end
+
+
+local function unstage_all()
+  NvTree:unstage(true)
 end
 
 
@@ -110,6 +130,13 @@ local function custom_mappings(bufnr, api)
   KM.nnoremap('L', api.tree.change_root_to_node,   options('CD', bufnr))
   KM.nnoremap('h', api.node.navigate.parent_close, options('Close Directory', bufnr))
   KM.nnoremap('H', api.tree.change_root_to_parent, options('Up', bufnr))
+
+  -- bindings for git ops
+  KM.nnoremap('s', stage,       options('stage node', bufnr))
+  -- remapped default, not in the remapped_defaults so it can be grouped w/ other git bindings
+  KM.nnoremap('S', stage_all,   options('stage repo', bufnr))
+  KM.nnoremap('u', unstage,     options('unstage node', bufnr))
+  KM.nnoremap('U', unstage_all, options('unstage repo', bufnr))
 end
 
 --- Contains methods for configuring key bindings for nvimtree.

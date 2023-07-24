@@ -1,4 +1,5 @@
-local Bool  = require 'lib.lua.core.bool'
+local Bool = require 'lib.lua.core.bool'
+local Git  = require 'utils.api.git'
 
 
 --- Contains methods for interacting w/ nvim-tree.
@@ -61,7 +62,7 @@ end
 
 --- Returns the currently focused nvim-tree node. More precisely, it returns the node that
 --  is currently under the cursor, if it exists. If focused is true, the nvim-tree buffer
---  must be both visible and active for a node to be returned; if focused is false, nvim-tree
+--  must be both visible and active for a node to be returned; if focused is false, nvimtree
 --  must only be visible. If the aforementioned conditions aren't met, this method returns
 --  nil.
 --
@@ -73,11 +74,39 @@ end
 function NvimTree:get_cursor_node(focused)
   focused = focused or true
 
-  return Bool.ternary(
+   return Bool.ternary(
     (not focused and self:is_tree_open()) or (focused and self:tree_in_use()),
     function() return self:cursor_node() end,
     nil
   )
+end
+
+
+---@private
+function NvimTree:path_for_git_op(all)
+  return Bool.ternary(
+    all,
+    Git.repo_root(),
+    self:get_cursor_node(true).absolute_path
+  )
+end
+
+
+--- Stages the file(s) corresponding to the node under the cursor, or all files in the
+--  repo if all is true.
+--
+---@param all boolean?: if true, all modified files in the current repo will be staged
+function NvimTree:stage(all)
+  Git.stage(self:path_for_git_op(all))
+end
+
+
+--- Unstages the file(s) corresponding to the node under the cursor, or all files in the
+--  repo if all is true.
+--
+---@param all boolean?: if true, all staged files in the current repo will be unstaged
+function NvimTree:unstage(all)
+  Git.unstage(self:path_for_git_op(all))
 end
 
 
