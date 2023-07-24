@@ -1,7 +1,4 @@
 local Bool = require 'lib.lua.core.bool'
-local Log  = require 'utils.log'
-
-local ERROR = vim.log.levels.ERROR
 
 
 local function make_err_msg(err_res, prefix)
@@ -37,7 +34,7 @@ function OnErr.log(f, prefix)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  Log.error(err_msg)
+  LOGGER.error(err_msg)
 end
 
 
@@ -53,7 +50,18 @@ function OnErr.notify(f, prefix)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  vim.notify(err_msg, ERROR, { title = 'Error' })
+  NOTIFY.error(err_msg)
+end
+
+
+--- On error, returns false.
+--
+---@param f fun(): any?: the function that might throw an error
+---@return boolean: true if the function completes w/out error, false otherwise
+---@return any?: the result of f, if any
+function OnErr.return_false(f)
+  local ok, res = pcall(f)
+  return ok, res
 end
 
 return OnErr

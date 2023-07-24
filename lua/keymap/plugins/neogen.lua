@@ -9,7 +9,6 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<leader>D',  ':Neogen func<CR>',  options('function docstring'))
-KM.nnoremap('<leader>Df', ':Neogen func<CR>',  options('function docstring'))
-KM.nnoremap('<leader>Dc', ':Neogen class<CR>', options('class docstring'))
+KM.nnoremap('<leader>df', ':Neogen func<CR>',  options('function docstring'))
+KM.nnoremap('<leader>dc', ':Neogen class<CR>', options('class docstring'))
 

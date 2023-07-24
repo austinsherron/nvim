@@ -23,6 +23,7 @@ KM.nnoremap('<leader>fh', Builtins.help_tags,              options('search help 
 KM.nnoremap('<leader>fn', '<cmd>Telescope undo<CR>',       options('search undo history'))
 KM.nnoremap('<leader>fp', '<cmd>Telescope projects<CR>',   options('search projects'))
 KM.nnoremap('<leader>fr', '<cmd>Telescope frecency<CR>',   options('search "frecent"'))
+KM.nnoremap('<leader>fs', Builtins.spell_suggest,          options('search spelling suggestions'))
 KM.nnoremap('<leader>ft', Builtins.treesitter,             options('search treesitter symbols'))
 KM.nnoremap('<leader>fu', Builtins.lsp_references,         options('find usages'))
 KM.nnoremap('<leader>fw', Telescope.contextual_live_grep,  options('find words'))
