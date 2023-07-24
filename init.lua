@@ -1,4 +1,4 @@
-local safe = require 'utils.errorhandling.safe'
+local safe = require 'utils.error.safe'
 
 
 -- init ------------------------------------------------------------------------

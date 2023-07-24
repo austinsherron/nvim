@@ -1,4 +1,4 @@
-local OnErr = require 'utils.errorhandling.onerr'
+local OnErr = require 'utils.error.onerr'
 
 
 --- Provides methods for "safely" performing various actions. In this context, "safely"
