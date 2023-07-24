@@ -11,7 +11,7 @@ my setup. My goal is to move from IntelliJ to an nvim based, "home-baked" IDE. M
 
 There are definitely more, but this README, like my nvim journey in general, is a work in progress!
 
-## Plugin Manifest
+## Plugin Organization
 
 I organize my plugins into the following categories:
 
@@ -40,7 +40,6 @@ I organize my plugins into the following categories:
 │   │   └── extensions
 │   └── utils
 └── templates
-
 ```
 
 ## To-Do Lists
@@ -110,7 +109,7 @@ I organize my plugins into the following categories:
 - [x] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc. (editorconfig got me a lot of the way there, but I can still do better -> neoformat)
 - [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
-- [ ] (Not very concrete) Incorporate tabs (and windows?) into workflows
+- [ ] Incorporate tabs (and windows?) into workflows (not very concrete)
 - [ ] How can I open multiple files at once w/ nvimtree?
 - [ ] Change diff/merge view colors to something that makes for better UX
 - [ ] Make gitsigns symbols more obvious
@@ -126,8 +125,13 @@ I organize my plugins into the following categories:
 - [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
 - [x] Bi-directional leap
 - [x] Leap in nvimtree
-- [ ] Packages telescope picker
+- [ ] Telescope picker for package dir (i.e.: plugins)
 - [ ] Homegrown session manager
+- [ ] Customize titles in contextual telescope extension search
+- [ ] Git interactions from nvimtree
+- [ ] Add LuaSnip custom snippets
+- [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
+- [ ] Refactor nvim utils to separate dir? (at least those that would be/are useful for plugins as well)
 
 ### Fixes
 
@@ -140,12 +144,15 @@ I organize my plugins into the following categories:
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
 - [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?) (I think this has been addressed; will know when next update is pushed)
 - [x] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
-- [ ] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything)
+- [x] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything) (ended up being a misconfiguration: spell suggest setting shouldn't have been an int)
 - [x] Update lua files/packages that export functions to encapsulate them in tables
 - [ ] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
 - [ ] DiffviewClose doesn't consistently close all diffview buffers/windows
 - [ ] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc....
+- [ ] Fix lua_ls workspace configuration prompt
+- [ ] Fix leap.nvim repeat functionality
+- [ ] Figure out why barbar diagnostics don't work
 - [ ] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/
 

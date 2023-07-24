@@ -4,7 +4,7 @@ local safe = require 'utils.errorhandling.safe'
 -- init ------------------------------------------------------------------------
 
 -- "bootstrap" settings must come first
-safe.require('core.bootstrap')
+safe.require 'core.bootstrap'
 
 -- plugins ---------------------------------------------------------------------
 
@@ -16,13 +16,13 @@ safe.require(
 
 -- keymap ---------------------------------------------------------------------
 
-safe.require('keymap')
+safe.require 'keymap'
 
 -- settings -------------------------------------------------------------------
 
-safe.require('core.settings')
+safe.require 'core.settings'
 
 -- appearance ------------------------------------------------------------------
 
-safe.require('core.appearance')
+safe.require 'core.appearance'
 
