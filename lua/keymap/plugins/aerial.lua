@@ -9,6 +9,6 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<leader>a',  ':AerialToggle<CR>',    options('open sidebar'))
-KM.nnoremap('<leader>A',  ':AerialNavToggle<CR>', options('open popup'))
+KM.nnoremap('<leader>a', ':AerialToggle<CR>',    options('toggle sidebar'))
+KM.nnoremap('<leader>A', ':AerialNavToggle<CR>', options('toggle popup'))
 

@@ -1,5 +1,6 @@
 local Bool   = require 'lib.lua.core.bool'
 local String = require 'lib.lua.core.string'
+local Path   = require 'lib.lua.system.path'
 local System = require 'utils.api.system'
 local OnErr  = require 'utils.errorhandling.onerr'
 
@@ -22,9 +23,15 @@ function Git.in_repo()
 end
 
 
----@return string: the name of the repo we're in currently
-function Git.repo_name()
+---@return string: the path to the root of the repo we're in currently
+function Git.repo_root()
   return System.run('git rev-parse --show-toplevel')
+end
+
+
+---@return string?: the name of the repo we're in currently
+function Git.repo_name()
+  return Path.basename(Git.repo_root())
 end
 
 
