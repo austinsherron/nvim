@@ -8,6 +8,7 @@
 local Aerial     = require 'config.aerial'
 local LuaSnip    = require 'config.luasnip'
 local Mason      = require 'config.mason'
+local SnipRun    = require 'config.sniprun'
 local Treesitter = require 'config.treesitter'
 local Lsp        = require 'lsp'
 local Plugins    = require('utils.plugins.plugin').plugins
@@ -78,6 +79,16 @@ return Plugins({
 
     config = function()
       require('nvim-navic')
+    end
+  },
+---- sniprun: run snippets of code on the fly
+  {
+    'michaelb/sniprun',
+    opts = SnipRun.opts(),
+    build = 'bash install.sh',
+
+    config = function(_, opts)
+      require('sniprun').setup(opts)
     end
   },
 ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)

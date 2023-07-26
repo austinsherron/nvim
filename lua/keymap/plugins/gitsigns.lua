@@ -22,6 +22,20 @@ local function diffthis()
 end
 
 
+local function prev_hunk()
+  local gs = package.loaded.gitsigns
+
+  gs.prev_hunk()
+end
+
+
+local function next_hunk()
+  local gs = package.loaded.gitsigns
+
+  gs.next_hunk()
+end
+
+
 -- TODO: revisit these mappings/descriptions
 local function actions()
   local gs = package.loaded.gitsigns
@@ -39,6 +53,10 @@ local function actions()
   -- git blame ops
   KM.nnoremap('<leader>hb', blameline,                    options('line git blame'))
   KM.nnoremap('<leader>ht', gs.toggle_current_line_blame, options('toggle line git blame'))
+
+  -- movement
+  KM.nnoremap('[g', prev_hunk, options('prev hunk'))
+  KM.nnoremap(']g', next_hunk, options('next hunk'))
 
   -- "changed" (diff/deleted) ops:
   KM.nnoremap('<leader>hd', gs.diffthis,       options('diff'))
