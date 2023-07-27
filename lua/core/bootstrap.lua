@@ -2,11 +2,6 @@ local Shell = require 'lib.lua.system.shell'
 local KM    = require 'utils.core.mapper'
 
 
--- globals ---------------------------------------------------------------------
-
--- load global variables for use by the initialization process
-require 'core.globals'
-
 -- note: settings that should come before everything else
 
 -- internals -------------------------------------------------------------------

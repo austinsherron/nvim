@@ -1,11 +1,19 @@
 
---- Nearly non-existent wrapper around nvim json api.
+--- Thin wrapper around nvim json api.
 --
 ---@class Json
-return {
-  ---@see vim.json.decode
-  decode = vim.json.decode,
-  ---@see vim.json.encode
-  encode = vim.json.encode,
-}
+local Json = {}
+
+---@see vim.json.decode
+function Json.decode(str)
+  return vim.json.decode(str, { luanil = { array = true, object = true }})
+end
+
+
+---@see vim.json.encode
+function Json.encode(obj)
+  return vim.json.encode(obj)
+end
+
+return Json
 
