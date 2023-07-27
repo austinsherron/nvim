@@ -34,7 +34,7 @@ function OnErr.log(f, prefix)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  LOGGER.error(err_msg)
+  GetLogger():error(err_msg)
 end
 
 
@@ -50,7 +50,7 @@ function OnErr.notify(f, prefix)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  NOTIFY.error(err_msg)
+  GetNotify().error(err_msg)
 end
 
 
