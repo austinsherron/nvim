@@ -110,12 +110,21 @@ function NvimTree:unstage(all)
 end
 
 
---- Returns true if the provided node is non-nil and a dir node.
+--- Returns true if the provided node is a dir node.
 --
----@param node Node?: the node to check
----@return true: true if the provided node is non-nil and a dir node, false otherwise
+---@param node Node: the node to check
+---@return true: true if the provided node is a dir node, false otherwise
 function NvimTree.is_dir(node)
-  return node ~= nil and node.type == 'directory'
+  return node.type == 'directory'
+end
+
+
+--- Returns true if the provided node is a file node.
+--
+---@param node Node: the node to check
+---@return true: true if the provided node is a file node, false otherwise
+function NvimTree.is_file(node)
+  return node.type == 'file'
 end
 
 return NvimTree.new()
