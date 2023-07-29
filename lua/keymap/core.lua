@@ -52,8 +52,8 @@ KM.nnoremap('<leader>hx', ':noh | :SearchBoxClear<CR>', options('cancel highligh
 
 -- add word
 KM.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
--- suggest words
-KM.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
+-- suggest words; note: handled in keymap/plugins/telescope.lua
+-- KM.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 
 -- buffers ---------------------------------------------------------------------
 

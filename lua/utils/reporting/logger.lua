@@ -16,6 +16,8 @@ local DEFAULT_LOGGER_OPTS = { persistent = false, user_facing = true }
 --
 ---@class NvimLogger
 ---@field private logger Logger: file logger
+---@field private default_opts NvimLoggerOpts: default logger options; can be overridden
+-- via method level options arguments
 local NvimLogger = {}
 NvimLogger.__index = NvimLogger
 
@@ -23,23 +25,27 @@ NvimLogger.__index = NvimLogger
 --
 ---@param log_filename string?: the name of the file to which to log; optional, defaults
 -- nvim-user.log
----@param log_level LogLevel?: the current log level; optional
+---@param log_level LogLevel?: the current log level optional
+---@param default_opts NvimLoggerOpts?: default logger options can be overridden
+-- via method level options arguments
 ---@return NvimLogger: a new NvimLogger instance
-function NvimLogger.new(log_filename, log_level)
+function NvimLogger.new(log_filename, log_level, default_opts)
   log_filename = log_filename or DEFAULT_LOG_FILENAME
+  default_opts = default_opts or DEFAULT_LOGGER_OPTS
 
   local logger = Logger.new(
     Path.log() .. '/' .. log_filename,
     log_level or LogLevel.default()
   )
 
-  return setmetatable({ logger = logger }, NvimLogger)
+  return setmetatable({ logger = logger, default_opts = default_opts }, NvimLogger)
 end
 
 
-local function do_log(logger, method, msg, opts)
-  opts = TMerge.mergeleft(DEFAULT_LOGGER_OPTS, opts or {})
-  logger[method](logger, msg)
+---@private
+function NvimLogger:do_log(method, msg, opts)
+  opts = TMerge.mergeleft(self.default_opts, opts or {})
+  self.logger[method](self.logger, msg)
 
   if opts.user_facing then
     Notify[method](msg, opts.persistent)
@@ -52,7 +58,7 @@ end
 ---@param msg string: the message to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:trace(msg, opts)
-  do_log(self.logger, 'trace', msg, opts)
+  self:do_log('trace', msg, opts)
 end
 
 
@@ -61,7 +67,7 @@ end
 ---@param msg string: the message to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:debug(msg, opts)
-  do_log(self.logger, 'debug', msg, opts)
+  self:do_log('debug', msg, opts)
 end
 
 
@@ -70,7 +76,7 @@ end
 ---@param msg string: the message to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:info(msg, opts)
-  do_log(self.logger, 'info', msg, opts)
+  self:do_log('info', msg, opts)
 end
 
 
@@ -79,7 +85,7 @@ end
 ---@param msg string: the message to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:warn(msg, opts)
-  do_log(self.logger, 'warn', msg, opts)
+  self:do_log('warn', msg, opts)
 end
 
 
@@ -88,13 +94,8 @@ end
 ---@param msg string: the message to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:error(msg, opts)
-  do_log(self.logger, 'error', msg, opts)
+  self:do_log('error', msg, opts)
 end
 
-local logger = NvimLogger.new(DEFAULT_LOG_FILENAME, LogLevel.INFO)
-
-logger:warn('oh no')
-
-return logger
-
+return NvimLogger.new(DEFAULT_LOG_FILENAME, LogLevel.INFO)
 
