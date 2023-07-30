@@ -1,6 +1,3 @@
-local Table  = require 'lib.lua.core.table'
-local Stream = require 'lib.lua.utils.stream'
-
 
 --- Relative order of completion results in auto-complete menu based on source groups.
 --
@@ -24,7 +21,7 @@ local GroupIndex = {
 --
 ---@enum TriggerLength
 local TriggerLength = {
-  BUFFER        = 2,
+  BUFFER        = 3,
   CALC          = 1,
   CONVCOMMITS   = 2,
   DICTIONARY    = 3,
@@ -38,6 +35,23 @@ local TriggerLength = {
   TREESITTER    = 1,
 }
 
+--- Human-readable labels for cmp sources.
+--
+---@enum SrcLabel
+local SrcLabel = {
+  ['buffer']              = '[Buffer]',
+  ['calc']                = '[Calc]',
+  ['conventionalcommits'] = '[CC]',
+  ['dictionary']          = '[Dict]',
+  ['emoji']               = '[Emoji]',
+  ['git']                 = '[Git]',
+  ['nvim_lsp']            = '[LSP]',
+  ['nvim_lsp_signature']  = '[Sig]',
+  ['luasnip']             = '[LuaSnip]',
+  ['path']                = '[Path]',
+  ['spell']               = '[Spell]',
+  ['treesitter']          = '[TS]',
+}
 
 local function get_all_bufs()
   return vim.api.nvim_list_bufs()
@@ -54,6 +68,7 @@ function Src.buffer()
   return {
     name           = 'buffer',
     group_index    = GroupIndex.BUFFER,
+    max_item_count = 5,
     trigger_length = TriggerLength.BUFFER,
 
     option = {
@@ -68,6 +83,7 @@ function Src.calc()
   return {
     name           = 'calc',
     group_index    = GroupIndex.CALC,
+    max_item_count = 5,
     trigger_length = TriggerLength.CALC,
   }
 end
@@ -80,6 +96,7 @@ local function conventionalcommits()
   return {
     name           = 'conventionalcommits',
     group_index    = GroupIndex.CONVCOMMITS,
+    max_item_count = 5,
     trigger_length = TriggerLength.CONVCOMMITS,
   }
 end
@@ -87,10 +104,11 @@ end
 
 -- TODO: set this up
 ---@return table: configuration for dictionary completion source
-local function dictionary()
+function Src.dictionary()
   return {
     name           = 'dictionary',
     group_index    = GroupIndex.DICTIONARY,
+    max_item_count = 5,
     trigger_length = TriggerLength.DICTIONARY,
   }
 end
@@ -101,6 +119,7 @@ function Src.emoji()
   return {
     name           = 'emoji',
     group_index    = GroupIndex.EMOJI,
+    max_item_count = 5,
     trigger_length = TriggerLength.EMOJI,
   }
 end
@@ -111,6 +130,7 @@ function Src.git()
   return {
     name           = 'git',
     group_index    = GroupIndex.GIT,
+    max_item_count = 5,
     trigger_length = TriggerLength.GIT,
   }
 end
@@ -121,6 +141,7 @@ function Src.lsp()
   return {
     name           = 'nvim_lsp',
     group_index    = GroupIndex.LSP,
+    max_item_count = 5,
     trigger_length = TriggerLength.LSP,
   }
 end
@@ -131,6 +152,7 @@ function Src.lsp_signature()
   return {
     name           = 'nvim_lsp_signature',
     group_index    = GroupIndex.LSP_SIGNATURE,
+    max_item_count = 5,
     trigger_length = TriggerLength.LSP_SIGNATURE,
   }
 end
@@ -141,6 +163,7 @@ function Src.luasnip()
   return {
     name           = 'luasnip',
     group_index    = GroupIndex.LUASNIP,
+    max_item_count = 5,
     trigger_length = TriggerLength.LUASNIP,
   }
 end
@@ -151,6 +174,7 @@ function Src.path()
   return {
     name           = 'path',
     group_index    = GroupIndex.PATH,
+    max_item_count = 5,
     trigger_length = TriggerLength.PATH,
   }
 end
@@ -162,6 +186,7 @@ function Src.spell()
   return {
     name           = 'spell',
     group_index    = GroupIndex.SPELL,
+    max_item_count = 5,
     trigger_length = TriggerLength.SPELL,
   }
 end
@@ -173,17 +198,18 @@ function Src.treesitter()
   return {
     name           = 'treesitter',
     group_index    = GroupIndex.TREESITTER,
+    max_item_count = 5,
     trigger_length = TriggerLength.TREESITTER,
   }
 end
 
 
----@return table: all completion sources
-function Src.all()
-  return Stream(Table.keys(Src))
-    :filter(function(i) return i ~= 'all' end)
-    :map(function(i) return Src[i]() end)
-    :collect()
+--- Returns the user facing labels for known cmp sources. For use in cmp formatting
+--  config.
+--
+---@return { [string]: string }: a table that maps cmp sources to their labels
+function Src.get_labels()
+  return SrcLabel
 end
 
 return Src

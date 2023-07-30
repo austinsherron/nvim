@@ -1,6 +1,7 @@
 local Src     = require 'config.cmp.sources'
 local LuaSnip = require 'config.luasnip'
 local KM      = require 'keymap.plugins.cmp'
+local LspKind = require 'lspkind'
 
 
 --- For internal use: allows us to reference cmp config methods dynamically.
@@ -13,16 +14,24 @@ local _Cmp = {}
 ---@param cmp table: the cmp module
 function _Cmp.base(cmp)
   cmp.setup({
+    formatting = {
+      format = LspKind.cmp_format({
+        mode = 'symbol_text',
+        menu = Src.get_labels(),
+      }),
+    },
     snippet = { expand = LuaSnip.expand },
     mapping = KM.make_mapping(),
+    -- note: order here informs the order of auto-complete results
     sources = cmp.config.sources({
-      Src.buffer(),
-      Src.emoji(),
+      Src.luasnip(),
       Src.lsp(),
       Src.lsp_signature(),
-      Src.luasnip(),
       Src.path(),
       Src.treesitter(),
+      Src.dictionary(),
+      Src.buffer(),
+      Src.emoji(),
     })
   })
 end
@@ -35,11 +44,12 @@ end
 ---@param cmp table: the cmp module
 function _Cmp.filetype(cmp)
   cmp.setup.filetype('gitcommit', {
+    -- note: order here informs the order of auto-complete results
     sources = cmp.config.sources({
-      Src.buffer(),
       Src.git(),
-      Src.emoji(),
       Src.path(),
+      Src.buffer(),
+      Src.emoji(),
     })
   })
 end
@@ -67,8 +77,8 @@ function _Cmp.cmdline(cmp)
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = 'path' },
       { name = 'cmdline' },
+      { name = 'path' },
     })
   })
 end
