@@ -12,10 +12,15 @@ Safe.require 'core.bootstrap'
 -- plugins ---------------------------------------------------------------------
 
 -- note: settings/keymap has dependencies on plugins, so load them first
+
+-- external
 Safe.require(
   'utils.plugins.pluginmanager',
   function(m) m.init('plugins') end
 )
+
+-- internal
+Safe.require('utils.plugins.internal')
 
 -- keymap ---------------------------------------------------------------------
 

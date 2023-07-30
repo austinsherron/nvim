@@ -9,7 +9,12 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<leader>ss', ':SessionManager save_current_session<CR>',     options('save current'))
-KM.nnoremap('<leader>sl', ':SessionManager load_last_session<CR>',        options('load last'))
-KM.nnoremap('<leader>sd', ':SessionManager load_current_dir_session<CR>', options('load current dir'))
+-- KM.nnoremap('<leader>ss', ':SessionManager save_current_session<CR>',     options('save current'))
+-- KM.nnoremap('<leader>sl', ':SessionManager load_last_session<CR>',        options('load last'))
+-- KM.nnoremap('<leader>sd', ':SessionManager load_current_dir_session<CR>', options('load current dir'))
+
+KM.nnoremap('<leader>ss', ':SessionSave<CR>',   options('save'))
+KM.nnoremap('<leader>sr', ':SessionLoad<CR>',   options('restore'))
+KM.nnoremap('<leader>sd', ':SessionDelete<CR>', options('delete'))
+KM.nnoremap('<leader>sl', ':SessionList<CR>',   options('list'))
 
