@@ -1,4 +1,4 @@
-local Path = require 'utils.api.path'
+local Path = require 'utils.api.vim.path'
 
 
 local SESSIONS_DIR = Path.data() .. '/sessions'
