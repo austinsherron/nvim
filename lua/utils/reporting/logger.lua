@@ -1,3 +1,6 @@
+local Bool     = require 'lib.lua.core.bool'
+local Table    = require 'lib.lua.core.table'
+local Set      = require 'lib.lua.extensions.set'
 local LogLevel = require 'lib.lua.log.level'
 local Logger   = require 'lib.lua.log.logger'
 local Path     = require 'utils.api.path'
@@ -42,60 +45,73 @@ function NvimLogger.new(log_filename, log_level, default_opts)
 end
 
 
----@private
-function NvimLogger:do_log(method, msg, opts)
-  opts = TMerge.mergeleft(self.default_opts, opts or {})
-  self.logger[method](self.logger, msg)
+local function fmt_for_logger(to_log)
+  return Bool.ternary(
+    Table.is_table(to_log),
+    function() return Table.unpack(to_log) end,
+    to_log
+  )
+end
 
-  if opts.user_facing then
-    Notify[method](msg, opts.persistent)
+
+---@private
+function NvimLogger:do_log(method, to_log, opts)
+  self.logger[method](self.logger, fmt_for_logger(to_log))
+
+  opts = TMerge.mergeleft(self.default_opts, opts or {})
+  local user_facing = opts.user_facing
+  -- user facing is only used here and so shouldn't be passed to notify
+  opts = Table.pick_out(opts, Set.new({ 'user_facing' }))
+
+  if user_facing then
+    Notify[method](to_log, opts)
   end
 end
 
 
 --- Logs a "trace" level message during neovim runtime.
 --
----@param msg string: the message to log
+---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
-function NvimLogger:trace(msg, opts)
-  self:do_log('trace', msg, opts)
+function NvimLogger:trace(to_log, opts)
+  self:do_log('trace', to_log, opts)
 end
 
 
 --- Logs a "debug" level message during neovim runtime.
 --
----@param msg string: the message to log
+---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
-function NvimLogger:debug(msg, opts)
-  self:do_log('debug', msg, opts)
+function NvimLogger:debug(to_log, opts)
+  self:do_log('debug', to_log, opts)
 end
 
 
 --- Logs an "info" level message during neovim runtime.
 --
----@param msg string: the message to log
+---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
-function NvimLogger:info(msg, opts)
-  self:do_log('info', msg, opts)
+function NvimLogger:info(to_log, opts)
+  self:do_log('info', to_log, opts)
 end
 
 
 --- Logs a "warn" level message during neovim runtime.
 --
----@param msg string: the message to log
+---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
-function NvimLogger:warn(msg, opts)
-  self:do_log('warn', msg, opts)
+function NvimLogger:warn(to_log, opts)
+  self:do_log('warn', to_log, opts)
 end
 
 
 --- Logs an "error" level message during neovim runtime.
 --
----@param msg string: the message to log
+---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
-function NvimLogger:error(msg, opts)
-  self:do_log('error', msg, opts)
+function NvimLogger:error(to_log, opts)
+  self:do_log('error', to_log, opts)
 end
 
-return NvimLogger.new(DEFAULT_LOG_FILENAME, LogLevel.INFO)
+return NvimLogger.new(DEFAULT_LOG_FILENAME, LogLevel.DEBUG)
 

@@ -119,19 +119,20 @@ I organize my plugins into the following categories:
 - [ ] Add ability to refactor imports on file move
 - [x] Better nvim init error handling (unclear if it actually works, but it's there-ish)
 - [x] Notifications/modals/confirmation menus on nvim init error
-- [ ] Logger should write to nvim application logs
-- [ ] Update nvim alias to include writing to logs
+- [x] Logger should write to nvim application logs
+- [x] Update nvim alias to include writing to logs (didn't do exactly this, but logs are being written and it's as configurable as it needs to be at this point)
 - [ ] Refactor KeyMapper to use state so as to avoid duplication "options" functions, etc.
 - [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
 - [x] Bi-directional leap
 - [x] Leap in nvimtree
-- [ ] Telescope picker for package dir (i.e.: plugins)
-- [ ] Homegrown session manager
-- [ ] Customize titles in contextual telescope extension search
+- [x] Telescope picker for package dir (i.e.: plugins)
+- [x] Homegrown session manager (got most [much?] of the way there and then figured out how to make session manager plugin do what I want it to [i.e.: session per dir, more or less])
+- [x] Customize titles in contextual telescope extension search
 - [ ] Git interactions from nvimtree
 - [ ] Add LuaSnip custom snippets
 - [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
 - [ ] Refactor nvim utils to separate dir? (at least those that would be/are useful for plugins as well)
+- [ ] Use lsp hooks to plug into lsp, instead of baking dependent code directly into lsp setup
 
 ### Fixes
 

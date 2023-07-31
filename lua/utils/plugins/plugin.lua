@@ -1,6 +1,7 @@
 require 'lazy.types'
 
-local Stream = require 'lib.lua.utils.stream'
+local Table  = require 'lib.lua.core.table'
+local Stream = require 'lib.lua.extensions.stream'
 local OnErr  = require 'utils.error.onerr'
 
 
@@ -58,10 +59,10 @@ function Plugin:__index(key)
   end
 
   return function(...)
-    local args = table.pack(...)
+    local args = Table.pack(...)
 
     return OnErr.notify(
-      function() return value(table.unpack(args)) end,
+      function() return value(Table.unpack(args)) end,
       (internal.name or 'unknownPlugin') .. '.' .. key
     )
   end

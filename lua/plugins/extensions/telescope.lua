@@ -1,9 +1,10 @@
+local Table    = require 'lib.lua.core.table'
 local Env      = require 'lib.lua.system.env'
 local Path     = require 'lib.lua.system.path'
 local NvTree   = require 'plugins.extensions.nvimtree'
 local Builtins = require 'telescope.builtin'
 
--- for use building telescope pickers
+-- for building telescope pickers
 local actions      = require 'telescope.actions'
 local action_state = require 'telescope.actions.state'
 local conf         = require('telescope.config').values
@@ -67,14 +68,31 @@ function Telescope.contextual_live_grep()
 end
 
 
+local function bind_keymap(keymap, map)
+    keymap = keymap or {}
+
+    for _, binding in ipairs(keymap) do
+      if #binding ~= 3 then
+        Warn({ 'Telescope ext: discarding invalid key binding=', binding })
+      else
+        map(Table.unpack(binding))
+      end
+    end
+end
+
+
 --- Utility that makes it easier to replace an existing picker's default action.
 --
 ---@param new_action fun(s: string[]): n: nil: a function that takes an array w/ the
 -- selected telescope item and performs some action w/ it
+---@param keymap table[]?: an array-like table of array-like tables that contain picker
+-- key bindings in the following format: { mode: string, key: string, action: string|function }
 ---@return (fun(pb: integer, _: any): r: true): a function used w/ telescope opts.attach_mappings
 -- to replace an existing picker's default action
-function Telescope.make_new_action(new_action)
-  return function(prompt_buffer, _)
+function Telescope.make_new_action(new_action, keymap)
+  return function(prompt_buffer, map)
+    bind_keymap(keymap, map)
+
     actions.select_default:replace(
       function()
         actions.close(prompt_buffer)
@@ -84,6 +102,40 @@ function Telescope.make_new_action(new_action)
     )
 
     return true
+  end
+end
+
+
+--- Creates a function intended for use w/ custom picker key bindings.
+--
+---@param confirm fun(s: { value: string }, pb: integer): c: boolean: a function that,
+-- given the prompt selection and buffer id, returns true if we should continue; intended
+-- for use asking users if they're sure they want to do something, etc.; can minimally
+-- return true
+---@param action fun(s: { value: string}, pb: integer): e: string: a function that
+-- performs some action w/ the selected value; takes the selection and prompt buffer id as
+-- arguments and returns an error string if an error was encountered during the action
+---@param after (fun(e: string?, s: { value: string}, pb: integer))?: n: nil: a function
+-- that runs after the primary action; intended for error processing, cleanup, etc.
+---@return fun(pb: integer): n: nil: a function that performs some action when bound in a
+-- picker keymap
+function Telescope.make_selection_action(confirm, action, after)
+  return function(prompt_buffer)
+    local selection = action_state.get_selected_entry()
+
+    if selection == nil then
+      return actions.close(prompt_buffer)
+    end
+
+    if not confirm(selection, prompt_buffer) then
+      return
+    end
+
+    local err = action(selection, prompt_buffer)
+
+    if after ~= nil then
+      after(err, selection, prompt_buffer)
+    end
   end
 end
 
@@ -100,6 +152,7 @@ local function make_search_packages_action()
     end
   )
 end
+
 
 --- Custom telescope picker for searching "nvundle" (i.e.: plugin directories).
 function Telescope.search_packages()
