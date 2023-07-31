@@ -5,7 +5,7 @@ local Telescope        = require 'lua.plugins.extensions.telescope'
 local session_utils    = require 'session_manager.utils'
 local actions          = require 'telescope.actions'
 local Builtins         = require 'telescope.builtin'
-local Confirm          = require 'utils.api.confirm'
+local Confirm          = require 'utils.api.vim.confirm'
 
 
 --- Contains functions that implement extended (custom) session manager functionality.

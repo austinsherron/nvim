@@ -1,7 +1,7 @@
 local Bool   = require 'lib.lua.core.bool'
 local String = require 'lib.lua.core.string'
 local Path   = require 'lib.lua.system.path'
-local System = require 'utils.api.system'
+local System = require 'utils.api.vim.system'
 local OnErr  = require 'utils.error.onerr'
 
 

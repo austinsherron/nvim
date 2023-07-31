@@ -3,8 +3,8 @@ local Table    = require 'lib.lua.core.table'
 local Set      = require 'lib.lua.extensions.set'
 local LogLevel = require 'lib.lua.log.level'
 local Logger   = require 'lib.lua.log.logger'
-local Path     = require 'utils.api.path'
-local TMerge   = require 'utils.api.tablemerge'
+local Path     = require 'utils.api.vim.path'
+local TMerge   = require 'utils.api.vim.tablemerge'
 local Notify   = require 'utils.reporting.notify'
 
 

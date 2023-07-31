@@ -1,5 +1,5 @@
 local Validate = require 'lib.lua.utils.validate'
-local TMerge  = require 'utils.api.tablemerge'
+local TMerge   = require 'utils.api.vim.tablemerge'
 
 
 ---@see vim.api.nvim_create_user_command
