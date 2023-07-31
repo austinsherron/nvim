@@ -1,8 +1,8 @@
-local String =  require 'lib.lua.core.string'
-local Table  =  require 'lib.lua.core.table'
-local Set    =  require 'lib.lua.extensions.set'
-local Env    =  require 'lib.lua.system.env'
-local Stream =  require 'lib.lua.utils.stream'
+local String = require 'lib.lua.core.string'
+local Table  = require 'lib.lua.core.table'
+local Set    = require 'lib.lua.extensions.set'
+local Stream = require 'lib.lua.extensions.stream'
+local Env    = require 'lib.lua.system.env'
 
 local get_nvim_runtime_files = vim.api.nvim_get_runtime_file
 

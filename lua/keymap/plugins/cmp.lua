@@ -1,9 +1,10 @@
+local Table = require 'lib.lua.core.table'
+
+
 -- note: most of this code, or at least the core logic of it, was sourced from
 --       https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
 local function has_words_before()
-  unpack = unpack or table.unpack
-
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local line, col = Table.unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 

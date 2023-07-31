@@ -10,6 +10,7 @@ local LuaSnip    = require 'config.luasnip'
 local Mason      = require 'config.mason'
 local SnipRun    = require 'config.sniprun'
 local Treesitter = require 'config.treesitter'
+local TreeSJ     = require 'config.treesj'
 local Lsp        = require 'lsp'
 local Plugins    = require('utils.plugins.plugin').plugins
 
@@ -108,9 +109,10 @@ return Plugins({
   {
     'Wansmer/treesj',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = TreeSJ.opts(),
 
-    config = function()
-      require('treesj').setup()
+    config = function(_, opts)
+      require('treesj').setup(opts)
     end,
   },
 })
