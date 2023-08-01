@@ -11,13 +11,25 @@ local Safe = {}
 --
 ---@see OnErr
 --
----@param to_call fun(): r: any?: the function to call
+---@param to_call function: the function to call
 ---@param error_handler OnErrStrategy?: how to handle errors; defaults to "notify"
 ---@param prefix string?: optional prefix for error msg
+---@param ... any?: args to pass to f
 ---@return any?: the value returned by to_call
-function Safe.call(to_call, error_handler, prefix)
+function Safe.call(to_call, error_handler, prefix, ...)
   error_handler = error_handler or 'notify'
-  return OnErr[error_handler](to_call, prefix)
+  return OnErr[error_handler](to_call, prefix, ...)
+end
+
+
+--- "Safe-ify" a function. Basically a wrapper around Safe.call that returns a callable
+--  instead of calling directly.
+--
+---@see Safe.call
+function Safe.ify(to_call, error_handler, prefix)
+  return function(...)
+    return Safe.call(to_call, error_handler, prefix, ...)
+  end
 end
 
 

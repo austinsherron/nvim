@@ -6,7 +6,7 @@ local OnErr  = require 'utils.error.onerr'
 -- recursively require all lua files in this dir
 Import.require_for_init(
   Path.script_path(),
-  'keymap',
+  'core.cmd.user',
   OnErr.notify
 )
 

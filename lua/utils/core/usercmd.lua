@@ -2,8 +2,6 @@ local Validate = require 'lib.lua.utils.validate'
 local TMerge   = require 'utils.api.vim.tablemerge'
 
 
----@see vim.api.nvim_create_user_command
----@see vim.api.nvim_buf_create_user_command
 ---@alias UserCommandConfig { name: string?, cmd: (string|function)?, bufnum: integer?, opts: table? }
 
 --- Wrapper around vim.api user command functions.
@@ -49,10 +47,27 @@ end
 
 -- Adds cmd to instance.
 --
----@param cmd string: cmd to add to instance
+---@param cmd string|function: cmd to add to instance
+---@param nargs integer|string: the number of parameters the command accepts; use "?" for
+-- variable # of params, or omit if no parameters
 ---@return UserCommand: self
-function UserCommand:withCmd(cmd)
+function UserCommand:withCmd(cmd, nargs)
   self.cmd = cmd
+
+  if nargs ~= nil then
+    self:withOpt('nargs', nargs)
+  end
+
+  return self
+end
+
+
+-- Adds description to instance.
+--
+---@param desc string: desc to add to instance
+---@return UserCommand: self
+function UserCommand:withDesc(desc)
+  self:withOpt('desc', desc)
   return self
 end
 
@@ -104,12 +119,15 @@ end
 --- Creates a user command. Command is buffer local if bufnum is in config or exists in
 --  this instance.
 --
+---@see vim.api.nvim_create_user_command
+---@see vim.api.nvim_buf_create_user_command
+--
 ---@param config UserCommandConfig?: configures the user command; merged w/ config that
 -- exists in the instance, w/ values in config overriding instance config if collisions
 -- are encountered
 ---@error if name or cmd don't exist in config or in this instance
 function UserCommand:create(config)
-  config = TMerge.mergeleft(self, config)
+  config = TMerge.mergeleft(self, config or {})
   config.opts = config.opts or {}
 
   validate({ 'name', 'cmd' }, config, 'create')
@@ -125,12 +143,15 @@ end
 --- Deletes a user command. Command is considered buffer local if bufnum is in config or
 --  exists in this instance.
 --
+---@see vim.api.nvim_del_user_command
+---@see vim.api.nvim_buf_del_user_command
+--
 ---@param config UserCommandConfig?: configures the user command; merged w/ config that
 -- exists in the instance, w/ values in config overriding instance config if collisions
 -- are encountered
 ---@error if name doesn't exist in config or in this instance
 function UserCommand:delete(config)
-  config = TMerge.mergeleft(self, config)
+  config = TMerge.mergeleft(self, config or {})
 
   validate({ 'name' }, config, 'delete')
 

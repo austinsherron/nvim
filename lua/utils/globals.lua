@@ -1,13 +1,13 @@
 local Lazy = require 'lib.lua.utils.lazy'
 
 
----@type fun(): l: Logger
-local getLogger = Lazy.require('utils.reporting.logger')
+---@type fun(): l: NvimLogger
+GetLogger = Lazy.require('utils.reporting.logger')
 
 -- global logging helpers
-function Trace(...) getLogger():trace(...) end
-function Debug(...) getLogger():debug(...) end
-function Info (...) getLogger():info (...) end
-function Warn (...) getLogger():warn (...) end
-function Error(...) getLogger():error(...) end
+function Trace(...) GetLogger():trace(...) end
+function Debug(...) GetLogger():debug(...) end
+function Info (...) GetLogger():info (...) end
+function Warn (...) GetLogger():warn (...) end
+function Error(...) GetLogger():error(...) end
 
