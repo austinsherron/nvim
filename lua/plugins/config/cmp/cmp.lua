@@ -1,6 +1,6 @@
 local Src     = require 'config.cmp.sources'
 local LuaSnip = require 'config.luasnip'
-local KM      = require 'keymap.plugins.cmp'
+local KM      = require 'keymap.plugins.editor.cmp'
 local LspKind = require 'lspkind'
 
 

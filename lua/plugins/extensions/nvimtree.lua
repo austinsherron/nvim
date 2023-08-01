@@ -1,4 +1,3 @@
-local Bool = require 'lib.lua.core.bool'
 local Git  = require 'utils.api.git'
 
 
@@ -74,7 +73,7 @@ end
 function NvimTree:get_cursor_node(focused)
   focused = focused or true
 
-   return Bool.ternary(
+   return ternary(
     (not focused and self:is_tree_open()) or (focused and self:tree_in_use()),
     function() return self:cursor_node() end,
     nil
@@ -84,7 +83,7 @@ end
 
 ---@private
 function NvimTree:path_for_git_op(all)
-  return Bool.ternary(
+  return ternary(
     all,
     Git.repo_root(),
     self:get_cursor_node(true).absolute_path

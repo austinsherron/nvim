@@ -1,4 +1,4 @@
-local Leap   = require 'keymap.plugins.leap'
+local Leap   = require 'keymap.plugins.motion.leap'
 local NvTree = require 'plugins.extensions.nvimtree'
 local KM     = require 'utils.core.mapper'
 

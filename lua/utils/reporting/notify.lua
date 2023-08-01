@@ -1,6 +1,3 @@
-local Bool         = require 'lib.lua.core.bool'
-local Table        = require 'lib.lua.core.table'
-local Set          = require 'lib.lua.extensions.set'
 local LogFormatter = require 'lib.lua.log.formatter'
 
 
@@ -28,7 +25,7 @@ local function do_log(to_log, log_level, opts)
   -- persistent == true means timeout == false, i.e.: no timeout
   local persistent = opts.persistent or false
   opts = Table.pick_out(opts, Set.new({ 'persistent' }))
-  opts.timeout = Bool.ternary(persistent, false, opts.timeout)
+  opts.timeout = ternary(persistent, false, opts.timeout)
 
   vim.notify(to_log, log_level, opts)
 end

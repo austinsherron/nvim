@@ -1,8 +1,6 @@
-local Bool = require 'lib.lua.core.bool'
-
 
 local function make_err_msg(err_res, prefix)
-  prefix = Bool.ternary(prefix == nil, '', function() return prefix .. ': ' end)
+  prefix = ternary(prefix == nil, '', function() return prefix .. ': ' end)
   return prefix .. (err_res or '')
 end
 

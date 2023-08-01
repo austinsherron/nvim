@@ -1,4 +1,4 @@
-local GitsignsKM = require 'keymap.plugins.gitsigns'
+local GitsignsKM = require 'keymap.plugins.git.gitsigns'
 
 
 --- Contains functions for configuring the gitsigns plugin.

@@ -1,8 +1,5 @@
-local Bool   = require 'lib.lua.core.bool'
-local String = require 'lib.lua.core.string'
 local Path   = require 'lib.lua.system.path'
 local System = require 'utils.api.vim.system'
-local OnErr  = require 'utils.error.onerr'
 
 
 --- Contains functions for interacting w/ git.
@@ -71,7 +68,7 @@ end
 --
 ---@param msg string?: a description of the changes being stashed
 function Git.stash(msg)
-  local msg_arg = Bool.ternary(
+  local msg_arg = ternary(
     String.not_nil_or_empty(msg),
     function() return ' -m ' .. msg end,
     ''

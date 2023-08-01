@@ -1,6 +1,3 @@
-local Bool     = require 'lib.lua.core.bool'
-local Table    = require 'lib.lua.core.table'
-local Set      = require 'lib.lua.extensions.set'
 local LogLevel = require 'lib.lua.log.level'
 local Logger   = require 'lib.lua.log.logger'
 local Path     = require 'utils.api.vim.path'
@@ -45,7 +42,7 @@ end
 
 
 local function fmt_for_logger(to_log)
-  return Bool.ternary(
+  return ternary(
     Table.is_table(to_log),
     function() return Table.unpack(to_log) end,
     to_log
