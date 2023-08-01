@@ -9,7 +9,7 @@ local Confirm          = require 'utils.api.vim.confirm'
 
 
 --- Contains functions that implement extended (custom) session manager functionality.
---
+---
 ---@class SessionMgr
 local SessionMgr = {}
 

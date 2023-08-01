@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring aerial.
---
+---
 ---@class Aerial
 local Aerial = {}
 

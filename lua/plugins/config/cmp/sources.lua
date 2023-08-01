@@ -1,6 +1,6 @@
 
 --- Relative order of completion results in auto-complete menu based on source groups.
---
+---
 ---@enum GroupIndex
 local GroupIndex = {
   LUASNIP       = 1,
@@ -18,7 +18,7 @@ local GroupIndex = {
 }
 
 --- The number of characters to type before including results from specific completion sources.
---
+---
 ---@enum TriggerLength
 local TriggerLength = {
   BUFFER        = 3,
@@ -36,7 +36,7 @@ local TriggerLength = {
 }
 
 --- Human-readable labels for cmp sources.
---
+---
 ---@enum SrcLabel
 local SrcLabel = {
   ['buffer']              = '[Buffer]',
@@ -58,8 +58,8 @@ local function get_all_bufs()
 end
 
 --- Collection of configurations for nvim-cmp completion sources. Also acts as a
---  complete list of installed/configured completion sources.
---
+--- complete list of installed/configured completion sources.
+---
 ---@class Src
 local Src = {}
 
@@ -91,7 +91,7 @@ end
 
 -- TODO: set this up
 ---@return table: configuration for conventional commits (i.e.: standard commit message
--- terms) completion source
+--- terms) completion source
 local function conventionalcommits()
   return {
     name           = 'conventionalcommits',
@@ -205,8 +205,8 @@ end
 
 
 --- Returns the user facing labels for known cmp sources. For use in cmp formatting
---  config.
---
+--- config.
+---
 ---@return { [string]: string }: a table that maps cmp sources to their labels
 function Src.get_labels()
   return SrcLabel

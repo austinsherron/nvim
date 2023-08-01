@@ -1,9 +1,6 @@
-local Table = require 'lib.lua.core.table'
-local Set   = require 'lib.lua.extensions.set'
-
 
 --- Specifies how to view/open a buffer
---
+---
 ---@enum ViewMode
 local ViewMode = {
   STANDALONE = 'e',         -- open standalone buffer
@@ -23,11 +20,11 @@ end
 
 
 --- Returns the provided value if it's a valid ViewMode, otherwise it returns the default
---  view mode
---
+--- view mode
+---
 ---@param maybe any?: the value that might be a view mode
 ---@return ViewMode: the provided value if it's a valid ViewMode, otherwise turns the
--- default view mode
+--- default view mode
 function ViewMode.orDefault(maybe)
   if _ViewMode.ALL:contains(maybe) then
     return maybe
@@ -44,10 +41,10 @@ end
 local Buffer = {}
 
 --- Opens a buffer for the file at the provided path.
---
+---
 ---@param path string: the path to the file to open
 ---@param view_mode ViewMode?: how to open the buffer; optional, defaults to
--- ViewMode.STANDALONE, at the time of writing
+--- ViewMode.STANDALONE, at the time of writing
 function Buffer.open(path, view_mode)
   view_mode = view_mode or ViewMode.default()
   vim.cmd(view_mode .. ' ' .. path)

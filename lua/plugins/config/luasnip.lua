@@ -1,13 +1,13 @@
 
 --- Contains functions for configuring the luasnip plugin.
---
+---
 ---@class LuaSnip
 local LuaSnip = {}
 
 --- Function passed to completion engine for snippet expansion.
---
+---
 ---@param args { body: table }: contains a "body" argument needed by luasnip's
--- "lsp_expand" function
+--- "lsp_expand" function
 function LuaSnip.expand(args)
   require('luasnip').lsp_expand(args.body)
 end

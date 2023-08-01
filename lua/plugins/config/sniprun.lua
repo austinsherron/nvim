@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring the sniprun plugin.
---
+---
 ---@class SnipRun
 local SnipRun = {}
 

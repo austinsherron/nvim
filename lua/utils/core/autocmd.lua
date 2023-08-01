@@ -1,5 +1,3 @@
-local Table    = require 'lib.lua.core.table'
-local Set      = require 'lib.lua.extensions.set'
 local Validate = require 'lib.lua.utils.validate'
 local TMerge   = require 'utils.api.vim.tablemerge'
 
@@ -8,28 +6,28 @@ local TMerge   = require 'utils.api.vim.tablemerge'
 ---@alias AutoCommandCallback fun(p: AutoCommandCallbackParams): r: boolean|nil
 
 --- Wrapper around vim.api autocommand functions.
---
+---
 ---@see vim.api.nvim_create_autocmd
 ---@see vim.api.nvim_del_autocmd
 ---@class AutoCommand
 ---@field private id number?: the id of an autocommand; required for deletion
 ---@field private group (string|integer)?: the name or id of an autocommand's group
 ---@field private pattern string[]?: file name pattern(s) that determine(s) for which files an
--- autocommand should run
+--- autocommand should run
 ---@field private buffer integer?: buffer id for buffer-local autocommands
 ---@field private event string[]?: the event(s) for which (an) autocommand(s) should run;
--- required for creation
+--- required for creation
 ---@field private desc string?: a string that describes an autocommand
 ---@field private callback AutoCommandCallback: callback to execute when an autocommand
--- is triggered; either this or command (set via opts) is required for creation
+--- is triggered; either this or command (set via opts) is required for creation
 ---@field private opts table: additional opts to pass to an autocommand CRUD call
 local AutoCommand = {}
 AutoCommand.__index = AutoCommand
 
 --- Constructor
---
+---
 ---@param config table?: configures the autocommand; see class definition for field
--- descriptions
+--- descriptions
 ---@return AutoCommand: new autocommand instance
 function AutoCommand.new(config)
   config = config or {}
@@ -39,8 +37,8 @@ function AutoCommand.new(config)
 end
 
 
--- Adds id to instance.
---
+--- Adds id to instance.
+---
 ---@param id number: id to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withId(id)
@@ -49,8 +47,8 @@ function AutoCommand:withId(id)
 end
 
 
--- Adds event to instance.
---
+--- Adds event to instance.
+---
 ---@param event string: event to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withEvent(event)
@@ -60,8 +58,8 @@ function AutoCommand:withEvent(event)
 end
 
 
--- Adds events to instance.
---
+--- Adds events to instance.
+---
 ---@param events string[]: events to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withEvents(events)
@@ -70,8 +68,8 @@ function AutoCommand:withEvents(events)
 end
 
 
--- Adds group to instance.
---
+--- Adds group to instance.
+---
 ---@param group string|integer: group to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withGroup(group)
@@ -80,8 +78,8 @@ function AutoCommand:withGroup(group)
 end
 
 
--- Adds pattern to instance.
---
+--- Adds pattern to instance.
+---
 ---@param pattern string: pattern to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withPattern(pattern)
@@ -91,8 +89,8 @@ function AutoCommand:withPattern(pattern)
 end
 
 
--- Adds patterns to instance.
---
+--- Adds patterns to instance.
+---
 ---@param patterns string[]: patterns to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withPatterns(patterns)
@@ -101,8 +99,8 @@ function AutoCommand:withPatterns(patterns)
 end
 
 
--- Adds buffer id to instance.
---
+--- Adds buffer id to instance.
+---
 ---@param buffer integer: buffer id to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withBuffer(buffer)
@@ -111,8 +109,8 @@ function AutoCommand:withBuffer(buffer)
 end
 
 
--- Adds description to instance.
---
+--- Adds description to instance.
+---
 ---@param desc string: desc to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withDesc(desc)
@@ -131,8 +129,8 @@ function AutoCommand:withCallback(callback)
 end
 
 
--- Adds opts to instance.
---
+--- Adds opts to instance.
+---
 ---@param opts table: opts to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withOpts(opts)
@@ -141,8 +139,8 @@ function AutoCommand:withOpts(opts)
 end
 
 
--- Adds individual opt to instance.
---
+--- Adds individual opt to instance.
+---
 ---@generic T
 ---@param key string: the key of the opt
 ---@param opt T: individual opt to add to instance
@@ -161,13 +159,13 @@ end
 
 
 --- Creates an autocommand.
---
---  Note: this method sets this instance's "id" attribute as the id of the created
---  autocommand.
---
+---
+--- Note: this method sets this instance's "id" attribute as the id of the created
+--- autocommand.
+---
 ---@param config table?: configures the autocommand; merged w/ config that
--- exists in the instance, w/ values in config overriding instance config if collisions
--- are encountered
+--- exists in the instance, w/ values in config overriding instance config if collisions
+--- are encountered
 ---@return number: the id of the created autocommand
 ---@error if event and callback or command don't exist in config or in this instance
 function AutoCommand:create(config)
@@ -186,10 +184,10 @@ end
 
 
 --- Deletes an autocommand.
---
+---
 ---@param config table?: configures the autocommand; merged w/ config that
--- exists in the instance, w/ values in config overriding instance config if collisions
--- are encountered
+---exists in the instance, w/ values in config overriding instance config if collisions
+---are encountered
 ---@error if id doesn't exist in config or in this instance
 function AutoCommand:delete(config)
   config = TMerge.mergeleft(self, config or {})

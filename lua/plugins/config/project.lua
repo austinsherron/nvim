@@ -2,7 +2,7 @@ local Env = require 'lib.lua.system.env'
 
 
 --- Contains functions for configuring the project plugin.
---
+---
 ---@class Project
 local Project = {}
 

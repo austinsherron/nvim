@@ -1,6 +1,3 @@
-local String = require 'lib.lua.core.string'
-local Table  = require 'lib.lua.core.table'
-
 
 local Mode = {
     none = '',

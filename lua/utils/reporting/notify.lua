@@ -2,8 +2,8 @@ local LogFormatter = require 'lib.lua.log.formatter'
 
 
 --- Specifies what kind of message is being logged, and its level of
---  importance/visibility/urgency.
---
+--- importance/visibility/urgency.
+---
 ---@enum Urgency
 local Urgency = {
   TRACE = vim.log.levels.TRACE,
@@ -14,7 +14,7 @@ local Urgency = {
 }
 
 --- A basic wrapper around calls to the vim notify api.
---
+---
 ---@class Notify
 local Notify = {}
 
@@ -32,7 +32,7 @@ end
 
 
 --- Logs a "trace" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 function Notify.trace(to_log, opts)
   do_log(to_log, Urgency.TRACE, opts)
@@ -40,7 +40,7 @@ end
 
 
 --- Logs a "debug" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 function Notify.debug(to_log, opts)
   do_log(to_log, Urgency.DEBUG, opts)
@@ -48,7 +48,7 @@ end
 
 
 --- Logs an "info" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 function Notify.info(to_log, opts)
   do_log(to_log, Urgency.INFO, opts)
@@ -56,7 +56,7 @@ end
 
 
 --- Logs a "warn" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 function Notify.warn(to_log, opts)
   do_log(to_log, Urgency.WARN, opts)
@@ -64,7 +64,7 @@ end
 
 
 --- Logs an "error" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 function Notify.error(to_log, opts)
   do_log(to_log, Urgency.ERROR, opts)

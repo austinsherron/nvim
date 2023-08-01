@@ -1,6 +1,6 @@
 
 --- Thin wrapper around nvim json api.
---
+---
 ---@class Json
 local Json = {}
 

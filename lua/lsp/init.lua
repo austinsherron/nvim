@@ -1,14 +1,14 @@
 local LspKM = require 'lsp.keymap'
-local Table = require 'lib.lua.core.table'
 
 
 local LSP_SERVERS = { 'bashls', 'lua_ls', 'pyright' }
 
 --- Configures neovim LSP and related functionality.
---
+---
 ---@class Lsp
 local Lsp = {}
 
+---@return string[]: an array-like table w/ configured lsp servers
 function Lsp.servers()
   return LSP_SERVERS
 end

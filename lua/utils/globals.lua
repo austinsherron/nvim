@@ -23,4 +23,3 @@ OnErr  = require 'utils.error.onerr'
 Safe   = require 'utils.error.safe'
 
 ternary = Bool.ternary
-

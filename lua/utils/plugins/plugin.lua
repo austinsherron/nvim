@@ -1,12 +1,10 @@
 require 'lazy.types'
 
-local Table  = require 'lib.lua.core.table'
 local Stream = require 'lib.lua.extensions.stream'
-local OnErr  = require 'utils.error.onerr'
 
 
 --- Internal helper that exists to clear a plugin's __index function and avoid infinite recursion.
---
+---
 ---@class _Plugin
 local _Plugin = {}
 _Plugin.__index = _Plugin
@@ -17,14 +15,14 @@ function _Plugin.new(this)
 end
 
 --- A helper that wraps a lazy.nvim plugin definition so that all references to function
---  properties are wrapped in error handling.
---
+--- properties are wrapped in error handling.
+---
 ---@class Plugin
 local Plugin = {}
 Plugin.__index = Plugin
 
 --- Constructor
---
+---
 ---@param plugin LazyPlugin: a lazy.nvim plugin definition
 ---@return Plugin: a new Plugin instance
 function Plugin.new(plugin)
@@ -35,7 +33,7 @@ end
 
 
 --- Constructs multiple plugins from an array of plugin definitions.
---
+---
 ---@param plugins LazyPlugin: an array-like table of lazy.nvim plugin definitions
 ---@return Plugin[]: an array-like table of Plugin instances
 function Plugin.all(plugins)
@@ -46,10 +44,10 @@ end
 
 
 --- Ensure any access of an instance's function properties is wrapped in error handling/
---
+---
 ---@param key string: the name of the property being accessed
 ---@return any?: the property being accessed, or nil if that's a key's value or the key
--- isn't present in the instance
+--- isn't present in the instance
 function Plugin:__index(key)
   local internal = _Plugin.new(self)
   local value = internal[key]
@@ -69,7 +67,7 @@ function Plugin:__index(key)
 end
 
 --- Exported Plugin constructors.
---
+---
 ---@class Plgn
 local Plgn = {}
 

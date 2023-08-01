@@ -2,7 +2,7 @@ local lsp = require 'lsp'
 
 
 --- Contains functions for configuring the mason plugin.
---
+---
 ---@class Mason
 local Mason = {}
 

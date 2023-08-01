@@ -4,7 +4,7 @@ local stdpath = vim.fn.stdpath
 
 
 --- Contains methods for interacting w/ various user "system" directories.
---
+---
 ---@class Path
 local Path = {}
 

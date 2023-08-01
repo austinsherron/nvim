@@ -1,13 +1,13 @@
 
 --- Basic wrapper around vim.tbl_deep_extend.
---
+---
 ---@see vim.tbl_deep_extend
 ---@class TableMerge
 local TableMerge = {}
 
 --- Merges tables from right to left, i.e.: on collision, values from rightmost table are
---  kept.
---
+--- kept.
+---
 ---@param ... table: tables to merge
 ---@return table: a table merged from the provided tables
 function TableMerge.mergeleft(...)
@@ -16,8 +16,8 @@ end
 
 
 --- Merges tables from left to right, i.e.: on collision, values from leftmost table are
---  kept.
---
+--- kept.
+---
 ---@param ... table: tables to merge
 ---@return table: a table merged from the provided tables
 function TableMerge.mergeright(...)

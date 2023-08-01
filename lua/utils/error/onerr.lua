@@ -4,24 +4,24 @@ local function make_err_msg(err_res, prefix)
   return prefix .. (err_res or '')
 end
 
--- A type alias that allows enforcement of passing specific method names to functions that
--- accept them as arguments.
---
--- TODO: figure out if there's a better way to achieve the above goal w/out hard-coding
---       method names.
---
+--- A type alias that allows enforcement of passing specific method names to functions that
+--- accept them as arguments.
+---
+--- TODO: figure out if there's a better way to achieve the above goal w/out hard-coding
+---       method names.
+---
 ---@alias OnErrStrategy
 ---| "log"       # see OnErr.log
 ---| "notify"    # see OnErr.notify
 
 --- Contains utility methods that wrap function calls and perform specific actions when the
---  functions raise errors.
---
+--- functions raise errors.
+---
 ---@class OnErr
 local OnErr = {}
 
 --- On error, logs the error message.
---
+---
 ---@param f function: the function that might throw an error
 ---@param prefix string?: optional prefix for error msg
 ---@param ... any?: args to pass to f
@@ -38,7 +38,7 @@ end
 
 
 --- On error, displays a notification w/ the error message.
---
+---
 ---@param f function: the function that might throw an error
 ---@param prefix string?: optional prefix for error msg
 ---@param ... any?: args to pass to f
@@ -57,7 +57,7 @@ end
 
 
 --- On error, returns false.
---
+---
 ---@param f fun(): any?: the function that might throw an error
 ---@param ... any?: args to pass to f
 ---@return boolean: true if the function completes w/out error, false otherwise

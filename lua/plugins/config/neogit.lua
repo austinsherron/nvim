@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring the neogit plugin.
---
+---
 ---@class Neogit
 local Neogit = {}
 

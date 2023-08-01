@@ -1,8 +1,8 @@
--- import globals: logger, notification service, etc. before doing anything else
+
+-- globals ---------------------------------------------------------------------
+
+-- import globals before doing anything else
 require 'utils.globals'
-
-local Safe = require 'utils.error.safe'
-
 
 -- init ------------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ Safe.require 'core.bootstrap'
 
 -- plugins ---------------------------------------------------------------------
 
--- note: settings/keymap has dependencies on plugins, so load them first
+-- settings/keymap have dependencies on plugins, so load them first
 Safe.require(
   'utils.plugins.pluginmanager',
   function(m) m.init('plugins') end
@@ -19,6 +19,7 @@ Safe.require(
 
 -- commands --------------------------------------------------------------------
 
+-- keymap has dependencies on commands
 Safe.require 'core.cmd.user'
 Safe.require 'core.cmd.auto'
 

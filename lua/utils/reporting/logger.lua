@@ -12,22 +12,22 @@ local DEFAULT_LOGGER_OPTS = { persistent = false, user_facing = true }
 local DEFAULT_LOG_FILENAME = 'nvim-user.log'
 
 --- A neovim runtime logger.
---
+---
 ---@class NvimLogger
 ---@field private log_filepath string: the path to the log file
 ---@field private logger Logger: file logger
 ---@field private default_opts NvimLoggerOpts: default logger options; can be overridden
--- via method level options arguments
+--- via method level options arguments
 local NvimLogger = {}
 NvimLogger.__index = NvimLogger
 
 --- Constructor
---
+---
 ---@param log_filename string?: the name of the file to which to log; optional, defaults
--- nvim-user.log
+--- nvim-user.log
 ---@param log_level LogLevel?: the current log level optional
 ---@param default_opts NvimLoggerOpts?: default logger options can be overridden
--- via method level options arguments
+--- via method level options arguments
 ---@return NvimLogger: a new NvimLogger instance
 function NvimLogger.new(log_filename, log_level, default_opts)
   local log_filepath = Path.log() .. '/' .. (log_filename or DEFAULT_LOG_FILENAME)
@@ -65,7 +65,7 @@ end
 
 
 --- Logs a "trace" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:trace(to_log, opts)
@@ -74,7 +74,7 @@ end
 
 
 --- Logs a "debug" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:debug(to_log, opts)
@@ -83,7 +83,7 @@ end
 
 
 --- Logs an "info" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:info(to_log, opts)
@@ -92,7 +92,7 @@ end
 
 
 --- Logs a "warn" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:warn(to_log, opts)
@@ -101,7 +101,7 @@ end
 
 
 --- Logs an "error" level message during neovim runtime.
---
+---
 ---@param to_log (any|any[])?: the messages/objects to log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:error(to_log, opts)

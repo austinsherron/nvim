@@ -29,7 +29,7 @@ local function leap_backward()
 end
 
 --- Contains methods for invoking/interacting w/ leap.nvim.
---
+---
 ---@class Leap
 local Leap = {}
 
@@ -41,10 +41,10 @@ end
 
 
 --- Returns the key used to invoke bi-directional leap.
---
---  Note: this is exposed as a function in order to centralize this configuration in case
---  of future updates, as it's used in multiple places.
---
+---
+--- Note: this is exposed as a function in order to centralize this configuration in case
+--- of future updates, as it's used in multiple places.
+---
 ---@return string: the key used to invoke bi-directional leap
 function Leap.bidirectional_leap_key()
   return 'q'
@@ -66,15 +66,15 @@ end
 -- interactions ----------------------------------------------------------------
 
 --- Creates key bindings for leap.nvim.
---
---  Note: exposed as a function instead of called on require to avoid adding keymap when
---  files import Leap (i.e.: nvimtree, at the time of writing). At the time of writing, this
---  function is invoked from leap.nvim's plugin config function.
---
+---
+--- Note: exposed as a function instead of called on require to avoid adding keymap when
+--- files import Leap (i.e.: nvimtree, at the time of writing). At the time of writing, this
+--- function is invoked from leap.nvim's plugin config function.
+---
 ---@param should_add_defaults boolean?: if true, default key bindings will be added; defaults
--- to false
+--- to false
 ---@param should_add_repeats boolean?: if true, key bindings for "repeat" motions will be
--- added (think `f` -> `,`|`;`); defaults to false
+--  added (think `f` -> `,`|`;`); defaults to false
 function Leap.add_keymap(should_add_defaults, should_add_repeats)
   should_add_defaults = should_add_defaults or false
   should_add_repeats = should_add_repeats or false

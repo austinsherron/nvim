@@ -140,7 +140,7 @@ local function custom_mappings(bufnr, api)
 end
 
 --- Contains methods for configuring key bindings for nvimtree.
---
+---
 ---@class NvimTree
 local NvimTree = {}
 

@@ -66,7 +66,7 @@ local function after_attach_autocmd()
 end
 
 --- Contains methods for configuring key bindings for core LSP related functionality.
---
+---
 ---@class Lsp
 local Lsp = {}
 

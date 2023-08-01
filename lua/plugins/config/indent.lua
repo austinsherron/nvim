@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring the indent-blankline plugin.
---
+---
 ---@class Indent
 local Indent = {}
 

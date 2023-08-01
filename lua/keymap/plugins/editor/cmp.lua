@@ -8,11 +8,11 @@ end
 
 
 --- Mapping function for <Tab>. Its logic:
---
---    1) if the completion menu is visible, select the next item
---    2) if item is a luasnip, expand it or jump to next insertion point
---    3) if there are characters before the cursor, complete the
---    4) else fallback
+---
+---   1) if the completion menu is visible, select the next item
+---   2) if item is a luasnip, expand it or jump to next insertion point
+---   3) if there are characters before the cursor, complete the
+---   4) else fallback
 local function make_select_expand_or_complete(cmp, luasnip)
   return function(fallback)
     if (cmp.visible()) then
@@ -31,10 +31,10 @@ end
 
 
 --- Mapping function for <S-Tab>. Its logic:
---
---    1) if the completion menu is visible, select the previous item
---    2) if the item is a luasnip and the last item is jumpable, jump to it
---    3) else fallback
+---
+---   1) if the completion menu is visible, select the previous item
+---   2) if the item is a luasnip and the last item is jumpable, jump to it
+---   3) else fallback
 local function make_prev_or_contract(cmp, luasnip)
   return function(fallback)
     if cmp.visible() then
@@ -49,9 +49,9 @@ end
 
 
 ---  Mapping function for <CR>. Its logic:
---
---    1) if the completion menu is visible and there's an active entry, confirm
---    2) else fallback
+---
+---   1) if the completion menu is visible and there's an active entry, confirm
+---   2) else fallback
 local function make_select_with_enter(cmp)
   return function(fallback)
     if cmp.visible() and cmp.get_active_entry() then
@@ -63,12 +63,12 @@ local function make_select_with_enter(cmp)
 end
 
 --- Contains methods for configuring key bindings for auto-completion (nvim-cmp).
---
+---
 ---@class Cmp
 local Cmp = {}
 
 --- Creates the keymap for auto-completion (nvim-cmp).
---
+---
 ---@return table: the nvim-cmp keymap
 function Cmp.make_mapping()
   local cmp = require 'cmp'
