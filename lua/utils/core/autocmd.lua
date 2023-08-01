@@ -9,6 +9,8 @@ local TMerge   = require 'utils.api.vim.tablemerge'
 
 --- Wrapper around vim.api autocommand functions.
 --
+---@see vim.api.nvim_create_autocmd
+---@see vim.api.nvim_del_autocmd
 ---@class AutoCommand
 ---@field private id number?: the id of an autocommand; required for deletion
 ---@field private group (string|integer)?: the name or id of an autocommand's group
@@ -30,7 +32,10 @@ AutoCommand.__index = AutoCommand
 -- descriptions
 ---@return AutoCommand: new autocommand instance
 function AutoCommand.new(config)
-  return setmetatable(config or {}, AutoCommand)
+  config = config or {}
+  config.opts = config.opts or {}
+
+  return setmetatable(config, AutoCommand)
 end
 
 
@@ -131,7 +136,7 @@ end
 ---@param opts table: opts to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withOpts(opts)
-  self.opts = opts
+  self.opts = opts or {}
   return self
 end
 
@@ -168,15 +173,14 @@ end
 function AutoCommand:create(config)
   config = TMerge.mergeleft(self, config or {})
 
+  local options, rest = Table.split_one(config, 'opts')
+  config = TMerge.mergeleft(options, rest)
+
   validate({ 'event', { 'callback', 'command' }}, config, 'create')
 
-  local event = config.event
-  local opts = config.opts or {}
+  local event, opts = Table.split_one(config, 'event')
 
-  config = Table.pick_out(config, Set.new({ 'event', 'opts' }))
-  config = TMerge.mergeleft(opts, config)
-
-  self.id = vim.api.nvim_create_autocmd(event, config)
+  self.id = vim.api.nvim_create_autocmd(event, opts)
   return self.id
 end
 

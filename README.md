@@ -69,7 +69,7 @@ I organize my plugins into the following categories:
 - [ ] Formatting
 - [ ] General prettiness (😅)
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
-- [ ] Git history interactions (i.e.: file history, git blame, etc.)
+- [x] Git history interactions (i.e.: file history, git blame, etc.)
 - [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (neogit)
 - [ ] Inline docs/hints
 - [x] Merge tool (...at least needs further configuration)
@@ -131,8 +131,10 @@ I organize my plugins into the following categories:
 - [ ] Git interactions from nvimtree
 - [ ] Add LuaSnip custom snippets
 - [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
-- [ ] Refactor nvim utils to separate dir? (at least those that would be/are useful for plugins as well)
+- [ ] Refactor nvim utils to separate repo? (at least those that would be/are useful for plugins as well)
 - [ ] Use lsp hooks to plug into lsp, instead of baking dependent code directly into lsp setup
+- [ ] Continue comments only in docstrings
+- [ ] Automatically add new params to docstrings
 
 ### Fixes
 
@@ -147,13 +149,17 @@ I organize my plugins into the following categories:
 - [x] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
 - [x] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything) (ended up being a misconfiguration: spell suggest setting shouldn't have been an int)
 - [x] Update lua files/packages that export functions to encapsulate them in tables
-- [ ] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
+- [x] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
-- [ ] DiffviewClose doesn't consistently close all diffview buffers/windows
-- [ ] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc....
-- [ ] Fix lua_ls workspace configuration prompt
+- [x] DiffviewClose doesn't consistently close all diffview buffers/windows (the issue ended up being a usability problem really: it's possible for multiple diffview menus to open, and it's not always obvious what's happening when sequentially closing them)
+- [x] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc.... (ended up sticking w/ existing session manager plugin)
+- [x] Fix lua_ls workspace configuration prompt
 - [ ] Fix leap.nvim repeat functionality
 - [ ] Figure out why barbar diagnostics don't work
 - [ ] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/
+
+### Tasks
+
+- [ ]
 

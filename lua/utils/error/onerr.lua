@@ -24,10 +24,11 @@ local OnErr = {}
 
 --- On error, logs the error message.
 --
----@param f fun(): any?: the function that might throw an error
+---@param f function: the function that might throw an error
 ---@param prefix string?: optional prefix for error msg
-function OnErr.log(f, prefix)
-  local ok, res = pcall(f)
+---@param ... any?: args to pass to f
+function OnErr.log(f, prefix, ...)
+  local ok, res = xpcall(f, debug.traceback, ...)
 
   if ok then
     return res
@@ -40,10 +41,11 @@ end
 
 --- On error, displays a notification w/ the error message.
 --
----@param f fun(): any?: the function that might throw an error
+---@param f function: the function that might throw an error
 ---@param prefix string?: optional prefix for error msg
-function OnErr.notify(f, prefix)
-  local ok, res = pcall(f)
+---@param ... any?: args to pass to f
+function OnErr.notify(f, prefix, ...)
+  local ok, res = xpcall(f, debug.traceback, ...)
 
   if ok then
     return res
@@ -59,10 +61,11 @@ end
 --- On error, returns false.
 --
 ---@param f fun(): any?: the function that might throw an error
+---@param ... any?: args to pass to f
 ---@return boolean: true if the function completes w/out error, false otherwise
 ---@return any?: the result of f, if any
-function OnErr.return_false(f)
-  local ok, res = pcall(f)
+function OnErr.return_false(f, ...)
+  local ok, res = pcall(f, ...)
   return ok, res
 end
 

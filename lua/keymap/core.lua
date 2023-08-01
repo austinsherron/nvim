@@ -61,8 +61,8 @@ KM.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
 --       they're defined w/ the barbar plugin keymap
 
 -- resize
-KM.nnoremap('<leader>J', ':resize -10<CR>',          options('resize "up" 10'))
-KM.nnoremap('<leader>K', ':resize +10<CR>',          options('resize "down" 10'))
-KM.nnoremap('<leader>L', ':vertical resize -10<CR>', options('resize "right" 10'))
-KM.nnoremap('<leader>H', ':vertical resize +10<CR>', options('resize "left" 10'))
+KM.nnoremap('<leader><C-K>', ':resize -10<CR>',          options('resize "up" 10'))
+KM.nnoremap('<leader><C-J>', ':resize +10<CR>',          options('resize "down" 10'))
+KM.nnoremap('<leader><C-H>', ':vertical resize +10<CR>', options('resize "left" 10'))
+KM.nnoremap('<leader><C-L>', ':vertical resize -10<CR>', options('resize "right" 10'))
 
