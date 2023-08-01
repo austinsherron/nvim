@@ -6,11 +6,8 @@
   write)
 --]]
 
-local Bool        = require 'lib.lua.core.bool'
-local Table       = require 'lib.lua.core.table'
 local Buffer      = require 'utils.api.vim.buffer'
 local UserCommand = require 'utils.core.usercmd'
-local Safe        = require 'utils.error.safe'
 
 
 local function do_open(view_mode)
@@ -24,7 +21,7 @@ end
 local function open_nvim_log(opts)
   opts = opts or {}
 
-  local view_mode = Bool.ternary(
+  local view_mode = ternary(
     Table.not_nil_or_empty(opts.fargs),
     function() return opts.fargs[1] end
   )

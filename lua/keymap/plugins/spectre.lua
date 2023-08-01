@@ -1,4 +1,3 @@
-local Bool = require 'lib.lua.core.bool'
 local KM   = require 'utils.core.mapper'
 
 
@@ -10,7 +9,7 @@ end
 
 
 local function spectre_cmd(cmd, select_word, prepend)
-  local select_word_str = Bool.ternary(select_word, '{select_word=true}', '')
+  local select_word_str = ternary(select_word, '{select_word=true}', '')
   prepend = prepend or ''
 
   return prepend .. '<cmd>lua require("spectre").' .. cmd .. '(' .. select_word_str .. ')<CR>'
