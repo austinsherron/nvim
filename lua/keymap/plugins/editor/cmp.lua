@@ -1,5 +1,3 @@
-local Table = require 'lib.lua.core.table'
-
 
 -- note: most of this code, or at least the core logic of it, was sourced from
 --       https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping

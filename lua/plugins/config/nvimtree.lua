@@ -1,4 +1,4 @@
-local NvimTreeKM = require 'keymap.plugins.nvimtree'
+local NvimTreeKM = require 'keymap.plugins.navigation.nvimtree'
 
 
 --- Contains functions for configuring the nvimtree plugin.

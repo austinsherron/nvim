@@ -63,6 +63,6 @@ KM.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
 -- resize
 KM.nnoremap('<leader><C-K>', ':resize -10<CR>',          options('resize "up" 10'))
 KM.nnoremap('<leader><C-J>', ':resize +10<CR>',          options('resize "down" 10'))
-KM.nnoremap('<leader><C-H>', ':vertical resize +10<CR>', options('resize "left" 10'))
-KM.nnoremap('<leader><C-L>', ':vertical resize -10<CR>', options('resize "right" 10'))
+KM.nnoremap('<leader><C-L>', ':vertical resize +10<CR>', options('resize "left" 10'))
+KM.nnoremap('<leader><C-H>', ':vertical resize -10<CR>', options('resize "right" 10'))
 
