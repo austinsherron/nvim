@@ -1,4 +1,3 @@
-local String = require 'lib.lua.core.string'
 local Stream = require 'lib.lua.extensions.stream'
 
 local confirm = vim.fn.confirm
@@ -9,13 +8,13 @@ local DEFAULT_CHOICE    = 2
 local DEFAULT_CONFIRMED = function(ci) return ci == 1 end
 
 --- Contains utilities for interacting w/ the vim.fn.confirm api, i.e.: creating and
---  interacting w/ confirmation dialogs.
---
+--- interacting w/ confirmation dialogs.
+---
 ---@class Confirm
 local Confirm = {}
 
 --- Formats an array-like table of choices in the manner expected by the confirm api.
---
+---
 ---@param choices string[]: the choices to format
 ---@return string: a string of choices formatted in the manner expected by the confirm api
 function Confirm.fmt_choices(choices)
@@ -27,15 +26,15 @@ end
 
 
 --- Constructs a confirmation dialog.
---
+---
 ---@param msg string: the confirmation message
 ---@param choices string[]?: possible choices; optional, defaults to { yes, no }
 ---@param default_choice integer?: index of the default choice; optional, defaults to 2
--- ("no", w/ default choices)
+--- ("no", w/ default choices)
 ---@param confirmed (fun(ci: integer): o: boolean)?: function that takes as an argument the
--- index of the selected choice and returns true if that choice indicates confirmation;
--- optional, defaults to a function that returns ci == 1 (choice == "yes", w/ default
--- choices)
+--- index of the selected choice and returns true if that choice indicates confirmation;
+--- optional, defaults to a function that returns ci == 1 (choice == "yes", w/ default
+--- choices)
 ---@return boolean: the return value of confirmed: true if confirmed, false otherwise
 function Confirm.dialog(msg, choices, default_choice, confirmed)
   choices = choices or DEFAULT_CHOICES

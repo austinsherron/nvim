@@ -5,18 +5,18 @@ local TMerge   = require 'utils.api.vim.tablemerge'
 ---@alias UserCommandConfig { name: string?, cmd: (string|function)?, bufnum: integer?, opts: table? }
 
 --- Wrapper around vim.api user command functions.
---
+---
 ---@class UserCommand
 ---@field name string?: name of the user command (how it's invoked)
 ---@field cmd (string|function)?: string command or lua function to invoke for command
 ---@field bufnum integer?: id of buffer to which to attach command; if present, command is
--- considered local to buffer
+--- considered local to buffer
 ---@field opts table?: parameterizes command creation
 local UserCommand = {}
 UserCommand.__index = UserCommand
 
 --- Constructor
---
+---
 ---@param config UserCommandConfig?: configures the user command
 ---@return UserCommand: new user command instance
 function UserCommand.new(config)
@@ -24,8 +24,8 @@ function UserCommand.new(config)
 end
 
 
--- Adds name to instance.
---
+--- Adds name to instance.
+---
 ---@param name string: name to add to instance
 ---@return UserCommand: self
 function UserCommand:withName(name)
@@ -35,8 +35,8 @@ end
 
 
 --- Adds bufnum to instance. Causes user command to be created as buffer local. Calling w/
---  nil will reset that behavior.
---
+--- nil will reset that behavior.
+---
 ---@param bufnum integer?: buffer number to add to instance, or nil to reset the bufnum
 ---@return UserCommand: self
 function UserCommand:withBufnum(bufnum)
@@ -45,11 +45,11 @@ function UserCommand:withBufnum(bufnum)
 end
 
 
--- Adds cmd to instance.
---
+--- Adds cmd to instance.
+---
 ---@param cmd string|function: cmd to add to instance
 ---@param nargs integer|string: the number of parameters the command accepts; use "?" for
--- variable # of params, or omit if no parameters
+--- variable # of params, or omit if no parameters
 ---@return UserCommand: self
 function UserCommand:withCmd(cmd, nargs)
   self.cmd = cmd
@@ -62,8 +62,8 @@ function UserCommand:withCmd(cmd, nargs)
 end
 
 
--- Adds description to instance.
---
+--- Adds description to instance.
+---
 ---@param desc string: desc to add to instance
 ---@return UserCommand: self
 function UserCommand:withDesc(desc)
@@ -72,8 +72,8 @@ function UserCommand:withDesc(desc)
 end
 
 
--- Adds opts to instance.
---
+--- Adds opts to instance.
+---
 ---@param opts table: opts to add to instance
 ---@return UserCommand: self
 function UserCommand:withOpts(opts)
@@ -82,8 +82,8 @@ function UserCommand:withOpts(opts)
 end
 
 
--- Adds individual opt to instance.
---
+--- Adds individual opt to instance.
+---
 ---@generic T
 ---@param key string: the key of the opt
 ---@param opt T: individual opt to add to instance
@@ -117,14 +117,14 @@ end
 
 
 --- Creates a user command. Command is buffer local if bufnum is in config or exists in
---  this instance.
---
+--- this instance.
+---
 ---@see vim.api.nvim_create_user_command
 ---@see vim.api.nvim_buf_create_user_command
---
+---
 ---@param config UserCommandConfig?: configures the user command; merged w/ config that
--- exists in the instance, w/ values in config overriding instance config if collisions
--- are encountered
+--- exists in the instance, w/ values in config overriding instance config if collisions
+--- are encountered
 ---@error if name or cmd don't exist in config or in this instance
 function UserCommand:create(config)
   config = TMerge.mergeleft(self, config or {})
@@ -141,14 +141,14 @@ end
 
 
 --- Deletes a user command. Command is considered buffer local if bufnum is in config or
---  exists in this instance.
---
+--- exists in this instance.
+---
 ---@see vim.api.nvim_del_user_command
 ---@see vim.api.nvim_buf_del_user_command
---
+---
 ---@param config UserCommandConfig?: configures the user command; merged w/ config that
--- exists in the instance, w/ values in config overriding instance config if collisions
--- are encountered
+--- exists in the instance, w/ values in config overriding instance config if collisions
+--- are encountered
 ---@error if name doesn't exist in config or in this instance
 function UserCommand:delete(config)
   config = TMerge.mergeleft(self, config or {})

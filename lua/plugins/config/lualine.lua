@@ -11,7 +11,7 @@ local function is_available()
 end
 
 --- Contains functions for configuring the lualine plugin.
---
+---
 ---@class Lualine
 local Lualine = {}
 

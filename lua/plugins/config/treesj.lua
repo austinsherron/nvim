@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring the treesj plugin.
---
+---
 ---@class TreeSJ
 local TreeSJ = {}
 

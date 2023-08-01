@@ -2,7 +2,7 @@ local env = require 'lib.lua.system.env'
 
 
 --- Contains functions for configuring the treesitter plugin.
---
+---
 ---@class Treesitter
 local Treesitter = {}
 

@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring the nvim-tmux nav plugin.
---
+---
 ---@class NvimTmuxNav
 local NvimTmuxNav = {}
 

@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring diffview.
---
+---
 ---@class Diffview
 local Diffview = {}
 

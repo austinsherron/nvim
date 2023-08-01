@@ -4,7 +4,7 @@ local Path = require 'utils.api.vim.path'
 local SESSIONS_DIR = Path.data() .. '/sessions'
 
 --- Contains functions for configuring the session manager plugin.
---
+---
 ---@class SessionMgr
 local SessionMgr = {}
 

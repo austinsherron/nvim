@@ -2,14 +2,14 @@ local Git  = require 'utils.api.git'
 
 
 --- Contains methods for interacting w/ nvim-tree.
---
+---
 ---@class NvimTree
 ---@field nvt_api table: the nvim-tree.api module
 local NvimTree = {}
 NvimTree.__index = NvimTree
 
 --- Constructor
---
+---
 ---@return NvimTree: a new NvimTree instance
 function NvimTree.new()
   return setmetatable({}, NvimTree)
@@ -27,7 +27,7 @@ end
 
 
 --- Opens the nvim-tree window w/out changing focus from the tree buffer.
---
+---
 ---@param node Node: the node to open silently
 function NvimTree:silent_open(node)
   self:api().node.open.edit(node)
@@ -60,16 +60,16 @@ end
 
 
 --- Returns the currently focused nvim-tree node. More precisely, it returns the node that
---  is currently under the cursor, if it exists. If focused is true, the nvim-tree buffer
---  must be both visible and active for a node to be returned; if focused is false, nvimtree
---  must only be visible. If the aforementioned conditions aren't met, this method returns
---  nil.
---
+--- is currently under the cursor, if it exists. If focused is true, the nvim-tree buffer
+--- must be both visible and active for a node to be returned; if focused is false, nvimtree
+--- must only be visible. If the aforementioned conditions aren't met, this method returns
+--- nil.
+---
 ---@param focused boolean?: if true, the nvim-tree buffer must be both open and the active
--- buffer for a node to be considered "focused"; if false, it just hast to be open;
--- defaults to true
+--- buffer for a node to be considered "focused"; if false, it just hast to be open;
+--- defaults to true
 ---@return Node?: the nvim-tree node that's currently under the cursor, if the conditions
--- mentioned above are met
+--- mentioned above are met
 function NvimTree:get_cursor_node(focused)
   focused = focused or true
 
@@ -92,8 +92,8 @@ end
 
 
 --- Stages the file(s) corresponding to the node under the cursor, or all files in the
---  repo if all is true.
---
+--- repo if all is true.
+---
 ---@param all boolean?: if true, all modified files in the current repo will be staged
 function NvimTree:stage(all)
   Git.stage(self:path_for_git_op(all))
@@ -101,8 +101,8 @@ end
 
 
 --- Unstages the file(s) corresponding to the node under the cursor, or all files in the
---  repo if all is true.
---
+--- repo if all is true.
+---
 ---@param all boolean?: if true, all staged files in the current repo will be unstaged
 function NvimTree:unstage(all)
   Git.unstage(self:path_for_git_op(all))
@@ -110,7 +110,7 @@ end
 
 
 --- Returns true if the provided node is a dir node.
---
+---
 ---@param node Node: the node to check
 ---@return true: true if the provided node is a dir node, false otherwise
 function NvimTree.is_dir(node)
@@ -119,7 +119,7 @@ end
 
 
 --- Returns true if the provided node is a file node.
---
+---
 ---@param node Node: the node to check
 ---@return true: true if the provided node is a file node, false otherwise
 function NvimTree.is_file(node)

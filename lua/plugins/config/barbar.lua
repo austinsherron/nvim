@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring barbar.
---
+---
 ---@class Barbar
 local Barbar = {}
 

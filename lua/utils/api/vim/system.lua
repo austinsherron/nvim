@@ -1,6 +1,6 @@
 
 --- Nearly non-existent wrapper around nvim functions related to system interactions.
---
+---
 ---@class System
 return {
   ---@see vim.fn.getcwd

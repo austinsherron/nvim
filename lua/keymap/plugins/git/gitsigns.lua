@@ -70,7 +70,7 @@ local function text_objects()
 end
 
 --- Contains methods for configuring key bindings for gitsigns.
---
+---
 ---@class Gitsigns
 local Gitsigns = {}
 

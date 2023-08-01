@@ -21,7 +21,7 @@ local function opts()
 end
 
 --- Contains functions for configuring the telescope plugin and its extensions.
---
+---
 ---@class Telescope
 local Telescope = {}
 

@@ -1,6 +1,6 @@
 
 --- Contains functions for configuring the autopairs plugin.
---
+---
 ---@class Autopairs
 local Autopairs = {}
 

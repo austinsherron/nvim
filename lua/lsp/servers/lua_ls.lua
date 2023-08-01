@@ -1,6 +1,3 @@
-local String = require 'lib.lua.core.string'
-local Table  = require 'lib.lua.core.table'
-local Set    = require 'lib.lua.extensions.set'
 local Stream = require 'lib.lua.extensions.stream'
 local Env    = require 'lib.lua.system.env'
 

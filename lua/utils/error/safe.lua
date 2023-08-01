@@ -1,16 +1,14 @@
-local OnErr = require 'utils.error.onerr'
-
 
 --- Provides methods for "safely" performing various actions. In this context, "safely"
---  means "w/ error handling".
---
+--- means "w/ error handling".
+---
 ---@class Safe
 local Safe = {}
 
 --- Basically pcall w/ mandatory error handling.
---
+---
 ---@see OnErr
---
+---
 ---@param to_call function: the function to call
 ---@param error_handler OnErrStrategy?: how to handle errors; defaults to "notify"
 ---@param prefix string?: optional prefix for error msg
@@ -23,8 +21,8 @@ end
 
 
 --- "Safe-ify" a function. Basically a wrapper around Safe.call that returns a callable
---  instead of calling directly.
---
+--- instead of calling directly.
+---
 ---@see Safe.call
 function Safe.ify(to_call, error_handler, prefix)
   return function(...)
@@ -34,9 +32,9 @@ end
 
 
 --- Standard lua require wrapped w/ mandatory error handling.
---
+---
 ---@see OnErr
---
+---
 ---@param to_require string: the import string that references a lua module to require (import)
 ---@param and_then (fun(m: any?): r: any?)?: optional function to call on the result of the require
 ---@param error_handler OnErrStrategy?: how to handle errors; defaults to "notify"
