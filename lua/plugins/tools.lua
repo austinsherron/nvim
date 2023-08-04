@@ -8,8 +8,8 @@
   plugins
 --]]
 
-local Template = require 'config.template'
-local Plugins  = require('utils.plugins.plugin').plugins
+local Template = require 'lua.plugins.config.template'
+local Plugins  = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({

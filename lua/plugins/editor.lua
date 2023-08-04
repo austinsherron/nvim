@@ -5,11 +5,11 @@
   control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
-local AutoPairs  = require 'config.autopairs'
-local Cmp        = require 'config.cmp.cmp'
-local Indent     = require 'config.indent'
-local SessionMgr = require 'config.sessionmgr'
-local Plugins    = require('utils.plugins.plugin').plugins
+local AutoPairs  = require 'lua.plugins.config.autopairs'
+local Cmp        = require 'lua.plugins.config.cmp.cmp'
+local Indent     = require 'lua.plugins.config.indent'
+local SessionMgr = require 'lua.plugins.config.sessionmgr'
+local Plugins    = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({

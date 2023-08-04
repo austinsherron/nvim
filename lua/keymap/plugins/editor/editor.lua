@@ -1,5 +1,5 @@
-local SessionMgr = require 'plugins.extensions.sessionmgr'
-local KM         = require 'utils.core.mapper'
+local SessionMgr = require 'lua.plugins.extensions.sessionmgr'
+local KM         = require 'lua.utils.core.mapper'
 
 
 -- session mgr. ----------------------------------------------------------------

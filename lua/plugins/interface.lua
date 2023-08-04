@@ -6,11 +6,11 @@
   something, or at least be informational
 --]]
 
--- local alpha = require 'config.alphanvim'
-local Babar    = require 'config.barbar'
-local Lualine  = require 'config.lualine'
-local Plugins  = require('utils.plugins.plugin').plugins
-local Priority = require 'utils.plugins.priority'
+-- local alpha = require 'lua.plugins.config.alphanvim'
+local Babar    = require 'lua.plugins.config.barbar'
+local Lualine  = require 'lua.plugins.config.lualine'
+local Plugins  = require('lua.utils.plugins.plugin').plugins
+local Priority = require 'lua.utils.plugins.priority'
 
 
 return Plugins({

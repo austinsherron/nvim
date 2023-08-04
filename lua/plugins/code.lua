@@ -5,14 +5,14 @@
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
-local Aerial     = require 'config.aerial'
-local LuaSnip    = require 'config.luasnip'
-local Mason      = require 'config.mason'
-local SnipRun    = require 'config.sniprun'
-local Treesitter = require 'config.treesitter'
-local TreeSJ     = require 'config.treesj'
-local Lsp        = require 'lsp'
-local Plugins    = require('utils.plugins.plugin').plugins
+local Lsp        = require 'lua.lsp'
+local Aerial     = require 'lua.plugins.config.aerial'
+local LuaSnip    = require 'lua.plugins.config.luasnip'
+local Mason      = require 'lua.plugins.config.mason'
+local SnipRun    = require 'lua.plugins.config.sniprun'
+local Treesitter = require 'lua.plugins.config.treesitter'
+local TreeSJ     = require 'lua.plugins.config.treesj'
+local Plugins    = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({
@@ -51,7 +51,7 @@ return Plugins({
     opts         = Mason.opts(),
     dependencies = { 'williamboman/mason.nvim' },
 
-    config = function(_, opts)
+    config       = function(_, opts)
       require('mason-lspconfig').setup(opts)
     end
   }),

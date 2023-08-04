@@ -1,4 +1,4 @@
-local env = require 'lib.lua.system.env'
+local Env = require 'lib.lua.system.env'
 
 
 --- Contains functions for configuring the treesitter plugin.
@@ -38,7 +38,7 @@ function Treesitter.opts()
     --   'yaml'
     -- },
     ignore_install = {},
-    parser_install_dir = env.nvundle(),
+    parser_install_dir = Env.nvundle(),
     sync_install = false,
 
     -- features

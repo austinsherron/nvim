@@ -6,8 +6,8 @@
   write)
 --]]
 
-local Buffer      = require 'utils.api.vim.buffer'
-local UserCommand = require 'utils.core.usercmd'
+local Buffer      = require 'lua.utils.api.vim.buffer'
+local UserCommand = require 'lua.utils.core.usercmd'
 
 
 local function do_open(view_mode)

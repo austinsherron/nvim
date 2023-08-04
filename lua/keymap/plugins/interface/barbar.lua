@@ -1,4 +1,4 @@
-local KM = require 'utils.core.mapper'
+local KM = require 'lua.utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this

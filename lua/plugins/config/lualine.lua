@@ -20,12 +20,12 @@ function Lualine.opts()
   return {
     extensions = { 'aerial', 'nvim-tree' },
     sections = {
-      lualine_b = { { 'filename', path = 1 } },
+      lualine_b = { { 'filename', path = 1 }},
       lualine_c = { 'searchcount', 'selectioncount' },
       lualine_x = { 'diff', 'branch' },
     },
     winbar = {
-      lualine_a = { { 'tabs', mode = 0, use_mode_colors = true } },
+      lualine_a = { { 'tabs', mode = 0, use_mode_colors = true }},
       lualine_b = { 'filetype', 'fileformat', 'encoding' },
       lualine_c = {
         'diagnostics',
@@ -33,7 +33,7 @@ function Lualine.opts()
       },
     },
     inactive_winbar = {
-      lualine_a = { { 'tabs', mode = 0, use_mode_colors = true } },
+      lualine_a = { { 'tabs', mode = 0, use_mode_colors = true }},
       lualine_b = { 'filetype', 'fileformat', 'encoding' },
     },
   }

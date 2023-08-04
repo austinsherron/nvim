@@ -5,9 +5,9 @@
    control (file) system (as opposed to on-screen) movement
 --]]
 
-local NvimTree = require 'config.nvimtree'
-local Project  = require 'config.project'
-local Plugins  = require('utils.plugins.plugin').plugins
+local NvimTree = require 'lua.plugins.config.nvimtree'
+local Project  = require 'lua.plugins.config.project'
+local Plugins  = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({

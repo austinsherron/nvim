@@ -5,9 +5,9 @@
    control on-screen (as opposed to file-system) movement
 --]]
 
-local NvimTmuxNav = require 'config.nvimtmuxnav'
-local Leap        = require 'keymap.plugins.motion.leap'
-local Plugins     = require('utils.plugins.plugin').plugins
+local Leap        = require 'lua.keymap.plugins.motion.leap'
+local NvimTmuxNav = require 'lua.plugins.config.nvimtmuxnav'
+local Plugins     = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({
