@@ -5,10 +5,10 @@
   enable nvim git interactions/integrations
 --]]
 
-local Diffview = require 'config.diffview'
-local Gitsigns = require 'config.gitsigns'
-local Neogit   = require 'config.neogit'
-local Plugins  = require('utils.plugins.plugin').plugins
+local Diffview = require 'lua.plugins.config.diffview'
+local Gitsigns = require 'lua.plugins.config.gitsigns'
+local Neogit   = require 'lua.plugins.config.neogit'
+local Plugins  = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({

@@ -2,12 +2,12 @@
 -- globals ---------------------------------------------------------------------
 
 -- import globals before doing anything else
-require 'utils.globals'
+require 'lua.utils.globals'
 
 -- init ------------------------------------------------------------------------
 
 -- "bootstrap" settings must come first
-Safe.require 'core.bootstrap'
+Safe.require 'lua.core.bootstrap'
 
 -- plugins ---------------------------------------------------------------------
 
@@ -20,18 +20,18 @@ Safe.require(
 -- commands --------------------------------------------------------------------
 
 -- keymap has dependencies on commands
-Safe.require 'core.cmd.user'
-Safe.require 'core.cmd.auto'
+Safe.require 'lua.core.cmd.user'
+Safe.require 'lua.core.cmd.auto'
 
 -- keymap ----------------------------------------------------------------------
 
-Safe.require 'keymap'
+Safe.require 'lua.keymap'
 
 -- settings --------------------------------------------------------------------
 
-Safe.require 'core.settings'
+Safe.require 'lua.core.settings'
 
 -- appearance ------------------------------------------------------------------
 
-Safe.require 'core.appearance'
+Safe.require 'lua.core.appearance'
 

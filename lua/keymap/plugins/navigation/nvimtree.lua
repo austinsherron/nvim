@@ -1,6 +1,6 @@
-local Leap   = require 'keymap.plugins.motion.leap'
-local NvTree = require 'plugins.extensions.nvimtree'
-local KM     = require 'utils.core.mapper'
+local Leap   = require 'lua.keymap.plugins.motion.leap'
+local NvTree = require 'lua.plugins.extensions.nvimtree'
+local KM     = require 'lua.utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this

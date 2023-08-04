@@ -1,5 +1,5 @@
 local Shell = require 'lib.lua.system.shell'
-local KM    = require 'utils.core.mapper'
+local KM    = require 'lua.utils.core.mapper'
 
 
 -- note: settings that should come before everything else

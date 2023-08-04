@@ -1,5 +1,5 @@
 local Validate = require 'lib.lua.utils.validate'
-local TMerge   = require 'utils.api.vim.tablemerge'
+local TMerge   = require 'lua.utils.api.vim.tablemerge'
 
 
 ---@alias AutoCommandCallbackParams { id: number, event: string, group: number?, match: string, buf: number, file: string, data: any }

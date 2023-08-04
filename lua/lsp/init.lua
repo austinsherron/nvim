@@ -1,4 +1,4 @@
-local LspKM = require 'lsp.keymap'
+local LspKM = require 'lua.lsp.keymap'
 
 
 local LSP_SERVERS = { 'bashls', 'lua_ls', 'pyright' }
@@ -15,7 +15,7 @@ end
 
 
 local function require_config_for_server(lsp_server)
-  return require('lsp.servers.' .. lsp_server)
+  return require('lua.lsp.servers.' .. lsp_server)
 end
 
 
