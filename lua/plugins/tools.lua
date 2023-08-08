@@ -24,6 +24,8 @@ return Plugins({
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = true,
   },
+---- plenary.nvim: lua utilities; a dependency for many, many plugins...
+  { 'nvim-lua/plenary.nvim' },
 ---- TODO: template.nvim: file templates (I couldn't get this to work; revisit)
   {
     'glepnir/template.nvim',
