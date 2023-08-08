@@ -32,6 +32,11 @@ return Plugins({
       require('gitsigns').setup(opts)
     end
   },
+---- lazygit: nvim entry point to lazygit
+  {
+    'kdheepak/lazygit.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
 ---- neogit: git interactions through neovim
   {
     'NeogitOrg/neogit',
