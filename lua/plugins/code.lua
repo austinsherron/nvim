@@ -7,6 +7,7 @@
 
 local Lsp        = require 'lua.lsp'
 local Aerial     = require 'lua.plugins.config.aerial'
+local Fidget     = require 'lua.plugins.config.fidget'
 local LuaSnip    = require 'lua.plugins.config.luasnip'
 local Mason      = require 'lua.plugins.config.mason'
 local SnipRun    = require 'lua.plugins.config.sniprun'
@@ -28,6 +29,17 @@ return Plugins({
     config = function(_, opts)
       require('aerial').setup(opts)
     end
+  },
+---- fidget: show lsp progress outside of statusline
+  {
+    'j-hui/fidget.nvim',
+    tag   =  'legacy',
+    event = 'LspAttach',
+    opts  = Fidget.opts(),
+
+    config = function(_, opts)
+      require('fidget').setup(opts)
+    end,
   },
 ---- LuaSnip: snippets engine (...written in Lua)
   {

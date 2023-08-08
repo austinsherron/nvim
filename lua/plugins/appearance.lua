@@ -13,6 +13,8 @@ local Priority = require 'lua.utils.plugins.priority'
 
 
 return Plugins({
+---- buf-resize: intuitively resize buffers when terminal dimensions change
+  { 'kwkarlwang/bufresize.nvim' },
 ---- colorschemes: loaded w/ high priority as discussed here:
 ----               https://github.com/folke/lazy.nvim > Plugin Spec > priority
   {

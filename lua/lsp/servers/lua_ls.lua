@@ -4,13 +4,19 @@ local Env    = require 'lib.lua.system.env'
 local get_nvim_runtime_files = vim.api.nvim_get_runtime_file
 
 
-local function get_lua_path()
+local function get_lua_path(trim_wild)
   local lua_path = Env.lua_path()
   local split_lua_path = String.split(lua_path, ';')
 
+  local trimmer = ternary(
+    trim_wild,
+    function() return function(i) return String.trim_after(i, '?') end end,
+    function() return function(i) return i end end
+  )
+
   return Stream(split_lua_path)
     :filter(function(i) return i ~= '' end)
-    :map(function(i) return String.trim_after(i, '?') end)
+    :map(trimmer)
     -- to dedup
     :collect(Set.new)
     :entries()
@@ -31,6 +37,7 @@ return {
       runtime = {
         -- tell the language server which version of lua we're using (most likely luajit in the case of neovim)
         version = 'LuaJIT',
+        path    = get_lua_path(false),
       },
       diagnostics = {
         -- so vim global is recognized

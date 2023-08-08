@@ -22,6 +22,7 @@ KM.nnoremap('<leader>fgc', Builtins.git_bcommits,           options('search git 
 KM.nnoremap('<leader>fgs', Builtins.git_stash,              options('search git files'))
 KM.nnoremap('<leader>fh',  Builtins.help_tags,              options('search help tags'))
 -- KM.nnoremap('<leader>fn',  '<cmd>Telescope undo<CR>',       options('search undo history'))
+KM.nnoremap('<leader>fm',  Builtins.man_pages,              options('search man pages'))
 KM.nnoremap('<leader>fn',  Telescope.search_packages,       options('search plugin files'))
 KM.nnoremap('<leader>fp',  '<cmd>Telescope projects<CR>',   options('search projects'))
 KM.nnoremap('<leader>fr',  '<cmd>Telescope frecency<CR>',   options('search "frecent"'))

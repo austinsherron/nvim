@@ -4,6 +4,17 @@ local function make_err_msg(err_res, prefix)
   return prefix .. (err_res or '')
 end
 
+
+local function make_title(prefix)
+  local title = 'Error encountered'
+
+  return ternary(
+    String.is_nil_or_empty(prefix),
+    title,
+    function() return title .. ' in ' .. prefix end
+  )
+end
+
 --- A type alias that allows enforcement of passing specific method names to functions that
 --- accept them as arguments.
 ---
@@ -52,7 +63,7 @@ function OnErr.notify(f, prefix, ...)
   local err_msg = make_err_msg(res, prefix)
   -- not necessary, but want to be explicit about the fact that we're logging a
   -- user-facing message here
-  Error(err_msg, { user_facing = true })
+  Error(err_msg, { user_facing = true, title = make_title(prefix) })
 end
 
 
