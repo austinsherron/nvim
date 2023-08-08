@@ -9,6 +9,6 @@ local function options(desc)
     return { desc = 'neogen: ' .. desc, nowait = true }
 end
 
-KM.nnoremap('<leader>gf', ':Neogen func<CR>',  options('function docstring'))
-KM.nnoremap('<leader>gc', ':Neogen class<CR>', options('class docstring'))
+KM.nnoremap('<leader>Df', ':Neogen func<CR>',  options('function docstring'))
+KM.nnoremap('<leader>Dc', ':Neogen class<CR>', options('class docstring'))
 
