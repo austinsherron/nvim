@@ -1,3 +1,7 @@
+local Env = require 'lib.lua.system.env'
+
+
+local SNIPPET_LIBRARY = Env.code_root() .. '/snippets/lua/snippets/library/'
 
 --- Contains functions for configuring the luasnip plugin.
 ---
@@ -18,11 +22,12 @@ function LuaSnip.config()
   local luasnip = require 'luasnip'
 
   luasnip.config.set_config({
-    history = false,
+    history      = false,
     updateevents = 'TextChanged,TextChangedI',
   })
 
   require('luasnip/loaders/from_vscode').load()
+  require('luasnip.loaders.from_lua').load({ paths = SNIPPET_LIBRARY })
 end
 
 return LuaSnip

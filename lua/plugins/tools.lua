@@ -13,6 +13,16 @@ local Plugins  = require('lua.utils.plugins.plugin').plugins
 
 
 return Plugins({
+---- link visitor: open links from nvim
+  {
+    'xiyaowong/link-visitor.nvim',
+    -- not enough config to warrant a standalone file/class
+    opts = { skip_confirmation = true },
+
+    config = function(_, opts)
+      require('link-visitor').setup(opts)
+    end
+  },
 ---- markdown preview: for previewing markdown documents 🤔
   {
     'iamcco/markdown-preview.nvim',

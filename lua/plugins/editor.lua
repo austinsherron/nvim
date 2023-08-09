@@ -65,6 +65,11 @@ return Plugins({
     'hrsh7th/cmp-nvim-lsp-signature-help',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
+---- cmp-luasnip: completion for LuaSnip snippets
+  {
+    'saadparwaiz1/cmp_luasnip',
+    dependencies = { 'hrsh7th/nvim-cmp' },
+  },
 ---- cmp-path: fuzzy completion of file system paths
   {
     'hrsh7th/cmp-path',

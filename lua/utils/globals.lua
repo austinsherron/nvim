@@ -22,4 +22,6 @@ Set    = require 'lib.lua.extensions.set'
 OnErr  = require 'lua.utils.error.onerr'
 Safe   = require 'lua.utils.error.safe'
 
+---@diagnostic disable-next-line: lowercase-global
 ternary = Bool.ternary
+
