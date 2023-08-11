@@ -1,4 +1,4 @@
-local KM = require 'lua.utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 local create_autocmd = vim.api.nvim_create_autocmd
 local create_augroup = vim.api.nvim_create_augroup

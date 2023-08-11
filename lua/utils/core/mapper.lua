@@ -70,7 +70,7 @@ end
 
 
 -- TODO: create "Indexable" class that implements python-like indexing for strings
---       see `lib.lua.core.string.Indexable`
+--       see `toolbox.core.string.Indexable`
 function Mapper.is_noremap(func_name)
     return String.startswith(func_name, NOREMAP) or
            String.startswith(func_name:sub(2, #func_name),  NOREMAP)

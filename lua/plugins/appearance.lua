@@ -7,9 +7,9 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
-local LspKind  = require 'lua.plugins.config.lspkind'
-local Plugins  = require('lua.utils.plugins.plugin').plugins
-local Priority = require 'lua.utils.plugins.priority'
+local LspKind  = require 'plugins.config.lspkind'
+local Plugins  = require('utils.plugins.plugin').plugins
+local Priority = require 'utils.plugins.priority'
 
 
 return Plugins({

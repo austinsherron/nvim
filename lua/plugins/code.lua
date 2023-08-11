@@ -5,15 +5,15 @@
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
-local Lsp        = require 'lua.lsp'
-local Aerial     = require 'lua.plugins.config.aerial'
-local Fidget     = require 'lua.plugins.config.fidget'
-local LuaSnip    = require 'lua.plugins.config.luasnip'
-local Mason      = require 'lua.plugins.config.mason'
-local SnipRun    = require 'lua.plugins.config.sniprun'
-local Treesitter = require 'lua.plugins.config.treesitter'
-local TreeSJ     = require 'lua.plugins.config.treesj'
-local Plugins    = require('lua.utils.plugins.plugin').plugins
+local Lsp        = require 'lsp'
+local Aerial     = require 'plugins.config.aerial'
+local Fidget     = require 'plugins.config.fidget'
+local LuaSnip    = require 'plugins.config.luasnip'
+local Mason      = require 'plugins.config.mason'
+local SnipRun    = require 'plugins.config.sniprun'
+local Treesitter = require 'plugins.config.treesitter'
+local TreeSJ     = require 'plugins.config.treesj'
+local Plugins    = require('utils.plugins.plugin').plugins
 
 
 return Plugins({

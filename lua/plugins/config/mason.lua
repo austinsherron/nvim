@@ -1,4 +1,4 @@
-local Lsp = require 'lua.lsp'
+local Lsp = require 'lsp'
 
 
 --- Contains functions for configuring the mason plugin.

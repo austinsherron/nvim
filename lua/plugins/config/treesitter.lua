@@ -1,4 +1,4 @@
-local Env = require 'lib.lua.system.env'
+local Env = require 'toolbox.system.env'
 
 
 --- Contains functions for configuring the treesitter plugin.

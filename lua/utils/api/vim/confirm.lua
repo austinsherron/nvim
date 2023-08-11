@@ -1,4 +1,4 @@
-local Stream = require 'lib.lua.extensions.stream'
+local Stream = require 'toolbox.extensions.stream'
 
 local confirm = vim.fn.confirm
 

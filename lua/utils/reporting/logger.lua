@@ -1,8 +1,8 @@
-local LogLevel = require 'lib.lua.log.level'
-local Logger   = require 'lib.lua.log.logger'
-local Path     = require 'lua.utils.api.vim.path'
-local TMerge   = require 'lua.utils.api.vim.tablemerge'
-local Notify   = require 'lua.utils.reporting.notify'
+local LogLevel = require 'toolbox.log.level'
+local Logger   = require 'toolbox.log.logger'
+local Path     = require 'utils.api.vim.path'
+local TMerge   = require 'utils.api.vim.tablemerge'
+local Notify   = require 'utils.reporting.notify'
 
 
 ---@alias NvimLoggerOpts { persistent: boolean?, user_facing: boolean? }

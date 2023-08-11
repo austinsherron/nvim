@@ -1,5 +1,5 @@
-local Path   = require 'lib.lua.system.path'
-local System = require 'lua.utils.api.vim.system'
+local Path   = require 'toolbox.system.path'
+local System = require 'utils.api.vim.system'
 
 
 --- Contains functions for interacting w/ git.

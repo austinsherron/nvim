@@ -1,5 +1,5 @@
-local Validate = require 'lib.lua.utils.validate'
-local TMerge   = require 'lua.utils.api.vim.tablemerge'
+local Validate = require 'toolbox.utils.validate'
+local TMerge   = require 'utils.api.vim.tablemerge'
 
 
 ---@alias UserCommandConfig { name: string?, cmd: (string|function)?, bufnum: integer?, opts: table? }

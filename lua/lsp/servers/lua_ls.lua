@@ -1,5 +1,5 @@
-local Stream = require 'lib.lua.extensions.stream'
-local Env    = require 'lib.lua.system.env'
+local Stream = require 'toolbox.extensions.stream'
+local Env    = require 'toolbox.system.env'
 
 local get_nvim_runtime_files = vim.api.nvim_get_runtime_file
 

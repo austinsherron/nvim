@@ -1,7 +1,7 @@
-local Env      = require 'lib.lua.system.env'
-local Path     = require 'lib.lua.system.path'
-local NvTree   = require 'lua.plugins.extensions.nvimtree'
+local NvTree   = require 'plugins.extensions.nvimtree'
 local Builtins = require 'telescope.builtin'
+local Env      = require 'toolbox.system.env'
+local Path     = require 'toolbox.system.path'
 
 -- for building telescope pickers
 local actions      = require 'telescope.actions'

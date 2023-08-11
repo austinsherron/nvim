@@ -1,5 +1,5 @@
-local Path   = require 'lib.lua.system.path'
-local Import = require 'lib.lua.utils.import'
+local Path   = require 'toolbox.system.path'
+local Import = require 'toolbox.utils.import'
 
 
 -- recursively require all lua files in this dir

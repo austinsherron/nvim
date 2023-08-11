@@ -1,4 +1,4 @@
-local LogFormatter = require 'lib.lua.log.formatter'
+local LogFormatter = require 'toolbox.log.formatter'
 
 
 --- Specifies what kind of message is being logged, and its level of

@@ -1,6 +1,6 @@
-local Telescope = require 'lua.plugins.extensions.telescope'
-local KM        = require 'lua.utils.core.mapper'
+local Telescope = require 'plugins.extensions.telescope'
 local Builtins  = require 'telescope.builtin'
+local KM        = require 'utils.core.mapper'
 
 
 -- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this

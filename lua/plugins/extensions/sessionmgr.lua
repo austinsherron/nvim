@@ -1,11 +1,11 @@
-local Env              = require 'lib.lua.system.env'
-local File             = require 'lib.lua.system.file'
-local SessionConfigMgr = require 'lua.plugins.config.sessionmgr'
-local Telescope        = require 'lua.plugins.extensions.telescope'
-local Confirm          = require 'lua.utils.api.vim.confirm'
+local SessionConfigMgr = require 'plugins.config.sessionmgr'
+local Telescope        = require 'plugins.extensions.telescope'
 local session_utils    = require 'session_manager.utils'
 local actions          = require 'telescope.actions'
 local Builtins         = require 'telescope.builtin'
+local Env              = require 'toolbox.system.env'
+local File             = require 'toolbox.system.file'
+local Confirm          = require 'utils.api.vim.confirm'
 
 
 --- Contains functions that implement extended (custom) session manager functionality.

@@ -1,10 +1,10 @@
-local Lazy = require 'lib.lua.utils.lazy'
+local Lazy = require 'toolbox.utils.lazy'
 
 
 -- logger ----------------------------------------------------------------------
 
 ---@type fun(): l: NvimLogger
-GetLogger = Lazy.require('lua.utils.reporting.logger')
+GetLogger = Lazy.require('utils.reporting.logger')
 
 -- global logging helpers
 function Trace(...) GetLogger():trace(...) end
@@ -15,12 +15,12 @@ function Error(...) GetLogger():error(...) end
 
 -- imports ---------------------------------------------------------------------
 
-Bool   = require 'lib.lua.core.bool'
-String = require 'lib.lua.core.string'
-Table  = require 'lib.lua.core.table'
-Set    = require 'lib.lua.extensions.set'
-OnErr  = require 'lua.utils.error.onerr'
-Safe   = require 'lua.utils.error.safe'
+Bool   = require 'toolbox.core.bool'
+String = require 'toolbox.core.string'
+Table  = require 'toolbox.core.table'
+Set    = require 'toolbox.extensions.set'
+OnErr  = require 'utils.error.onerr'
+Safe   = require 'utils.error.safe'
 
 ---@diagnostic disable-next-line: lowercase-global
 ternary = Bool.ternary

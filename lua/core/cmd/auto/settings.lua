@@ -5,7 +5,7 @@
   contains autocommands related to core settings
 --]]
 
-local Autocmd = require 'lua.utils.core.autocmd'
+local Autocmd = require 'utils.core.autocmd'
 
 
 -- so lines inserted from comments don't cause comment continuation

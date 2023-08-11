@@ -1,4 +1,4 @@
-local Git = require 'lua.utils.api.git'
+local Git = require 'utils.api.git'
 
 
 --- Contains methods for interacting w/ nvim-tree.

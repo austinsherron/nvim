@@ -1,6 +1,6 @@
 require 'lazy.types'
 
-local Stream = require 'lib.lua.extensions.stream'
+local Stream = require 'toolbox.extensions.stream'
 
 
 --- Internal helper that exists to clear a plugin's __index function and avoid infinite recursion.

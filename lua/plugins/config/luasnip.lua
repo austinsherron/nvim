@@ -1,4 +1,4 @@
-local Env = require 'lib.lua.system.env'
+local Env = require 'toolbox.system.env'
 
 
 local SNIPPET_LIBRARY = Env.code_root() .. '/snippets/lua/snippets/library/'

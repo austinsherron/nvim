@@ -1,4 +1,4 @@
-local KM = require 'lua.utils.core.mapper'
+local KM = require 'utils.core.mapper'
 
 
 -- alpha -----------------------------------------------------------------------

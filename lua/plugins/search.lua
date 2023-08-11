@@ -5,8 +5,8 @@
   make it easier to find things
 --]]
 
-local Telescope = require 'lua.plugins.config.telescope'
-local Plugins   = require('lua.utils.plugins.plugin').plugins
+local Telescope = require 'plugins.config.telescope'
+local Plugins   = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
