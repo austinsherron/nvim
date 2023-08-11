@@ -23,10 +23,17 @@ local function get_lua_path(trim_wild)
 end
 
 
+local function get_internal_wkspace_lib()
+  return {
+    Env.code_root() .. '/lib/lua',
+  }
+end
+
+
 local function get_wkspace_lib()
   return Table.concat({
-    get_lua_path(),
-    get_nvim_runtime_files('', true),
+    get_internal_wkspace_lib(),
+    get_nvim_runtime_files('lua', true),
   })
 end
 

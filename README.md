@@ -99,9 +99,12 @@ I organize my plugins into the following categories:
 - [ ] Zsh
 - [ ] Fish
 - [ ] JavaScript
+- [ ] Json
+- [ ] Toml
 - [ ] TypeScript
 - [ ] K8S Yaml
 - [ ] Terraform
+- [ ] Yaml
 
 ### Tasks
 
@@ -135,6 +138,7 @@ I organize my plugins into the following categories:
 - [ ] Use lsp hooks to plug into lsp, instead of baking dependent code directly into lsp setup
 - [ ] Continue comments only in docstrings
 - [ ] Automatically add new params to docstrings
+- [ ] Add unit tests
 
 ### Fixes
 

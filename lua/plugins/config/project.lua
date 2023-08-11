@@ -12,7 +12,8 @@ function Project.opts()
     detection_methods = { 'pattern' },
     exclude_dirs = {
       -- exclude plugins
-      Env.nvundle() .. '/*'
+      Env.nvundle() .. '/*',          -- exclude plugins
+      Env.external_pkgs() .. '/*',    -- exclude external repos
     },
   }
 end
