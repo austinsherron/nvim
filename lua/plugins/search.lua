@@ -5,7 +5,7 @@
   make it easier to find things
 --]]
 
-local Telescope = require 'plugins.config.telescope'
+local Telescope = require 'plugins.config.search.telescope'
 local Plugins   = require('utils.plugins.plugin').plugins
 
 

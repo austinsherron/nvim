@@ -6,9 +6,9 @@
   something, or at least be informational
 --]]
 
--- local alpha = require 'plugins.config.alphanvim'
-local Babar    = require 'plugins.config.barbar'
-local Lualine  = require 'plugins.config.lualine'
+-- local alpha = require 'plugins.config.interface.alphanvim'
+local Babar    = require 'plugins.config.interface.barbar'
+local Lualine  = require 'plugins.config.interface.lualine'
 local Plugins  = require('utils.plugins.plugin').plugins
 local Priority = require 'utils.plugins.priority'
 

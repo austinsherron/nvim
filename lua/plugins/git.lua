@@ -5,9 +5,9 @@
   enable nvim git interactions/integrations
 --]]
 
-local Diffview = require 'plugins.config.diffview'
-local Gitsigns = require 'plugins.config.gitsigns'
-local Neogit   = require 'plugins.config.neogit'
+local Diffview = require 'plugins.config.git.diffview'
+local Gitsigns = require 'plugins.config.git.gitsigns'
+local Neogit   = require 'plugins.config.git.neogit'
 local Plugins  = require('utils.plugins.plugin').plugins
 
 

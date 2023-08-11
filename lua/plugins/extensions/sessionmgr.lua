@@ -1,4 +1,4 @@
-local SessionConfigMgr = require 'plugins.config.sessionmgr'
+local SessionConfigMgr = require 'plugins.config.editor.sessionmgr'
 local Telescope        = require 'plugins.extensions.telescope'
 local session_utils    = require 'session_manager.utils'
 local actions          = require 'telescope.actions'

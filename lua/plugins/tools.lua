@@ -8,7 +8,7 @@
   plugins
 --]]
 
-local Template = require 'plugins.config.template'
+local Template = require 'plugins.config.tools.template'
 local Plugins  = require('utils.plugins.plugin').plugins
 
 

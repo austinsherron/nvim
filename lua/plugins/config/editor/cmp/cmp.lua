@@ -1,7 +1,7 @@
 local LspKind = require 'lspkind'
 local KM      = require 'keymap.plugins.editor.cmp'
-local Src     = require 'plugins.config.cmp.sources'
-local LuaSnip = require 'plugins.config.luasnip'
+local Src     = require 'plugins.config.editor.cmp.sources'
+local LuaSnip = require 'plugins.config.code.luasnip'
 
 
 --- For internal use: allows us to reference cmp config methods dynamically.

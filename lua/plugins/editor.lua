@@ -5,10 +5,10 @@
   control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
-local AutoPairs  = require 'plugins.config.autopairs'
-local Cmp        = require 'plugins.config.cmp.cmp'
-local Indent     = require 'plugins.config.indent'
-local SessionMgr = require 'plugins.config.sessionmgr'
+local AutoPairs  = require 'plugins.config.editor.autopairs'
+local Cmp        = require 'plugins.config.editor.cmp.cmp'
+local Indent     = require 'plugins.config.interface.indent'
+local SessionMgr = require 'plugins.config.editor.sessionmgr'
 local Plugins    = require('utils.plugins.plugin').plugins
 
 

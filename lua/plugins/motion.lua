@@ -6,7 +6,7 @@
 --]]
 
 local Leap        = require 'keymap.plugins.motion.leap'
-local NvimTmuxNav = require 'plugins.config.nvimtmuxnav'
+local NvimTmuxNav = require 'plugins.config.motion.nvimtmuxnav'
 local Plugins     = require('utils.plugins.plugin').plugins
 
 

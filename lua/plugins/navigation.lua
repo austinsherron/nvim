@@ -5,8 +5,8 @@
    control (file) system (as opposed to on-screen) movement
 --]]
 
-local NvimTree = require 'plugins.config.nvimtree'
-local Project  = require 'plugins.config.project'
+local NvimTree = require 'plugins.config.navigation.nvimtree'
+local Project  = require 'plugins.config.navigation.project'
 local Plugins  = require('utils.plugins.plugin').plugins
 
 

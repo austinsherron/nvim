@@ -6,13 +6,13 @@
 --]]
 
 local Lsp        = require 'lsp'
-local Aerial     = require 'plugins.config.aerial'
-local Fidget     = require 'plugins.config.fidget'
-local LuaSnip    = require 'plugins.config.luasnip'
-local Mason      = require 'plugins.config.mason'
-local SnipRun    = require 'plugins.config.sniprun'
-local Treesitter = require 'plugins.config.treesitter'
-local TreeSJ     = require 'plugins.config.treesj'
+local Aerial     = require 'plugins.config.code.aerial'
+local Fidget     = require 'plugins.config.code.fidget'
+local LuaSnip    = require 'plugins.config.code.luasnip'
+local Mason      = require 'plugins.config.code.mason'
+local SnipRun    = require 'plugins.config.code.sniprun'
+local Treesitter = require 'plugins.config.code.treesitter'
+local TreeSJ     = require 'plugins.config.code.treesj'
 local Plugins    = require('utils.plugins.plugin').plugins
 
 

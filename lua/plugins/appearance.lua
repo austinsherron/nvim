@@ -7,7 +7,7 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
-local LspKind  = require 'plugins.config.lspkind'
+local LspKind  = require 'plugins.config.appearance.lspkind'
 local Plugins  = require('utils.plugins.plugin').plugins
 local Priority = require 'utils.plugins.priority'
 
