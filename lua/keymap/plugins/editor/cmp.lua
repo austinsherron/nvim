@@ -17,9 +17,7 @@ local function make_select_expand_or_complete(cmp, luasnip)
   return function(fallback)
     if cmp.visible() then
       cmp.select_next_item()
-    -- consider using expand_or_locally_jumpable: that way we only jump inside
-    -- the snippet region
-    elseif luasnip.expand_or_jumpable() then
+    elseif luasnip.expand_or_locally_jumpable() then
       luasnip.expand_or_jump()
     elseif has_words_before() then
       cmp.complete()
@@ -97,11 +95,11 @@ function Cmp.make_mapping()
   local luasnip = require 'luasnip'
 
   return cmp.mapping.preset.insert({
-    ['<Tab>']     = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's' }),
-    ['<S-Tab>']   = cmp.mapping(make_prev_or_contract(cmp, luasnip), { 'i', 's' }),
-    ['<leader>j'] = cmp.mapping(make_next_choice(luasnip), { 'i', 's' }),
-    ['<leader>k'] = cmp.mapping(make_prev_choice(luasnip), { 'i', 's' }),
-    ['<CR>']      = cmp.mapping({
+    ['<Tab>']   = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip), { 'i', 's' }),
+    ['<Down>']  = cmp.mapping(make_next_choice(luasnip), { 'i', 's' }),
+    ['<Up>']    = cmp.mapping(make_prev_choice(luasnip), { 'i', 's' }),
+    ['<CR>']    = cmp.mapping({
       i = make_select_with_enter(cmp),
       s = cmp.mapping.confirm({ select = true }),
       c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),

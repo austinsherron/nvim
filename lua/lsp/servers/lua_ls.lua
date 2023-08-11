@@ -5,6 +5,8 @@ local get_nvim_runtime_files = vim.api.nvim_get_runtime_file
 
 
 local function get_lua_path(trim_wild)
+  trim_wild = trim_wild or false
+
   local lua_path = Env.lua_path()
   local split_lua_path = String.split(lua_path, ';')
 
@@ -26,6 +28,7 @@ end
 local function get_internal_wkspace_lib()
   return {
     Env.code_root() .. '/lib/lua',
+    Env.code_root() .. '/snippets/lua/',
   }
 end
 
@@ -41,23 +44,23 @@ end
 return {
   settings = {
     Lua = {
-      runtime = {
-        -- tell the language server which version of lua we're using (most likely luajit in the case of neovim)
-        version = 'LuaJIT',
-        path    = get_lua_path(false),
-      },
       diagnostics = {
         -- so vim global is recognized
         globals = { 'vim' },
       },
-      workspace = {
-        -- make server aware of neovim runtime files
-        library         = get_wkspace_lib(),
-        checkThirdParty = false,
+      runtime = {
+        path    = get_lua_path(false),
+        -- tell the language server which version of lua we're using (most likely luajit in the case of neovim)
+        version = 'LuaJIT',
       },
       -- don't send telemetry data (contains a randomized but unique identifier)
       telemetry = {
         enable = false,
+      },
+      workspace = {
+        checkThirdParty = false,
+        -- make server aware of neovim runtime files
+        library         = get_wkspace_lib(),
       },
     },
   },
