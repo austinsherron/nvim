@@ -15,7 +15,9 @@ function SessionMgr.config()
   require('session_manager').setup({
     -- same as default but want to make explicit since this has other dependencies
     sessions_dir = SESSIONS_DIR,
-    autload_mode = AutoloadMode.CurrentDir,
+    -- disabling so I can take matters into my own hands;
+    -- see lua/core/auto/before/workspace.lua
+    autload_mode = AutoloadMode.Disabled,
   })
 end
 

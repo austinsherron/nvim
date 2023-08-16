@@ -11,9 +11,10 @@ function Project.opts()
   return {
     detection_methods = { 'pattern' },
     exclude_dirs = {
-      -- exclude plugins
       Env.nvundle() .. '/*',          -- exclude plugins
       Env.external_pkgs() .. '/*',    -- exclude external repos
+      Env.nvim_root_pub(),            -- exclude "deployed" nvim
+      Env.editors_root() .. '/nvim',  -- exclude nvim submodule
     },
   }
 end

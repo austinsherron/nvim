@@ -131,7 +131,7 @@ I organize my plugins into the following categories:
 - [x] Telescope picker for package dir (i.e.: plugins)
 - [x] Homegrown session manager (got most [much?] of the way there and then figured out how to make session manager plugin do what I want it to [i.e.: session per dir, more or less])
 - [x] Customize titles in contextual telescope extension search
-- [ ] Git interactions from nvimtree
+- [ ] Git interactions from nvimtree (partially there w/ stage/unstage)
 - [ ] Add LuaSnip custom snippets
 - [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
 - [ ] Refactor nvim utils to separate repo? (at least those that would be/are useful for plugins as well)
@@ -139,6 +139,12 @@ I organize my plugins into the following categories:
 - [ ] Continue comments only in docstrings
 - [ ] Automatically add new params to docstrings
 - [ ] Add unit tests
+- [ ] Add Lualine support for projects
+- [ ] Add Lualine support for sessions
+- [ ] Add more systematic logging
+- [ ] Add more systematic error-handling
+- [ ] Add augroup's to autocmds
+- [ ] Add leap highlight
 
 ### Fixes
 
@@ -162,4 +168,5 @@ I organize my plugins into the following categories:
 - [ ] Fix leap.nvim repeat functionality
 - [ ] Figure out why barbar diagnostics don't work
 - [x] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/ (ended up being an issues w/ the way "require paths" were being constructed for recursive calls)
+- [ ] Fix issues w/ session mgr. isn't restoring sessions from cwd even though I'm now manually setting it
 

@@ -1,37 +1,31 @@
+require 'utils.globals'                -- import globals before doing anything else
 
--- globals ---------------------------------------------------------------------
+---------- bootstrap ----------
 
--- import globals before doing anything else
-require 'utils.globals'
+Safe.require 'core.bootstrap'          -- "bootstrap" settings must come first
 
--- init ------------------------------------------------------------------------
+-------- commands, pre --------
 
--- "bootstrap" settings must come first
-Safe.require 'core.bootstrap'
+Safe.require 'core.cmd.auto.before'    -- some cmds should load before plugins
 
--- plugins ---------------------------------------------------------------------
+----------- plugins -----------
 
--- settings/keymap have dependencies on plugins, so load them first
+-- plugins
 Safe.require(
-  'utils.plugins.pluginmanager',
+  'utils.plugins.pluginmanager',       -- load plugins as early as reasonably possible
   function(m) m.init('plugins') end
 )
 
--- commands --------------------------------------------------------------------
+------- commands, post --------
 
--- keymap has dependencies on commands
+-- commands, post-plugin
+Safe.require 'core.cmd.auto.after'     -- some cmds may depend on plugins, so load after
 Safe.require 'core.cmd.user'
-Safe.require 'core.cmd.auto'
 
--- keymap ----------------------------------------------------------------------
+----------- config ------------
 
-Safe.require 'keymap'
-
--- settings --------------------------------------------------------------------
-
-Safe.require 'core.settings'
-
--- appearance ------------------------------------------------------------------
-
-Safe.require 'core.appearance'
+-- remaining configuration:
+Safe.require 'keymap'                  -- keymap
+Safe.require 'core.settings'           -- core settings
+Safe.require 'core.appearance'         -- colorscheme
 

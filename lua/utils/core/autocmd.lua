@@ -11,7 +11,7 @@ local TMerge   = require 'utils.api.vim.tablemerge'
 ---@see vim.api.nvim_del_autocmd
 ---@class AutoCommand
 ---@field private id number?: the id of an autocommand; required for deletion
----@field private group (string|integer)?: the name or id of an autocommand's group
+---@field private group (integer)?: the name or id of an autocommand's group
 ---@field private pattern string[]?: file name pattern(s) that determine(s) for which files an
 --- autocommand should run
 ---@field private buffer integer?: buffer id for buffer-local autocommands
@@ -68,12 +68,24 @@ function AutoCommand:withEvents(events)
 end
 
 
+local function create_or_get_group(group_name, options)
+  return Safe.call(function()
+    return vim.api.nvim_create_augroup(group_name, options or {})
+  end)
+end
+
+
 --- Adds group to instance.
 ---
+--- Note: if a group w/ name == group doesn't already exist, this method will create it.
+---
 ---@param group string|integer: group to add to instance
+---@param options { clear: boolean? }|nil: options for creation/retrieving the augroup
+--- see vim.api.nvim_create_augroup
 ---@return AutoCommand: self
-function AutoCommand:withGroup(group)
-  self.group = group
+function AutoCommand:withGroup(group, options)
+  self.group = create_or_get_group(group, options)
+  InfoQuietly({ 'Created augroup=', group })
   return self
 end
 
@@ -158,6 +170,33 @@ local function validate(required, config, op)
 end
 
 
+---@private
+function AutoCommand:_create(config)
+  config = TMerge.mergeleft(self, config or {})
+
+  local options, rest = Table.split_one(config, 'opts')
+  config = TMerge.mergeleft(options, rest)
+
+  validate({ 'event', { 'callback', 'command' }}, config, 'create')
+
+  local event, opts = Table.split_one(config, 'event')
+  DebugQuietly({ 'Creating autocmd for event=', event, ' with opts=', opts })
+
+  self.id = vim.api.nvim_create_autocmd(event, opts)
+  return self.id
+end
+
+
+---@private
+function AutoCommand:create_log_msg(id)
+  return string.format(
+    'Created autocmd (id=%d,desc=%s)',
+    id,
+    (self.desc or '?')
+  )
+end
+
+
 --- Creates an autocommand.
 ---
 --- Note: this method sets this instance's "id" attribute as the id of the created
@@ -169,17 +208,21 @@ end
 ---@return number: the id of the created autocommand
 ---@error if event and callback or command don't exist in config or in this instance
 function AutoCommand:create(config)
+  return ThisThenLog(
+    Safe.ify(function() return self:_create(config) end),
+    function(id) InfoQuietly(self:create_log_msg(id)) end
+  )
+end
+
+
+---@private
+function AutoCommand:_delete(config)
   config = TMerge.mergeleft(self, config or {})
 
-  local options, rest = Table.split_one(config, 'opts')
-  config = TMerge.mergeleft(options, rest)
+  validate({ 'id' }, config, 'delete')
 
-  validate({ 'event', { 'callback', 'command' }}, config, 'create')
-
-  local event, opts = Table.split_one(config, 'event')
-
-  self.id = vim.api.nvim_create_autocmd(event, opts)
-  return self.id
+  vim.api.nvim_del_autocmd(config.id)
+  return config.id
 end
 
 
@@ -190,11 +233,10 @@ end
 ---are encountered
 ---@error if id doesn't exist in config or in this instance
 function AutoCommand:delete(config)
-  config = TMerge.mergeleft(self, config or {})
-
-  validate({ 'id' }, config, 'delete')
-
-  vim.api.nvim_del_autocmd(config.id)
+  return ThisThenLog(
+    Safe.ify(function() return self:_delete(config) end),
+    function(id) InfoQuietly('Deleted autocmd (id=' .. tostring(id) .. ')') end
+  )
 end
 
 return AutoCommand

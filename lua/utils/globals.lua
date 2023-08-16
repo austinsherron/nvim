@@ -1,20 +1,8 @@
-local Lazy = require 'toolbox.utils.lazy'
 
+-- logging utils
+require 'utils.reporting.globals'
 
--- logger ----------------------------------------------------------------------
-
----@type fun(): l: NvimLogger
-GetLogger = Lazy.require('utils.reporting.logger')
-
--- global logging helpers
-function Trace(...) GetLogger():trace(...) end
-function Debug(...) GetLogger():debug(...) end
-function Info (...) GetLogger():info (...) end
-function Warn (...) GetLogger():warn (...) end
-function Error(...) GetLogger():error(...) end
-
--- imports ---------------------------------------------------------------------
-
+-- generally useful, oft imported utils
 Bool   = require 'toolbox.core.bool'
 String = require 'toolbox.core.string'
 Table  = require 'toolbox.core.table'
