@@ -29,20 +29,22 @@ Autocmd.new()
   :withCallback(set_cwd)
   :create()
 
-local function load_cwd_session()
-  session_manager.load_current_dir_session()
-
-  DebugQuietly({ 'Loaded cwd session' })
-  return true
-end
-
--- loads session for cwd; taking this responsibility from session manager since I can't
--- get the plugin to do what I want oob, i.e.: load the right session when I open nvim
--- from a specific dir
-Autocmd.new()
-  :withDesc('Loads session for cwd')
-  :withEvent('VimEnter')
-  :withGroup('UserSession')
-  :withOpt('nested', true)
-  :withCallback(load_cwd_session)
-  :create()
+-- TODO: the below wasn't working due to barbar integration issue; will figure this out
+--       soon, but need to revert in the meantime
+-- local function load_cwd_session()
+--   session_manager.load_current_dir_session()
+--
+--   DebugQuietly({ 'Loaded cwd session' })
+--   return true
+-- end
+--
+-- -- loads session for cwd; taking this responsibility from session manager since I can't
+-- -- get the plugin to do what I want oob, i.e.: load the right session when I open nvim
+-- -- from a specific dir
+-- Autocmd.new()
+--   :withDesc('Loads session for cwd')
+--   :withEvent('VimEnter')
+--   :withGroup('UserSession')
+--   :withOpt('nested', true)
+--   :withCallback(load_cwd_session)
+--   :create()

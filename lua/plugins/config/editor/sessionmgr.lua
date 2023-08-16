@@ -17,7 +17,9 @@ function SessionMgr.config()
     sessions_dir = SESSIONS_DIR,
     -- disabling so I can take matters into my own hands;
     -- see lua/core/auto/before/workspace.lua
-    autload_mode = AutoloadMode.Disabled,
+    -- TODO: the above wasn't working due to barbar integration issue; will figure this
+    --       out soon, but need to revert in the meantime
+    autload_mode = AutoloadMode.CurrentDir,
   })
 end
 
