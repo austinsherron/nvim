@@ -1,18 +1,42 @@
 local KM = require 'utils.core.mapper'
 
+local Notify = require 'notify'
+
+
+local function make_options(plugin)
+  return function(desc)
+    return { desc = plugin .. ': ' .. desc, nowait = true, silent = true }
+  end
+end
+
+local options
 
 -- alpha -----------------------------------------------------------------------
 
-KM.nnoremap('<leader>0', ':Alpha<CR>', { desc = 'alpha: open startpage' })
+options = make_options('alpha')
+
+KM.nnoremap('<leader>0', ':Alpha<CR>', options('open startpage'))
 
 -- notify ----------------------------------------------------------------------
 
-KM.nnoremap('<leader>3', ':Notifications<CR>', { desc = 'notify: notification history' })
+local function dismiss()
+  Notify.dismiss({ pending = false, silent = false })
+end
+
+options = make_options('notify')
+
+KM.nnoremap('<leader>3', ':Notifications<CR>', options('notification history'))
+KM.nnoremap('<leader>~', dismiss,              options('dismiss notifications'))
+
+-- sidebar ---------------------------------------------------------------------
+
+options = make_options('sidebar')
+
+KM.nnoremap('<leader>2', ':SidebarNvimToggle<CR>', options('toggle'))
 
 -- undotree --------------------------------------------------------------------
 
-local options = { desc = 'undo: toggle', nowait = true, silent = true }
+options = make_options('undotree')
 
-KM.nnoremap('<leader>2', ':UndotreeToggle | UndotreeFocus<CR>', options)
-
+KM.nnoremap('<leader>4', ':UndotreeToggle | UndotreeFocus<CR>', options('toggle'))
 

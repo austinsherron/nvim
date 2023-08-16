@@ -53,7 +53,8 @@ KM.nnoremap('<M-p>', ':BufferPick<CR>',   options('go to...'))
 
 -- current
 KM.nnoremap('<leader>x', ':BufferClose<CR>', options('close'))
-KM.nnoremap('<M-w>',     ':BufferClose<CR>', options('close'))
+KM.nnoremap('<M-x>',     ':BufferClose<CR>', options('close'))
+
 
 -- all but current
 KM.nnoremap('<leader>X', ':BufferCloseAllButCurrent<CR>', options('close all but current'))
@@ -61,7 +62,7 @@ KM.nnoremap('<S-M-X>',   ':BufferCloseAllButCurrent<CR>', options('close all but
 
 -- restore
 KM.nnoremap('<leader>br',   ':BufferRestore<CR>', options('restore'))
-KM.nnoremap('<S-M-T>',      ':BufferRestore<CR>', options('restore'))
+KM.nnoremap('<M-S-B>',      ':BufferRestore<CR>', options('restore'))
 
 -- misc ops --------------------------------------------------------------------
 

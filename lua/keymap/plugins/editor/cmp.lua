@@ -82,6 +82,17 @@ local function make_select_with_enter(cmp)
   end
 end
 
+
+local function make_close_cmp_menu(cmp)
+  return function(fallback)
+    if cmp.visible() then
+      cmp.close()
+    else
+      fallback()
+    end
+  end
+end
+
 --- Contains methods for configuring key bindings for auto-completion (nvim-cmp).
 ---
 ---@class Cmp
@@ -96,9 +107,10 @@ function Cmp.make_mapping()
 
   return cmp.mapping.preset.insert({
     ['<Tab>']   = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip), { 'i', 's' }),
-    ['<Down>']  = cmp.mapping(make_next_choice(luasnip), { 'i', 's' }),
-    ['<Up>']    = cmp.mapping(make_prev_choice(luasnip), { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip),          { 'i', 's' }),
+    ['<Down>']  = cmp.mapping(make_next_choice(luasnip),                    { 'i', 's' }),
+    ['<Up>']    = cmp.mapping(make_prev_choice(luasnip),                    { 'i', 's' }),
+    ['<C-x>']   = cmp.mapping(make_close_cmp_menu(cmp),                     { 'i', 's' }),
     ['<CR>']    = cmp.mapping({
       i = make_select_with_enter(cmp),
       s = cmp.mapping.confirm({ select = true }),

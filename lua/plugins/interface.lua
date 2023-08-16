@@ -81,6 +81,15 @@ return Plugins({
       vim.notify = require('notify')
     end
   },
+---- sidebar: module siderbar (TODO: configure further)
+  {
+    'sidebar-nvim/sidebar.nvim',
+    opts = {},
+
+    config = function (_, opts)
+      require('sidebar-nvim').setup(opts)
+    end
+  },
 ---- undotree: visualize a file/buffer's change history
   { 'mbbill/undotree' },
 ---- which-key: visualize keybindings based on what's typed

@@ -11,8 +11,13 @@ end
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<leader>1',  ':NvimTreeToggle<CR>',    options('toggle'))
+KM.nnoremap('<M-S-T>', ':NvimTreeFocus<CR>', options('focus'))
+
+KM.nnoremap('<leader>1', ':NvimTreeToggle<CR>', options('toggle'))
+KM.nnoremap('<M-t>',     ':NvimTreeToggle<CR>', options('toggle'))
+
 KM.nnoremap('<leader>F',  ':NvimTreeFindFile<CR>',  options('find file in tree'))
+KM.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>', options('find file in tree!'))
 KM.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>', options('find file in tree!'))
 
 -- on_attach -------------------------------------------------------------------

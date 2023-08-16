@@ -76,5 +76,29 @@ function Git.stash(msg)
   System.run('git stash' .. msg_arg)
 end
 
+
+--- Clones the provided github repo to dir w/ the given options.
+---
+---@param repo string: the repo to clone in the form "owner/repo-name", w/o .git suffix
+---@param dir string|nil: the path to which to clone the repo; if nil, uses the cwd
+---@param options table|nil: options to pass to the clone command; flags should not be
+--- prefixed w/ "--"
+function Git.clone(repo, dir, options)
+  options = Table.map_items(
+    options or {},
+    { keys = function(k, v) return string.format('--%s=%s', k, v) end }
+  )
+
+  local url = 'https://github.com/' .. repo .. '.git'
+  local cmd = Table.concat({
+    { 'git', 'clone', },
+    options,
+    { url },
+    ternary(dir == nil, {}, { dir }),
+  })
+
+  System.run(cmd)
+end
+
 return Git
 

@@ -13,11 +13,12 @@ end
 
 -- save
 KM.nnoremap('<leader>w', ':w<CR>',   options('save one'))
+KM.nnoremap('<M-w>',     ':w<CR>',   options('save one'))
 KM.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
 
 -- close/quit
 KM.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
-KM.nnoremap('<leader>Q', ':qa<CR>',   options('quit/close all'))
+KM.nnoremap('<leader>Q', ':qa<CR>',  options('quit/close all'))
 KM.nnoremap('<leader>!', ':qa!<CR>', options('force quit'))
 
 -- <esc>
