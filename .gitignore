@@ -1,6 +1,5 @@
 .luarc.json
 *.netrwhist
-spell
 packages/
 *.tmp
 *.bak
