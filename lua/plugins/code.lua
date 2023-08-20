@@ -20,6 +20,8 @@ return Plugins({
 ---- aerial: code outlines
   {
     'stevearc/aerial.nvim',
+    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
+    enabled      = false,
     opts         = Aerial.opts(),
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
@@ -107,7 +109,9 @@ return Plugins({
 ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = Treesitter.opts(),
+    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
+    enabled = false,
+    opts    = Treesitter.opts(),
 
     build = function()
       require('nvim-treesitter.install').update(Treesitter.build())
@@ -120,8 +124,10 @@ return Plugins({
 ---- TreeSJ: split/join semantic blocks of code
   {
     'Wansmer/treesj',
+    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
+    enabled      = false,
+    opts         = TreeSJ.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    opts = TreeSJ.opts(),
 
     config = function(_, opts)
       require('treesj').setup(opts)

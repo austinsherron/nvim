@@ -1,5 +1,6 @@
 
-local TELESCOPE_EXTENSIONS = { 'aerial', 'emoji', 'frecency', 'projects', 'undo' }
+-- TODO: re-add  once I figure out the issue(s) w/ treesitter (ts-issue-marker)
+local TELESCOPE_EXTENSIONS = { --[['aerial',]] 'emoji', 'frecency', 'projects', 'undo' }
 
 local function load_telescope_ext(name)
   require('telescope').load_extension(name)
