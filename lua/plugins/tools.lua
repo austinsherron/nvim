@@ -31,8 +31,6 @@ return Plugins({
 ---- neogen: docstring generation
   {
     'danymat/neogen',
-    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
-    enabled      = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = true,
   },

@@ -109,8 +109,7 @@ function Cmp.config()
   _Cmp.base(cmp)
   _Cmp.filetype(cmp)
   _Cmp.cmdline(cmp)
--- TODO: re-add  once I figure out the issue(s) w/ treesitter (ts-issue-marker)
-  -- _Cmp.autopairs(cmp)
+  _Cmp.autopairs(cmp)
 end
 
 return Cmp

@@ -16,8 +16,6 @@ return Plugins({
 ---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
   {
     'windwp/nvim-autopairs',
-    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
-    enabled      = false,
     event        = 'InsertEnter',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = AutoPairs.config
@@ -110,8 +108,6 @@ return Plugins({
 ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
   {
     'HiPhish/nvim-ts-rainbow2',
-    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
-    enabled      = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 ---- surround: efficient manipulation of brackets, quotes, etc.
@@ -125,18 +121,15 @@ return Plugins({
     end
   },
 ---- treesitter-endwise: automatically close various semantic structures, i.e.: if-then-end, etc.
+---- TODO: doesn't work at the moment (08/25/2023, after "fixing" treesitter highlight issue)
   {
     'RRethy/nvim-treesitter-endwise',
-    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
-    enabled      = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event        = 'InsertEnter',
   },
 ---- treesitter-playground: view treesitter functional info in nvim
   {
     'nvim-treesitter/playground',
-    -- TODO: enable once I figure out the issue(s) w/ treesitter (ts-issue-marker)
-    enabled      = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 })
