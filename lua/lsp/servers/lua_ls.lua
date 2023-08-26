@@ -71,7 +71,11 @@ return {
     Lua = {
       diagnostics = {
         -- so vim global is recognized
-        globals = { 'vim' },
+        globals = {
+          'describe',
+          'it',
+          'vim',
+        },
       },
       runtime = {
         path    = get_lua_path(false),

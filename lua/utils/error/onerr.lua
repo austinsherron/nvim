@@ -9,7 +9,7 @@ local function make_title(prefix)
   local title = 'Error encountered'
 
   return ternary(
-    String.is_nil_or_empty(prefix),
+    String.nil_or_empty(prefix),
     title,
     function() return title .. ' in ' .. prefix end
   )

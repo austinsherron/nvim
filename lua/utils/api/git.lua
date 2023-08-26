@@ -73,7 +73,7 @@ function Git.stash(msg)
     function() return ' -m ' .. msg end,
     ''
   )
-  System.run('git stash' .. msg_arg)
+  System.run('git stash ' .. msg_arg)
 end
 
 
