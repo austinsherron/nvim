@@ -14,7 +14,7 @@ end
 -- save
 KM.nnoremap('<leader>w', ':w<CR>',   options('save one'))
 KM.nnoremap('<M-w>',     ':w<CR>',   options('save one'))
-KM.nnoremap('<leader>W', ':wqa<CR>', options('save all + quit'))
+KM.nnoremap('<leader>W', ':wqa!<CR>', options('save all + quit'))
 
 -- close/quit
 KM.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
@@ -34,7 +34,7 @@ KM.inoremap('<C-c>', '<Esc>',    options('exit/back'))
 KM.nmap('<C-N><C-N>', ':set invrelativenumber<CR>', options('toggle relative line #'))
 
 -- close quickfix window
-KM.nmap('<leader>cq', ':cclose<CR>', options('close quickfix window'))
+KM.nmap('<leader>cx', ':cclose<CR>', options('close quickfix window'))
 
 -- motion ----------------------------------------------------------------------
 

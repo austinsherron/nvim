@@ -93,7 +93,8 @@ return Plugins({
 ---- indent-blankline: indentation guides
   {
     'lukas-reineke/indent-blankline.nvim',
-    opts = Indent.opts(),
+    opts         = Indent.opts(),
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
     config = function(_, opts)
       require('indent_blankline').setup(opts)

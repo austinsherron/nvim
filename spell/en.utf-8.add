@@ -49,6 +49,7 @@ autocommands
 autogroup
 automations
 autopairs
+AutoPairs
 autosession
 bak
 balenaEtcher
@@ -261,6 +262,7 @@ fullscreen
 func
 functionality
 fzf
+getcmdline
 getcwd
 getLogger
 GetLogger
@@ -619,6 +621,7 @@ searchline
 see
 see/!
 See
+seldomly
 selectioncount
 sep
 serializable
@@ -681,6 +684,7 @@ stringify
 strs
 stsh
 subcommand
+subdir
 submodule
 Submodule
 submodules
@@ -780,6 +784,7 @@ UserCommandConfig
 UserLog
 UserLogs
 UserLspConfig
+UserWorkspace
 usr
 utf
 util
@@ -848,3 +853,5 @@ Zorin
 zoxide
 zquestz
 Zsh
+LazyImport
+metamethods

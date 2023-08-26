@@ -2,6 +2,11 @@ local Stream = require 'toolbox.extensions.stream'
 local Env    = require 'toolbox.system.env'
 
 
+local BUSTED_GLOBALS = { 'assert', 'describe', 'it', 'spy' }
+local NVIM_GLOBALS = { 'vim' }
+local GLOBALS =  Table.concat({ BUSTED_GLOBALS, NVIM_GLOBALS })
+local LUA_VERSION = 'LuaJIT'
+
 local function filter_lua_runtime_path(path)
   local nvim_root_pub = Env.nvim_root_pub()
   local nvim_submodule = Env.nvim_submodule()
@@ -70,17 +75,13 @@ return {
   settings = {
     Lua = {
       diagnostics = {
-        -- so vim global is recognized
-        globals = {
-          'describe',
-          'it',
-          'vim',
-        },
+        -- so globals (i.e.: vim, busted > describe, it, etc....)
+        globals = GLOBALS,
       },
       runtime = {
         path    = get_lua_path(false),
         -- tell the language server which version of lua we're using (most likely luajit in the case of neovim)
-        version = 'LuaJIT',
+        version = LUA_VERSION,
       },
       -- don't send telemetry data (contains a randomized but unique identifier)
       telemetry = {

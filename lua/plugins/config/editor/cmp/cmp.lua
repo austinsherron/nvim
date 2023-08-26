@@ -2,7 +2,16 @@ local LspKind = require 'lspkind'
 local KM      = require 'keymap.plugins.editor.cmp'
 local Src     = require 'plugins.config.editor.cmp.sources'
 local LuaSnip = require 'plugins.config.code.luasnip'
+local Editor  = require 'utils.api.vim.editor'
 
+
+local CMDLINE_DISABLED_CMDS = Set.new({
+  'IncRename',
+  'e',
+  'split',
+  'vsp',
+  'vsplit',
+})
 
 --- For internal use: allows us to reference cmp config methods dynamically.
 ---
@@ -58,15 +67,25 @@ end
 --- Auto-completion configuration for the searchline (i.e.: current buffer search -> `/` and `?`)
 --- (if native_menu = false).
 ---
---- Note: I found it rather annoying to have auto-completion in the searchline, so I
---- removed it from the Cmp.config impl by not adding it to _Cmp.
+--- Note: I found it rather annoying to have auto-completion in the searchline, so I've
+--- disabled it until further notice.
 --
 ---@param cmp table: the cmp module
-local function searchline(cmp)
+function _Cmp.searchline(cmp)
   cmp.setup.cmdline({ '/', '?' }, {
+    enabled = false,
     mapping = cmp.mapping.preset.cmdline(),
     sources = { Src.buffer(), Src.path() }
   })
+end
+
+
+local function should_complete_cmdline()
+  local cmd = String.firstword(Editor.cmdline())
+
+  DebugQuietly({ '_Cmp.should_complete_cmdline: cmd=', cmd })
+
+  return not CMDLINE_DISABLED_CMDS:contains(cmd)
 end
 
 
@@ -75,6 +94,7 @@ end
 ---@param cmp table: the cmp module
 function _Cmp.cmdline(cmp)
   cmp.setup.cmdline(':', {
+    enabled = should_complete_cmdline,
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'cmdline' },
@@ -108,6 +128,7 @@ function Cmp.config()
 
   _Cmp.base(cmp)
   _Cmp.filetype(cmp)
+  _Cmp.searchline(cmp)
   _Cmp.cmdline(cmp)
   _Cmp.autopairs(cmp)
 end
