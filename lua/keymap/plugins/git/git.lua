@@ -1,35 +1,30 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function make_options(plugin)
-  return function(desc)
-    return { desc = plugin .. ': ' .. desc, nowait = true }
-  end
-end
-
-local options
+local KM = KeyMapper.new({ nowait = true })
 
 -- diffview --------------------------------------------------------------------
 
-options = make_options('diffview')
-
-KM.nnoremap('<leader>dv', ':DiffviewOpen<CR>',          options('open diff/merge view'))
-KM.nnoremap('<leader>dx', ':DiffviewClose<CR>',         options('close diff/merge view'))
-KM.nnoremap('<leader>dh', ':DiffviewFileHistory<CR>',   options('show all history'))
-KM.nnoremap('<leader>df', ':DiffviewFileHistory %<CR>', options('show file history'))
+KM:with({ desc_prefix = 'diffview: ' })
+  :bind({
+    { '<leader>dv', ':DiffviewOpen<CR>',          { desc = 'open diff/merge view'  }},
+    { '<leader>dx', ':DiffviewClose<CR>',         { desc = 'close diff/merge view' }},
+    { '<leader>dh', ':DiffviewFileHistory<CR>',   { desc = 'show all history'      }},
+    { '<leader>df', ':DiffviewFileHistory %<CR>', { desc = 'show file history'     }},
+}):done()
 
 -- lazygit ---------------------------------------------------------------------
 
-options = make_options('lazygit')
+KM:with({ desc_prefix = 'lazygit: ' })
+  :bind({
+    { '<leader>go', ':LazyGit<CR>',                  { desc = 'open for cwd'                 }},
+    { '<leader>gf', ':LazyGitFilter<CR>',            { desc = 'view repo commits'            }},
+    { '<leader>gc', ':LazyGitCurrentFile<CR>',       { desc = "open for current file's repo" }},
+    { '<leader>gF', ':LazyGitFilterCurrentFile<CR>', { desc = 'view file commits'            }},
+}):done()
 
-KM.nnoremap('<leader>go', ':LazyGit<CR>',                  options('open for cwd'))
-KM.nnoremap('<leader>gf', ':LazyGitFilter<CR>',            options('view repo commits'))
-KM.nnoremap('<leader>gc', ':LazyGitCurrentFile<CR>',       options("open for current file's repo"))
-KM.nnoremap('<leader>gF', ':LazyGitFilterCurrentFile<CR>', options('view file commits'))
 
 -- neogit ----------------------------------------------------------------------
 
-KM.nnoremap('<leader>G', ':Neogit<CR>', { desc = 'neogit: open' })
+KM:bind_one('<leader>G', ':Neogit<CR>', { desc = 'neogit: open' })
 

@@ -1,39 +1,31 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function make_options(plugin)
-  return function(desc)
-    return { desc = plugin .. ': ' .. desc, nowait = true }
-  end
-end
-
-local options
+local KM = KeyMapper.new({ nowait = true })
 
 -- aerial ----------------------------------------------------------------------
 
-options = make_options('aerial')
+KM:with({ desc_prefix = 'aerial: ' })
+  :bind({
+  { '<leader>a', ':AerialToggle<CR>',    { desc = 'toggle sidebar' }},
+  { '<leader>A', ':AerialNavToggle<CR>', { desc = 'toggle popup'   }},
+}):done()
 
-KM.nnoremap('<leader>a', ':AerialToggle<CR>',    options('toggle sidebar'))
-KM.nnoremap('<leader>A', ':AerialNavToggle<CR>', options('toggle popup'))
+-- -- mason -----------------------------------------------------------------------
 
--- mason -----------------------------------------------------------------------
+KM:with({ desc_prefix = 'mason: ' })
+  :bind({{ '<leader>M', ':Mason<CR>', { desc = 'open lsp mgr.' }}})
+  :done()
 
-options = make_options('mason')
+-- -- sniprun ---------------------------------------------------------------------
 
-KM.nnoremap('<leader>M', ':Mason<CR>', options('open lsp mgr.'))
+KM:with({ desc_prefix = 'sniprun: ' })
+  :bind({{ '<leader>R', ':SnipRun<CR>', { desc = 'run' }, { 'v' }}})
+  :done()
 
--- sniprun ---------------------------------------------------------------------
+-- -- treesj ---------------------------------------------------------------------
 
-options = make_options('sniprun')
-
-KM.vnoremap('<leader>R', ':SnipRun<CR>', options('run'))
-
--- treesj ---------------------------------------------------------------------
-
-options = make_options('TreeSJ')
-
-KM.nnoremap('<leader>m', ':TSJToggle<CR>', options('toggle split/join block'))
-
+KM:with({ desc_prefix = 'TreeSJ: ' })
+  :bind({{ '<leader>m', ':TSJToggle<CR>', { desc = 'toggle split/join block' } }})
+  :done()
 

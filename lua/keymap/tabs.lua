@@ -1,26 +1,23 @@
--- TODO: this file shouldn't be in keymap/plugins; figure out why it's not being read
---       keymap
-
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc)
-    return { desc = 'tabs: ' .. desc, nowait = true }
-end
+local KM = KeyMapper.new({ desc_prefix = 'tabs: ', nowait = true })
 
 -- navigation ------------------------------------------------------------------
 
-KM.nnoremap('<leader>tn', ':tabnext<CR>',     options('next'))
-KM.nnoremap('<leader>tp', ':tabprevious<CR>', options('previous'))
+KM:bind({
+  { '<leader>tn', ':tabnext<CR>',     { desc = 'next'     }},
+  { '<leader>tp', ':tabprevious<CR>', { desc = 'previous' }},
+})
 
 -- core ops --------------------------------------------------------------------
 
-KM.nnoremap('<leader>to', ':tabnew<CR>',   options('open'))
-KM.nnoremap('<leader>tx', ':tabclose<CR>', options('close'))
+KM:bind({
+  { '<leader>to', ':tabnew<CR>',   { desc = 'open'  }},
+  { '<leader>tx', ':tabclose<CR>', { desc = 'close' }},
+})
 
 -- misc. ops -------------------------------------------------------------------
 
-KM.nnoremap('<leader>tl', ':tabs<CR>', options('list'))
+KM:bind_one('<leader>tl', ':tabs<CR>', { desc = 'list' })
 

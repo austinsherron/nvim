@@ -1,24 +1,20 @@
-local Leap   = require 'keymap.plugins.motion.leap'
-local NvTree = require 'plugins.extensions.nvimtree'
-local KM     = require 'utils.core.mapper'
+local Flash     = require 'keymap.plugins.motion.flash'
+local NvTree    = require 'plugins.extensions.nvimtree'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc, bufnr)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, silent = true, nowait = true }
-end
+local KM = KeyMapper.new({ desc_prefix = 'nvim-tree: ', silent = true, nowait = true })
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<M-S-T>', ':NvimTreeFocus<CR>', options('focus'))
+KM:bind({
+  { '<M-S-T>',    ':NvimTreeFocus<CR>',     { desc = 'focus'  }},
+  { '<leader>1',  ':NvimTreeToggle<CR>',    { desc = 'toggle' }},
+  { '<M-t>',      ':NvimTreeToggle<CR>',    { desc = 'toggle' }},
 
-KM.nnoremap('<leader>1', ':NvimTreeToggle<CR>', options('toggle'))
-KM.nnoremap('<M-t>',     ':NvimTreeToggle<CR>', options('toggle'))
-
-KM.nnoremap('<leader>F',  ':NvimTreeFindFile<CR>',  options('find file in tree'))
-KM.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>', options('find file in tree!'))
-KM.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>', options('find file in tree!'))
+  { '<leader>F',  ':NvimTreeFindFile<CR>',  { desc = 'find file in tree'  }},
+  { '<leader>F!', ':NvimTreeFindFile!<CR>', { desc = 'find file in tree!' }},
+})
 
 -- on_attach -------------------------------------------------------------------
 
@@ -34,117 +30,104 @@ KM.nnoremap('<leader>F!', ':NvimTreeFindFile!<CR>', options('find file in tree!'
     but (note from me, Austin) make sure to comment out the replaced mapping to keep
     a readily accessible record of the defaults
 --]]
+
 local function default_mappings(bufnr, api)
-  -- key mappings
-  KM.nnoremap('<C-]>', api.tree.change_root_to_node,          options('CD', bufnr))
-  KM.nnoremap('<C-e>', api.node.open.replace_tree_buffer,     options('Open: In Place', bufnr))
-  KM.nnoremap('<C-k>', api.node.show_info_popup,              options('Info', bufnr))
-  KM.nnoremap('<C-r>', api.fs.rename_sub,                     options('Rename: Omit Filename', bufnr))
-  KM.nnoremap('<C-t>', api.node.open.tab,                     options('Open: New Tab', bufnr))
-  KM.nnoremap('<C-v>', api.node.open.vertical,                options('Open: Vertical Split', bufnr))
-  -- km.nnoremap('<C-x>', api.node.open.horizontal,              options('Open: Horizontal Split', bufnr))
-  KM.nnoremap('<BS>',  api.node.navigate.parent_close,        options('Close Directory', bufnr))
-  KM.nnoremap('<CR>',  api.node.open.edit,                    options('Open', bufnr))
-  KM.nnoremap('<Tab>', api.node.open.preview,                 options('Open Preview', bufnr))
-  KM.nnoremap('>',     api.node.navigate.sibling.next,        options('Next Sibling', bufnr))
-  KM.nnoremap('<',     api.node.navigate.sibling.prev,        options('Previous Sibling', bufnr))
-  KM.nnoremap('.',     api.node.run.cmd,                      options('Run Command', bufnr))
-  -- KM.nnoremap('-',     api.tree.change_root_to_parent,        options('Up', bufnr))
-  KM.nnoremap('a',     api.fs.create,                         options('Create', bufnr))
-  KM.nnoremap('bd',    api.marks.bulk.delete,                 options('Delete Bookmarked', bufnr))
-  KM.nnoremap('bmv',   api.marks.bulk.move,                   options('Move Bookmarked', bufnr))
-  KM.nnoremap('B',     api.tree.toggle_no_buffer_filter,      options('Toggle No Buffer', bufnr))
-  KM.nnoremap('c',     api.fs.copy.node,                      options('Copy', bufnr))
-  KM.nnoremap('C',     api.tree.toggle_git_clean_filter,      options('Toggle Git Clean', bufnr))
-  KM.nnoremap('[c',    api.node.navigate.git.prev,            options('Prev Git', bufnr))
-  KM.nnoremap(']c',    api.node.navigate.git.next,            options('Next Git', bufnr))
-  KM.nnoremap('d',     api.fs.remove,                         options('Delete', bufnr))
-  KM.nnoremap('D',     api.fs.trash,                          options('Trash', bufnr))
-  KM.nnoremap('E',     api.tree.expand_all,                   options('Expand All', bufnr))
-  KM.nnoremap('e',     api.fs.rename_basename,                options('Rename: Basename', bufnr))
-  KM.nnoremap(']e',    api.node.navigate.diagnostics.next,    options('Next Diagnostic', bufnr))
-  KM.nnoremap('[e',    api.node.navigate.diagnostics.prev,    options('Prev Diagnostic', bufnr))
-  KM.nnoremap('F',     api.live_filter.clear,                 options('Clean Filter', bufnr))
-  KM.nnoremap('f',     api.live_filter.start,                 options('Filter', bufnr))
-  KM.nnoremap('g?',    api.tree.toggle_help,                  options('Help', bufnr))
-  KM.nnoremap('gy',    api.fs.copy.absolute_path,             options('Copy Absolute Path', bufnr))
-  -- km.nnoremap('H',     api.tree.toggle_hidden_filter,         options('Toggle Dotfiles', bufnr))
-  KM.nnoremap('<C-g>', api.tree.toggle_gitignore_filter,      options('Toggle Git Ignore', bufnr))
-  KM.nnoremap('J',     api.node.navigate.sibling.last,        options('Last Sibling', bufnr))
-  KM.nnoremap('K',     api.node.navigate.sibling.first,       options('First Sibling', bufnr))
-  KM.nnoremap('m',     api.marks.toggle,                      options('Toggle Bookmark', bufnr))
-  KM.nnoremap('o',     api.node.open.edit,                    options('Open', bufnr))
-  KM.nnoremap('O',     api.node.open.no_window_picker,        options('Open: No Window Picker', bufnr))
-  KM.nnoremap('p',     api.fs.paste,                          options('Paste', bufnr))
-  KM.nnoremap('P',     api.node.navigate.parent,              options('Parent Directory', bufnr))
-  -- km.nnoremap('q',     api.tree.close,                        options('Close', bufnr))
-  KM.nnoremap('r',     api.fs.rename,                         options('Rename', bufnr))
-  KM.nnoremap('R',     api.tree.reload,                       options('Refresh', bufnr))
-  -- km.nnoremap('s',     api.node.run.system,                   options('Run System', bufnr))
-  -- KM.nnoremap('S',     api.tree.search_node,                  options('Search', bufnr))
-  -- km.nnoremap('U',     api.tree.toggle_custom_filter,         options('Toggle Hidden', bufnr))
-  KM.nnoremap('W',     api.tree.collapse_all,                 options('Collapse', bufnr))
-  KM.nnoremap('x',     api.fs.cut,                            options('Cut', bufnr))
-  KM.nnoremap('y',     api.fs.copy.filename,                  options('Copy Name', bufnr))
-  KM.nnoremap('Y',     api.fs.copy.relative_path,             options('Copy Relative Path', bufnr))
+  KM:with({ buffer = bufnr })
+    :bind({
+      -- key mappings
+      { '<C-]>', api.tree.change_root_to_node,          { desc = 'CD'                     }},
+      { '<C-e>', api.node.open.replace_tree_buffer,     { desc = 'Open: In Place'         }},
+      { '<C-k>', api.node.show_info_popup,              { desc = 'Info'                   }},
+      { '<C-r>', api.fs.rename_sub,                     { desc = 'Rename: Omit Filename'  }},
+      { '<C-t>', api.node.open.tab,                     { desc = 'Open: New Tab'          }},
+      { '<C-v>', api.node.open.vertical,                { desc = 'Open: Vertical Split'   }},
+   -- { '<C-x>', api.node.open.horizontal,              { desc = 'Open: Horizontal Split' }},
+      { '<BS>',  api.node.navigate.parent_close,        { desc = 'Close Directory'        }},
+      { '<CR>',  api.node.open.edit,                    { desc = 'Open'                   }},
+      { '<Tab>', api.node.open.preview,                 { desc = 'Open Preview'           }},
+      { '>',     api.node.navigate.sibling.next,        { desc = 'Next Sibling'           }},
+      { '<',     api.node.navigate.sibling.prev,        { desc = 'Previous Sibling'       }},
+      { '.',     api.node.run.cmd,                      { desc = 'Run Command'            }},
+   -- { '-',     api.tree.change_root_to_parent,        { desc = 'Up'                     }},
+      { 'a',     api.fs.create,                         { desc = 'Create'                 }},
+      { 'bd',    api.marks.bulk.delete,                 { desc = 'Delete Bookmarked'      }},
+      { 'bmv',   api.marks.bulk.move,                   { desc = 'Move Bookmarked'        }},
+      { 'B',     api.tree.toggle_no_buffer_filter,      { desc = 'Toggle No Buffer'       }},
+      { 'c',     api.fs.copy.node,                      { desc = 'Copy'                   }},
+      { 'C',     api.tree.toggle_git_clean_filter,      { desc = 'Toggle Git Clean'       }},
+      { '[c',    api.node.navigate.git.prev,            { desc = 'Prev Git'               }},
+      { ']c',    api.node.navigate.git.next,            { desc = 'Next Git'               }},
+      { 'd',     api.fs.remove,                         { desc = 'Delete'                 }},
+      { 'D',     api.fs.trash,                          { desc = 'Trash'                  }},
+      { 'E',     api.tree.expand_all,                   { desc = 'Expand All'             }},
+      { 'e',     api.fs.rename_basename,                { desc = 'Rename: Basename'       }},
+      { ']e',    api.node.navigate.diagnostics.next,    { desc = 'Next Diagnostic'        }},
+      { '[e',    api.node.navigate.diagnostics.prev,    { desc = 'Prev Diagnostic'        }},
+      { 'F',     api.live_filter.clear,                 { desc = 'Clean Filter'           }},
+      { 'f',     api.live_filter.start,                 { desc = 'Filter'                 }},
+      { 'g?',    api.tree.toggle_help,                  { desc = 'Help'                   }},
+      { 'gy',    api.fs.copy.absolute_path,             { desc = 'Copy Absolute Path'     }},
+   -- { 'H',     api.tree.toggle_hidden_filter,         { desc = 'Toggle Dotfiles'        }},
+      { '<C-g>', api.tree.toggle_gitignore_filter,      { desc = 'Toggle Git Ignore'      }},
+      { 'J',     api.node.navigate.sibling.last,        { desc = 'Last Sibling'           }},
+      { 'K',     api.node.navigate.sibling.first,       { desc = 'First Sibling'          }},
+      { 'm',     api.marks.toggle,                      { desc = 'Toggle Bookmark'        }},
+      { 'o',     api.node.open.edit,                    { desc = 'Open'                   }},
+      { 'O',     api.node.open.no_window_picker,        { desc = 'Open: No Window Picker' }},
+      { 'p',     api.fs.paste,                          { desc = 'Paste'                  }},
+      { 'P',     api.node.navigate.parent,              { desc = 'Parent Directory'       }},
+   -- { 'q',     api.tree.close,                        { desc = 'Close'                  }},
+      { 'r',     api.fs.rename,                         { desc = 'Rename'                 }},
+      { 'R',     api.tree.reload,                       { desc = 'Refresh'                }},
+   -- { 's',     api.node.run.system,                   { desc = 'Run System'             }},
+   -- { 'S',     api.tree.search_node,                  { desc = 'Search'                 }},
+   -- { 'U',     api.tree.toggle_custom_filter,         { desc = 'Toggle Hidden'          }},
+      { 'W',     api.tree.collapse_all,                 { desc = 'Collapse'               }},
+      { 'x',     api.fs.cut,                            { desc = 'Cut'                    }},
+      { 'y',     api.fs.copy.filename,                  { desc = 'Copy Name'              }},
+      { 'Y',     api.fs.copy.relative_path,             { desc = 'Copy Relative Path'     }},
 
-  -- mouse mappings (I explicitly disable the mouse in vim/nvim, so these are unused at this point)
-  KM.nnoremap('<2-LeftMouse>',  api.node.open.edit,           options('Open', bufnr))
-  KM.nnoremap('<2-RightMouse>', api.tree.change_root_to_node, options('CD', bufnr))
-end
-
-
-local function silent_open(node)
-  NvTree:silent_open(node)
+      -- mouse mappings (I explicitly disable the mouse in vim/nvim, so these are unused at this point)
+      { '<2-LeftMouse>',  api.node.open.edit,           { desc = 'Open' }},
+      { '<2-RightMouse>', api.tree.change_root_to_node, { desc = 'CD'   }},
+  }):done()
 end
 
 
 local function remapped_defaults(bufnr, api)
-  KM.nnoremap('<C-h>', api.node.open.horizontal,      options('Open: Horizontal Split', bufnr))
-  KM.nnoremap('I',     api.tree.toggle_hidden_filter, options('Toggle Dotfiles', bufnr))
-  KM.nnoremap('<C-s>', silent_open,                   options('Open silently', bufnr))
+  KM:with({ buffer = bufnr })
+    :bind({
+      { '<C-h>', api.node.open.horizontal,      { desc = 'Open: Horizontal Split' }},
+      { 'I',     api.tree.toggle_hidden_filter, { desc = 'Toggle Dotfiles'        }},
+      { '<C-s>', NvTree.silent_open,            { desc = 'Open silently'          }},
+  }):done()
 
   -- note: important to know that this is 'q' at the time of writing: we need to remove
   -- the 'q' default mapping above
-  KM.nnoremap(Leap.bidirectional_leap_key(), Leap.bidirectional_leap, options('Leap', bufnr))
-end
-
-
-local function stage()
-  NvTree:stage()
-end
-
-
-local function stage_all()
-  NvTree:stage(true)
-end
-
-
-local function unstage()
-  NvTree:unstage()
-end
-
-
-local function unstage_all()
-  NvTree:unstage(true)
+  Flash.jump()
 end
 
 
 local function custom_mappings(bufnr, api)
-  KM.nnoremap('l', api.node.open.edit,             options('Open', bufnr))
-  KM.nnoremap('L', api.tree.change_root_to_node,   options('CD', bufnr))
-  KM.nnoremap('h', api.node.navigate.parent_close, options('Close Directory', bufnr))
-  KM.nnoremap('H', api.tree.change_root_to_parent, options('Up', bufnr))
+  KM:with({ buffer = bufnr })
+    :bind({
+      -- natural continuation of vim-like key-bindings
+      { 'l', api.node.open.edit,             { desc = 'Open'            }},
+      { 'L', api.tree.change_root_to_node,   { desc = 'CD'              }},
+      { 'h', api.node.navigate.parent_close, { desc = 'Close Directory' }},
+      { 'H', api.tree.change_root_to_parent, { desc = 'Up'              }},
 
-  -- bindings for git ops
-  KM.nnoremap('s', stage,       options('stage node', bufnr))
-  -- remapped default, not in the remapped_defaults so it can be grouped w/ other git bindings
-  KM.nnoremap('S', stage_all,   options('stage repo', bufnr))
-  KM.nnoremap('u', unstage,     options('unstage node', bufnr))
-  KM.nnoremap('U', unstage_all, options('unstage repo', bufnr))
+      -- bindings for git ops
+      { 's', NvTree.stage,                        { desc = 'stage node'   }},
+      -- note: "u" is a remapped default, but it's not in the remapped_defaults so it can
+      --       be grouped w/ other git bindings
+      { 'u', NvTree.unstage,                      { desc = 'unstage node' }},
+      { 'S', function() NvTree.stage(true) end,   { desc = 'stage repo'   }},
+      { 'U', function() NvTree.unstage(true) end, { desc = 'unstage repo' }},
+  }):done()
 end
 
---- Contains methods for configuring key bindings for nvimtree.
+--- Contains functions for configuring key bindings for nvimtree.
 ---
 ---@class NvimTree
 local NvimTree = {}

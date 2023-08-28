@@ -42,7 +42,7 @@ function Lsp.config()
     lspconfig[lsp_server].setup(conf)
   end
 
-  LspKM.keymap()
+  LspKM.add_keymap()
 end
 
 return Lsp

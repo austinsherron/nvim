@@ -2,7 +2,6 @@ local String = require 'toolbox.core.string'
 local Table  = require 'toolbox.core.table'
 local Stack  = require 'toolbox.extensions.stack'
 local Stream = require 'toolbox.extensions.stream'
-local TMerge = require 'utils.api.vim.tablemerge'
 
 
 local DEFAULT_MODES = { 'n' }

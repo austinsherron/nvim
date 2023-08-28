@@ -1,76 +1,87 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc)
-  return { desc = 'buffers: ' .. desc, nowait = true }
-end
+local KM = KeyMapper.new({ desc_prefix = 'buffers: ', nowait = true })
 
 -- navigation ------------------------------------------------------------------
 
----- sequential
+-- sequential --
 
 -- next
-KM.nnoremap('<leader>n', ':BufferNext<CR>', options('next'))
-KM.nnoremap('<M-]>',     ':BufferNext<CR>', options('next'))
+KM:bind({
+  { '<leader>n', ':BufferNext<CR>', { desc = 'next' }},
+  { '<M-]>',     ':BufferNext<CR>', { desc = 'next' }},
+})
 
 -- prev
-KM.nnoremap('<leader>p', ':BufferPrevious<CR>', options('previous'))
-KM.nnoremap('<M-[>',     ':BufferPrevious<CR>', options('previous'))
+KM:bind({
+  { '<leader>p', ':BufferPrevious<CR>', { desc = 'previous' }},
+  { '<M-[>',     ':BufferPrevious<CR>', { desc = 'previous' }},
+})
 
----- jump to...
+-- jump to... --
 
 -- w/ leader
-KM.nnoremap('<leader>b1', ':BufferGoto 1<CR>', options('go to 1'))
-KM.nnoremap('<leader>b2', ':BufferGoto 2<CR>', options('go to 2'))
-KM.nnoremap('<leader>b3', ':BufferGoto 3<CR>', options('go to 3'))
-KM.nnoremap('<leader>b4', ':BufferGoto 4<CR>', options('go to 4'))
-KM.nnoremap('<leader>b5', ':BufferGoto 5<CR>', options('go to 5'))
-KM.nnoremap('<leader>b6', ':BufferGoto 6<CR>', options('go to 6'))
-KM.nnoremap('<leader>b7', ':BufferGoto 7<CR>', options('go to 7'))
-KM.nnoremap('<leader>b8', ':BufferGoto 8<CR>', options('go to 8'))
-KM.nnoremap('<leader>b9', ':BufferGoto 9<CR>', options('go to 9'))
-KM.nnoremap('<leader>b0', ':BufferLast<CR>',   options('go to last'))
-KM.nnoremap('<leader>bg', ':BufferPick<CR>',   options('go to...'))
+KM:bind({
+  { '<leader>b1', ':BufferGoto 1<CR>', { desc = 'go to 1'    }},
+  { '<leader>b2', ':BufferGoto 2<CR>', { desc = 'go to 2'    }},
+  { '<leader>b3', ':BufferGoto 3<CR>', { desc = 'go to 3'    }},
+  { '<leader>b4', ':BufferGoto 4<CR>', { desc = 'go to 4'    }},
+  { '<leader>b5', ':BufferGoto 5<CR>', { desc = 'go to 5'    }},
+  { '<leader>b6', ':BufferGoto 6<CR>', { desc = 'go to 6'    }},
+  { '<leader>b7', ':BufferGoto 7<CR>', { desc = 'go to 7'    }},
+  { '<leader>b8', ':BufferGoto 8<CR>', { desc = 'go to 8'    }},
+  { '<leader>b9', ':BufferGoto 9<CR>', { desc = 'go to 9'    }},
+  { '<leader>b0', ':BufferLast<CR>',   { desc = 'go to last' }},
+  { '<leader>bg', ':BufferPick<CR>',   { desc = 'go to...'   }},
+})
 
 -- with meta (i.e.: alt/option)
-KM.nnoremap('<M-1>', ':BufferGoto 1<CR>', options('go to 1'))
-KM.nnoremap('<M-2>', ':BufferGoto 2<CR>', options('go to 2'))
-KM.nnoremap('<M-3>', ':BufferGoto 3<CR>', options('go to 3'))
-KM.nnoremap('<M-4>', ':BufferGoto 4<CR>', options('go to 4'))
-KM.nnoremap('<M-5>', ':BufferGoto 5<CR>', options('go to 5'))
-KM.nnoremap('<M-6>', ':BufferGoto 6<CR>', options('go to 6'))
-KM.nnoremap('<M-7>', ':BufferGoto 7<CR>', options('go to 7'))
-KM.nnoremap('<M-8>', ':BufferGoto 8<CR>', options('go to 8'))
-KM.nnoremap('<M-9>', ':BufferGoto 9<CR>', options('go to 9'))
-KM.nnoremap('<M-0>', ':BufferLast<CR>',   options('go to last'))
-KM.nnoremap('<M-p>', ':BufferPick<CR>',   options('go to...'))
+KM:bind({
+  { '<M-1>', ':BufferGoto 1<CR>', { desc = 'go to 1'    }},
+  { '<M-2>', ':BufferGoto 2<CR>', { desc = 'go to 2'    }},
+  { '<M-3>', ':BufferGoto 3<CR>', { desc = 'go to 3'    }},
+  { '<M-4>', ':BufferGoto 4<CR>', { desc = 'go to 4'    }},
+  { '<M-5>', ':BufferGoto 5<CR>', { desc = 'go to 5'    }},
+  { '<M-6>', ':BufferGoto 6<CR>', { desc = 'go to 6'    }},
+  { '<M-7>', ':BufferGoto 7<CR>', { desc = 'go to 7'    }},
+  { '<M-8>', ':BufferGoto 8<CR>', { desc = 'go to 8'    }},
+  { '<M-9>', ':BufferGoto 9<CR>', { desc = 'go to 9'    }},
+  { '<M-0>', ':BufferLast<CR>',   { desc = 'go to last' }},
+  { '<M-p>', ':BufferPick<CR>',   { desc = 'go to...'   }},
+})
 
 -- core ops --------------------------------------------------------------------
 
----- close/delete
+-- close/delete --
 
 -- current
-KM.nnoremap('<leader>x', ':BufferClose<CR>', options('close'))
-KM.nnoremap('<M-x>',     ':BufferClose<CR>', options('close'))
-
+KM:bind({
+  { '<leader>x', ':BufferClose<CR>', { desc = 'close' }},
+  { '<M-x>',     ':BufferClose<CR>', { desc = 'close' }},
+})
 
 -- all but current
-KM.nnoremap('<leader>X', ':BufferCloseAllButCurrent<CR>', options('close all but current'))
-KM.nnoremap('<S-M-X>',   ':BufferCloseAllButCurrent<CR>', options('close all but current'))
+KM:bind({
+  { '<leader>X', ':BufferCloseAllButCurrent<CR>', { desc = 'close all but current' }},
+  { '<S-M-X>',   ':BufferCloseAllButCurrent<CR>', { desc = 'close all but current' }},
+})
 
 -- restore
-KM.nnoremap('<leader>br',   ':BufferRestore<CR>', options('restore'))
-KM.nnoremap('<M-S-B>',      ':BufferRestore<CR>', options('restore'))
+KM:bind({
+  { '<leader>br', ':BufferRestore<CR>', { desc = 'restore' }},
+  { '<M-S-B>',    ':BufferRestore<CR>', { desc = 'restore' }},
+})
 
 -- misc ops --------------------------------------------------------------------
 
 -- pin
-KM.nnoremap('<leader>bp', ':BufferPin<CR>', options('pin'))
+KM:bind_one('<leader>bp', ':BufferPin<CR>', { desc = 'pin' })
 
 -- reorder
-KM.nnoremap('<leader>bd', ':BufferOrderByDirectory<CR>',    options('order by dir'))
-KM.nnoremap('<leader>b#', ':BufferOrderByBufferNumber<CR>', options('order by #'))
-KM.nnoremap('<leader>bl', ':BufferOrderByLanguage<CR>',     options('order by lang.'))
+KM:bind({
+  { '<leader>bd', ':BufferOrderByDirectory<CR>',    { desc = 'order by dir'  }},
+  { '<leader>b#', ':BufferOrderByBufferNumber<CR>', { desc = 'order by #'    }},
+  { '<leader>bl', ':BufferOrderByLanguage<CR>',     { desc = 'order by lang' }},
+})
 

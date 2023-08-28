@@ -1,16 +1,15 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
+
+local KM = KeyMapper.new({ nowait = true })
 
 -- nvim-tmux nav ---------------------------------------------------------------
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc)
-    return { desc = 'nvim-tmux: ' .. desc, nowait = true }
-end
-
-KM.nnoremap('<silent><C-h>', ':NvimTmuxNavigateLeft<CR>',  options('mv left'))
-KM.nnoremap('<silent><C-j>', ':NvimTmuxNavigateDown<CR>',  options('mv down'))
-KM.nnoremap('<silent><C-k>', ':NvimTmuxNavigateUp<CR>',    options('mv up'))
-KM.nnoremap('<silent><C-l>', ':NvimTmuxNavigateRight<CR>', options('mv right'))
+KM:with({ desc_prefix = 'nvim-tmux: ' })
+  :bind({
+    { '<silent><C-h>', ':NvimTmuxNavigateLeft<CR>',  { desc = 'mv left'  }},
+    { '<silent><C-j>', ':NvimTmuxNavigateDown<CR>',  { desc = 'mv down'  }},
+    { '<silent><C-k>', ':NvimTmuxNavigateUp<CR>',    { desc = 'mv up'    }},
+    { '<silent><C-l>', ':NvimTmuxNavigateRight<CR>', { desc = 'mv right' }},
+}):done()
 
