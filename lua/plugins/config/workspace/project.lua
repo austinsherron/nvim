@@ -10,11 +10,11 @@ local Project = {}
 function Project.opts()
   return {
     detection_methods = { 'pattern' },
-    exclude_dirs = {
-      Env.nvundle() .. '/*',          -- exclude plugins
+    exclude_dirs      = {
+      Env.editors_root() .. '/nvim',  -- exclude nvim submodule
       Env.external_pkgs() .. '/*',    -- exclude external repos
       Env.nvim_root_pub(),            -- exclude "deployed" nvim
-      Env.editors_root() .. '/nvim',  -- exclude nvim submodule
+      Env.nvundle() .. '/*',          -- exclude plugins
       Env.tmux_bundle(),              -- exclude tmux plugins
     },
   }

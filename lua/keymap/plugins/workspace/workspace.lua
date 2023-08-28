@@ -12,5 +12,5 @@ KM:with({ desc_prefix = 'session mgr.: ' })
     { '<leader>sr', ':SessionManager load_last_session<CR>',        { desc = 'restore last'    }},
     { '<leader>sd', ':SessionManager load_current_dir_session<CR>', { desc = 'restore for cwd' }},
     { '<leader>sl',  SessionMgr.list,                               { desc = 'list'            }},
- }):done()
+}):done()
 

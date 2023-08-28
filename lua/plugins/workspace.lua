@@ -7,8 +7,8 @@
   groupings/filtered views of the same
 --]]
 
-local Project    = require 'plugins.config.navigation.project'
-local SessionMgr = require 'plugins.config.editor.sessionmgr'
+local Project    = require 'plugins.config.workspace.project'
+local SessionMgr = require 'plugins.config.workspace.sessionmgr'
 local Plugins    = require('utils.plugins.plugin').plugins
 
 
