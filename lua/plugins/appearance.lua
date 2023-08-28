@@ -30,6 +30,12 @@ return Plugins({
     priority = Priority.THIRD,
   },
   {
+    'marko-cerovac/material.nvim',
+
+    lazy     = false,
+    priority = Priority.THIRD,
+  },
+  {
     'AlexvZyl/nordic.nvim',
 
     lazy     = false,
