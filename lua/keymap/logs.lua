@@ -1,14 +1,12 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc)
-    return { desc = 'logs: ' .. desc, nowait = true }
-end
+local KM = KeyMapper.new({ desc_prefix = 'logs: ', nowait = true })
 
 -- interactions ----------------------------------------------------------------
 
-KM.nnoremap('<leader>l', ':UserLogs vsplit<CR>', options('open in vsplit'))
-KM.nnoremap('<leader>L', ':UserLogs<CR>',        options('open'))
+KM:bind({
+  { '<leader>l', ':UserLogs vsplit<CR>', { desc = 'open in vsplit' }},
+  { '<leader>L', ':UserLogs<CR>',        { desc = 'open'           }},
+})
 

@@ -1,13 +1,13 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
 -- interactions ----------------------------------------------------------------
 
-local options = {
-    desc = 'lazy: open plugin mgr.',
-    nowait = true,
-    silent = true,
-}
+local KM = KeyMapper.new({
+  desc   = 'lazy: open plugin mgr.',
+  nowait = true,
+  silent = true,
+})
 
-KM.nnoremap('<leader>Z', ':Lazy<CR>', options)
+KM:bind_one('<leader>Z', ':Lazy<CR>')
 

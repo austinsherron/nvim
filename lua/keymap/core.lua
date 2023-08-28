@@ -1,58 +1,59 @@
-local KM = require 'utils.core.mapper'
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc)
-    return { desc = 'core: ' .. desc, nowait = true }
-end
+local KM = KeyMapper.new({ desc_prefix = 'core: ', nowait = true })
 
 -- interactions ---------------------------------------------------------------
 
----- core ops
+-- core ops --
 
--- save
-KM.nnoremap('<leader>w', ':w<CR>',   options('save one'))
-KM.nnoremap('<M-w>',     ':w<CR>',   options('save one'))
-KM.nnoremap('<leader>W', ':wqa!<CR>', options('save all + quit'))
+KM:bind({
+  -- save
+  { '<leader>w', ':w<CR>',    { desc = 'save one'        }},
+  { '<M-w>',     ':w<CR>',    { desc = 'save one'        }},
+  { '<leader>W', ':wqa!<CR>', { desc = 'save all + quit' }},
+  -- close/quit
+  { '<leader>q', ':q<CR>',   { desc = 'quit/close'     }},
+  { '<leader>Q', ':qa<CR>',  { desc = 'quit/close all' }},
+  { '<leader>!', ':qa!<CR>', { desc = 'force quit'     }},
+  -- <esc>
+  { 'jh',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
+  { 'hj',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
+  { 'jk',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
+  { 'kj',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
+  { '<C-c>', '<Esc>', { desc = 'exit/back' }, { 'i' }},
+})
 
--- close/quit
-KM.nnoremap('<leader>q', ':q<CR>',   options('quit/close'))
-KM.nnoremap('<leader>Q', ':qa<CR>',  options('quit/close all'))
-KM.nnoremap('<leader>!', ':qa!<CR>', options('force quit'))
+-- misc ops --
 
--- <esc>
-KM.inoremap('jh',    '<Esc>',    options('exit/back'))
-KM.inoremap('hj',    '<Esc>',    options('exit/back'))
-KM.inoremap('jk',    '<Esc>',    options('exit/back'))
-KM.inoremap('kj',    '<Esc>',    options('exit/back'))
-KM.inoremap('<C-c>', '<Esc>',    options('exit/back'))
-
----- misc ops
-
--- toggle relative line numbers
-KM.nmap('<C-N><C-N>', ':set invrelativenumber<CR>', options('toggle relative line #'))
-
--- close quickfix window
-KM.nmap('<leader>cx', ':cclose<CR>', options('close quickfix window'))
+KM:bind({
+  -- toggle relative line numbers
+  { '<C-N><C-N>', ':set invrelativenumber<CR>', { desc = 'toggle relative line #' }},
+  -- close quickfix window
+  { '<leader>cx', ':cclose<CR>',                { desc = 'close quickfix window'  }},
+  -- enter column edit mode
+  { '<leader>v',  '<C-v>',                      { desc = 'enter column edit mode' }},
+})
 
 -- motion ----------------------------------------------------------------------
 
----- wrapped lines
+-- wrapped lines --
 
--- lets j and k move inside a visually wrapped line
-KM.nnoremap('j', 'gj', options('cursor down'))
-KM.nnoremap('k', 'gk', options('cursor up'))
+KM:bind({
+  -- lets j and k move inside a visually wrapped line
+  { 'j', 'gj', { desc = 'cursor down' }},
+  { 'k', 'gk', { desc = 'cursor up'   }},
+})
 
 -- display --------------------------------------------------------------------
 
 -- turn off highlight (i.e.: for search, as wall as for searchbox.nvim plugin)
-KM.nnoremap('<leader>hx', ':noh | :SearchBoxClear<CR>', options('cancel highlight'))
+KM:bind_one('<leader>hx', ':noh | :SearchBoxClear<CR>', { desc = 'cancel highlight' })
 
 -- spellcheck ------------------------------------------------------------------
 
 -- add word
-KM.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
+KM:bind_one('<leader>sa', 'zg', { desc = 'add word to dict.' })
 -- suggest words; note: handled in keymap/plugins/telescope.lua
 -- KM.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
 
@@ -62,8 +63,10 @@ KM.nnoremap('<leader>sa', 'zg', options('add word to dict.'))
 --       they're defined w/ the barbar plugin keymap
 
 -- resize
-KM.nnoremap('<leader><C-K>', ':resize -10<CR>',          options('resize "up" 10'))
-KM.nnoremap('<leader><C-J>', ':resize +10<CR>',          options('resize "down" 10'))
-KM.nnoremap('<leader><C-L>', ':vertical resize +10<CR>', options('resize "left" 10'))
-KM.nnoremap('<leader><C-H>', ':vertical resize -10<CR>', options('resize "right" 10'))
+KM:bind({
+  { '<leader><C-K>', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
+  { '<leader><C-J>', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
+  { '<leader><C-L>', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
+  { '<leader><C-H>', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
+})
 

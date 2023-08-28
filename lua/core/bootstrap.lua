@@ -1,5 +1,5 @@
-local Shell = require 'toolbox.system.shell'
-local KM    = require 'utils.core.mapper'
+local Shell     = require 'toolbox.system.shell'
+local KeyMapper = require 'utils.core.mapper'
 
 
 -- note: settings that should come before everything else
@@ -32,7 +32,7 @@ vim.opt.termguicolors = true
 -- interactions ----------------------------------------------------------------
 
 -- remap space to no-op
-KM.nnoremap('<Space>', '<Nop>')
+KeyMapper.quick_bind('<Space>', '<Nop>')
 
 -- remap leaders to space
 vim.g.mapleader = ' '

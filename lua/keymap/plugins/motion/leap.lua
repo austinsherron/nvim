@@ -1,18 +1,19 @@
-local KM = require 'utils.core.mapper'
+-- TODO: remove this code if I decide to permanently adopt flash instead of leap
+
+local KeyMapper = require 'utils.core.mapper'
 
 
--- TODO: refactor KeyMapper so that it can be instantiated w/ the state present in this
---       function
-local function options(desc)
-  return { desc = 'leap: ' .. desc, nowait = true, silent = true }
-end
-
+local KM = KeyMapper.new({
+  desc_prefix = 'leap: ',
+  nowait      = true,
+  silent      = true,
+})
 
 local function leap(backward)
   require('leap').leap({
     opts = {
-      inclusive_op = true,
       backward     = backward,
+      inclusive_op = true,
     }
   })
 end
@@ -30,11 +31,11 @@ end
 
 --- Contains methods for invoking/interacting w/ leap.nvim.
 ---
----@class Leap
-local Leap = {}
+---@class LeapKM
+local LeapKM = {}
 
 --- Invokes bi-directional leap.
-function Leap.bidirectional_leap()
+function LeapKM.bidirectional_leap()
   local current_window = vim.fn.win_getid()
   require('leap').leap({ target_windows = { current_window } })
 end
@@ -46,7 +47,7 @@ end
 --- of future updates, as it's used in multiple places.
 ---
 ---@return string: the key used to invoke bi-directional leap
-function Leap.bidirectional_leap_key()
+function LeapKM.bidirectional_leap_key()
   return 'q'
 end
 
@@ -75,17 +76,19 @@ end
 --- to false
 ---@param should_add_repeats boolean?: if true, key bindings for "repeat" motions will be
 --  added (think `f` -> `,`|`;`); defaults to false
-function Leap.add_keymap(should_add_defaults, should_add_repeats)
+function LeapKM.add_keymap(should_add_defaults, should_add_repeats)
   should_add_defaults = should_add_defaults or false
   should_add_repeats = should_add_repeats or false
 
-  KM.nnoremap('>', leap_forward,                 options('forward'))
--- FIXME: this works, but we're not able to pass `inclusive_op`, which means the jump
---        misses by a few chars; we can't use the above format, because it just straight
---        up doesn't work (jumps forward)
-  KM.nnoremap('<', '<Plug>(leap-backward-till)', options('backward'))
+  KM:bind({
+    { '>', leap_forward,                 { desc = 'forward'  }},
+  -- FIXME: this works, but we're not able to pass `inclusive_op`, which means the jump
+  --        misses by a few chars; we can't use the above format, because it just straight
+  --        up doesn't work (jumps forward)
+    { '<', '<Plug>(leap-backward-till)', { desc = 'backward' }},
 
-  KM.nnoremap(Leap.bidirectional_leap_key(), Leap.bidirectional_leap, options('bi-directional'))
+    { LeapKM.bidirectional_leap_key(), LeapKM.bidirectional_leap, { desc = 'bi-directional' }},
+  })
 
   if should_add_defaults then
     add_defaults()
@@ -96,5 +99,5 @@ function Leap.add_keymap(should_add_defaults, should_add_repeats)
   end
 end
 
-return Leap
+return LeapKM
 
