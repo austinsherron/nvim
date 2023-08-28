@@ -145,6 +145,8 @@ I organize my plugins into the following categories:
 - [ ] Add more systematic error-handling
 - [ ] Add augroup's to autocmds
 - [ ] Add leap highlight
+- [ ] Spectre in a modal?
+- [ ] Copy file content to clipboard from nvimtree
 
 ### Fixes
 
@@ -165,8 +167,9 @@ I organize my plugins into the following categories:
 - [x] DiffviewClose doesn't consistently close all diffview buffers/windows (the issue ended up being a usability problem really: it's possible for multiple diffview menus to open, and it's not always obvious what's happening when sequentially closing them)
 - [x] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc.... (ended up sticking w/ existing session manager plugin)
 - [x] Fix lua_ls workspace configuration prompt
-- [ ] Fix leap.nvim repeat functionality
+- [x] Fix leap.nvim repeat functionality (didn't really fix this, but have opted, at least for the moment, to use flash.nvim, instead of leap, as my primary motion plugin)
 - [ ] Figure out why barbar diagnostics don't work
 - [x] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/ (ended up being an issues w/ the way "require paths" were being constructed for recursive calls)
 - [ ] Fix issues w/ session mgr. isn't restoring sessions from cwd even though I'm now manually setting it
 
+### Ideas

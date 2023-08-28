@@ -7,10 +7,11 @@
 --]]
 
 -- local alpha = require 'plugins.config.interface.alphanvim'
-local Babar    = require 'plugins.config.interface.barbar'
-local Lualine  = require 'plugins.config.interface.lualine'
-local Plugins  = require('utils.plugins.plugin').plugins
-local Priority = require 'utils.plugins.priority'
+local Barbar    = require 'plugins.config.interface.barbar'
+local Lightbulb = require 'plugins.config.interface.lightbulb'
+local Lualine   = require 'plugins.config.interface.lualine'
+local Plugins   = require('utils.plugins.plugin').plugins
+local Priority  = require 'utils.plugins.priority'
 
 
 return Plugins({
@@ -28,7 +29,7 @@ return Plugins({
   {
     'romgrk/barbar.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = Babar.opts(),
+    opts = Barbar.opts(),
   },
 ---- bqf (better quickfix window): makes quickfix window more user-friendly
   {
@@ -57,6 +58,15 @@ return Plugins({
   },
 ---- fzf.vim: collection of fzf vim integrations/utilities
   { 'junegunn/fzf.vim' },
+---- lightbulb: ide style 💡 to mark code actions
+  {
+    'kosayoda/nvim-lightbulb',
+    opts = Lightbulb.opts(),
+
+    config = function(_, opts)
+      require('nvim-lightbulb').setup(opts)
+    end
+  },
 ---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',

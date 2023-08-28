@@ -6,7 +6,6 @@
 --]]
 
 local NvimTree = require 'plugins.config.navigation.nvimtree'
-local Project  = require 'plugins.config.navigation.project'
 local Plugins  = require('utils.plugins.plugin').plugins
 
 
@@ -33,15 +32,6 @@ return Plugins({
     config = function(_, opts)
       require('nvim-tree').setup(opts)
     end,
-  },
----- project: project manager/navigator
-  {
-    'ahmedkhalf/project.nvim',
-    opts = Project.opts(),
-
-    config = function(_, opts)
-      require('project_nvim').setup(opts)
-    end
   },
 })
 

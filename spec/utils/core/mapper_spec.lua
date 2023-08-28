@@ -1,5 +1,4 @@
----@diagnostic disable: undefined-field
-
+---@diagnostic disable: invisible
 local Dict      = require 'toolbox.core.dict'
 local KeyMapper = require 'utils.core.mapper'
 
@@ -40,7 +39,7 @@ describe('KeyMapper', function()
   end)
 
   describe(':get_merged_options(options)', function()
-    it('should merge instance options w/o options arg', function()
+    it(function()
       local KM = KeyMapper.new()
         :with(options1)
         :with(options2)
@@ -52,7 +51,7 @@ describe('KeyMapper', function()
         nowait      = true,
       }
       assert.True(Dict.equals(KM:get_merged_options(), expected))
-    end)
+    end, 'should merge instance options w/o options arg')
     it('should merge instance options w/ options arg', function()
       local KM = KeyMapper.new()
         :with(options1)

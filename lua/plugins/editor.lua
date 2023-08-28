@@ -5,11 +5,10 @@
   control core editor capabilities like commenting, completion, general text manipulation, etc.
 --]]
 
-local AutoPairs  = require 'plugins.config.editor.autopairs'
-local Cmp        = require 'plugins.config.editor.cmp.cmp'
-local Indent     = require 'plugins.config.interface.indent'
-local SessionMgr = require 'plugins.config.editor.sessionmgr'
-local Plugins    = require('utils.plugins.plugin').plugins
+local AutoPairs = require 'plugins.config.editor.autopairs'
+local Cmp       = require 'plugins.config.editor.cmp.cmp'
+local Indent    = require 'plugins.config.interface.indent'
+local Plugins   = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
@@ -99,12 +98,6 @@ return Plugins({
     config = function(_, opts)
       require('indent_blankline').setup(opts)
     end
-  },
----- neovim session-manager: persist open files/buffers b/w nvim sessions
-  {
-    'Shatur/neovim-session-manager',
-
-    config = SessionMgr.config,
   },
 ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
   {
