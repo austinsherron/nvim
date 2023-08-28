@@ -7,6 +7,7 @@
 
 local Diffview = require 'plugins.config.git.diffview'
 local Gitsigns = require 'plugins.config.git.gitsigns'
+local Lazygit  = require 'plugins.config.git.lazygit'
 local Neogit   = require 'plugins.config.git.neogit'
 local Plugins  = require('utils.plugins.plugin').plugins
 
@@ -36,6 +37,8 @@ return Plugins({
   {
     'kdheepak/lazygit.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
+
+    config = Lazygit.config,
   },
 ---- neogit: git interactions through neovim
   {
