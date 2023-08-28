@@ -1,126 +1,146 @@
-
-local Mode = {
-    none = '',
-    n = 'n',
-    i = 'i',
-    l = 'l',
-    o = 'o',
-    t = 't',
-    c = 'c',
-    x = 'x',
-    s = 's',
-    v = 'v',
-}
-
-local NOREMAP = 'noremap'
-local MAP = 'map'
+local String = require 'toolbox.core.string'
+local Table  = require 'toolbox.core.table'
+local Stack  = require 'toolbox.extensions.stack'
+local Stream = require 'toolbox.extensions.stream'
+local TMerge = require 'utils.api.vim.tablemerge'
 
 
--- for internal use (allows us to define functions in any order w/in the file)
-local Mapper = {}
+local DEFAULT_MODES = { 'n' }
+-- WARN: this is effectively duplicated in this file's unit tests
+local DEFAULT_OPTIONS = { noremap = true }
 
+---@alias BindingOptions { desc_prefix: string|nil, desc: string|nil, nowait: boolean|nil, silent: boolean|nil }
+---@alias Binding { lhs: string|nil, rhs: string|function|nil, options: BindingOptions|nil, modes: string[]|nil }
+
+--- Utility for binding key sequences to actions/commands.
+---
+---@class KeyMapper
+---@field private options Stack
 local KeyMapper = {}
 KeyMapper.__index = KeyMapper
 
+--- Constructor
+---
+---@param options BindingOptions|nil:
+---@return KeyMapper: a new instance
+function KeyMapper.new(options)
+  local this = { options = Stack.new() }
+  this.options:push(DEFAULT_OPTIONS)
 
-function KeyMapper.new(default_options)
-    local this = { options = default_options }
-    setmetatable(this, KeyMapper)
-    return this
+  if Table.not_nil_or_empty(options --[[@as table]]) then
+    this.options:push(options or {})
+  end
+
+  return setmetatable(this, KeyMapper)
 end
 
 
--- core mapping logic ----------------------------------------------------------
+--- Adds a set of binding options to use w/ all subsequent bind calls until KeyMapper.done
+--- is called. Multiple calls to KeyMapper.with will add options to the instance in last
+--- in, first-out order.
+---
+---@param options BindingOptions: the options to use
+---@return KeyMapper: self
+function KeyMapper:with(options)
+  self.options:push(options)
+  return self
+end
+
+
+---@private
+function KeyMapper:get_merged_options(options)
+  -- create a single array (stack, based on precedence) w/ all options
+  local all_options = Table.concat({ self.options:peekall(), { options or {}}})
+  -- merge all options into single dict
+  return Table.combine_many(all_options)
+end
+
+
+---@private
+function KeyMapper:get_options(options)
+  -- merge individual binding options, if any, w/ instance level options, if any
+  options = self:get_merged_options(options)
+
+  if Table.nil_or_empty(options) then
+    return {}
+  end
+
+  -- if there's a description prefix, pick it out and combine it w/ the binding's
+  -- description, if any
+  local desc_prefix, final_opts = Table.split_one(options, 'desc_prefix')
+  local desc = (desc_prefix or '') .. (final_opts.desc or '')
+
+  -- if there is a description, set it in options
+  if String.not_nil_or_empty(desc) then
+    final_opts.desc = desc
+  end
+
+  -- return processed options
+  return final_opts
+end
+
 
 -- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim.lua.keymaps.lua
-function Mapper.do_mapping(mode, lhs, rhs, options)
-    if (type(rhs) == 'string') then
-        vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-    elseif (type(rhs) == 'function') then
-        vim.keymap.set(mode, lhs, rhs, options)
-    else
-        error('(lhs) ' .. tostring(lhs) .. ' = (rhs) ' .. tostring(rhs) .. ': rhs is of an unrecognized type (' .. type(rhs) .. ')')
-    end
-end
+---@private
+function KeyMapper:do_binding(lhs, rhs, options, modes)
+  options = self:get_options(options)
+  modes = modes or DEFAULT_MODES
 
--- mapping function construction -----------------------------------------------
-
-function Mapper.do_make_mapping_func(mode, noremap)
-    return function(lhs, rhs, opts)
-        local silent = String.startswith(lhs, '<silent>')
-        lhs = lhs:gsub('<silent>', '')
-
-        opts = opts or {}
-        local silent_and_noreamp = { noremap = noremap, silent = silent }
-        local options = Table.combine(opts, silent_and_noreamp)
-
-        return Mapper.do_mapping(mode, lhs, rhs, options)
-    end
+  DebugQuietly({ 'Binding lhs="', lhs, '" to rhs="', rhs, '" (opts=', options, ', modes=', modes, ')' })
+  vim.keymap.set(modes, lhs, rhs, options)
+  DebugQuietly({ 'Binding processed successfully' })
 end
 
 
-function Mapper.make_mapping_func(func_name)
-    if (func_name == MAP or func_name == NOREMAP) then
-        return Mapper.do_make_mapping_func(Mode.none, func_name == NOREMAP)
-    end
-
-    local mode, noremap = Mapper.parse_func_name(func_name)
-    return Mapper.do_make_mapping_func(mode, noremap)
+--- Signals that we should no longer use the options most recently added from any source,
+--- including from the last call to KeyMapper.with or provided during instantiation.
+---
+---@return KeyMapper: self
+function KeyMapper:done()
+  self.options:pop()
+  return self
 end
 
 
--- TODO: create "Indexable" class that implements python-like indexing for strings
---       see `toolbox.core.string.Indexable`
-function Mapper.is_noremap(func_name)
-    return String.startswith(func_name, NOREMAP) or
-           String.startswith(func_name:sub(2, #func_name),  NOREMAP)
+--- Binds the provided key bindings.
+---
+---@param bindings Binding[]: the key bindings to bind
+---@return KeyMapper: self
+function KeyMapper:bind(bindings)
+  InfoQuietly({ 'Processing ', #bindings, ' key bindings' })
+
+  Stream(bindings)
+    :foreach(function(b) self:do_binding(Table.unpack(b)) end)
+
+  return self
 end
 
 
-function Mapper.parse_func_name(func_name)
-    return func_name:sub(1, 1), Mapper.is_noremap(func_name)
-end
-
--- function name validation ----------------------------------------------------
-
-function Mapper.is_no_mode_form(func_name)
-    return func_name == MAP or func_name == NOREMAP
-end
-
-
-function Mapper.is_func_name_format_valid(func_name)
-    -- function name can't be valid if it's not present, or if it's len < 3
-    if (func_name == nil or #func_name < 3) then
-        return false
-    end
-
-    -- valid if it's either "map" or "noremap"
-    if (Mapper.is_no_mode_form(func_name)) then
-        return true
-    end
-
-    local mode = func_name:sub(1, 1)
-
-    -- invalid if its first letter isn't one of the known modes
-    if (Mode[mode] == nil) then
-        return false
-    end
-
-    local mp_form = mode .. MAP
-    local nrmp_form = mode .. NOREMAP
-
-    -- valid if it equals its mode + "map" or "noremap"
-    return func_name == mp_form or func_name == nrmp_form
+--- Binds a single key binding.
+---
+---@param lhs string: the key sequence to bind to an action
+---@param rhs string|function: the action to bind to a key sequence
+---@param options BindingOptions|nil: parameterizes key binding
+---@param modes string[]|nil: the vim modes in which the binding should take effect
+---@return KeyMapper: self
+function KeyMapper:bind_one(lhs, rhs, options, modes)
+  return self:bind({{ lhs, rhs, options, modes }})
 end
 
 
-function KeyMapper:__index(func_name)
-    if (not Mapper.is_func_name_format_valid(func_name)) then
-        error('unrecognized key mapping function=' .. func_name)
-    end
-
-    return Mapper.make_mapping_func(func_name)
+--- Binds a single key binding w/out an instantiated key mapper. Note that this functions
+--- is not intended for repeated calls in the same general location.
+---
+---@see KeyMapper.bind_one for argument descriptions
+function KeyMapper.quick_bind(lhs, rhs, options, modes)
+  KeyMapper.new():bind_one(lhs, rhs, options, modes)
 end
 
-return KeyMapper.new()
+
+---@note: exposed primarily for testing, though I don't think there's any harm in exposing
+--- them
+KeyMapper.DEFAULT_MODES = DEFAULT_MODES
+KeyMapper.DEFAULT_OPTIONS = DEFAULT_OPTIONS
+
+return KeyMapper
 
