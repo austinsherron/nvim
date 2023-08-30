@@ -84,7 +84,10 @@ local Source = {
 ---@class Src
 local Src = {}
 
-local LABELS = Table.to_dict(Source, function(e) return e.name, e.label end)
+local LABELS = Table.to_dict(
+  Table.values(Source),
+  function(e) return e.name, e.label end
+)
 
 ---@note: order here informs the order of auto-complete results
 ---@return table[]: configuration for sources used by base cmp setup
