@@ -1,61 +1,82 @@
+local Buffer = require 'utils.api.vim.buffer'
 
---- Relative order of completion results in auto-complete menu based on source groups.
----
----@enum GroupIndex
-local GroupIndex = {
-  LUASNIP       = 1,
-  LSP_SIGNATURE = 2,
-  LSP           = 3,
-  PATH          = 4,
-  TREESITTER    = 5,
-  BUFFER        = 6,
-  GIT           = 7,
-  CONVCOMMITS   = 8,
-  DICTIONARY    = 9,
-  SPELL         = 10,
-  EMOJI         = 11,
-  CALC          = 12,
+
+---@note: used to compute group_index; a src's place in the array is its relative ordering
+--- in completion results
+local ORDER = {
+  'nvim_lsp_signature_help',
+  'nvim_lsp',
+  'nvim_lua',
+  'path',
+  'cmdline',
+  'treesitter',
+  'buffer',
+  'conventionalcommits',
+  'dictionary',
+  'spell',
+  'emoji',
+  'calc',
 }
 
---- The number of characters to type before including results from specific completion sources.
+--- Contains nvim-cmp configuration for an individual source.
 ---
----@enum TriggerLength
-local TriggerLength = {
-  BUFFER        = 3,
-  CALC          = 1,
-  CONVCOMMITS   = 2,
-  DICTIONARY    = 3,
-  EMOJI         = 1,
-  GIT           = 2,
-  LSP           = 1,
-  LSP_SIGNATURE = 1,
-  LUASNIP       = 1,
-  PATH          = 2,
-  SPELL         = 3,
-  TREESITTER    = 1,
-}
-
---- Human-readable labels for cmp sources.
+---@note: reference ':h cmp-config.sources' for field descriptions
 ---
----@enum SrcLabel
-local SrcLabel = {
-  ['buffer']              = '[Buffer]',
-  ['calc']                = '[Calc]',
-  ['conventionalcommits'] = '[CC]',
-  ['dictionary']          = '[Dict]',
-  ['emoji']               = '[Emoji]',
-  ['git']                 = '[Git]',
-  ['nvim_lsp']            = '[LSP]',
-  ['nvim_lsp_signature']  = '[Sig]',
-  ['luasnip']             = '[LuaSnip]',
-  ['path']                = '[Path]',
-  ['spell']               = '[Spell]',
-  ['treesitter']          = '[TS]',
-}
+---@class CmpSrc
+local CmpSrc = {}
+CmpSrc.__index = CmpSrc
 
-local function get_all_bufs()
-  return vim.api.nvim_list_bufs()
+function CmpSrc.new(name, label, trigger_length, options)
+  return setmetatable({
+    name           = name,
+    label          = label,
+    group_index    = Array.indexof(ORDER, name),
+    trigger_length = trigger_length,
+    option         = options,
+  }, CmpSrc)
 end
+
+
+--- Custom call metamethod that uses the instance to construct a "source" table in the
+--- format expected by cmp.
+---
+---@return table: a "source" table in the format expected by cmp
+function CmpSrc:__call()
+  -- label isn't needed (or expected) here
+  local config = Table.pick_out(self, Set.only('label'))
+  -- hard coding this for now
+  config.max_item_count = 5
+
+  InfoQuietly({ 'CmpSrc: configuring nvim-cmp src=', config.name })
+  DebugQuietly({ 'CmpSrc: full config for nvim-cmp src=', config })
+
+  return config
+end
+
+
+---@note: as suggested by ':h cmp-spell-enable-in-context'
+local function enable_spell()
+  return require('cmp.config.context').in_treesitter_capture('spell')
+end
+
+local DISABLED_CMDS = Set.of('e', 'IncRename', 'split', 'vsp', 'vsplit')
+
+---@enum Source
+local Source = {
+  BUFFER        = CmpSrc.new('buffer', '[Buffer]', 3, { get_bufnrs = Buffer.getall }),
+  CALC          = CmpSrc.new('calc', '[Calc]', 1),
+  CMDLINE       = CmpSrc.new('cmdline', '[Cmd]', 3, { ignore_cmds = DISABLED_CMDS }),
+  CONVCOMMITS   = CmpSrc.new('conventionalcommits', '[CC]', 2),
+  DICTIONARY    = CmpSrc.new('dictionary', '[Dict]', 3),
+  EMOJI         = CmpSrc.new('emoji', '[Emoji]', 1),
+  LSP           = CmpSrc.new('nvim_lsp', '[LSP]', 1),
+  LSP_SIGNATURE = CmpSrc.new('nvim_lsp_signature_help', '[Sig]', 1),
+  LUASNIP       = CmpSrc.new('luasnip', '[LuaSnip]', 1),
+  NVIM_LUA      = CmpSrc.new('nvim_lua', '[NvimLua]', 3),
+  PATH          = CmpSrc.new('path', '[Path]', 2),
+  SPELL         = CmpSrc.new('spell', '[Spell]', 3, { enable_in_context = enable_spell }),
+  TREESITTER    = CmpSrc.new('treesitter', '[TS]', 1),
+}
 
 --- Collection of configurations for nvim-cmp completion sources. Also acts as a
 --- complete list of installed/configured completion sources.
@@ -63,143 +84,45 @@ end
 ---@class Src
 local Src = {}
 
----@return table: configuration for buffer completion source
-function Src.buffer()
-  return {
-    name           = 'buffer',
-    group_index    = GroupIndex.BUFFER,
-    max_item_count = 5,
-    trigger_length = TriggerLength.BUFFER,
+local LABELS = Table.to_dict(Source, function(e) return e.name, e.label end)
 
-    option = {
-      get_bufnrs = get_all_bufs,
-    }
+---@note: order here informs the order of auto-complete results
+---@return table[]: configuration for sources used by base cmp setup
+function Src.for_base()
+  return {
+    Source.LUASNIP(),
+    Source.LSP(),
+    Source.LSP_SIGNATURE(),
+    Source.NVIM_LUA(),
+    Source.PATH(),
+    Source.TREESITTER(),
+    Source.SPELL(),
+    Source.DICTIONARY(),
+    Source.BUFFER(),
+    Source.EMOJI(),
   }
 end
 
 
----@return table: configuration for calc (math-y type stuff) completion source
-function Src.calc()
+---@note: order here informs the order of auto-complete results
+---@return table[]: configuration for sources used in git commits
+function Src.for_gitcommit()
   return {
-    name           = 'calc',
-    group_index    = GroupIndex.CALC,
-    max_item_count = 5,
-    trigger_length = TriggerLength.CALC,
+    Source.PATH(),
+    Source.BUFFER(),
+    Source.NVIM_LUA(),
+    Source.EMOJI(),
+    Source.SPELL(),
+    Source.DICTIONARY(),
   }
 end
 
 
--- TODO: set this up
----@return table: configuration for conventional commits (i.e.: standard commit message
---- terms) completion source
-local function conventionalcommits()
+---@return table[]: configuration for sources used in the vim command line
+function Src.for_cmdline()
   return {
-    name           = 'conventionalcommits',
-    group_index    = GroupIndex.CONVCOMMITS,
-    max_item_count = 5,
-    trigger_length = TriggerLength.CONVCOMMITS,
-  }
-end
-
-
--- TODO: set this up
----@return table: configuration for dictionary completion source
-function Src.dictionary()
-  return {
-    name           = 'dictionary',
-    group_index    = GroupIndex.DICTIONARY,
-    max_item_count = 5,
-    trigger_length = TriggerLength.DICTIONARY,
-  }
-end
-
-
----@return table: configuration for emoji completion source
-function Src.emoji()
-  return {
-    name           = 'emoji',
-    group_index    = GroupIndex.EMOJI,
-    max_item_count = 5,
-    trigger_length = TriggerLength.EMOJI,
-  }
-end
-
-
----@return table: configuration for git completion source
-function Src.git()
-  return {
-    name           = 'git',
-    group_index    = GroupIndex.GIT,
-    max_item_count = 5,
-    trigger_length = TriggerLength.GIT,
-  }
-end
-
-
----@return table: configuration for lsp completion source
-function Src.lsp()
-  return {
-    name           = 'nvim_lsp',
-    group_index    = GroupIndex.LSP,
-    max_item_count = 5,
-    trigger_length = TriggerLength.LSP,
-  }
-end
-
-
----@return table: configuration for lsp signature completion source
-function Src.lsp_signature()
-  return {
-    name           = 'nvim_lsp_signature',
-    group_index    = GroupIndex.LSP_SIGNATURE,
-    max_item_count = 5,
-    trigger_length = TriggerLength.LSP_SIGNATURE,
-  }
-end
-
-
----@return table: configuration for luasnip (snippets engine) completion source
-function Src.luasnip()
-  return {
-    name           = 'luasnip',
-    group_index    = GroupIndex.LUASNIP,
-    max_item_count = 5,
-    trigger_length = TriggerLength.LUASNIP,
-  }
-end
-
-
----@return table: configuration for file-system path completion source
-function Src.path()
-  return {
-    name           = 'path',
-    group_index    = GroupIndex.PATH,
-    max_item_count = 5,
-    trigger_length = TriggerLength.PATH,
-  }
-end
-
-
--- TODO: set this up
----@return table: configuration for spellcheck suggestions completion source
-function Src.spell()
-  return {
-    name           = 'spell',
-    group_index    = GroupIndex.SPELL,
-    max_item_count = 5,
-    trigger_length = TriggerLength.SPELL,
-  }
-end
-
-
--- TODO: set this up
----@return table: configuration for treesitter completion source
-function Src.treesitter()
-  return {
-    name           = 'treesitter',
-    group_index    = GroupIndex.TREESITTER,
-    max_item_count = 5,
-    trigger_length = TriggerLength.TREESITTER,
+    Source.CMDLINE(),
+    Source.PATH(),
   }
 end
 
@@ -209,7 +132,7 @@ end
 ---
 ---@return { [string]: string }: a table that maps cmp sources to their labels
 function Src.get_labels()
-  return SrcLabel
+  return LABELS
 end
 
 return Src

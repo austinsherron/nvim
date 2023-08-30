@@ -75,13 +75,15 @@ return {
   settings = {
     Lua = {
       diagnostics = {
-        -- so globals (i.e.: vim, busted > describe, it, etc....)
+        -- so lua_ls doesn't complain about unrecognized globals (i.e.: vim, busted >
+        -- describe/it, etc....)
         globals = GLOBALS,
       },
       runtime = {
-        path    = get_lua_path(false),
+        path       = get_lua_path(false),
+        pathStrict = true,
         -- tell the language server which version of lua we're using (most likely luajit in the case of neovim)
-        version = LUA_VERSION,
+        version    = LUA_VERSION,
       },
       -- don't send telemetry data (contains a randomized but unique identifier)
       telemetry = {
