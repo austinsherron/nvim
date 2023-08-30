@@ -69,6 +69,11 @@ return Plugins({
     'saadparwaiz1/cmp_luasnip',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
+---- cmp-nvim-lua: completion n/vim lua api
+  {
+    'hrsh7th/cmp-nvim-lua',
+    dependencies = { 'hrsh7th/nvim-cmp' },
+  },
 ---- cmp-path: fuzzy completion of file system paths
   {
     'hrsh7th/cmp-path',
@@ -77,6 +82,11 @@ return Plugins({
 ---- cmp-spell: fuzzy completion of spelling suggestions
   {
     'f3fora/cmp-spell',
+    dependencies = { 'hrsh7th/nvim-cmp' },
+  },
+---- cmp-treesitter: fuzzy completion of treesitter nodes
+  {
+    'ray-x/cmp-treesitter',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
 ---- comment: manipulate code comments easily

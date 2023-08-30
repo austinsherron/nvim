@@ -95,13 +95,13 @@ end
 
 --- Contains methods for configuring key bindings for auto-completion (nvim-cmp).
 ---
----@class Cmp
-local Cmp = {}
+---@class CmpKM
+local CmpKM = {}
 
 --- Creates the keymap for auto-completion (nvim-cmp).
 ---
 ---@return table: the nvim-cmp keymap
-function Cmp.make_mapping()
+function CmpKM.make_mapping()
   local cmp = require 'cmp'
   local luasnip = require 'luasnip'
 
@@ -119,5 +119,5 @@ function Cmp.make_mapping()
   })
 end
 
-return Cmp
+return CmpKM
 

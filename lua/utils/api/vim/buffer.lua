@@ -50,6 +50,14 @@ function Buffer.open(path, view_mode)
   vim.cmd(view_mode .. ' ' .. path)
 end
 
+
+---@see vim.api.nvim_list_bufs
+---@return any[]: current buffer handles
+function Buffer.getall()
+  return vim.api.nvim_list_bufs()
+end
+
+---@note: so ViewMode is publically accessible
 Buffer.ViewMode = ViewMode
 
 return Buffer

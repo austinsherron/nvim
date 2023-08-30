@@ -1,4 +1,4 @@
-local Autocmd    = require 'utils.core.autocmd'
+local Autocmd   = require 'utils.core.autocmd'
 local KeyMapper = require 'utils.core.mapper'
 
 
