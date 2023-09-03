@@ -11,13 +11,13 @@ local Autocmd = require 'utils.core.autocmd'
 local session_manager = require 'session_manager'
 
 
-InfoQuietly({ 'Creating user workspace autocmds' })
+InfoQuietly('Creating user workspace autocmds')
 
 local function set_cwd()
   local cwd = System.cwd()
   System.cd(cwd)
 
-  DebugQuietly({ 'Cwd set to ', cwd })
+  Debug('Cwd set to %s', { cwd })
   return true
 end
 
@@ -34,7 +34,7 @@ Autocmd.new()
 -- local function load_cwd_session()
 --   session_manager.load_current_dir_session()
 --
---   DebugQuietly({ 'Loaded cwd session' })
+--   Debug('Loaded cwd session')
 --   return true
 -- end
 --

@@ -85,9 +85,9 @@ function KeyMapper:do_binding(lhs, rhs, options, modes)
   options = self:get_options(options)
   modes = modes or DEFAULT_MODES
 
-  DebugQuietly({ 'Binding lhs="', lhs, '" to rhs="', rhs, '" (opts=', options, ', modes=', modes, ')' })
+  Debug('Binding lhs="%s" to rhs="%s" (opts=%s, modes=%s)', { lhs, rhs, options, modes })
   vim.keymap.set(modes, lhs, rhs, options)
-  DebugQuietly({ 'Binding processed successfully' })
+  Debug('Binding processed successfully')
 end
 
 
@@ -106,7 +106,7 @@ end
 ---@param bindings Binding[]: the key bindings to bind
 ---@return KeyMapper: self
 function KeyMapper:bind(bindings)
-  InfoQuietly({ 'Processing ', #bindings, ' key bindings' })
+  InfoQuietly('Processing %s key binding(s)', { #bindings })
 
   Stream(bindings)
     :foreach(function(b) self:do_binding(Table.unpack(b)) end)

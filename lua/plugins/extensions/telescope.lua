@@ -44,7 +44,7 @@ function Telescope.do_contextual_search(f, title, opts)
   elseif NvTree.is_file(node) then
     node_path = node.parent.absolute_path
   else
-    error('nvim-tree <-> telescope integration: unrecognized nvim-tree node type=' .. node.type)
+    Err.raise('nvim-tree <-> telescope: unrecognized nvim-tree node type=', node.type)
   end
 
   opts = TMerge.mergeleft({
@@ -93,7 +93,7 @@ local function bind_keymap(keymap, map)
 
     for _, binding in ipairs(keymap) do
       if #binding ~= 3 then
-        Warn({ 'Telescope ext: discarding invalid key binding=', binding })
+        Warn('Telescope ext: discarding invalid key binding=%s', { binding })
       else
         map(Table.unpack(binding))
       end

@@ -13,7 +13,7 @@ local function download(dst_path)
   local repo = Lazy.git_path()
 
   Git.clone(repo, dst_path, { filter = 'blob:none', branch = 'stable' })
-  InfoQuietly({ 'Successfully downloaded ', repo })
+  InfoQuietly('Successfully downloaded %s', { repo })
 end
 
 --- Initializes the neovim plugin manager.
@@ -26,7 +26,7 @@ function PluginMgr.init(plugins)
   local lazy_path = Lazy.lazy_path()
 
   if not System.stat(lazy_path) then
-    InfoQuietly({ 'Plugin manager not found at=', lazy_path, '; fetching' })
+    InfoQuietly('Plugin manager not found at=%s; fetching', { lazy_path })
     download(lazy_path)
   end
 

@@ -8,7 +8,7 @@
 local Autocmd = require 'utils.core.autocmd'
 
 
-InfoQuietly({ 'Creating user settings autocmds' })
+InfoQuietly('Creating user settings autocmds')
 
 -- so lines inserted from comments don't cause comment continuation
 Autocmd.new()

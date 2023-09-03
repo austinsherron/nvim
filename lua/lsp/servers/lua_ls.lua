@@ -66,7 +66,7 @@ local function get_runtime_files()
 
 local function get_wkspace_lib()
   return Stream(Table.concat({ get_internal_wkspace_lib(), {}}))   -- get_runtime_files() }))
-    :peek(function(i) DebugQuietly({ 'Adding file=', i, ' to lua_ls workspace.library'}) end)
+    :peek(function(i) Debug('Adding file=%s to lua_ls workspace.library', { i }) end)
     :get()
 end
 
