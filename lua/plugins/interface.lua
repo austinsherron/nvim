@@ -29,7 +29,7 @@ return Plugins({
   {
     'romgrk/barbar.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = Barbar.opts(),
+    opts         = Barbar.opts(),
   },
   ---- bqf (better quickfix window): makes quickfix window more user-friendly
   {
@@ -40,9 +40,9 @@ return Plugins({
   ----             it to for now
   ({
     'akinsho/bufferline.nvim',
-    enabled = false,
+    enabled      = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version = '*',
+    version      = '*',
 
     config = function()
       require('bufferline').setup({})

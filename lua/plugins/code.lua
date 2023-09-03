@@ -26,16 +26,16 @@ return Plugins({
       'nvim-tree/nvim-web-devicons'
     },
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('aerial').setup(opts)
     end
   },
   ---- fidget: show lsp progress outside of statusline
   {
     'j-hui/fidget.nvim',
-    tag    = 'legacy',
-    event  = 'LspAttach',
-    opts   = Fidget.opts(),
+    tag   = 'legacy',
+    event = 'LspAttach',
+    opts  = Fidget.opts(),
 
     config = function(_, opts)
       require('fidget').setup(opts)
@@ -123,7 +123,7 @@ return Plugins({
     opts         = TreeSJ.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('treesj').setup(opts)
     end,
   },

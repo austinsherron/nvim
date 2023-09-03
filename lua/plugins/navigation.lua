@@ -29,7 +29,7 @@ return Plugins({
     version      = '*',
     opts         = NvimTree.opts(),
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('nvim-tree').setup(opts)
     end,
   },

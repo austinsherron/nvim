@@ -20,7 +20,7 @@ return Plugins({
     -- FIXME: these don't seem to be respected below...
     opts         = Diffview.opts(),
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('diffview').setup(opts)
     end
   },
@@ -46,7 +46,7 @@ return Plugins({
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts         = Neogit.opts(),
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('neogit').setup(opts)
     end
   },

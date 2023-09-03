@@ -29,7 +29,7 @@ return Plugins({
     enabled = false,
     lazy    = false,
 
-    config  = function()
+    config = function()
       LeapKM.add_keymap()
     end
   },

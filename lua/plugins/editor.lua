@@ -105,7 +105,7 @@ return Plugins({
     opts         = Indent.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('indent_blankline').setup(opts)
     end
   },
@@ -120,7 +120,7 @@ return Plugins({
     version = '*', -- use for stability; omit to use `main` branch for the latest features
     event   = 'VeryLazy',
 
-    config  = function()
+    config = function()
       require('nvim-surround').setup()
     end
   },
