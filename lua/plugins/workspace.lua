@@ -13,13 +13,13 @@ local Plugins    = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
----- neovim session-manager: persist open files/buffers b/w nvim sessions
+  ---- neovim session-manager: persist open files/buffers b/w nvim sessions
   {
     'Shatur/neovim-session-manager',
 
     config = SessionMgr.config,
   },
----- project: project manager/navigator
+  ---- project: project manager/navigator
   {
     'ahmedkhalf/project.nvim',
     opts = Project.opts(),

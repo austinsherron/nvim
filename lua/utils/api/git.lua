@@ -86,7 +86,7 @@ end
 function Git.clone(repo, dir, options)
   options = Table.map_items(
     options or {},
-    { keys = function(k, v) return string.format('--%s=%s', k, v) end }
+    { keys = function(k, v) return fmt('--%s=%s', k, v) end }
   )
 
   local url = 'https://github.com/' .. repo .. '.git'

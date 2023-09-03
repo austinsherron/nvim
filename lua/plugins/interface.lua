@@ -15,7 +15,7 @@ local Priority  = require 'utils.plugins.priority'
 
 
 return Plugins({
----- alpha: landing page
+  ---- alpha: landing page
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -25,30 +25,30 @@ return Plugins({
       require('alpha').setup(require('alpha.themes.startify').config)
     end,
   },
----- barbar: buffer bar
+  ---- barbar: buffer bar
   {
     'romgrk/barbar.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = Barbar.opts(),
+    opts         = Barbar.opts(),
   },
----- bqf (better quickfix window): makes quickfix window more user-friendly
+  ---- bqf (better quickfix window): makes quickfix window more user-friendly
   {
     'kevinhwang91/nvim-bqf',
     dependencies = { 'junegunn/fzf.vim' },
   },
----- bufferline: another buffer bar; note: disabled since barbar does what I want
-----             it to for now
+  ---- bufferline: another buffer bar; note: disabled since barbar does what I want
+  ----             it to for now
   ({
     'akinsho/bufferline.nvim',
-    enabled = false,
+    enabled      = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version = '*',
+    version      = '*',
 
     config = function()
       require('bufferline').setup({})
     end
   }),
----- fzf: fuzzy-finder
+  ---- fzf: fuzzy-finder
   {
     'junegunn/fzf',
 
@@ -56,9 +56,9 @@ return Plugins({
       vim.fn['fzf#install']()
     end
   },
----- fzf.vim: collection of fzf vim integrations/utilities
+  ---- fzf.vim: collection of fzf vim integrations/utilities
   { 'junegunn/fzf.vim' },
----- lightbulb: ide style 💡 to mark code actions
+  ---- lightbulb: ide style 💡 to mark code actions
   {
     'kosayoda/nvim-lightbulb',
     opts = Lightbulb.opts(),
@@ -67,7 +67,7 @@ return Plugins({
       require('nvim-lightbulb').setup(opts)
     end
   },
----- lualine: status line; TODO: customize
+  ---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',
     opts = Lualine.opts(),
@@ -76,7 +76,7 @@ return Plugins({
       require('lualine').setup(opts)
     end
   },
----- notify: pretty notifications
+  ---- notify: pretty notifications
   {
     'rcarriga/nvim-notify',
     dependencies = { 'MunifTanjim/nui.nvim' },
@@ -91,18 +91,18 @@ return Plugins({
       vim.notify = require('notify')
     end
   },
----- sidebar: module siderbar (TODO: configure further)
+  ---- sidebar: module sidebar (TODO: configure further)
   {
     'sidebar-nvim/sidebar.nvim',
     opts = {},
 
-    config = function (_, opts)
+    config = function(_, opts)
       require('sidebar-nvim').setup(opts)
     end
   },
----- undotree: visualize a file/buffer's change history
+  ---- undotree: visualize a file/buffer's change history
   { 'mbbill/undotree' },
----- which-key: visualize keybindings based on what's typed
+  ---- which-key: visualize keybindings based on what's typed
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',

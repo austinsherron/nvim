@@ -189,7 +189,7 @@ end
 
 ---@private
 function AutoCommand:create_log_msg(id)
-  return string.format(
+  return fmt(
     'Created autocmd (id=%d,desc=%s)',
     id,
     (self.desc or '?')

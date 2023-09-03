@@ -13,7 +13,7 @@ local Plugins  = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
----- diff view: for looking at diffs...
+  ---- diff view: for looking at diffs...
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -24,7 +24,7 @@ return Plugins({
       require('diffview').setup(opts)
     end
   },
----- gitsigns: visual cues about what's changed/is changing
+  ---- gitsigns: visual cues about what's changed/is changing
   {
     'lewis6991/gitsigns.nvim',
     opts = Gitsigns.opts(),
@@ -33,14 +33,14 @@ return Plugins({
       require('gitsigns').setup(opts)
     end
   },
----- lazygit: nvim entry point to lazygit
+  ---- lazygit: nvim entry point to lazygit
   {
     'kdheepak/lazygit.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
 
     config = Lazygit.config,
   },
----- neogit: git interactions through neovim
+  ---- neogit: git interactions through neovim
   {
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim' },
