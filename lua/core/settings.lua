@@ -72,11 +72,20 @@ o.undofile = true                                   -- enable undo history
 o.swapfile = false                                  -- disable swap files
 
 -- ignore certain files when opening buffers from inside neovim
-vim.opt.wildignore:append({ '*.o', '*.obj', '**/.git/*', '*.swp', '*.pyc', '*.class', '**/node_modules/*', '*.bak' })
+opt.wildignore:append({
+  '*.o',
+  '*.obj',
+  '**/.git/*',
+  '*.swp',
+  '*.pyc',
+  '*.class',
+  '**/node_modules/*',
+  '*.bak',
+})
 
 -- prefer splitting windows below or to the right
-vim.o.splitbelow = true
-vim.o.splitright = true
+o.splitbelow = true
+o.splitright = true
 
 -- unknown/disabled settings ---------------------------------------------------
 

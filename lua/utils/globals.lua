@@ -1,3 +1,5 @@
+---@note: we want global functions w/ lowercased names
+---@diagnostic disable: lowercase-global
 
 -- logging utils
 require 'utils.reporting.globals'
@@ -13,8 +15,7 @@ Set    = require 'toolbox.extensions.set'
 OnErr  = require 'utils.error.onerr'
 Safe   = require 'utils.error.safe'
 
----@diagnostic disable-next-line: lowercase-global
+-- generally useful, oft imported util functions
 fmt     = String.fmt
----@diagnostic disable-next-line: lowercase-global
 ternary = Bool.ternary
 

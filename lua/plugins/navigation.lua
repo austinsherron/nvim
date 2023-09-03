@@ -10,10 +10,10 @@ local Plugins  = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
----- nnn: file explorer w/ what seems like a cult-ish following
+  ---- nnn: file explorer w/ what seems like a cult-ish following
 
----- note: didn't love the nnn interface; perhaps I need to use it a bit more
-----       to become accustomed to it
+  ---- note: didn't love the nnn interface; perhaps I need to use it a bit more
+  ----       to become accustomed to it
   {
     'luukvbaal/nnn.nvim',
     enabled = false,
@@ -22,14 +22,14 @@ return Plugins({
       require('nnn').setup()
     end
   },
----- nvim-tree: file explorer
+  ---- nvim-tree: file explorer
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     version      = '*',
     opts         = NvimTree.opts(),
 
-    config = function(_, opts)
+    config       = function(_, opts)
       require('nvim-tree').setup(opts)
     end,
   },

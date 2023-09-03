@@ -13,10 +13,11 @@ local Priority = require 'utils.plugins.priority'
 
 
 return Plugins({
----- buf-resize: intuitively resize buffers when terminal dimensions change
+  ---- buf-resize: intuitively resize buffers when terminal dimensions change
+  ---- TODO: doesn't seem to work
   { 'kwkarlwang/bufresize.nvim' },
----- colorschemes: loaded w/ high priority as discussed here:
-----               https://github.com/folke/lazy.nvim > Plugin Spec > priority
+  ---- colorschemes: loaded w/ high priority as discussed here:
+  ----               https://github.com/folke/lazy.nvim > Plugin Spec > priority
   {
     'catppuccin/nvim',
 
@@ -47,7 +48,7 @@ return Plugins({
     lazy     = false,
     priority = Priority.THIRD,
   },
----- dressing.nvim: ui/ux treatments for vim input/select
+  ---- dressing.nvim: ui/ux treatments for vim input/select
   {
     'stevearc/dressing.nvim',
 
@@ -55,7 +56,7 @@ return Plugins({
       require('dressing').setup()
     end
   },
----- lspkind: icons for lsp completion items
+  ---- lspkind: icons for lsp completion items
   {
     'onsails/lspkind.nvim',
     opts = LspKind.opts(),
@@ -64,7 +65,7 @@ return Plugins({
       require('lspkind').init(opts)
     end
   },
----- nui: ui components
+  ---- nui: ui components
   {
     'MunifTanjim/nui.nvim',
 

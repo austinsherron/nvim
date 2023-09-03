@@ -13,7 +13,7 @@ local Plugins     = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
---- flash: another "fast movement" plugin; a replacement for leap? (yes)
+  --- flash: another "fast movement" plugin; a replacement for leap? (yes)
   {
     'folke/flash.nvim',
     opts = Flash.opts(),
@@ -23,17 +23,17 @@ return Plugins({
       FlashKM.add_keymap()
     end
   },
----- leap: fast movement w/in files; note: disabled in favor of flash
+  ---- leap: fast movement w/in files; note: disabled in favor of flash
   {
     'ggandor/leap.nvim',
     enabled = false,
     lazy    = false,
 
-    config = function()
+    config  = function()
       LeapKM.add_keymap()
     end
   },
----- nvim-tmux navigation: integration b/w nvim + tmux (pane nav shortcuts)
+  ---- nvim-tmux navigation: integration b/w nvim + tmux (pane nav shortcuts)
   {
     'alexghergh/nvim-tmux-navigation',
     opts = NvimTmuxNav.opts(),
