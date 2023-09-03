@@ -17,7 +17,7 @@ end
 
 local function inspect_wkspace_dirs()
   -- TODO: make this a bit more user friendly/prettier
-  Info({ vim.inspect(vim.lsp.buf.list_workspace_folders()) })
+  Info(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end
 
 

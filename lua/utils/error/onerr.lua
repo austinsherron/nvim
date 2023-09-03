@@ -44,7 +44,7 @@ function OnErr.log(f, prefix, ...)
   end
 
   local err_msg = make_err_msg(res, prefix)
-  Error(err_msg, { user_facing = false })
+  Error(err_msg, {}, { user_facing = false })
 end
 
 
@@ -63,7 +63,7 @@ function OnErr.notify(f, prefix, ...)
   local err_msg = make_err_msg(res, prefix)
   -- not necessary, but want to be explicit about the fact that we're logging a
   -- user-facing message here
-  Error(err_msg, { user_facing = true, title = make_title(prefix) })
+  Error(err_msg, {}, { user_facing = true, title = make_title(prefix) })
 end
 
 

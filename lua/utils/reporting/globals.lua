@@ -12,11 +12,9 @@ function Info (...) GetLogger():info (...) end
 function Warn (...) GetLogger():warn (...) end
 function Error(...) GetLogger():error(...) end
 
-function TraceQuietly(tl) GetLogger():trace(tl, { user_facing = false }) end
-function DebugQuietly(tl) GetLogger():debug(tl, { user_facing = false }) end
-function InfoQuietly (tl) GetLogger():info (tl, { user_facing = false }) end
-function WarnQuietly (tl) GetLogger():warn (tl, { user_facing = false }) end
-function ErrorQuietly(tl) GetLogger():error(tl, { user_facing = false }) end
+function InfoQuietly (tl, a) GetLogger():info (tl, a, { user_facing = false }) end
+function WarnQuietly (tl, a) GetLogger():warn (tl, a, { user_facing = false }) end
+function ErrorQuietly(tl, a) GetLogger():error(tl, a, { user_facing = false }) end
 
 
 --- Small decorator that executes the provided "this" fn, captures its return value, logs

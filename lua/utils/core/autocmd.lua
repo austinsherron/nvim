@@ -85,7 +85,7 @@ end
 ---@return AutoCommand: self
 function AutoCommand:withGroup(group, options)
   self.group = create_or_get_group(group, options)
-  InfoQuietly({ 'Created augroup=', group })
+  InfoQuietly('Created augroup="%s"', { group })
   return self
 end
 
@@ -180,7 +180,7 @@ function AutoCommand:_create(config)
   validate({ 'event', { 'callback', 'command' }}, config, 'create')
 
   local event, opts = Table.split_one(config, 'event')
-  DebugQuietly({ 'Creating autocmd for event=', event, ' with opts=', opts })
+  Debug('Creating autocmd for event="%s" with opts=%s', { event, opts })
 
   self.id = vim.api.nvim_create_autocmd(event, opts)
   return self.id
@@ -235,7 +235,7 @@ end
 function AutoCommand:delete(config)
   return ThisThenLog(
     Safe.ify(function() return self:_delete(config) end),
-    function(id) InfoQuietly('Deleted autocmd (id=' .. tostring(id) .. ')') end
+    function(id) InfoQuietly('Deleted autocmd (id=%s)', { id }) end
   )
 end
 

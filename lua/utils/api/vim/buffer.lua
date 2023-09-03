@@ -32,7 +32,7 @@ function ViewMode.orDefault(maybe)
 
   -- nil is a semi-valid option, as it potentially indicates the default was desired
   if maybe ~= nil then
-    Warn({ 'View mode=', maybe, ' is not a valid ViewMode' })
+    Warn('View mode=%s is not a valid ViewMode', { maybe })
   end
 
   return _ViewMode.DEFAULT

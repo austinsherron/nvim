@@ -1,4 +1,5 @@
 local LogFormatter = require 'toolbox.log.formatter'
+local LogLevel     = require 'toolbox.log.level'
 
 
 --- Specifies what kind of message is being logged, and its level of
@@ -18,56 +19,68 @@ local Urgency = {
 ---@class Notify
 local Notify = {}
 
-local function do_log(to_log, log_level, opts)
-  to_log = LogFormatter.format(to_log)
+local function do_log(level, to_log, args, opts)
+  args = args or {}
   opts = opts or {}
+
+  to_log = LogFormatter.format(LogLevel.NIL, to_log, args, opts)
 
   -- persistent == true means timeout == false, i.e.: no timeout
   local persistent = opts.persistent or false
-  opts = Table.pick_out(opts, Set.new({ 'persistent' }))
+  opts = Table.pick_out(opts, Set.only('persistent'))
   opts.timeout = ternary(persistent, false, opts.timeout)
 
-  vim.notify(to_log, log_level, opts)
+  vim.notify(to_log, level, opts)
 end
 
 
---- Logs a "trace" level message during neovim runtime.
+--- Logs a "trace" level message via the vim.notify api.
 ---
----@param to_log (any|any[])?: the messages/objects to log
-function Notify.trace(to_log, opts)
-  do_log(to_log, Urgency.TRACE, opts)
+---@param to_log any: the formattable string or object to log
+---@param args any[]|nil: an array of objects to format into to_log
+---@param opts table|nil: options that control logging behavior
+function Notify.trace(to_log, args, opts)
+  do_log(Urgency.TRACE, to_log, args, opts)
 end
 
 
---- Logs a "debug" level message during neovim runtime.
+--- Logs a "debug" level message via the vim.notify api.
 ---
----@param to_log (any|any[])?: the messages/objects to log
-function Notify.debug(to_log, opts)
-  do_log(to_log, Urgency.DEBUG, opts)
+---@param to_log any: the formattable string or object to log
+---@param args any[]|nil: an array of objects to format into to_log
+---@param opts table|nil: options that control logging behavior
+function Notify.debug(to_log, args, opts)
+  do_log(Urgency.DEBUG, to_log, args, opts)
 end
 
 
---- Logs an "info" level message during neovim runtime.
+--- Logs an "info" level message via the vim.notify api.
 ---
----@param to_log (any|any[])?: the messages/objects to log
-function Notify.info(to_log, opts)
-  do_log(to_log, Urgency.INFO, opts)
+---@param to_log any: the formattable string or object to log
+---@param args any[]|nil: an array of objects to format into to_log
+---@param opts table|nil: options that control logging behavior
+function Notify.info(to_log, args, opts)
+  do_log(Urgency.INFO, to_log, args, opts)
 end
 
 
---- Logs a "warn" level message during neovim runtime.
+--- Logs a "warn" level message via the vim.notify api.
 ---
----@param to_log (any|any[])?: the messages/objects to log
-function Notify.warn(to_log, opts)
-  do_log(to_log, Urgency.WARN, opts)
+---@param to_log any: the formattable string or object to log
+---@param args any[]|nil: an array of objects to format into to_log
+---@param opts table|nil: options that control logging behavior
+function Notify.warn(to_log, args, opts)
+  do_log(Urgency.WARN, to_log, args, opts)
 end
 
 
---- Logs an "error" level message during neovim runtime.
+--- Logs an "error" level message via the vim.notify api.
 ---
----@param to_log (any|any[])?: the messages/objects to log
-function Notify.error(to_log, opts)
-  do_log(to_log, Urgency.ERROR, opts)
+---@param to_log any: the formattable string or object to log
+---@param args any[]|nil: an array of objects to format into to_log
+---@param opts table|nil: options that control logging behavior
+function Notify.error(to_log, args, opts)
+  do_log(Urgency.ERROR, to_log, args, opts)
 end
 
 return Notify

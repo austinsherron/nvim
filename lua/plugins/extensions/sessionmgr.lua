@@ -22,10 +22,10 @@ local function delete_session(name)
   local err = File.delete(make_session_path(name))
 
   if err ~= nil then
-    return Warn({ 'Session ext: error deleting session=', name, '; err=', err })
+    return Warn('Session ext: error deleting session=%s; err=%s', { name, err })
   end
 
-  Info({ 'Successfully deleted session=', name })
+  Info('Successfully deleted session=%s', { name })
 end
 
 

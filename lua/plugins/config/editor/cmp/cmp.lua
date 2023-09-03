@@ -27,7 +27,7 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.base(cmp)
-  InfoQuietly({ 'Configuring nvim-cmp' })
+  InfoQuietly('Configuring nvim-cmp')
 
   cmp.setup({
     formatting = Cmp.formatting(),
