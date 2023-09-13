@@ -7,47 +7,32 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
-local LspKind  = require 'plugins.config.appearance.lspkind'
-local Plugins  = require('utils.plugins.plugin').plugins
-local Priority = require 'utils.plugins.priority'
+local LspKind     = require 'plugins.config.appearance.lspkind'
+local TokyoNight  = require 'plugins.config.appearance.tokyonight'
+local ColorScheme = require 'utils.plugins.colorscheme'
+local Priority    = require 'utils.plugins.priority'
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
   ---- buf-resize: intuitively resize buffers when terminal dimensions change
-  ---- TODO: doesn't seem to work
-  { 'kwkarlwang/bufresize.nvim' },
-  ---- colorschemes: loaded w/ high priority as discussed here:
-  ----               https://github.com/folke/lazy.nvim > Plugin Spec > priority
   {
-    'catppuccin/nvim',
+    'kwkarlwang/bufresize.nvim',
+    opts = {},
 
-    lazy     = false,
-    priority = Priority.THIRD,
+    config = function(_, opts)
+      require('bufresize').setup(opts)
+    end
   },
-  {
-    'rebelot/kanagawa.nvim',
-
-    lazy     = false,
-    priority = Priority.THIRD,
-  },
-  {
-    'marko-cerovac/material.nvim',
-
-    lazy     = false,
-    priority = Priority.THIRD,
-  },
-  {
-    'AlexvZyl/nordic.nvim',
-
-    lazy     = false,
-    priority = Priority.THIRD,
-  },
-  {
-    'folke/tokyonight.nvim',
-
-    lazy     = false,
-    priority = Priority.THIRD,
-  },
+  ---- colorschemes: using a strongly typed wrapper to enforce consisten colorscheme
+  ----               plugin attributes
+  ColorScheme('catppuccin/nvim'),
+  ColorScheme('rebelot/kanagawa.nvim'),
+  ColorScheme('marko-cerovac/material.nvim'),
+  ColorScheme('AlexvZyl/nordic.nvim'),
+  ColorScheme('folke/tokyonight.nvim')
+    :configure('tokyonight', TokyoNight.opts()),
   ---- dressing.nvim: ui/ux treatments for vim input/select
   {
     'stevearc/dressing.nvim',

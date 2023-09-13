@@ -6,7 +6,8 @@
 --]]
 
 local NvimTree = require 'plugins.config.navigation.nvimtree'
-local Plugins  = require('utils.plugins.plugin').plugins
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({

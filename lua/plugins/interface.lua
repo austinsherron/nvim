@@ -10,8 +10,10 @@
 local Barbar    = require 'plugins.config.interface.barbar'
 local Lightbulb = require 'plugins.config.interface.lightbulb'
 local Lualine   = require 'plugins.config.interface.lualine'
-local Plugins   = require('utils.plugins.plugin').plugins
+local Sidebar   = require 'plugins.config.interface.sidebar'
 local Priority  = require 'utils.plugins.priority'
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
@@ -94,7 +96,7 @@ return Plugins({
   ---- sidebar: module sidebar (TODO: configure further)
   {
     'sidebar-nvim/sidebar.nvim',
-    opts = {},
+    opts = Sidebar.opts(),
 
     config = function(_, opts)
       require('sidebar-nvim').setup(opts)

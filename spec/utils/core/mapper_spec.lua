@@ -1,4 +1,5 @@
----@diagnostic disable: invisible
+---@diagnostic disable: invisible, undefined-field
+
 local Dict      = require 'toolbox.core.dict'
 local KeyMapper = require 'utils.core.mapper'
 

@@ -13,7 +13,8 @@ local Mason      = require 'plugins.config.code.mason'
 local SnipRun    = require 'plugins.config.code.sniprun'
 local Treesitter = require 'plugins.config.code.treesitter'
 local TreeSJ     = require 'plugins.config.code.treesj'
-local Plugins    = require('utils.plugins.plugin').plugins
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({

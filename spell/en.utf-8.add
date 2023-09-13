@@ -95,6 +95,7 @@ BufferPin
 BufferPrevious
 BufferRestore
 BufferState
+bufhidden
 BufNewFile
 bufnr
 bufnum
@@ -239,6 +240,7 @@ errorhandling
 errorQuietly
 esc
 Esc
+excludesfile
 executables
 expr
 external
@@ -285,6 +287,7 @@ functionality
 fzf
 getcmdline
 getcwd
+geti2p
 getinfo
 getLogger
 GetLogger
@@ -314,6 +317,7 @@ gpgsign
 GroupIndex
 gsconnect
 GSConnect
+gThumb
 guake
 gz
 hcl
@@ -326,6 +330,9 @@ html
 htop
 https
 hui
+i2p
+I2P
+i2pd
 ide
 idx
 ie
@@ -349,6 +356,7 @@ insteadOf
 integrations
 IntelliJ
 invrelativenumber
+io
 ipairs
 isdirectory
 ish
@@ -481,6 +489,7 @@ mv
 namespace
 NamingStrategy
 NamingStrategyKey
+nano
 nargs
 nav
 navic
@@ -534,6 +543,7 @@ NvimTreeFindFile
 NvimTreeFocus
 NvimTreeToggle
 nvm
+nvr
 nvt
 Nvt
 nvundle
@@ -547,6 +557,7 @@ oob
 OOB
 open
 openmode
+OpenShot
 orDefault
 os
 otherwssie
@@ -574,6 +585,7 @@ pcall
 peekall
 perf
 pfx
+pipefail
 pkgs
 Plgn
 pluginmanager
@@ -581,6 +593,7 @@ PluginMgr
 popup
 positionals
 POSIX
+ppa
 pre
 Prepend
 prev
@@ -616,6 +629,7 @@ rcs
 rdelims
 README
 readmes
+readthedocs
 realpath
 rebase
 RecursiveJoin
@@ -691,6 +705,7 @@ Sherron
 SidebarNvimFocus
 SidebarNvimToggle
 Sig
+signingkey
 silentopen
 silversearcher
 SmiteshP
@@ -779,6 +794,7 @@ todo
 TODO
 tokyo
 tokyonight
+TokyoNight
 toml
 Toml
 toNode
@@ -905,3 +921,4 @@ Zorin
 zoxide
 zquestz
 Zsh
+policykit

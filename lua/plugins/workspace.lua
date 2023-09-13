@@ -9,7 +9,8 @@
 
 local Project    = require 'plugins.config.workspace.project'
 local SessionMgr = require 'plugins.config.workspace.sessionmgr'
-local Plugins    = require('utils.plugins.plugin').plugins
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({

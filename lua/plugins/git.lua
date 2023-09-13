@@ -9,7 +9,8 @@ local Diffview = require 'plugins.config.git.diffview'
 local Gitsigns = require 'plugins.config.git.gitsigns'
 local Lazygit  = require 'plugins.config.git.lazygit'
 local Neogit   = require 'plugins.config.git.neogit'
-local Plugins  = require('utils.plugins.plugin').plugins
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
@@ -40,9 +41,11 @@ return Plugins({
 
     config = Lazygit.config,
   },
-  ---- neogit: git interactions through neovim
+  ---- neogit: git interactions through neovim; note: disabled at the moment in favor of
+  ----         lazygit.nvim
   {
     'NeogitOrg/neogit',
+    enabled      = false,
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts         = Neogit.opts(),
 

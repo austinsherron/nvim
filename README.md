@@ -23,7 +23,8 @@ I organize my plugins into the following categories:
 * **Motion** - Motion plugins control on-screen (as opposed to file-system) movement.
 * **Navigation** - Navigation plugins control (file) system (as opposed to on-screen) movement.
 * **Search** - Search plugins make it easier to find things.
-* **Tools** - Tools plugins add misc. functionality to nvim; they add *explicitly new* functionality to nvim, as opposed to changing something about the way its core functions work. Tools here don't fit into any other categories.
+* **Tools** - Tools plugins add misc functionality to nvim; they add *explicitly new* functionality to nvim, as opposed to changing something about the way its core functions work. Tools here don't fit into any other categories.
+* **Workspace** - Workspace plugins control capabilities related to managing and manipulating "workspace" elements. These include buffers, tabs, windows, sessions, projects, and groupings/filtered views of the same.
 
 ## Structure
 
@@ -31,15 +32,31 @@ I organize my plugins into the following categories:
 .
 ├── lua
 │   ├── core
+│   │   └── cmd
+│   │       ├── auto
+│   │       └── user
 │   ├── keymap
 │   │   └── plugins
 │   ├── lsp
+│   │   ├── library
+│   │   │   └── assets
 │   │   └── servers
 │   ├── plugins
 │   │   ├── config
 │   │   └── extensions
 │   └── utils
-└── templates
+│       ├── api
+│       │   └── vim
+│       ├── core
+│       ├── error
+│       ├── plugins
+│       └── reporting
+├── spec
+│   └── utils
+│       └── core
+└── spell
+
+44 directories
 ```
 
 ## To-Do Lists
