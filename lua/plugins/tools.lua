@@ -12,6 +12,16 @@ local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
+  ---- 1password: integrates 1pw w/ nvim
+  {
+    'mrjones2014/op.nvim',
+    build = 'make install',
+    opts = {},
+
+    config = function(_, opts)
+      require('op').setup(opts)
+    end
+  },
   ---- colorizer: high perf color highlighter
   ---- TODO: configure
   {
