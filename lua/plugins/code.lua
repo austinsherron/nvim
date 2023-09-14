@@ -59,15 +59,15 @@ return Plugins({
     end
   },
   ---- mason lsp-config: integration b/w mason and nvim lsp-config
-  ({
+  {
     'williamboman/mason-lspconfig.nvim',
     opts         = Mason.opts(),
     dependencies = { 'williamboman/mason.nvim' },
 
-    config       = function(_, opts)
+    config = function(_, opts)
       require('mason-lspconfig').setup(opts)
     end
-  }),
+  },
   ---- neodev: make lsp aware of (n)vim apis and plugins
   {
     'folke/neodev.nvim',

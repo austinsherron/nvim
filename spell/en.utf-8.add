@@ -922,3 +922,8 @@ zoxide
 zquestz
 Zsh
 policykit
+bork
+InfoQuietly
+WarnQuietly
+ErrorQuietly
+ThisThenLog
