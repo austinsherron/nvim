@@ -31,5 +31,11 @@ function Path.log()
   return stdpath('log')
 end
 
+
+---@return string: the path to the state dir
+function Path.state()
+  return stdpath('state')
+end
+
 return Path
 

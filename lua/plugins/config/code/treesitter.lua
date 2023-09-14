@@ -35,7 +35,7 @@ function Treesitter.opts()
     --   'terraform',
     --   'typescript',
     --   'vim',
-    --   'yaml'
+    --   'yaml',
     -- },
     ignore_install = {},
     parser_install_dir = Env.nvundle(),

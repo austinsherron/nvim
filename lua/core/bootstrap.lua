@@ -1,33 +1,38 @@
 local Shell     = require 'toolbox.system.shell'
 local KeyMapper = require 'utils.core.mapper'
+local Path      = require 'utils.api.vim.path'
+
+local globals = vim.g
+local o       = vim.o
+local opt     = vim.opt
 
 
 -- note: settings that should come before everything else
 
 -- internals -------------------------------------------------------------------
 
----- setup dirs for misc. state
+---- setup dirs for misc state
 
-local state_base = vim.fn.stdpath('state')
+local state_base = Path.state()
 
 -- for storing for storing backups
 local backup_path = state_base .. '/backup'
 Shell.mkdir(backup_path, true)
-vim.o.backupdir = backup_path
+o.backupdir = backup_path
 
 -- for storing undo history
 local undo_path = state_base .. '/undo'
 Shell.mkdir(undo_path, true)
-vim.o.undodir = undo_path
+o.undodir = undo_path
 
 -- look & feel -----------------------------------------------------------------
 
 -- disable netrw (recommended by nvim-tree.lua plugin installation guide)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+globals.loaded_netrw = 1
+globals.loaded_netrwPlugin = 1
 
 -- tell nvim to emit "24-bit, 'true' colors" to the terminal
-vim.opt.termguicolors = true
+opt.termguicolors = true
 
 -- interactions ----------------------------------------------------------------
 
@@ -35,6 +40,6 @@ vim.opt.termguicolors = true
 KeyMapper.quick_bind('<Space>', '<Nop>')
 
 -- remap leaders to space
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+globals.mapleader = ' '
+globals.maplocalleader = ' '
 

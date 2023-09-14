@@ -78,5 +78,24 @@ function OnErr.return_false(f, ...)
   return ok, res
 end
 
+
+--- On error, returns a substitute value.
+---
+---@generic T
+---@param f fun(...): T|nil: the function that might throw an error
+---@param sub Callable: the value to substitute on error
+---@param ... any?: args to pass to f
+---@return T: the return value of f, or the return value of sub, if f encounters errors
+---@return string: the response from any errors encountered calling f, if any
+function OnErr.substitute(f, sub, ...)
+  local ok, res = pcall(f, ...)
+
+  if ok then
+    return res
+  end
+
+  return sub(), res
+end
+
 return OnErr
 

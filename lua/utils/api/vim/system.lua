@@ -18,5 +18,7 @@ return {
   run        = vim.fn.system,
   ---@see vim.loop.fs_stat
   stat       = vim.loop.fs_stat,
+  ---@see vim.fn.executable
+  executable = vim.fn.executable,
 }
 

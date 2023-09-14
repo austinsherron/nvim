@@ -1,11 +1,14 @@
-local SessionConfigMgr = require 'plugins.config.editor.sessionmgr'
+-- internal
+local SessionConfigMgr = require 'plugins.config.workspace.sessionmgr'
 local Telescope        = require 'plugins.extensions.telescope'
-local session_utils    = require 'session_manager.utils'
-local actions          = require 'telescope.actions'
-local Builtins         = require 'telescope.builtin'
 local Env              = require 'toolbox.system.env'
 local File             = require 'toolbox.system.file'
 local Confirm          = require 'utils.api.vim.confirm'
+
+-- external
+local session_utils    = require 'session_manager.utils'
+local actions          = require 'telescope.actions'
+local builtins         = require 'telescope.builtin'
 
 
 --- Contains functions that implement extended (custom) session manager functionality.
@@ -76,7 +79,7 @@ end
 
 --- Displays known sessions.
 function SessionMgr.list()
-  Builtins.find_files({
+  builtins.find_files({
     attach_mappings = make_list_sessions_action(),
     cwd             = SessionConfigMgr.sessions_dir(),
     path_display    = function(_, name) return format_session_name(name) end,

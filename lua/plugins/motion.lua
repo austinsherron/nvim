@@ -9,7 +9,8 @@ local FlashKM     = require 'keymap.plugins.motion.flash'
 local LeapKM      = require 'keymap.plugins.motion.leap'
 local Flash       = require 'plugins.config.motion.flash'
 local NvimTmuxNav = require 'plugins.config.motion.nvimtmuxnav'
-local Plugins     = require('utils.plugins.plugin').plugins
+
+local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({

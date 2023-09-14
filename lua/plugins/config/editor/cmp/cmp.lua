@@ -38,7 +38,7 @@ function Cmp.base(cmp)
 end
 
 
---- Auto-completion configuration for misc. filetypes.
+--- Auto-completion configuration for misc filetypes.
 ---
 ---@param cmp table: the cmp module
 function Cmp.filetype(cmp)
