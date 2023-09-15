@@ -8,6 +8,8 @@
   plugins
 --]]
 
+local Treesitter = require 'plugins.config.code.treesitter'
+
 local Plugins = require('utils.plugins.plugin').plugins
 
 
@@ -50,6 +52,7 @@ return Plugins({
   ---- neogen: docstring generation
   {
     'danymat/neogen',
+    enabled      = Treesitter.enabled(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = true,
   },

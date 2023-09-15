@@ -21,6 +21,7 @@ return Plugins({
   ---- aerial: code outlines
   {
     'stevearc/aerial.nvim',
+    enabled      = Treesitter.enabled(),
     opts         = Aerial.opts(),
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
@@ -108,7 +109,8 @@ return Plugins({
   ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = Treesitter.opts(),
+    enabled = Treesitter.enabled(),
+    opts    = Treesitter.opts(),
 
     build = function()
       require('nvim-treesitter.install').update(Treesitter.build())
@@ -121,6 +123,7 @@ return Plugins({
   ---- TreeSJ: split/join semantic blocks of code
   {
     'Wansmer/treesj',
+    enabled      = Treesitter.enabled(),
     opts         = TreeSJ.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
