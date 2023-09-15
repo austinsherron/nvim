@@ -8,7 +8,8 @@
 --]]
 
 local LspKind     = require 'plugins.config.appearance.lspkind'
-local TokyoNight  = require 'plugins.config.appearance.tokyonight'
+-- TODO: temporarily commented out until I figure out why stash colorscheme config isn't working
+-- local TokyoNight  = require 'plugins.config.appearance.tokyonight'
 local ColorScheme = require 'utils.plugins.colorscheme'
 local Priority    = require 'utils.plugins.priority'
 
@@ -31,8 +32,9 @@ return Plugins({
   ColorScheme('rebelot/kanagawa.nvim'),
   ColorScheme('marko-cerovac/material.nvim'),
   ColorScheme('AlexvZyl/nordic.nvim'),
-  ColorScheme('folke/tokyonight.nvim')
-    :configure('tokyonight', TokyoNight.opts()),
+  ColorScheme('folke/tokyonight.nvim'),
+    -- TODO: same colorscheme config comment as in imports above
+    -- :configure('tokyonight', TokyoNight.opts()),
   ---- dressing.nvim: ui/ux treatments for vim input/select
   {
     'stevearc/dressing.nvim',
