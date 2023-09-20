@@ -927,3 +927,8 @@ InfoQuietly
 WarnQuietly
 ErrorQuietly
 ThisThenLog
+TreesitterPlugin
+enablement
+wqa
+qa
+enums

@@ -66,21 +66,8 @@ function Plugin:__index(key)
   end
 end
 
---- Exported Plugin constructors.
----
----@class Plgn
-local Plgn = {}
-
----@see Plugin.new
-function Plgn.plugin(def)
-  return Plugin.new(def)
-end
-
-
----@see Plugin.all
-function Plgn.plugins(def)
-  return Plugin.all(def)
-end
-
-return Plgn
+return {
+  plugin  = Plugin.new,
+  plugins = Plugin.all,
+}
 

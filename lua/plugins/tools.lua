@@ -12,6 +12,8 @@ local Treesitter = require 'plugins.config.code.treesitter'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
+local TsPlugin   = Treesitter.TreesitterPlugin
+
 
 return Plugins({
   ---- 1password: integrates 1pw w/ nvim
@@ -52,7 +54,7 @@ return Plugins({
   ---- neogen: docstring generation
   {
     'danymat/neogen',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.NEOGEN),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = true,
   },

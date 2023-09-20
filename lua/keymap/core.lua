@@ -27,11 +27,8 @@ KM:bind({
 -- misc ops --
 
 KM:bind({
-  -- toggle relative line numbers
   { '<C-N><C-N>', ':set invrelativenumber<CR>', { desc = 'toggle relative line #' }},
-  -- close quickfix window
   { '<leader>cx', ':cclose<CR>',                { desc = 'close quickfix window'  }},
-  -- enter column edit mode
   { '<leader>v',  '<C-v>',                      { desc = 'enter column edit mode' }},
 })
 
@@ -41,8 +38,8 @@ KM:bind({
 
 KM:bind({
   -- lets j and k move inside a visually wrapped line
-  { 'j', 'gj', { desc = 'cursor down' }},
-  { 'k', 'gk', { desc = 'cursor up'   }},
+  { 'j', 'gj', { desc = 'cursor down (wrapped)' }},
+  { 'k', 'gk', { desc = 'cursor up (wrapped)'   }},
 })
 
 -- display --------------------------------------------------------------------

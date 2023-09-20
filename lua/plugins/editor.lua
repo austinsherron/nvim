@@ -10,14 +10,16 @@ local AutoPairs  = require 'plugins.config.editor.autopairs'
 local Cmp        = require 'plugins.config.editor.cmp.cmp'
 local Indent     = require 'plugins.config.interface.indent'
 
-local Plugins = require('utils.plugins.plugin').plugins
+local Plugins  = require('utils.plugins.plugin').plugins
+
+local TsPlugin = Treesitter.TreesitterPlugin
 
 
 return Plugins({
   ---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
   {
     'windwp/nvim-autopairs',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.AUTOPAIRS),
     event        = 'InsertEnter',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = AutoPairs.config
@@ -90,7 +92,7 @@ return Plugins({
   ---- cmp-treesitter: fuzzy completion of treesitter nodes
   {
     'ray-x/cmp-treesitter',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.CMP_TREESITTER),
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
   ---- comment: manipulate code comments easily
@@ -106,7 +108,7 @@ return Plugins({
   ---- indent-blankline: indentation guides
   {
     'lukas-reineke/indent-blankline.nvim',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.INDENT_BLANKLINE),
     opts         = Indent.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
@@ -117,7 +119,7 @@ return Plugins({
   ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
   {
     'HiPhish/nvim-ts-rainbow2',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.TS_RAINBOW),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   ---- surround: efficient manipulation of brackets, quotes, etc.
@@ -134,14 +136,14 @@ return Plugins({
   ---- TODO: doesn't work at the moment (08/25/2023, after "fixing" treesitter highlight issue)
   {
     'RRethy/nvim-treesitter-endwise',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.ENDWISE),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event        = 'InsertEnter',
   },
   ---- treesitter-playground: view treesitter functional info in nvim
   {
     'nvim-treesitter/playground',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.PLAYGROUND),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 })
