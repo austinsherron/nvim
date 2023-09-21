@@ -13,7 +13,7 @@ ColorScheme.__index = ColorScheme
 ---@param git_path string: git repo path
 ---@return ColorScheme: a new instance
 function ColorScheme.new(git_path)
-  InfoQuietly('Initializaing colorscheme="%s"', { git_path })
+  InfoQuietly('Initializing colorscheme="%s"', { git_path })
 
   return setmetatable({
     git_path,

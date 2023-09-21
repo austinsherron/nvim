@@ -16,12 +16,14 @@ local TreeSJ     = require 'plugins.config.code.treesj'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
+local TsPlugin = Treesitter.TreesitterPlugin
+
 
 return Plugins({
   ---- aerial: code outlines
   {
     'stevearc/aerial.nvim',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.AERIAL),
     opts         = Aerial.opts(),
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
@@ -123,7 +125,7 @@ return Plugins({
   ---- TreeSJ: split/join semantic blocks of code
   {
     'Wansmer/treesj',
-    enabled      = Treesitter.enabled(),
+    enabled      = Treesitter.enabled(TsPlugin.TREESJ),
     opts         = TreeSJ.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 

@@ -59,6 +59,7 @@ KM:bind({
 KM:bind({
   { '<leader>x', ':BufferClose<CR>', { desc = 'close' }},
   { '<M-x>',     ':BufferClose<CR>', { desc = 'close' }},
+  { '<M-w>',     ':BufferClose<CR>', { desc = 'close' }},
 })
 
 -- all but current
@@ -71,6 +72,7 @@ KM:bind({
 KM:bind({
   { '<leader>br', ':BufferRestore<CR>', { desc = 'restore' }},
   { '<M-S-B>',    ':BufferRestore<CR>', { desc = 'restore' }},
+  { '<M-S-T>',    ':BufferRestore<CR>', { desc = 'restore' }},
 })
 
 -- misc ops --------------------------------------------------------------------
