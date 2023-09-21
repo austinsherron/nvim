@@ -24,8 +24,8 @@ local TS_PLUGIN_ENABLEMENT = {
   [TreesitterPlugin.INDENT_BLANKLINE] = false,
   [TreesitterPlugin.NEOGEN]           = false,
   [TreesitterPlugin.PLAYGROUND]       = false,
-  [TreesitterPlugin.TS_RAINBOW]       = false,
   [TreesitterPlugin.TREESJ]           = false,
+  [TreesitterPlugin.TS_RAINBOW]       = false,
 }
 
 local TS_ENABLED = false
@@ -47,11 +47,8 @@ Treesitter.TreesitterPlugin = TreesitterPlugin
 ---@return boolean: if true, nvim-treesitter and downstream plugins are
 --- enabled and usable (in theory)
 function Treesitter.enabled(plugin)
-  if TS_ENABLED == false or plugin == nil then
-    return TS_ENABLED
-  end
-
-  return TS_PLUGIN_ENABLEMENT[plugin]
+  -- if no plugin is provided, just check if ts is enabled, otherwise check the plugin
+  return TS_ENABLED and (plugin == nil or TS_PLUGIN_ENABLEMENT[plugin])
 end
 
 
