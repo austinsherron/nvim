@@ -8,8 +8,8 @@
 --]]
 
 local LspKind     = require 'plugins.config.appearance.lspkind'
--- TODO: temporarily commented out until I figure out why stash colorscheme config isn't working
--- local TokyoNight  = require 'plugins.config.appearance.tokyonight'
+local Nightfox    = require 'plugins.config.appearance.nightfox'
+local TokyoNight  = require 'plugins.config.appearance.tokyonight'
 local ColorScheme = require 'utils.plugins.colorscheme'
 local Priority    = require 'utils.plugins.priority'
 
@@ -26,15 +26,16 @@ return Plugins({
       require('bufresize').setup(opts)
     end
   },
-  ---- colorschemes: using a strongly typed wrapper to enforce consisten colorscheme
+  ---- colorschemes: using a strongly typed wrapper to enforce consistent colorscheme
   ----               plugin attributes
   ColorScheme('catppuccin/nvim'),
+  ColorScheme('projekt0n/github-nvim-theme'),
   ColorScheme('rebelot/kanagawa.nvim'),
   ColorScheme('marko-cerovac/material.nvim'),
+  ColorScheme('EdenEast/nightfox.nvim', Nightfox.config()),
   ColorScheme('AlexvZyl/nordic.nvim'),
-  ColorScheme('folke/tokyonight.nvim'),
-    -- TODO: same colorscheme config comment as in imports above
-    -- :configure('tokyonight', TokyoNight.opts()),
+  ColorScheme('rose-pine/neovim'),
+  ColorScheme('folke/tokyonight.nvim', TokyoNight.config()),
   ---- dressing.nvim: ui/ux treatments for vim input/select
   {
     'stevearc/dressing.nvim',

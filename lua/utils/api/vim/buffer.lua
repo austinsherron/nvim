@@ -22,20 +22,29 @@ end
 --- Returns the provided value if it's a valid ViewMode, otherwise it returns the default
 --- view mode
 ---
----@param maybe any?: the value that might be a view mode
+---@param o any?: the value that might be a view mode
 ---@return ViewMode: the provided value if it's a valid ViewMode, otherwise turns the
 --- default view mode
-function ViewMode.orDefault(maybe)
-  if _ViewMode.ALL:contains(maybe) then
-    return maybe
+function ViewMode.orDefault(o)
+  if ViewMode.is_valid(o) then
+    return o
   end
 
   -- nil is a semi-valid option, as it potentially indicates the default was desired
-  if maybe ~= nil then
-    Warn('View mode=%s is not a valid ViewMode', { maybe })
+  if o ~= nil then
+    Warn('View mode=%s is not a valid ViewMode', { o })
   end
 
   return _ViewMode.DEFAULT
+end
+
+
+--- Checks that the provided object is a valid ViewMode.
+---
+---@param o any|nil: the object to check
+---@return boolean: true if o is a valid ViewMode, false otherwise
+function ViewMode.is_valid(o)
+  return _ViewMode.ALL:contains(o)
 end
 
 local Buffer = {}
@@ -57,7 +66,7 @@ function Buffer.getall()
   return vim.api.nvim_list_bufs()
 end
 
----@note: so ViewMode is publically accessible
+---@note: so ViewMode is publicly accessible
 Buffer.ViewMode = ViewMode
 
 return Buffer

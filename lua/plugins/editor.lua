@@ -10,7 +10,7 @@ local AutoPairs  = require 'plugins.config.editor.autopairs'
 local Cmp        = require 'plugins.config.editor.cmp.cmp'
 local Indent     = require 'plugins.config.interface.indent'
 
-local Plugins  = require('utils.plugins.plugin').plugins
+local Plugins = require('utils.plugins.plugin').plugins
 
 local TsPlugin = Treesitter.TreesitterPlugin
 
