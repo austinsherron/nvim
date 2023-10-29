@@ -1,69 +1,56 @@
-require 'lazy.types'
-
 local Stream = require 'toolbox.extensions.stream'
+local Type   = require 'toolbox.meta.type'
 
 
---- Internal helper that exists to clear a plugin's __index function and avoid infinite recursion.
----
----@class _Plugin
-local _Plugin = {}
-_Plugin.__index = _Plugin
-
-function _Plugin.new(this)
-  setmetatable(this, _Plugin)
-  return this
-end
-
---- A helper that wraps a lazy.nvim plugin definition so that all references to function
---- properties are wrapped in error handling.
+--- An adapter that takes a lazy.nvim plugin definition and wraps all function references
+--- in error handling.
 ---
 ---@class Plugin
+---@field private plugin table
 local Plugin = {}
 Plugin.__index = Plugin
 
+local function plugin_name(plugin)
+  return plugin[1] or '?'
+end
+
+
+local function wrap_fn(name, fn_name, fn)
+  return function(...)
+    local fqdn = fmt('%s.%s', name, fn_name)
+
+    Debug('Lazy plugin setup: calling "%s"', { fqdn })
+
+    return Safe.call(fn, 'log', fqdn, ...)
+  end
+end
+
+
 --- Constructor
 ---
----@param plugin LazyPlugin: a lazy.nvim plugin definition
+---@param plugin table: a lazy.nvim plugin definition
 ---@return Plugin: a new Plugin instance
 function Plugin.new(plugin)
-  setmetatable(plugin, Plugin)
----@diagnostic disable-next-line: return-type-mismatch
-  return plugin
+  local name = plugin_name(plugin)
+
+  InfoQuietly('Initializing plugin="%s"', { name })
+
+  Stream(Table.keys(plugin))
+    :filter(function(k) return Type.isfunc(plugin[k]) end)
+    :foreach(function(k) plugin[k] = wrap_fn(name, k, plugin[k]) end)
+
+  return setmetatable(plugin, Plugin)
 end
 
 
 --- Constructs multiple plugins from an array of plugin definitions.
 ---
----@param plugins LazyPlugin: an array-like table of lazy.nvim plugin definitions
+---@param plugins table[]: an array-like table of lazy.nvim plugin definitions
 ---@return Plugin[]: an array-like table of Plugin instances
 function Plugin.all(plugins)
   return Stream(plugins)
     :map(Plugin.new)
     :get()
-end
-
-
---- Ensure any access of an instance's function properties is wrapped in error handling/
----
----@param key string: the name of the property being accessed
----@return any?: the property being accessed, or nil if that's a key's value or the key
---- isn't present in the instance
-function Plugin:__index(key)
-  local internal = _Plugin.new(self)
-  local value = internal[key]
-
-  if value == nil or type(value) ~= 'function' then
-    return value
-  end
-
-  return function(...)
-    local args = Table.pack(...)
-
-    return OnErr.notify(
-      function() return value(Table.unpack(args)) end,
-      (internal.name or 'unknownPlugin') .. '.' .. key
-    )
-  end
 end
 
 return {

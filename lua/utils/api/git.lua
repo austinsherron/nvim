@@ -26,7 +26,7 @@ function Git.repo_root()
 end
 
 
----@return string?: the name of the repo we're in currently
+---@return string|nil: the name of the repo we're in currently
 function Git.repo_name()
   return Path.basename(Git.repo_root())
 end
@@ -98,6 +98,52 @@ function Git.clone(repo, dir, options)
   })
 
   System.run(cmd)
+end
+
+
+--- Contains utilities for setting git configuration values.
+---
+---@class Config
+local Config = {}
+
+---@note: to export the Config class
+Git.Config = Config
+
+--- Sets a git configuration value.
+---
+---@param key string: the key of the config
+---@param value string: the value of the config
+---@param section string|nil: optional, defaults to "core"; the section or "block" (i.e.:
+--- in a .gitconfig) in which the config lives
+---@param scope string|nil: optional, defaults to "global"; the scope at which to set the
+--- config
+function Config.set(key, value, section, scope)
+  section = section or 'core'
+  scope = scope or 'global'
+
+  InfoQuietly(
+    'Git.Config.set: setting %s.%s to %s (scope=%s)',
+    { section, key, value, scope }
+  )
+
+  System.run(fmt('git config --%s %s.%s %s', scope, section, key, value))
+end
+
+
+--- Sets the git (commit) editor globally.
+---
+---@param editor string: the editor command to set
+---@param ... string|nil: arguments to the editor command
+function Config.set_editor(editor, ...)
+  if not System.executable(editor) then
+    Error(fmt('Git.Config.set_editor: no such executable exists: %s', editor))
+    -- Err.raise('Git.Config.set_editor: no such executable exists: %s', editor)
+  end
+
+  local cmd_parts = Table.concat({{ editor }, Table.pack(...) })
+  local cmd = String.join(cmd_parts, ' ')
+
+  Config.set('editor', cmd)
 end
 
 return Git
