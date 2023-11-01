@@ -1,5 +1,3 @@
-local Env = require 'toolbox.system.env'
-
 
 --- Strongly-typed representation of plugins w/ a dependency on treesitter.
 ---
@@ -17,18 +15,18 @@ local TreesitterPlugin = {
 }
 
 local TS_PLUGIN_ENABLEMENT = {
-  [TreesitterPlugin.AERIAL]           = false,
-  [TreesitterPlugin.AUTOPAIRS]        = false,
-  [TreesitterPlugin.CMP_TREESITTER]   = false,
-  [TreesitterPlugin.ENDWISE]          = false,
-  [TreesitterPlugin.INDENT_BLANKLINE] = false,
-  [TreesitterPlugin.NEOGEN]           = false,
-  [TreesitterPlugin.PLAYGROUND]       = false,
-  [TreesitterPlugin.TREESJ]           = false,
-  [TreesitterPlugin.TS_RAINBOW]       = false,
+  [TreesitterPlugin.AERIAL]           = true,
+  [TreesitterPlugin.AUTOPAIRS]        = true,
+  [TreesitterPlugin.CMP_TREESITTER]   = true,
+  [TreesitterPlugin.ENDWISE]          = true,
+  [TreesitterPlugin.INDENT_BLANKLINE] = true,
+  [TreesitterPlugin.NEOGEN]           = true,
+  [TreesitterPlugin.PLAYGROUND]       = true,
+  [TreesitterPlugin.TREESJ]           = true,
+  [TreesitterPlugin.TS_RAINBOW]       = true,
 }
 
-local TS_ENABLED = false
+local TS_ENABLED = true
 
 --- Contains functions for configuring the treesitter plugin.
 ---
@@ -70,7 +68,6 @@ function Treesitter.opts()
       'gomod',
       'gosum',
       'hcl',
-      'help',
       'javascript',
       'json',
       'lua',
@@ -84,7 +81,6 @@ function Treesitter.opts()
       'yaml',
     },
     ignore_install = {},
-    parser_install_dir = Env.nvundle(),
     sync_install = false,
 
     -- features
