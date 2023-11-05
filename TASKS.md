@@ -15,7 +15,6 @@
 - [ ] File templates
 - [ ] Formatting
 - [ ] General prettiness (😅)
-- [ ] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (neogit)
 - [ ] Inline docs/hints
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [ ] Renaming/refactoring
@@ -37,10 +36,11 @@
 - [x] Diff viewer (could be better though...)
 - [x] Docstring template insertion (explore configuration options)
 - [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
-- [x] Find+Replace
+- [x] Find + replace
 - [x] Fuzzy-find commands
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
 - [x] Git history interactions (i.e.: file history, git blame, etc.)
+- [x] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (lazygit)
 - [x] Merge tool (...at least needs further configuration)
 - [x] Notifications
 - [x] Persistent undo history
@@ -102,8 +102,8 @@
 - [ ] Copy file content to clipboard from nvimtree
 - [ ] Change diagnostic symbols to something snazzier
 - [ ] Add tracebacks to error logging
-- [ ] "Fix plugins extension" (?)
-- [ ] "Fix cmp" (?)
+- [ ] Add ability to make file executable from nvim-tree
+- [ ] Add ability to copy file contents from nvim-tree
 
 ### Completed
 
@@ -129,14 +129,20 @@
 ## Fixes
 
 - [ ] Check for nvim-surround treesitter dependency; if it has one, add it to TreesitterPlugin and make downstream changes
+- [ ] Fix issues w/ session mgr not restoring sessions from cwd even though I'm now manually setting it
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
-- [ ] Figure out why barbar diagnostics don't work
 - [ ] Figure out cyclic import issue w/ logging
+- [ ] Figure out why barbar diagnostics don't work
+- [ ] Fix issues w/ session mgr isn't restoring sessions from cwd even though I'm now manually setting it
+- [ ] Fix aerial markdown issue
+- [ ] Figure out why restoring sessions often causes barbar errors
+- [ ] "Fix plugins extension" (?)
+- [ ] "Fix cmp" (?)
 
 ### Completed
 
-- [ ] Fix issues w/ session mgr isn't restoring sessions from cwd even though I'm now manually setting it
+- [x] !!! Diagnose and fix Treesitter issues (see fb465783acaa09ac0f8c1ab07eac6e22948f8ea3 for resolution notes)
 - [x] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/ (ended up being an issues w/ the way "require paths" were being constructed for recursive calls)
 - [x] Fix lua_ls workspace configuration prompt
 - [x] Fix leap.nvim repeat functionality (didn't really fix this, but have opted, at least for the moment, to use flash.nvim, instead of leap, as my primary motion plugin)
