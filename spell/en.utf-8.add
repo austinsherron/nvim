@@ -206,6 +206,7 @@ curr
 currentline
 cursorhold
 CursorHold
+Customizations
 cvt
 cwd
 cwd's
@@ -255,6 +256,7 @@ directionality
 directionally
 dirname
 dirs
+disoverability
 dl
 DMV
 docstring
@@ -273,6 +275,7 @@ dup
 DynamicNode
 EC2
 EdenEast
+EdgeDirction
 editorconfig
 EKS
 elseif
@@ -321,8 +324,11 @@ findable
 fintech
 firstword
 fivetran
+FIXME
 FlashKM
+flathub
 flatmap
+flatpak
 Flatpak
 fmt
 fn
@@ -424,8 +430,10 @@ infoQuietly
 InfoQuietly
 init
 initializer
+inputrc
 InsertEnter
 InsertMode
+install's
 instantiation
 insteadOf
 integrations
@@ -652,6 +660,7 @@ nvm
 nvr
 nvt
 Nvt
+NvTree
 nvundle
 NVUNDLE
 obj's
@@ -723,10 +732,12 @@ PWD
 px
 py
 pyc
+__pycache__
 pylint
 pyright
 python3
 Python3
+pythonpath
 PYTHONPATH
 qa
 qbf
@@ -828,6 +839,7 @@ setmetatable
 sfx
 sha256
 SharedNum
+sharship
 shellcheck
 sherron
 Sherron
@@ -884,6 +896,7 @@ subdir
 submodule
 Submodule
 submodules
+substr
 substring
 sudo
 swp
@@ -907,6 +920,7 @@ tabpages
 tabprevious
 TabState
 Taskwarrior
+TBD
 tbl
 tbls
 telescearch
@@ -943,6 +957,7 @@ Toml
 toNode
 tools
 toplevel
+torbrowser
 tostring
 tpm
 tracebacks
@@ -1010,6 +1025,7 @@ UX
 uz
 v0
 vals
+ValueError
 vararg
 Veeva
 Venmo
@@ -1021,6 +1037,7 @@ ViewMode
 VimEnter
 VimLeave
 vimrc
+VimTest
 VirtualTextOk
 VisitLinkInBuffer
 VisitLinkNearest
@@ -1039,6 +1056,7 @@ Wenxuan
 wget
 whatsapp
 whitespace
+whois
 whoopsie
 wikipedia
 williamboman
@@ -1083,22 +1101,3 @@ Zorin
 zoxide
 zquestz
 Zsh
-EdgeDirction
-install's
-FIXME
-disoverability
-VimTest
-TBD
-sharship
-inputrc
-Customizations
-whois
-torbrowser
-flathub
-flatpak
-pythonpath
-ValueError
-lua
-__pycache__
-substr
-NvTree

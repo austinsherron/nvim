@@ -2,10 +2,12 @@
 local CmpKM   = require 'keymap.plugins.editor.cmp'
 local Src     = require 'plugins.config.editor.cmp.sources'
 local LuaSnip = require 'plugins.config.code.luasnip'
+local Editor  = require 'utils.api.vim.editor'
 
 -- external
 local lspkind = require 'lspkind'
 
+local CMDLINE_DISABLED_CMDS = Set.new()
 
 --- Contains functions for configuring the nvim-cmp plugin.
 ---
@@ -50,11 +52,21 @@ function Cmp.filetype(cmp)
 end
 
 
+local function should_complete_cmdline()
+  local cmd = String.firstword(Editor.cmdline())
+
+  Debug({ 'cmd=', cmd })
+
+  return true
+end
+
+
 --- Auto-completion configuration for command line (i.e.: `:`) (if native_menu = false).
 ---
 ---@param cmp table: the cmp module
 function Cmp.cmdline(cmp)
   cmp.setup.cmdline(':', {
+    enabled = should_complete_cmdline,
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(Src.for_cmdline()),
   })
