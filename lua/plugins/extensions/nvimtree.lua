@@ -1,61 +1,80 @@
-local Git = require 'utils.api.git'
+---@diagnostic disable: undefined-field
+
+local File   = require 'toolbox.system.file'
+local Lazy   = require 'toolbox.utils.lazy'
+local Git    = require 'utils.api.git'
+local Editor = require 'utils.api.vim.editor'
+
+local api = Lazy.require 'nvim-tree.api'
 
 
 --- Contains methods for interacting w/ nvim-tree.
 ---
 ---@class NvimTree
----@field nvt_api table: the nvim-tree.api module
 local NvimTree = {}
-NvimTree.__index = NvimTree
 
---- Constructor
+--- Copies into the system register the content of the file referenced by node.
 ---
----@return NvimTree: a new NvimTree instance
-function NvimTree.new()
-  return setmetatable({}, NvimTree)
+---@param node Node: the node whose content will be copied
+function NvimTree.copy_node_content(node)
+  local node_path = NvimTree.get_node_path(node)
+
+  if String.nil_or_empty(node_path) then
+    return
+  end
+
+  if not NvimTree.is_file(node) then
+    Warn('NvimTree ext: cannot copy content of node=%s: node is not a file node', { node.name })
+    Debug('NvimTree ext: node=%s', { node })
+    return
+  end
+
+  local content = File.read(node_path --[[@as string safe due to nil_or_empty call above]])
+  Editor.copy(content or '')
 end
 
 
----@private
-function NvimTree:api()
-  if self.nvt_api == nil then
-    self.nvt_api = require 'nvim-tree.api'
+--- Wrapper around NvimTree.copy_node_content that uses the cursor node.
+---
+---@see NvimTree.copy_node_content
+---@see NvimTree.get_cursor_node
+function NvimTree.copy_cursor_node_content()
+  local node = NvimTree.get_cursor_node(true)
+
+  if node == nil then
+    return
   end
 
-  return self.nvt_api
+  NvimTree.copy_node_content(node)
 end
 
 
 --- Opens the nvim-tree window w/out changing focus from the tree buffer.
 ---
 ---@param node Node: the node to open silently
-function NvimTree:silent_open(node)
-  self:api().node.open.edit(node)
-  self:api().tree.focus()
+function NvimTree.silent_open(node)
+  api.node.open.edit(node)
+  api.tree.focus()
 end
 
 
----@private
-function NvimTree:is_tree_open()
-  return self:api().tree.is_visible()
+local function is_tree_open()
+  return api.tree.is_visible()
 end
 
 
----@private
-function NvimTree:cursor_node()
-  return self:api().tree.get_node_under_cursor()
+local function cursor_node()
+  return api.tree.get_node_under_cursor()
 end
 
 
----@private
-function NvimTree:is_tree_focused()
-  return self:api().tree.is_tree_buf()
+local function is_tree_focused()
+  return api.tree.is_tree_buf()
 end
 
 
----@private
-function NvimTree:tree_in_use()
-  return self:is_tree_open() and self:is_tree_focused()
+local function tree_in_use()
+  return is_tree_open() and is_tree_focused()
 end
 
 
@@ -65,28 +84,27 @@ end
 --- must only be visible. If the aforementioned conditions aren't met, this method returns
 --- nil.
 ---
----@param focused boolean?: if true, the nvim-tree buffer must be both open and the active
---- buffer for a node to be considered "focused"; if false, it just hast to be open;
---- defaults to true
----@return Node?: the nvim-tree node that's currently under the cursor, if the conditions
---- mentioned above are met
-function NvimTree:get_cursor_node(focused)
-  focused = focused or true
+---@param focused boolean|nil: optional, defaults to true; if true, the nvim-tree buffer
+--- must be both open and active be considered "focused"; if false, it just has to be open
+---@return Node|nil: the nvim-tree node that's currently under the cursor, if the
+--- conditions mentioned above are met
+function NvimTree.get_cursor_node(focused)
+  focused = Bool.or_default(focused, true)
 
    return ternary(
-    (not focused and self:is_tree_open()) or (focused and self:tree_in_use()),
-    function() return self:cursor_node() end,
+    (not focused and is_tree_open()) or (focused and tree_in_use()),
+    function() return cursor_node() end,
     nil
   )
 end
 
 
 ---@private
-function NvimTree:path_for_git_op(all)
+function NvimTree.path_for_git_op(all)
   return ternary(
     all,
     Git.repo_root(),
-    self:get_cursor_node(true).absolute_path
+    NvimTree.get_node_path(NvimTree.get_cursor_node(true))
   )
 end
 
@@ -94,18 +112,24 @@ end
 --- Stages the file(s) corresponding to the node under the cursor, or all files in the
 --- repo if all is true.
 ---
----@param all boolean?: if true, all modified files in the current repo will be staged
-function NvimTree:stage(all)
-  Git.stage(self:path_for_git_op(all))
+---@param all boolean|nil: optional, defaults to false; if true, all modified files in the
+--- current repo will be staged
+function NvimTree.stage(all)
+  all = Bool.or_default(all, false)
+
+  Git.stage(NvimTree.path_for_git_op(all))
 end
 
 
 --- Unstages the file(s) corresponding to the node under the cursor, or all files in the
 --- repo if all is true.
 ---
----@param all boolean?: if true, all staged files in the current repo will be unstaged
-function NvimTree:unstage(all)
-  Git.unstage(self:path_for_git_op(all))
+--@param all boolean|nil: optional, defaults to false; if true, all staged files in the
+--- current repo will be unstaged
+function NvimTree.unstage(all)
+  all = Bool.or_default(all, false)
+
+  Git.unstage(NvimTree.path_for_git_op(all))
 end
 
 
@@ -126,5 +150,28 @@ function NvimTree.is_file(node)
   return node.type == 'file'
 end
 
-return NvimTree.new()
+
+local function get_name(node)
+  if node == nil then
+    return '?'
+  end
+
+  return node.name
+end
+
+
+--- Returns the absolute_path of node.
+---
+---@param node Node|nil: the node whose absolute path will be returned, if it exists
+---@return string|nil: the absolute path of node, or nil if none is present
+function NvimTree.get_node_path(node)
+  if node ~= nil and String.not_nil_or_empty(node.absolute_path) then
+    return node.absolute_path
+  end
+
+  Warn('NvimTree ext: node=%s has no absolute_path', { get_name(node) })
+  Debug('NvimTree ext: node=%s', { node })
+end
+
+return NvimTree
 

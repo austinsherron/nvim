@@ -54,7 +54,7 @@ local function default_mappings(bufnr, api)
       { 'bmv',   api.marks.bulk.move,                   { desc = 'Move Bookmarked'        }},
       { 'B',     api.tree.toggle_no_buffer_filter,      { desc = 'Toggle No Buffer'       }},
       { 'c',     api.fs.copy.node,                      { desc = 'Copy'                   }},
-      { 'C',     api.tree.toggle_git_clean_filter,      { desc = 'Toggle Git Clean'       }},
+   -- { 'C',     api.tree.toggle_git_clean_filter,      { desc = 'Toggle Git Clean'       }},
       { '[c',    api.node.navigate.git.prev,            { desc = 'Prev Git'               }},
       { ']c',    api.node.navigate.git.next,            { desc = 'Next Git'               }},
       { 'd',     api.fs.remove,                         { desc = 'Delete'                 }},
@@ -124,6 +124,9 @@ local function custom_mappings(bufnr, api)
       { 'u', NvTree.unstage,                      { desc = 'unstage node' }},
       { 'S', function() NvTree.stage(true) end,   { desc = 'stage repo'   }},
       { 'U', function() NvTree.unstage(true) end, { desc = 'unstage repo' }},
+
+      -- misc bindings
+      { 'C', NvTree.copy_cursor_node_content, { desc = 'copy file content' }},
   }):done()
 end
 

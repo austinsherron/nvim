@@ -20,6 +20,12 @@ local builtins     = require 'telescope.builtin'
 ---@class Telescope
 local Telescope = {}
 
+local function make_missing_node_path_msg(node)
+  return 'Telescope ext: no node path found for node=%s (likely searching root node); falling back to non-contextual search', { node.name }
+
+end
+
+
 --- Executes a search function constrained to the nvimtree dir under the cursor, or the
 --- parent dir of the file under the cursor, if any. Otherwise, executes an unconstrained
 --- search.
@@ -31,20 +37,22 @@ local Telescope = {}
 ---@return any|nil: the return value of f
 function Telescope.do_contextual_search(f, title, opts)
   opts = TMerge.mergeleft({ prompt_title = title }, opts or {})
-  local node = NvTree:get_cursor_node()
+  local node = NvTree.get_cursor_node()
 
   if node == nil then
     return f(opts)
   end
 
-  local node_path = nil
+  local node_path = ternary(
+    NvTree.is_file(node),
+    function() return NvTree.get_node_path(node.parent) end,
+    NvTree.get_node_path(node)
+  )
 
-  if NvTree.is_dir(node) then
-    node_path = node.absolute_path
-  elseif NvTree.is_file(node) then
-    node_path = node.parent.absolute_path
-  else
-    Err.raise('nvim-tree <-> telescope: unrecognized nvim-tree node type=', node.type)
+  if node_path == nil then
+    Warn(make_missing_node_path_msg(node))
+    Debug('Telescope ext: node=%s', { node })
+    return f(opts)
   end
 
   opts = TMerge.mergeleft({
