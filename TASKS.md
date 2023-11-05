@@ -99,11 +99,11 @@
 - [ ] Add more systematic logging
 - [ ] Add more systematic error-handling
 - [ ] Spectre in a modal?
-- [ ] Copy file content to clipboard from nvimtree
 - [ ] Change diagnostic symbols to something snazzier
 - [ ] Add tracebacks to error logging
 - [ ] Add ability to make file executable from nvim-tree
-- [ ] Add ability to copy file contents from nvim-tree
+- [ ] "Fix plugins extension" (?)
+- [ ] "Fix cmp" (?)
 
 ### Completed
 
@@ -125,6 +125,8 @@
 - [x] Enable spell-checker/grammar helper/etc. (potentially investigate spellchecker plugins, i.e.: spelunker)
 - [x] Enable minor auto-reformatting, i.e.: aligning spacing, remove trailing whitespace, automatic newlines + alignment, replacing tabs w/ spaces, etc. (editorconfig got me a lot of the way there, but I can still do better -> neoformat)
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
+- [x] Add ability to copy file contents from nvim-tree
+- [x] Copy file content to clipboard from nvimtree (dup)
 
 ## Fixes
 
@@ -134,7 +136,6 @@
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
 - [ ] Figure out cyclic import issue w/ logging
 - [ ] Figure out why barbar diagnostics don't work
-- [ ] Fix issues w/ session mgr isn't restoring sessions from cwd even though I'm now manually setting it
 - [ ] Fix aerial markdown issue
 - [ ] Figure out why restoring sessions often causes barbar errors
 - [ ] "Fix plugins extension" (?)
