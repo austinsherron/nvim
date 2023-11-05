@@ -10,6 +10,8 @@ return {
   cd         = vim.api.nvim_set_current_dir,
   ---@see vim.fn.getcwd
   cwd        = vim.fn.getcwd,
+  --- Gets the path to the current file.
+  get_current_file = function() return vim.fn.expand("%") end,
   ---@see vim.fn.isdirectory
   is_dir     = vim.fn.isdirectory,
   ---@see vim.fn.mkdir

@@ -22,6 +22,10 @@
 - [ ] Snippets
 - [ ] Tag generator, viewer, and associated plugins
 - [ ] The Line - a stylized indicator that a line is (almost) too long
+- [ ] Unit test integrations
+    - [x] Ability to run from nvim
+    - [ ] Ability to view/act on results
+    - [ ] Ability to debug and step through execution
 
 ### Completed
 
@@ -124,13 +128,15 @@
 
 ## Fixes
 
+- [ ] Check for nvim-surround treesitter dependency; if it has one, add it to TreesitterPlugin and make downstream changes
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
 - [ ] Figure out why barbar diagnostics don't work
+- [ ] Figure out cyclic import issue w/ logging
 
 ### Completed
 
-- [ ] Fix issues w/ session mgr. isn't restoring sessions from cwd even though I'm now manually setting it
+- [ ] Fix issues w/ session mgr isn't restoring sessions from cwd even though I'm now manually setting it
 - [x] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/ (ended up being an issues w/ the way "require paths" were being constructed for recursive calls)
 - [x] Fix lua_ls workspace configuration prompt
 - [x] Fix leap.nvim repeat functionality (didn't really fix this, but have opted, at least for the moment, to use flash.nvim, instead of leap, as my primary motion plugin)

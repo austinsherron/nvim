@@ -23,6 +23,7 @@ I organize my plugins into the following categories:
 * **Motion** - Motion plugins control on-screen (as opposed to file-system) movement.
 * **Navigation** - Navigation plugins control (file) system (as opposed to on-screen) movement.
 * **Search** - Search plugins make it easier to find things.
+* **Test** - Test plugins enable unit testing and related functionality.
 * **Tools** - Tools plugins add misc functionality to nvim; they add *explicitly new* functionality to nvim, as opposed to changing something about the way its core functions work. Tools here don't fit into any other categories.
 * **Workspace** - Workspace plugins control capabilities related to managing and manipulating "workspace" elements. These include buffers, tabs, windows, sessions, projects, and groupings/filtered views of the same.
 

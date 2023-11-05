@@ -26,8 +26,8 @@ return Plugins({
     enabled      = Treesitter.enabled(TsPlugin.AERIAL),
     opts         = Aerial.opts(),
     dependencies = {
+      'nvim-tree/nvim-web-devicons',
       'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons'
     },
 
     config = function(_, opts)
