@@ -4,6 +4,7 @@ local File   = require 'toolbox.system.file'
 local Lazy   = require 'toolbox.utils.lazy'
 local Git    = require 'utils.api.git'
 local Editor = require 'utils.api.vim.editor'
+local System = require 'utils.api.vim.system'
 
 local api = Lazy.require 'nvim-tree.api'
 
@@ -31,6 +32,8 @@ function NvimTree.copy_node_content(node)
 
   local content = File.read(node_path --[[@as string safe due to nil_or_empty call above]])
   Editor.copy(content or '')
+
+  Info('Successfully copied to clipboard contents of %s', { node.name })
 end
 
 
@@ -55,6 +58,21 @@ end
 function NvimTree.silent_open(node)
   api.node.open.edit(node)
   api.tree.focus()
+end
+
+
+--- Adds executable file permissions to the file/dir referenced by the cursor node.
+function NvimTree.chmod_x()
+  local node = NvimTree.get_cursor_node(true)
+  local node_path = NvimTree.get_node_path(node)
+
+  if String.nil_or_empty(node_path) then
+    return
+  end
+
+  ---@note: the above function call guarantees this won't nil or empty
+  ---@diagnostic disable-next-line: param-type-mismatch
+  System.chmod_x(node_path)
 end
 
 

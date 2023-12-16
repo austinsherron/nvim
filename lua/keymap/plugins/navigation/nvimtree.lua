@@ -127,6 +127,7 @@ local function custom_mappings(bufnr, api)
 
       -- misc bindings
       { 'C', NvTree.copy_cursor_node_content, { desc = 'copy file content' }},
+      { 'X', NvTree.chmod_x,                  { desc = 'chmod +x'          }},
   }):done()
 end
 

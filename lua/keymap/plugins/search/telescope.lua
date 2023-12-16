@@ -23,7 +23,7 @@ KM:bind({
   { '<leader>fgc', Builtins.git_bcommits,               { desc = 'search git commits'              }},
   { '<leader>fgs', Builtins.git_stash,                  { desc = 'search git stashes'              }},
   { '<leader>fh',  Builtins.help_tags,                  { desc = 'search help tags'                }},
-  { '<leader>fn',  '<cmd>Telescope undo<CR>',           { desc = 'search undo history'             }},
+  { '<leader>fH',  '<cmd>Telescope undo<CR>',           { desc = 'search undo history'             }},
   { '<leader>fm',  Builtins.man_pages,                  { desc = 'search man pages'                }},
   { '<leader>fn',  Telescope.search_packages,           { desc = 'search plugin files'             }},
   { '<leader>fp',  '<cmd>Telescope projects<CR>',       { desc = 'search projects'                 }},
@@ -35,7 +35,6 @@ KM:bind({
 
 -- remaps ----------------------------------------------------------------------
 
-KM:bind({
-  { '<leader>su', Builtins.spell_suggest, { desc = 'spelling suggestions' }},
-})
+---@note:
+KM:bind_one('<leader>ds', Builtins.spell_suggest, { desc = 'spelling suggestions' })
 

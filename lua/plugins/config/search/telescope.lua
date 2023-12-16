@@ -1,24 +1,36 @@
+local Lazy = require 'toolbox.utils.lazy'
 
-local TELESCOPE_EXTENSIONS = { 'aerial', 'emoji', 'frecency', 'projects', 'undo' }
-
-local function load_telescope_ext(name)
-  require('telescope').load_extension(name)
-end
+local telescope = Lazy.require('telescope')
 
 
-local function opts()
-  return {
-    extensions = {
-      undo = {
-        side_by_side = true,
-        layout_strategy = 'vertical',
-        layout_config = {
-          preview_height = 0.8,
-        }
-      }
-    }
-  }
-end
+local PICKERS = {
+  buffers = {
+    theme = 'ivy',
+  },
+  spell_suggest = {
+    theme = 'cursor',
+  },
+}
+
+local EXTENSIONS = {
+  -- FIXME: can't actually figure how how to make config here work
+  aerial    = {},
+  emoji     = {},
+  frecency  = {},
+  projects  = {},
+  undo      = {
+    -- side_by_side    = true,
+    -- layout_strategy = 'vertical',
+    -- layout_config   = {
+    --   preview_height = 0.3,
+    -- },
+  },
+}
+
+local OPTS = {
+  pickers    = PICKERS,
+  extensions = EXTENSIONS,
+}
 
 --- Contains functions for configuring the telescope plugin and its extensions.
 ---
@@ -27,10 +39,12 @@ local Telescope = {}
 
 --- Configures the telescope plugin.
 function Telescope.config()
-  require('telescope').setup(opts())
+  ---@diagnostic disable-next-line: undefined-field
+  telescope.setup(OPTS)
 
-  for _, tsc_ext in ipairs(TELESCOPE_EXTENSIONS) do
-    load_telescope_ext(tsc_ext)
+  for name, _ in pairs(EXTENSIONS) do
+    ---@diagnostic disable-next-line: undefined-field
+    telescope.load_extension(name)
   end
 end
 

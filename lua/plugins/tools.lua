@@ -9,10 +9,11 @@
 --]]
 
 local Treesitter = require 'plugins.config.code.treesitter'
+local NeoRepl    = require 'plugins.config.tools.neorepl'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
-local TsPlugin   = Treesitter.TreesitterPlugin
+local TsPlugin = Treesitter.TreesitterPlugin
 
 
 return Plugins({
@@ -57,6 +58,15 @@ return Plugins({
     enabled      = Treesitter.enabled(TsPlugin.NEOGEN),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config       = true,
+  },
+  ---- neorepl: (n)vim api enabled repl, right here in nvim
+  {
+    'ii14/neorepl.nvim',
+    opts = NeoRepl.opts(),
+
+    config = function(_, opts)
+      require('neorepl').config(opts)
+    end
   },
   ---- plenary.nvim: lua utilities; a dependency for many, many plugins...
   { 'nvim-lua/plenary.nvim' },

@@ -21,7 +21,10 @@ KM:bind({
 
 -- jump to... --
 
--- w/ leader
+-- arbitrary buffer w/ dynamic hot key
+KM:bind_one('<leader>j', ':BufferPick<CR>', { desc = 'jump to...' })
+
+-- number by buffer index
 KM:bind({
   { '<leader>b1', ':BufferGoto 1<CR>', { desc = 'go to 1'    }},
   { '<leader>b2', ':BufferGoto 2<CR>', { desc = 'go to 2'    }},
@@ -33,10 +36,9 @@ KM:bind({
   { '<leader>b8', ':BufferGoto 8<CR>', { desc = 'go to 8'    }},
   { '<leader>b9', ':BufferGoto 9<CR>', { desc = 'go to 9'    }},
   { '<leader>b0', ':BufferLast<CR>',   { desc = 'go to last' }},
-  { '<leader>bg', ':BufferPick<CR>',   { desc = 'go to...'   }},
 })
 
--- with meta (i.e.: alt/option)
+-- number w/ meta (i.e.: alt/option)
 KM:bind({
   { '<M-1>', ':BufferGoto 1<CR>', { desc = 'go to 1'    }},
   { '<M-2>', ':BufferGoto 2<CR>', { desc = 'go to 2'    }},

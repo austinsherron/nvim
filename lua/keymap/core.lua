@@ -47,23 +47,37 @@ KM:bind({
 -- turn off highlight (i.e.: for search, as wall as for searchbox.nvim plugin)
 KM:bind_one('<leader>hx', ':noh | :SearchBoxClear<CR>', { desc = 'cancel highlight' })
 
--- spellcheck ------------------------------------------------------------------
-
--- add word
-KM:bind_one('<leader>sa', 'zg', { desc = 'add word to dict.' })
--- suggest words; note: handled in keymap/plugins/telescope.lua
--- KM.nnoremap('<leader>su', 'z=', options('suggest word(s) for typo'))
-
 -- buffers ---------------------------------------------------------------------
 
 -- note: since all other buffer key bindings are dependent on the barbar plugin,
 --       they're defined w/ the barbar plugin keymap
 
+-- open splits
+KM:bind({
+  { '<leader>bh', ':split<CR>',  { desc = 'open horizontal split' }},
+  { '<leader>bv', ':vsplit<CR>', { desc = 'open vertical split'   }},
+})
+
 -- resize
 KM:bind({
-  { '<leader><C-K>', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
-  { '<leader><C-J>', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
-  { '<leader><C-L>', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
-  { '<leader><C-H>', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
+  { '<C-r>j', ':resize -2<CR>',           { desc = 'resize "up" 2'     }},
+  { '<C-r>k', ':resize +2<CR>',           { desc = 'resize "down" 2'   }},
+  { '<C-r>l', ':vertical resize +2<CR>',  { desc = 'resize "left" 2'   }},
+  { '<C-r>h', ':vertical resize -2<CR>',  { desc = 'resize "right" 2'  }},
+  { '<C-r>J', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
+  { '<C-r>K', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
+  { '<C-r>L', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
+  { '<C-r>H', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
 })
+
+-- spellcheck ------------------------------------------------------------------
+
+KM:with({ desc_prefix = 'spelling: ' })
+KM:bind({
+  { '<leader>da', 'zg',  { desc = 'add word to dict'                }},
+  { '<leader>dr', 'zug', { desc = 'remove word from dict'           }},
+  ---@note: overridden in handled in keymap/plugins/telescope.lua
+  -- FIXME: modifications to key mapper that added support for 'ignore' were totally fucked
+  -- { '<leader>dr', 'zg',  { desc = 'show suggestions', ignore = true }},
+}):done()
 

@@ -1,3 +1,5 @@
+local Shell = require 'toolbox.system.shell'
+
 
 --- Nearly non-existent wrapper around nvim functions related to system interactions.
 ---
@@ -8,6 +10,8 @@ return {
   add_to_rtp = function(path) vim.opt.rtp:prepend(path) end,
   ---@see vim.api.nvim_set_current_dir
   cd         = vim.api.nvim_set_current_dir,
+  ---@see Shell.chmod_x
+  chmod_x    = Shell.chmod_x,
   ---@see vim.fn.getcwd
   cwd        = vim.fn.getcwd,
   --- Gets the path to the current file.

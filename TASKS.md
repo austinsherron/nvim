@@ -104,6 +104,7 @@
 - [ ] Add ability to make file executable from nvim-tree
 - [ ] "Fix plugins extension" (?)
 - [ ] "Fix cmp" (?)
+- [ ] Configure auto-completion support for neorepl
 
 ### Completed
 
@@ -140,6 +141,9 @@
 - [ ] Figure out why restoring sessions often causes barbar errors
 - [ ] "Fix plugins extension" (?)
 - [ ] "Fix cmp" (?)
+- [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
+- [ ] Bufresize should ignore certain window types (i.e.: nvimtree, diffview, side panel, etc.)
+- [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
 
 ### Completed
 
@@ -164,5 +168,29 @@
 
 ## Ideas
 
-TODO
+### Refactor:
+
+- [ ] Change parameter position, or otherwise change parameters
+    - [ ] Update docs
+    - [ ] Update call sites
+- [ ] Make function, method, field, etc public/private/package/protected
+- [ ] Easily wrap values in function calls/or arbitrary braces
+- [ ] Easily move functions/methods w/in a file
+- [ ] Moving files w/ path dependent imports changes imports
+- [ ] Change case style (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
+- [ ] Auto-fill completed function params
+- [ ] Deleting a control structure and automatically reindenting interior code
+
+### File Create Sub-Menu:
+
+Menu in file-explorer (i.e.: nvim-tree) that allows you to choose specific kinds of files/dirs to create. Can include custom types as well as templates. Some examples:
+
+- [ ] New lang specific file
+  - [ ] lua
+  - [ ] python
+  - [ ] shell (i.e. bash)
+- [ ] New lang specific folder structure
+  - [ ] Python project (i.e. w/ project.toml)
+  - [ ] Python module (ie.e. w/ __init__.py)
+- [ ] Create missing function/method/var, etc.
 
