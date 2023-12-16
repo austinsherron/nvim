@@ -1,62 +1,34 @@
+local enum = require('toolbox.extensions.enum').enum
 
---- Specifies how to view/open a buffer
+
+--- Specifies how to view/open a buffer.
 ---
 ---@enum ViewMode
-local ViewMode = {
+local ViewMode = enum({
   STANDALONE = 'e',         -- open standalone buffer
   SPLIT      = 'split',     -- open buffer in split (over-under)
   VSPLIT     = 'vsplit',    -- open buffer in vertical split (side-by-side)
-}
+}, 'STANDALONE')
 
-local _ViewMode = {
-  ALL     = Set.new(Table.values(ViewMode)),
-  DEFAULT = ViewMode.STANDALONE,
-}
-
----@return ViewMode: the default view mode
-function ViewMode.default()
-  return _ViewMode.DEFAULT
-end
-
-
---- Returns the provided value if it's a valid ViewMode, otherwise it returns the default
---- view mode
+--- Contains utilities for interacting w/ (n)vim buffers.
 ---
----@param o any?: the value that might be a view mode
----@return ViewMode: the provided value if it's a valid ViewMode, otherwise turns the
---- default view mode
-function ViewMode.orDefault(o)
-  if ViewMode.is_valid(o) then
-    return o
-  end
-
-  -- nil is a semi-valid option, as it potentially indicates the default was desired
-  if o ~= nil then
-    Warn('View mode=%s is not a valid ViewMode', { o })
-  end
-
-  return _ViewMode.DEFAULT
-end
-
-
---- Checks that the provided object is a valid ViewMode.
----
----@param o any|nil: the object to check
----@return boolean: true if o is a valid ViewMode, false otherwise
-function ViewMode.is_valid(o)
-  return _ViewMode.ALL:contains(o)
-end
-
+---@class Buffer
 local Buffer = {}
 
---- Opens a buffer for the file at the provided path.
+--- Opens an empty standalone buffer.
+function Buffer.blank()
+  vim.cmd('enew')
+end
+
+
+--- Opens a buffer, either transient w/ no file, or for the file at path, if provided.
 ---
----@param path string: the path to the file to open
----@param view_mode ViewMode?: how to open the buffer; optional, defaults to
---- ViewMode.STANDALONE, at the time of writing
-function Buffer.open(path, view_mode)
-  view_mode = view_mode or ViewMode.default()
-  vim.cmd(view_mode .. ' ' .. path)
+---@param view_mode string|nil: optional, defaults to ViewMode.STANDALONE at the time of
+--- writing; "how" to open the buffer
+---@param path string|nil: optional; the path to the file to open, if any
+function Buffer.open(view_mode, path)
+  view_mode = ViewMode:or_default(view_mode)
+  vim.cmd[view_mode](path)
 end
 
 

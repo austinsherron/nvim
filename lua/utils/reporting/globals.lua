@@ -1,14 +1,9 @@
-local Callable = require 'toolbox.functional.callable'
 local Lazy     = require 'toolbox.utils.lazy'
-local Stub     = require 'toolbox.utils.stub'
 
 
 -- globally accessible, lazy-loaded nvim logger instance
----@note: since the instantiation of the logger is upstream of nearly all nvim code, any
---- error encountered here will bork the editor; for that reason, we'll ensure that a stub
---- is substituted for the logger if errors are encountered
 ---@type fun(): l: NvimLogger
-GetLogger = Lazy.require('utils.reporting.logger', Callable.new(Stub.new()))
+GetLogger = Lazy.require('utils.reporting.logger')
 
 -- global logging helpers
 function Trace(...) GetLogger():trace(...) end

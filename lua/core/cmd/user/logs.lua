@@ -11,21 +11,13 @@ local UserCommand = require 'utils.core.usercmd'
 
 
 local function do_open(view_mode)
-  view_mode = Buffer.ViewMode.orDefault(view_mode)
   local log_path = GetLogger():log_path()
-
-  Buffer.open(log_path, view_mode)
+  Buffer.open(view_mode, log_path)
 end
 
 
 local function open_nvim_log(opts)
-  opts = opts or {}
-
-  local view_mode = ternary(
-    Table.not_nil_or_empty(opts.fargs),
-    function() return opts.fargs[1] end
-  )
-
+  local view_mode = Table.safeget(opts or {}, { 'fargs', 1 })
   do_open(view_mode)
 end
 

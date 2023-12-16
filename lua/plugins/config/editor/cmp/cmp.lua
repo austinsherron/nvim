@@ -7,7 +7,7 @@ local Editor  = require 'utils.api.vim.editor'
 -- external
 local lspkind = require 'lspkind'
 
-local CMDLINE_DISABLED_CMDS = Set.new()
+local CMDLINE_DISABLED_CMDS = Set.of('ls')
 
 --- Contains functions for configuring the nvim-cmp plugin.
 ---
@@ -52,10 +52,15 @@ function Cmp.filetype(cmp)
 end
 
 
+-- TODO: this doesn't seem to work they way I want it to (or think/thought it should)
 local function should_complete_cmdline()
-  local cmd = String.firstword(Editor.cmdline())
+  local cmd = Editor.cmdline()
+  local firstword = String.firstword(cmd)
 
-  Debug({ 'cmd=', cmd })
+  if CMDLINE_DISABLED_CMDS:contains(firstword) then
+    Debug('Cmp: cmdline cmp is disabled for cmd=%s', { cmd })
+    return false
+  end
 
   return true
 end

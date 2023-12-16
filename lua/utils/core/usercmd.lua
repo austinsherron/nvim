@@ -48,7 +48,7 @@ end
 --- Adds cmd to instance.
 ---
 ---@param cmd string|function: cmd to add to instance
----@param nargs integer|string: the number of parameters the command accepts; use "?" for
+---@param nargs integer|string|nil: the number of parameters the command accepts; use "?" for
 --- variable # of params, or omit if no parameters
 ---@return UserCommand: self
 function UserCommand:withCmd(cmd, nargs)

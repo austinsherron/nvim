@@ -2,7 +2,8 @@
 -- editor ----------------------------------------------------------------------
 
 --[[
-  control core editor capabilities like commenting, completion, general text manipulation, etc.
+  control core editor capabilities like commenting, completion, general text
+  manipulation, etc.
 --]]
 
 local Treesitter = require 'plugins.config.code.treesitter'

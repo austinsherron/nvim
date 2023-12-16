@@ -2,8 +2,8 @@
 -- interface -------------------------------------------------------------------
 
 --[[
-  add to, control, and/or augment interface elements; interface elements should do
-  something, or at least be informational
+  add to, control, and/or augment interface elements; interface elements should
+  do something, or at least be informational
 --]]
 
 -- local alpha = require 'plugins.config.interface.alphanvim'

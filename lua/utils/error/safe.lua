@@ -24,6 +24,12 @@ end
 --- instead of calling directly.
 ---
 ---@see Safe.call
+---
+---@generic T
+---@param to_call fun(...): T
+---@param error_handler OnErrStrategy|nil
+---@param prefix string|nil
+---@return fun(...): T
 function Safe.ify(to_call, error_handler, prefix)
   return function(...)
     return Safe.call(to_call, error_handler, prefix, ...)

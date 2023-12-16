@@ -1,5 +1,16 @@
+-- FIXME: circular imports somewhere are causing issues/logger; likely due to global
+--        availability of logger (2023?) (lol whoops, I hadn't even committed this yet
+--        before writing a new one; you can tell how much this bugs me... 😅 😔 😭)
+
+-- FIXME: since the instantiation of the logger is upstream of nearly all nvim code, any
+--        error encountered here will bork the editor; for that reason, I'm currently
+--        using a stub to make sure the editor still functions, but flying blind is
+--        unpleasant (12/15/2023)
+
 local LogLevel = require 'toolbox.log.level'
 local Logger   = require 'toolbox.log.logger'
+local Stub     = require 'toolbox.utils.stub'
+
 local Path     = require 'utils.api.vim.path'
 local TMerge   = require 'utils.api.vim.tablemerge'
 local Notify   = require 'utils.reporting.notify'
@@ -33,7 +44,9 @@ NvimLogger.__index = NvimLogger
 ---@return NvimLogger: a new NvimLogger instance
 function NvimLogger.new(log_filename, log_level, default_opts)
   local log_filepath = Path.log() .. '/' .. (log_filename or DEFAULT_LOG_FILENAME)
-  local logger = Logger.new(log_filepath, log_level or LogLevel.default())
+  -- FIXME: see above FIXME(s) (1-8 at the moment)
+  -- local logger = Logger.new(log_filepath, log_level or LogLevel.default())
+  local logger = Stub.new()
 
   return setmetatable({
     logger       = logger,
