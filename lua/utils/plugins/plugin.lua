@@ -35,7 +35,7 @@ function Plugin.new(plugin)
 
   InfoQuietly('Initializing plugin="%s"', { name })
 
-  Stream(Table.keys(plugin))
+  Stream.new(Table.keys(plugin))
     :filter(function(k) return Type.isfunc(plugin[k]) end)
     :foreach(function(k) plugin[k] = wrap_fn(name, k, plugin[k]) end)
 
@@ -48,7 +48,7 @@ end
 ---@param plugins table[]: an array-like table of lazy.nvim plugin definitions
 ---@return Plugin[]: an array-like table of Plugin instances
 function Plugin.all(plugins)
-  return Stream(plugins)
+  return Stream.new(plugins)
     :map(Plugin.new)
     :get()
 end

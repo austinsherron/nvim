@@ -39,7 +39,7 @@ local function get_lua_path(trim_wild)
   local split_lua_path = String.split(lua_path, ';')
   local trimmer = get_trimmer(trim_wild)
 
-  return Stream(split_lua_path)
+  return Stream.new(split_lua_path)
     :filter(function(i) return i ~= '' end)
     :filter(function(p) return filter_lua_runtime_path(p) end)
     :map(trimmer)
@@ -58,14 +58,14 @@ end
 
 
 local function get_runtime_files()
-   return Stream(get_lua_path(true))
+   return Stream.new(get_lua_path(true))
      :filter(function(p) return filter_lua_runtime_path(p) end)
      :get()
  end
 
 
 local function get_wkspace_lib()
-  return Stream(Table.concat({ get_internal_wkspace_lib(), {}}))   -- get_runtime_files() }))
+  return Stream.new(Table.concat({ get_internal_wkspace_lib(), {}}))   -- get_runtime_files() }))
     :peek(function(i) Debug('Adding file=%s to lua_ls workspace.library', { i }) end)
     :get()
 end

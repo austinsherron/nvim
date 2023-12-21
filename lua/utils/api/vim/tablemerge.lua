@@ -15,7 +15,7 @@ end
 
 
 local function do_merge(merge_type, ...)
-  local to_merge = Stream(Table.pack(...))
+  local to_merge = Stream.new(Table.pack(...))
     :filter(Table.not_nil_or_empty)
     :collect()
 
