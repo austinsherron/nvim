@@ -1,16 +1,15 @@
-local SessionMgr = require 'plugins.extensions.sessionmgr'
 local KeyMapper  = require 'utils.core.mapper'
+local Session    = require 'utils.api.session'
 
 
 local KM = KeyMapper.new()
 
--- session mgr. ----------------------------------------------------------------
+-- sessions (persisted) --------------------------------------------------------
 
-KM:with({ desc_prefix = 'session mgr.: ' })
+KM:with({ desc_prefix = 'sessions: ' })
   :bind({
-    { '<leader>ss', ':SessionManager save_current_session<CR>',     { desc = 'save'            }},
-    { '<leader>sr', ':SessionManager load_last_session<CR>',        { desc = 'restore last'    }},
-    { '<leader>sd', ':SessionManager load_current_dir_session<CR>', { desc = 'restore for cwd' }},
-    { '<leader>sl',  SessionMgr.list,                               { desc = 'list'            }},
+    { '<leader>ss', Session.save,         { desc = 'save'            }},
+    { '<leader>sl', Session.load_last,    { desc = 'load last'       }},
+    { '<leader>sr', Session.load_for_cwd, { desc = 'restore for cwd' }},
 }):done()
 

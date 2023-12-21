@@ -1,3 +1,5 @@
+local Stream = require 'toolbox.extensions.stream'
+
 local enum = require('toolbox.extensions.enum').enum
 
 
@@ -32,10 +34,52 @@ function Buffer.open(view_mode, path)
 end
 
 
----@see vim.api.nvim_list_bufs
----@return any[]: current buffer handles
+--- Checks if a buffer is listed.
+---
+---@see vim.fn.buflisted
+---@param bufnr integer: the number of the buffer to check
+---@return boolean: true if the buffer w/ id bufnr is listed, false otherwise
+function Buffer.is_listed(bufnr)
+  return vim.fn.buflisted(bufnr) == 1
+end
+
+
+--- Gets listed (i.e.: open/visible) buffer ids.
+---
+---@see vim.api.nvim_list_bufs()
+---@return integer[]: current buffer handles
 function Buffer.getall()
-  return vim.api.nvim_list_bufs()
+  return Stream.new(vim.api.nvim_list_bufs())
+    :filter(Buffer.is_listed)
+    :collect()
+end
+
+
+--- Closes the buffer w/ id bufnr.
+---
+---@param bufnr integer: the id of the buffer to close
+---@param force boolean|nil: optional, defaults to false; if true, buffers w/ unsaved
+--- changed will be closed
+function Buffer.close(bufnr, force)
+  force = Bool.or_default(force, false)
+
+  local bangornot = ternary(force, '!', '')
+  local cmd = fmt('silent bd%s %s', bangornot, bufnr)
+
+  vim.cmd(cmd)
+end
+
+
+--- Closes all listed (i.e.: open/visible) buffers.
+---
+---@param force boolean|nil: optional, defaults to false; if true, buffers w/ unsaved
+--- changed will be closed
+function Buffer.closeall(force)
+  local bufnrs = Buffer.getall()
+
+  for _, bufnr in ipairs(bufnrs) do
+    Buffer.close(bufnr, force)
+  end
 end
 
 ---@note: so ViewMode is publicly accessible

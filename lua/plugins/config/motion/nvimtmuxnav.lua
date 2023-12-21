@@ -7,7 +7,8 @@ local NvimTmuxNav = {}
 ---@return table: a table that contains configuration values for the nvim-tmux nav plugin
 function NvimTmuxNav.opts()
   return {
-    keybindings = {
+    disable_when_zoomed = true,
+    keybindings         = {
       left  = '<C-h>',
       down  = '<C-j>',
       up    = '<C-k>',

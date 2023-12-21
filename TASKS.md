@@ -102,9 +102,8 @@
 - [ ] Change diagnostic symbols to something snazzier
 - [ ] Add tracebacks to error logging
 - [ ] Add ability to make file executable from nvim-tree
-- [ ] "Fix plugins extension" (?)
-- [ ] "Fix cmp" (?)
 - [ ] Configure auto-completion support for neorepl
+- [ ] Add barbar + session integration so buffers are restored in correct order
 
 ### Completed
 
@@ -140,10 +139,12 @@
 - [ ] Fix aerial markdown issue
 - [ ] Figure out why restoring sessions often causes barbar errors
 - [ ] "Fix plugins extension" (?)
-- [ ] "Fix cmp" (?)
+- [ ] Disable cmdline auto-completion for specific commands (ls, for example)
 - [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
 - [ ] Bufresize should ignore certain window types (i.e.: nvimtree, diffview, side panel, etc.)
 - [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
+- [ ] Fix indent-blankline
+- [ ] Fix snippet loading
 
 ### Completed
 

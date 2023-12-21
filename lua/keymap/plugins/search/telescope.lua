@@ -1,3 +1,5 @@
+local Project   = require 'plugins.extensions.project'
+local Session   = require 'plugins.extensions.session'
 local Telescope = require 'plugins.extensions.telescope'
 local Builtins  = require 'telescope.builtin'
 local KeyMapper = require 'utils.core.mapper'
@@ -26,8 +28,9 @@ KM:bind({
   { '<leader>fH',  '<cmd>Telescope undo<CR>',           { desc = 'search undo history'             }},
   { '<leader>fm',  Builtins.man_pages,                  { desc = 'search man pages'                }},
   { '<leader>fn',  Telescope.search_packages,           { desc = 'search plugin files'             }},
-  { '<leader>fp',  '<cmd>Telescope projects<CR>',       { desc = 'search projects'                 }},
+  { '<leader>fp',  Project.picker,                      { desc = 'search projects'                 }},
   { '<leader>fr',  '<cmd>Telescope frecency<CR>',       { desc = 'search "frecent"'                }},
+  { '<leader>fs',  Session.picker,                      { desc = 'search sessions'                 }},
   { '<leader>ft',  Builtins.treesitter,                 { desc = 'search treesitter symbols'       }},
   { '<leader>fu',  Builtins.lsp_references,             { desc = 'find usages'                     }},
   { '<leader>fw',  Telescope.contextual_live_grep,      { desc = 'find words'                      }},
