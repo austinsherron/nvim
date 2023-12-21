@@ -18,7 +18,7 @@ local Confirm = {}
 ---@param choices string[]: the choices to format
 ---@return string: a string of choices formatted in the manner expected by the confirm api
 function Confirm.fmt_choices(choices)
-  return Stream(choices)
+  return Stream.new(choices)
     :map(String.capitalize)
     :map(function(c) return '&' .. c end)
     :collect(function(cs) return String.join(cs, '\n') end)

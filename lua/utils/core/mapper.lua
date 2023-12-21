@@ -108,7 +108,7 @@ end
 function KeyMapper:bind(bindings)
   InfoQuietly('Processing %s key binding(s)', { #bindings })
 
-  Stream(bindings)
+  Stream.new(bindings)
     :foreach(function(b) self:do_binding(Table.unpack(b)) end)
 
   return self
