@@ -22,7 +22,6 @@ local Telescope = {}
 
 local function make_missing_node_path_msg(node)
   return 'Telescope ext: no node path found for node=%s (likely searching root node); falling back to non-contextual search', { node.name }
-
 end
 
 

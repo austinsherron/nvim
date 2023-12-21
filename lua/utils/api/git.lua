@@ -22,7 +22,7 @@ end
 
 ---@return string: the path to the root of the repo we're in currently
 function Git.repo_root()
-  return System.run('git rev-parse --show-toplevel')
+  return String.trim(System.run('git rev-parse --show-toplevel'), '\n')
 end
 
 

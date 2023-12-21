@@ -26,10 +26,10 @@ end
 ---@see Safe.call
 ---
 ---@generic T
----@param to_call fun(...): T
+---@param to_call fun(...): T|nil
 ---@param error_handler OnErrStrategy|nil
 ---@param prefix string|nil
----@return fun(...): T
+---@return fun(...): T|nil
 function Safe.ify(to_call, error_handler, prefix)
   return function(...)
     return Safe.call(to_call, error_handler, prefix, ...)

@@ -7,18 +7,22 @@
   groupings/filtered views of the same
 --]]
 
+local Persisted  = require 'plugins.config.workspace.persisted'
 local Project    = require 'plugins.config.workspace.project'
-local SessionMgr = require 'plugins.config.workspace.sessionmgr'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
 
 return Plugins({
-  ---- neovim session-manager: persist open files/buffers b/w nvim sessions
+  ---- persisted: session manager forked from persistence.nvim (from the legendary folke)
   {
-    'Shatur/neovim-session-manager',
+    'olimorris/persisted.nvim',
+    event = 'VimEnter',
+    opts  = Persisted.opts(),
 
-    config = SessionMgr.config,
+    config = function(_, opts)
+      require('persisted').setup(opts)
+    end,
   },
   ---- project: project manager/navigator
   {

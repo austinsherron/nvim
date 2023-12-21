@@ -37,6 +37,7 @@ ArrayToDictValueMapper
 arrs
 asc
 ascii
+askubuntu
 AssertionCallable
 AssertionMsgs
 AssertionType
@@ -124,6 +125,7 @@ BufferPrevious
 BufferRestore
 BufferState
 bufhidden
+buflisted
 BufNewFile
 bufnr
 bufnum
@@ -145,6 +147,7 @@ casemap
 catppuccin
 CCDC
 cd
+cd'ing
 centric
 changeset
 CharArray
@@ -170,6 +173,7 @@ cmds
 cmp
 CmpKM
 CmpSrc
+CodeContext
 codicons
 colordiff
 colorizer
@@ -274,7 +278,9 @@ directionality
 directionally
 dirname
 dirs
+DirScope
 disoverability
+distro
 dl
 DMV
 docstring
@@ -283,6 +289,7 @@ docstrings
 doo
 dotfiles
 Dotfiles
+dotphiles
 dotsync
 dp2
 Dp2Logger
@@ -348,6 +355,7 @@ fintech
 firefox
 FireFox
 firstword
+fishshell
 fivetran
 FIXME
 FlashKM
@@ -401,6 +409,7 @@ gitdir
 github
 gitignore
 gitignored
+gitleaks
 Gitleaks
 gitsigns
 gke
@@ -479,7 +488,9 @@ iter
 Iter
 iterable
 Iterable
+iterables
 iteratively
+IterUtils
 itsfoss
 javascript
 jchlv
@@ -584,6 +595,7 @@ luafilesystem
 luajit
 LuaJIT
 lualine
+LualineComponent
 LuaLS
 luarc
 luarocks
@@ -660,6 +672,7 @@ newindex
 newmode
 nextIdx
 nightfox
+NixOS
 nmap
 nnn
 nnodes
@@ -709,6 +722,7 @@ NvTree
 nvundle
 NVUNDLE
 obj's
+ocal
 Okular
 omnifunc
 onboarding
@@ -771,6 +785,8 @@ printf
 privatelink
 profiler
 programmatically
+ProjectContext
+ProjectsExt
 prs
 pryv
 pryvate
@@ -880,6 +896,7 @@ SessionConfigMgr
 SessionConfigType
 SessionData
 SessionDelete
+SessionInfo
 SessionList
 SessionLoad
 SessionManager
@@ -938,6 +955,7 @@ startify
 startpage
 startswith
 stateful
+StatusComponent
 statusline
 stderr
 stdout
@@ -963,6 +981,7 @@ substr
 substring
 substrings
 sudo
+sush
 swp
 symlink
 symlinks
@@ -983,6 +1002,7 @@ tabnext
 tabpages
 tabprevious
 TabState
+taskwarrior
 Taskwarrior
 TBD
 tbl
@@ -1006,6 +1026,7 @@ there'd
 ThisThenLog
 timeshift
 timestamp
+timewarrior
 Timewarrior
 tlp
 TMerge
@@ -1075,6 +1096,7 @@ updatetime
 UPPERER
 url
 urls
+usb
 userArgs
 usercmd
 UserCommand
@@ -1091,6 +1113,7 @@ ux
 UX
 uz
 v0
+v4l
 vals
 ValueError
 vararg
@@ -1183,4 +1206,9 @@ Zelle
 Zorin
 zoxide
 zquestz
+zsh
 Zsh
+datetimes
+mgmt
+dir's
+h3

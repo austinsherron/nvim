@@ -1,23 +1,22 @@
 -- internal
-local SessionConfigMgr = require 'plugins.config.workspace.sessionmgr'
-local Telescope        = require 'plugins.extensions.telescope'
-local Env              = require 'toolbox.system.env'
-local File             = require 'toolbox.system.file'
-local Confirm          = require 'utils.api.vim.confirm'
+local Telescope  = require 'plugins.extensions.telescope'
+local Env        = require 'toolbox.system.env'
+local File       = require 'toolbox.system.file'
+local SessionApi = require 'utils.api.session'
+local Confirm    = require 'utils.api.vim.confirm'
 
 -- external
-local session_utils    = require 'session_manager.utils'
-local actions          = require 'telescope.actions'
-local builtins         = require 'telescope.builtin'
+local telescope = require 'telescope'
+local actions   = require 'telescope.actions'
 
 
 --- Contains functions that implement extended (custom) session manager functionality.
 ---
----@class SessionMgr
-local SessionMgr = {}
+---@class Session
+local Session = {}
 
 local function make_session_path(name)
-  return SessionConfigMgr.sessions_dir() .. '/' .. name
+  return SessionApi.sessions_dir() .. '/' .. name
 end
 
 
@@ -53,7 +52,7 @@ local function make_list_sessions_action()
       local session = selection[1]
       local path = make_session_path(session)
 
-      session_utils.load_session(path, false)
+      SessionApi.load_session(path)
     end,
     {
       { 'i', '<C-d>', make_delete_session_action() },
@@ -77,15 +76,25 @@ local function format_session_name(name)
 end
 
 
---- Displays known sessions.
-function SessionMgr.list()
-  builtins.find_files({
-    attach_mappings = make_list_sessions_action(),
-    cwd             = SessionConfigMgr.sessions_dir(),
-    path_display    = function(_, name) return format_session_name(name) end,
-    prompt_title    = 'Sessions',
-  })
+local function sessions_picker()
+  telescope.extensions.persisted.persisted()
+
+  -- TODO
+  --
+  -- ({
+  --   attach_mappings = function(prompt_bufnr)
+  --     local action = make_project_selection_action(prompt_bufnr)
+  --     actions.select_default:replace(action)
+  --     return true
+  --   end
+  -- })
 end
 
-return SessionMgr
+
+--- Displays known sessions.
+function Session.picker()
+  sessions_picker()
+end
+
+return Session
 
