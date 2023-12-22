@@ -15,6 +15,10 @@ local builtins     = require 'telescope.builtin'
 -- local previewers   = require 'telescope.previewers'
 
 
+---@alias TelescopeKeyBinding { mode: string, key: string, action: string|function }
+---@alias TelescopeKeyMapper fun(mode: string|string[], key: string, action: string|function)
+---@alias TelescopeAttachBindings fun(prompt_buffer: integer, map: TelescopeKeyMapper): boolean
+
 --- Contains functions that implement extended (custom) telescope search functionality.
 ---
 ---@class Telescope
@@ -108,15 +112,35 @@ local function bind_keymap(keymap, map)
 end
 
 
+--- Utility for attaching key bindings to a picker w/out changing its default action.
+---
+---@param keymap TelescopeKeyBinding[]|nil: optional; picker action key bindings
+---@param retval boolean|nil: optional, defaults to true; the return value of the returned
+--- function; see :h telescope.mappings for details
+---@return TelescopeAttachBindings: function that attaches key bindings to a picker and
+--- returns retval
+function Telescope.bind_keymap(keymap, retval)
+  retval = Bool.or_default(retval, true)
+
+  return function(_, map)
+    bind_keymap(keymap, map)
+    return retval
+  end
+end
+
+
 --- Utility that makes it easier to replace an existing picker's default action.
 ---
----@param new_action fun(s: string[]): n: nil: a function that takes an array w/ the
---- selected telescope item and performs some action w/ it
----@param keymap table[]|nil: an array-like table of array-like tables that contain picker
---- key bindings in the following format: { mode: string, key: string, action: string|function }
+---@param new_action fun(selection: table) a function that performs some action w/ the
+--- selected telescope item
+---@param keymap TelescopeKeyBinding[]|nil: optional; picker action key bindings
+---@param retval boolean|nil: optional, defaults to true; the return value of the returned
+--- function; see :h telescope.mappings for details
 ---@return (fun(pb: integer, _: any): r: true): a function used w/ telescope opts.attach_mappings
 --- to replace an existing picker's default action
-function Telescope.make_new_action(new_action, keymap)
+function Telescope.make_new_action(new_action, keymap, retval)
+  retval = Bool.or_default(retval, true)
+
   return function(prompt_buffer, map)
     bind_keymap(keymap, map)
 
@@ -128,7 +152,7 @@ function Telescope.make_new_action(new_action, keymap)
       end
     )
 
-    return true
+    return retval
   end
 end
 

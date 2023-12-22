@@ -1,15 +1,10 @@
-local Session = require 'utils.api.session'
-local Buffer  = require 'utils.api.vim.buffer'
-local System  = require 'utils.api.vim.system'
+local Telescope = require 'plugins.extensions.telescope'
+local Session   = require 'utils.api.session'
 
-local DirScope = System.DirScope
+local telescope = require 'telescope'
+local config    = require 'telescope.config'
 
-local telescope    = require 'telescope'
-local actions      = require 'telescope.actions'
-local action_state = require 'telescope.actions.state'
-local config       = require 'telescope.config'
-
-config = config.values
+config          = config.values
 
 
 --- Contains functions that implement extended (custom) project and session management
@@ -18,54 +13,33 @@ config = config.values
 ---@class Project
 local Project = {}
 
-local function get_project_dir_and_session()
-    local selection = action_state.get_selected_entry()
-    local project_dir = selection.value
 
-    return project_dir, Session.get(project_dir)
+local function default_action(selection)
+  local project_dir = Table.safeget(selection, 'value')
+  if project_dir == nil then return end
+
+  local session = Session.get(project_dir)
+  if session == nil then return end
+
+  InfoQuietly('Swithing to project session=%s', { session.name })
+  Session.switch(session)
 end
 
-
-local function cd_and_load_session(project_dir, session)
-  if project_dir == nil then
-    return
-  end
-
-  Buffer.closeall()
-  ---@diagnostic disable-next-line: undefined-field
-  System.cd(project_dir, DirScope.TAB)
-
-  if session ~= nil then
-    Session.load(session.file_path)
-  end
-end
-
-
-local function make_project_selection_action(prompt_bufnr)
-  return function()
-    actions.close(prompt_bufnr)
-    Session.save()
-
-    local project_dir, session = get_project_dir_and_session()
-    cd_and_load_session(project_dir, session)
-  end
+local function make_attachment_action()
+  return Telescope.make_new_action(Safe.ify(default_action))
 end
 
 
 local function projects_picker()
   telescope.extensions.projects.projects({
-    attach_mappings = function(prompt_bufnr)
-      local action = make_project_selection_action(prompt_bufnr)
-      actions.select_default:replace(action)
-      return true
-    end
+    attach_mappings = make_attachment_action(),
   })
 end
 
 
 --- Opens the project.nvim telescope picker w/ a custom default action. The new default
 --- action saves the session for the current cwd, closes all buffers, changes the cwd to
---- the dir of the selected project, and loads the project's session, if it exists.
+--- the dir of the selected project, and loads the project's session.
 function Project.picker()
   projects_picker()
 end
