@@ -148,6 +148,7 @@ catppuccin
 CCDC
 cd
 cd'ing
+CD'ing
 centric
 changeset
 CharArray
@@ -235,6 +236,7 @@ darknet
 datadog
 datasheets
 datetime
+datetimes
 DBs
 dbxcli
 debian
@@ -277,6 +279,7 @@ DirChanged
 directionality
 directionally
 dirname
+dir's
 dirs
 DirScope
 disoverability
@@ -428,6 +431,7 @@ GSConnect
 gThumb
 guake
 gz
+h3
 haha
 hardcoded
 hb4b
@@ -624,6 +628,7 @@ metamethod
 metamethods
 metatable
 metatables
+mgmt
 michaelb
 Minimo
 misconfiguration
@@ -849,6 +854,7 @@ resize
 resizing
 restow
 return
+retval
 rgb
 RGB
 rhs
@@ -1008,6 +1014,9 @@ TBD
 tbl
 tbls
 telescearch
+TelescopeAttachBindings
+TelescopeKeyBinding
+TelescopeKeyMapper
 TempFloatingWindow
 TemProject
 terraform
@@ -1208,7 +1217,3 @@ zoxide
 zquestz
 zsh
 Zsh
-datetimes
-mgmt
-dir's
-h3

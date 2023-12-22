@@ -17,6 +17,7 @@ local EXTENSIONS = {
   aerial    = {},
   emoji     = {},
   frecency  = {},
+  notify    = {},
   persisted = {},
   projects  = {},
   undo      = {

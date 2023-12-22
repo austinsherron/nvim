@@ -175,6 +175,7 @@
     - [ ] Update docs
     - [ ] Update call sites
 - [ ] Make function, method, field, etc public/private/package/protected
+    - [ ] For lua, convert function to/from local
 - [ ] Easily wrap values in function calls/or arbitrary braces
 - [ ] Easily move functions/methods w/in a file
 - [ ] Moving files w/ path dependent imports changes imports
