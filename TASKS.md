@@ -94,14 +94,12 @@
 - [ ] Continue comments only in docstrings
 - [ ] Automatically add new params to docstrings
 - [ ] Add unit tests
-- [ ] Add Lualine support for projects
-- [ ] Add Lualine support for sessions
 - [ ] Add more systematic logging
 - [ ] Add more systematic error-handling
 - [ ] Spectre in a modal?
 - [ ] Change diagnostic symbols to something snazzier
 - [ ] Add tracebacks to error logging
-- [ ] Add ability to make file executable from nvim-tree
+- [ ] Add ability to make file "un-executable" from nvim-tree
 - [ ] Configure auto-completion support for neorepl
 - [ ] Add barbar + session integration so buffers are restored in correct order
 
@@ -127,17 +125,17 @@
 - [x] Add ability to close all buffers except "this one" (i.e.: the focused buffer)
 - [x] Add ability to copy file contents from nvim-tree
 - [x] Copy file content to clipboard from nvimtree (dup)
+- [x] Add Lualine support for projects
+- [x] Add Lualine support for sessions
+- [x] Add ability to make file executable from nvim-tree
 
 ## Fixes
 
 - [ ] Check for nvim-surround treesitter dependency; if it has one, add it to TreesitterPlugin and make downstream changes
-- [ ] Fix issues w/ session mgr not restoring sessions from cwd even though I'm now manually setting it
 - [ ] Issue upgrading LuaSnip
-- [ ] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
 - [ ] Figure out cyclic import issue w/ logging
 - [ ] Figure out why barbar diagnostics don't work
 - [ ] Fix aerial markdown issue
-- [ ] Figure out why restoring sessions often causes barbar errors
 - [ ] "Fix plugins extension" (?)
 - [ ] Disable cmdline auto-completion for specific commands (ls, for example)
 - [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
@@ -166,6 +164,9 @@
 - [x] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything) (ended up being a misconfiguration: spell suggest setting shouldn't have been an int)
 - [x] Update lua files/packages that export functions to encapsulate them in tables
 - [x] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
+- [x] Fix issues w/ session mgr not restoring sessions from cwd even though I'm now manually setting it (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
+- [x] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really) (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
+- [x] Figure out why restoring sessions often causes barbar errors (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
 
 ## Ideas
 
