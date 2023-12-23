@@ -1,4 +1,3 @@
-local Stream = require 'toolbox.extensions.stream'
 local Type   = require 'toolbox.meta.type'
 
 

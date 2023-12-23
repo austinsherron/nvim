@@ -28,8 +28,8 @@ end
 ---
 ---@class System
 return {
+  ---@note: for use w/ cd
   DirScope   = DirScope,
-
   --- Adds path to the runtime path.
   ---@see vim.opt.rtp
   add_to_rtp = function(path) vim.opt.rtp:prepend(path) end,

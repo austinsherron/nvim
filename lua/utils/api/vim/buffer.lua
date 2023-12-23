@@ -1,5 +1,3 @@
-local Stream = require 'toolbox.extensions.stream'
-
 local enum = require('toolbox.extensions.enum').enum
 
 

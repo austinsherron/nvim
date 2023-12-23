@@ -1,4 +1,3 @@
-local Stream = require 'toolbox.extensions.stream'
 local Env    = require 'toolbox.system.env'
 local File   = require 'toolbox.system.file'
 local Path   = require 'toolbox.system.path'
@@ -82,7 +81,7 @@ end
 ---@param dir_path string: the absolute path of the dir that a session is tracking
 ---@param strict boolean|nil: optional, defaults to true; if true, raises an error if more
 --- than one matching session is found
----@return SessionInfo|nil: the session w/ dir path == dir_path, if any
+---@return SessionInfo: the session w/ dir path == dir_path, if any
 function Session.get(dir_path, strict)
   Debug('Session.get: fetching session for dir_path=%s', { dir_path })
   strict = Bool.or_default(strict, true)
@@ -176,7 +175,6 @@ end
 function Session.switch(session)
   Session.save()
   Buffer.closeall()
-  ---@diagnostic disable-next-line: undefined-field
   System.cd(session.dir_path, DirScope.TAB)
   Session.load_session(session.file_path)
 end

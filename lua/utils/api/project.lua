@@ -1,4 +1,3 @@
-local Stream = require 'toolbox.extensions.stream'
 local Lambda = require 'toolbox.functional.lambda'
 local Git    = require 'utils.api.git'
 local System = require 'utils.api.vim.system'

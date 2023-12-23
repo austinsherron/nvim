@@ -1,5 +1,3 @@
-local Stream = require 'toolbox.extensions.stream'
-
 local confirm = vim.fn.confirm
 
 

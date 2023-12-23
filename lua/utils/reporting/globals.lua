@@ -1,4 +1,4 @@
-local Lazy     = require 'toolbox.utils.lazy'
+local Lazy = require 'toolbox.utils.lazy'
 
 
 -- globally accessible, lazy-loaded nvim logger instance
