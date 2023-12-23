@@ -1,7 +1,6 @@
 local String = require 'toolbox.core.string'
 local Table  = require 'toolbox.core.table'
 local Stack  = require 'toolbox.extensions.stack'
-local Stream = require 'toolbox.extensions.stream'
 
 
 local DEFAULT_MODES = { 'n' }
@@ -79,15 +78,21 @@ function KeyMapper:get_options(options)
 end
 
 
+---@private
+function KeyMapper:get_desc()
+  return String.alphanum(self:get_options().desc or '')
+end
+
+
 -- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim.lua.keymaps.lua
 ---@private
 function KeyMapper:do_binding(lhs, rhs, options, modes)
   options = self:get_options(options)
   modes = modes or DEFAULT_MODES
 
-  Debug('Binding lhs="%s" to rhs="%s" (opts=%s, modes=%s)', { lhs, rhs, options, modes })
+  Trace('Binding lhs="%s" to rhs="%s" (opts=%s, modes=%s)', { lhs, rhs, options, modes })
   vim.keymap.set(modes, lhs, rhs, options)
-  Debug('Binding processed successfully')
+  Trace('Binding processed successfully')
 end
 
 
@@ -106,7 +111,7 @@ end
 ---@param bindings Binding[]: the key bindings to bind
 ---@return KeyMapper: self
 function KeyMapper:bind(bindings)
-  InfoQuietly('Processing %s key binding(s)', { #bindings })
+  Debug('Processing %s key binding(s) for %s', { #bindings, self:get_desc() })
 
   Stream.new(bindings)
     :foreach(function(b) self:do_binding(Table.unpack(b)) end)

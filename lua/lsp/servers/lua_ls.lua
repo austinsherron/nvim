@@ -1,4 +1,3 @@
-local Stream = require 'toolbox.extensions.stream'
 local Env    = require 'toolbox.system.env'
 
 
@@ -66,7 +65,7 @@ local function get_runtime_files()
 
 local function get_wkspace_lib()
   return Stream.new(Table.concat({ get_internal_wkspace_lib(), {}}))   -- get_runtime_files() }))
-    :peek(function(i) Debug('Adding file=%s to lua_ls workspace.library', { i }) end)
+    :peek(function(i) Debug('lua_ls: adding file=%s to workspace.library', { i }) end)
     :get()
 end
 
