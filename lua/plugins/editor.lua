@@ -110,12 +110,9 @@ return Plugins({
   {
     'lukas-reineke/indent-blankline.nvim',
     enabled      = Treesitter.enabled(TsPlugin.INDENT_BLANKLINE),
-    opts         = Indent.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
-    config = function(_, opts)
-      require('indent_blankline').setup(opts)
-    end
+    config = Indent.config
   },
   ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
   {
@@ -126,8 +123,10 @@ return Plugins({
   ---- surround: efficient manipulation of brackets, quotes, etc.
   {
     'kylechui/nvim-surround',
-    version = '*',    -- use for stability; omit to use `main` branch for the latest features
-    event   = 'VeryLazy',
+    enabled      = Treesitter.enabled(TsPlugin.SURROUND),
+    version      = '*',    -- use for stability; omit to use `main` branch for the latest features
+    event        = 'VeryLazy',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
     config = function()
       require('nvim-surround').setup()

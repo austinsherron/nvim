@@ -11,6 +11,7 @@ local TreesitterPlugin = {
   NEOGEN           = 'neogen',
   NEOTEST          = 'neotest',
   PLAYGROUND       = 'playground',
+  SURROUND         = 'surround',
   TS_RAINBOW       = 'ts-rainbow2',
   TREESJ           = 'treesj',
 }
@@ -24,6 +25,7 @@ local TS_PLUGIN_ENABLEMENT = {
   [TreesitterPlugin.NEOGEN]           = true,
   [TreesitterPlugin.NEOTEST]          = true,
   [TreesitterPlugin.PLAYGROUND]       = true,
+  [TreesitterPlugin.SURROUND]         = true,
   [TreesitterPlugin.TREESJ]           = true,
   [TreesitterPlugin.TS_RAINBOW]       = true,
 }
