@@ -190,7 +190,7 @@ end
 ---@private
 function AutoCommand:create_log_msg(id)
   return fmt(
-    'Created autocmd (id=%d,desc=%s)',
+    'Created autocmd (id=%d, desc=%s)',
     id,
     (self.desc or '?')
   )
@@ -208,10 +208,13 @@ end
 ---@return number: the id of the created autocommand
 ---@error if event and callback or command don't exist in config or in this instance
 function AutoCommand:create(config)
-  return ThisThenLog(
-    Safe.ify(function() return self:_create(config) end),
-    function(id) InfoQuietly(self:create_log_msg(id)) end
-  )
+  local id = Safe.call(function() return self:_create(config) end)
+
+  if id ~= nil then
+    InfoQuietly(self:create_log_msg(id))
+  end
+
+  return id
 end
 
 
@@ -233,10 +236,13 @@ end
 ---are encountered
 ---@error if id doesn't exist in config or in this instance
 function AutoCommand:delete(config)
-  return ThisThenLog(
-    Safe.ify(function() return self:_delete(config) end),
-    function(id) InfoQuietly('Deleted autocmd (id=%s)', { id }) end
-  )
+  local id = Safe.call(function() return self:_delete(config) end)
+
+  if id ~= nil then
+    InfoQuietly('Deleted autocmd (id=%s)', { id })
+  end
+
+  return id
 end
 
 return AutoCommand

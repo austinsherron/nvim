@@ -10,6 +10,8 @@ local Persisted = {}
 --- manager plugin
 function Persisted.opts()
   return {
+    -- FIXME: see FIXME in Session.save
+    -- autosave = false,
     save_dir = Session.sessions_dir(),
   }
 end
