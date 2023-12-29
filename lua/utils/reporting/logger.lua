@@ -1,33 +1,19 @@
--- FIXME: circular imports somewhere are causing issues/logger; likely due to global
---        availability of logger (2023?) (lol whoops, I hadn't even committed this yet
---        before writing a new one; you can tell how much this bugs me... 😅 😔 😭)
-
--- FIXME: since the instantiation of the logger is upstream of nearly all nvim code, any
---        error encountered here will bork the editor; for that reason, I'm currently
---        using a stub to make sure the editor still functions, but flying blind is
---        unpleasant (12/15/2023)
-
-local LogLevel = require 'toolbox.log.level'
-local Logger   = require 'toolbox.log.logger'
-local Stub     = require 'toolbox.utils.stub'
-
-local Path     = require 'utils.api.vim.path'
-local TMerge   = require 'utils.api.vim.tablemerge'
-local Notify   = require 'utils.reporting.notify'
+local LogLevel   = require 'toolbox.log.level'
+local Logger     = require 'toolbox.log.logger'
+local LoggerType = require 'toolbox.log.type'
+local TMerge     = require 'utils.api.vim.tablemerge'
+local NvimConfig = require 'utils.config'
+local Notify     = require 'utils.reporting.notify'
 
 
 ---@alias NvimLoggerOpts { persistent: boolean?, user_facing: boolean? }
 
 ---@type NvimLoggerOpts
 local DEFAULT_OPTS = { persistent = false, user_facing = true }
----@type NvimLoggerOpts
-local DEFAULT_QUIET_OPTS = { persistent = false, user_facing = false }
-local DEFAULT_LOG_FILENAME = 'nvim-user.log'
 
 --- A neovim runtime logger.
 ---
 ---@class NvimLogger
----@field private log_filepath string: the path to the log file
 ---@field private logger Logger: file logger
 ---@field private default_opts NvimLoggerOpts: default logger options; can be overridden
 --- via method level options arguments
@@ -36,39 +22,34 @@ NvimLogger.__index = NvimLogger
 
 --- Constructor
 ---
----@param log_filename string?: the name of the file to which to log; optional, defaults
---- nvim-user.log
 ---@param log_level LogLevel?: the current log level optional
 ---@param default_opts NvimLoggerOpts?: default logger options can be overridden
 --- via method level options arguments
 ---@return NvimLogger: a new NvimLogger instance
-function NvimLogger.new(log_filename, log_level, default_opts)
-  local log_filepath = Path.log() .. '/' .. (log_filename or DEFAULT_LOG_FILENAME)
-  -- FIXME: see above FIXME(s) (1-8 at the moment)
-  -- local logger = Logger.new(log_filepath, log_level or LogLevel.default())
-  local logger = Stub.new()
+function NvimLogger.new(log_level, default_opts)
+  local logger = Logger.new(LoggerType.NVIM, log_level or LogLevel.default())
 
   return setmetatable({
     logger       = logger,
     default_opts = default_opts or DEFAULT_OPTS,
-    log_filepath = log_filepath,
   }, NvimLogger)
 end
 
 
 ---@private
 function NvimLogger:do_log(method, to_log, args, opts)
-  -- at this point, none of the values in opts are actually used by this logger, but that
-  -- is likely to change in the near future; pass opts along for that eventuality
+  opts = opts or {}
+
   self.logger[method](self.logger, to_log, args, opts)
 
-  opts = TMerge.mergeleft(self.default_opts, opts or {})
-  -- user facing is only used here and so shouldn't be passed to notify
-  local user_facing, options = Table.split_one(opts, 'user_facing')
-
-  if user_facing then
-    Notify[method](to_log, args, options)
+  if opts.user_facing ~= true then
+    return
   end
+
+  opts = TMerge.mergeleft(self.default_opts, opts)
+  _, opts = Table.split_one(opts, 'user_facing')
+
+  Notify[method](to_log, args, opts)
 end
 
 
@@ -78,7 +59,7 @@ end
 ---@param args any[]?: an array of objects to format into to_log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:trace(to_log, args, opts)
-  self:do_log('trace', to_log, args, TMerge.mergeleft(DEFAULT_QUIET_OPTS, opts))
+  self:do_log('trace', to_log, args, TMerge.mergeleft(DEFAULT_OPTS, opts))
 end
 
 
@@ -88,7 +69,7 @@ end
 ---@param args any[]?: an array of objects to format into to_log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:debug(to_log, args, opts)
-  self:do_log('debug', to_log, args, TMerge.mergeleft(DEFAULT_QUIET_OPTS, opts))
+  self:do_log('debug', to_log, args, TMerge.mergeleft(DEFAULT_OPTS, opts))
 end
 
 
@@ -124,8 +105,13 @@ end
 
 ---@return string: the path to the log file
 function NvimLogger:log_path()
-  return self.log_filepath
+  return self.logger:log_path()
 end
 
-return NvimLogger.new(DEFAULT_LOG_FILENAME, LogLevel.DEBUG)
+
+local function current_level()
+  return NvimConfig.log_level() or LogLevel.default()
+end
+
+return NvimLogger.new(current_level())
 

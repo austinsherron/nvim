@@ -1,5 +1,7 @@
+local Table        = require 'toolbox.core.table'
 local LogFormatter = require 'toolbox.log.formatter'
 local LogLevel     = require 'toolbox.log.level'
+local NvimConfig   = require 'utils.config'
 
 
 --- Specifies what kind of message is being logged, and its level of
@@ -19,7 +21,20 @@ local Urgency = {
 ---@class Notify
 local Notify = {}
 
+local function current_level()
+  local urgency = NvimConfig.notify_level()
+  return Urgency[urgency] or Urgency.WARN
+end
+
+
+local function should_notify(level)
+  return level >= current_level()
+end
+
+
 local function do_log(level, to_log, args, opts)
+  if not should_notify(level) then return end
+
   args = args or {}
   opts = opts or {}
 
@@ -27,11 +42,10 @@ local function do_log(level, to_log, args, opts)
   to_log = LogFormatter.format(LogLevel.NIL, to_log, args, opts)
 
   -- persistent == true means timeout == false, i.e.: no timeout
-  local persistent = opts.persistent or false
-  opts = Table.pick_out(opts, Set.only('persistent'))
-  opts.timeout = ternary(persistent, false, opts.timeout)
+  local persistent, rest = Table.split_one(opts, 'persistent')
+  rest.timeout = ternary(persistent == true, false, rest.timeout)
 
-  vim.notify(to_log, level, opts)
+  vim.notify(to_log, level, rest)
 end
 
 

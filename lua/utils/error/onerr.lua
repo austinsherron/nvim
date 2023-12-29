@@ -1,7 +1,9 @@
 
 local function make_err_msg(err_res, prefix)
+  err_res = err_res or ''
+
   prefix = ternary(prefix == nil, '', function() return prefix .. ': ' end)
-  return prefix .. (err_res or '')
+  return prefix .. err_res
 end
 
 

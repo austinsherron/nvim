@@ -131,9 +131,7 @@
 
 ## Fixes
 
-- [ ] Check for nvim-surround treesitter dependency; if it has one, add it to TreesitterPlugin and make downstream changes
 - [ ] Issue upgrading LuaSnip
-- [ ] Figure out cyclic import issue w/ logging
 - [ ] Figure out why barbar diagnostics don't work
 - [ ] Fix aerial markdown issue
 - [ ] "Fix plugins extension" (?)
@@ -143,6 +141,9 @@
 - [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
 - [ ] Fix indent-blankline
 - [ ] Fix snippet loading
+- [ ] Fix statusline crowding in specific utility buffers (i.e.: nvimtree, diffview file tree, probably others)
+- [ ] Editorconfig line length constraints aren't being enforced
+- [ ] Fix issues w/ duplicate sessions (one w/ branch + one w/o)
 
 ### Completed
 
@@ -167,6 +168,13 @@
 - [x] Fix issues w/ session mgr not restoring sessions from cwd even though I'm now manually setting it (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
 - [x] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really) (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
 - [x] Figure out why restoring sessions often causes barbar errors (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
+- [x] Check for nvim-surround treesitter dependency; if it has one, add it to TreesitterPlugin and make downstream changes
+- [x] Figure out cyclic import issue w/ logging
+
+### Won't Do
+
+- [x] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
+    - [x] I no longer use auto-session (at least for the time being)
 
 ## Ideas
 
@@ -183,6 +191,7 @@
 - [ ] Change case style (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
 - [ ] Auto-fill completed function params
 - [ ] Deleting a control structure and automatically reindenting interior code
+- [ ] Remove control structure, i.e.: remove loops/if statements/etc, fix indentation/formatting of code contained therein
 
 ### File Create Sub-Menu:
 
@@ -194,6 +203,6 @@ Menu in file-explorer (i.e.: nvim-tree) that allows you to choose specific kinds
   - [ ] shell (i.e. bash)
 - [ ] New lang specific folder structure
   - [ ] Python project (i.e. w/ project.toml)
-  - [ ] Python module (ie.e. w/ __init__.py)
+  - [ ] Python module (i.e. w/ __init__.py)
 - [ ] Create missing function/method/var, etc.
 

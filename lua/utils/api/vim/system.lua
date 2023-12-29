@@ -12,7 +12,7 @@ local DirScope = enum({
   GLOBAL = 'global',
   TAB    = 'tcd',
   WIN    = 'lcd',
-}, 'GLOBAL')
+}, 'TAB')
 
 local function cd(dir, scope)
   scope = DirScope:or_default(scope)

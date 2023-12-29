@@ -70,8 +70,10 @@ autopairs
 AutoPairs
 autosession
 AWS
+backends
 bak
 balancer
+balancers
 balenaEtcher
 barbar
 basename
@@ -87,6 +89,7 @@ Bazecor
 bbye
 Bdelete
 bfq
+bg
 bgn
 BindingOptions
 Birdette
@@ -144,6 +147,7 @@ callSnippet
 camelCase
 CamelCaseEr
 casemap
+CategorySelfReferenceException
 catppuccin
 CCDC
 cd
@@ -166,6 +170,7 @@ ClassSnippets
 clearnet
 cli
 cloc
+closeall
 Cloudflare
 cloudfront
 cmd
@@ -219,6 +224,7 @@ crontab
 Crontab
 CrowdStrike
 CSV
+ctags
 ctrl
 ctx
 curdir
@@ -265,6 +271,7 @@ dev
 devicons
 devilspie2
 devlispie2
+DevOps
 dialogs
 dict's
 dicts
@@ -322,6 +329,7 @@ enum's
 enums
 EnumSnippets
 env
+EnvironmentVariableNotSetException
 envs
 envvar
 EOF
@@ -344,6 +352,7 @@ fallbacks
 falsy
 fargs
 fcond
+fg
 fi
 fileformat
 fileinto
@@ -436,6 +445,7 @@ haha
 hardcoded
 hb4b
 hcl
+hg
 hoc
 hostname
 HOSTNAME
@@ -494,6 +504,7 @@ iterable
 Iterable
 iterables
 iteratively
+iterator's
 IterUtils
 itsfoss
 javascript
@@ -528,6 +539,7 @@ Kubernetes
 kustomization
 kustomize
 KVS
+kwargs
 L3MON4D3
 Lamano
 lang
@@ -552,6 +564,7 @@ lhsfmt
 li
 librewolf
 LibreWolf
+lifecycle
 lightbulb
 linehl
 linkedin
@@ -562,6 +575,7 @@ linux
 linux64
 lmv
 ln
+load_balancers
 lockfile
 Lockscreen
 LOG_FILE_BASE
@@ -610,6 +624,7 @@ luasnip's
 luassert
 luaunit
 LuaUnit
+lukas
 MacBook
 macchiato
 machinerc
@@ -632,6 +647,7 @@ mgmt
 michaelb
 Minimo
 misconfiguration
+Mixin
 mkdir
 mksession
 mktemp
@@ -739,6 +755,7 @@ OOB
 open
 openmode
 OpenShot
+opensuse
 opsec
 optional's
 orDefault
@@ -803,6 +820,7 @@ py
 pyc
 __pycache__
 pylint
+pyopenssl
 pyright
 python3
 Python3
@@ -814,6 +832,8 @@ qf
 quant
 quickfix
 rainbow2
+RainbowBlue
+RainbowCyan
 RainbowDelimiterBlue
 RainbowDelimiterCyan
 RainbowDelimiterGreen
@@ -821,6 +841,11 @@ RainbowDelimiterOrange
 RainbowDelimiterRed
 RainbowDelimiterViolet
 RainbowDelimiterYellow
+RainbowGreen
+RainbowOrange
+RainbowRed
+RainbowViolet
+RainbowYellow
 Rbd
 rc
 rcload
@@ -837,6 +862,7 @@ refNodes
 regionality
 regTrig
 reindenting
+reineke
 RelativeOrder
 RelativeOrdering
 RelativePosition
@@ -844,6 +870,7 @@ relink
 remappings
 repeatability
 repl
+ReplaceOpts
 repo
 repos
 repr
@@ -880,6 +907,7 @@ SafeClass
 SafeTest
 saml
 sayonara
+Scalability
 scm
 searchbox
 SearchBoxClear
@@ -888,6 +916,7 @@ SearchBoxMatchAll
 SearchBoxReplace
 searchcount
 searchline
+SearchOpts
 see
 see/!
 See
@@ -946,6 +975,7 @@ spc
 spectre
 spm
 sql
+SQLAlchemy
 sqlite
 src
 srcery
@@ -1088,8 +1118,10 @@ undirected
 undotree
 UndotreeFocus
 UndotreeToggle
+ungoogled
 unicode
 unittest
+UnknownHostException
 unknownPlugin
 unlink
 unm
@@ -1122,6 +1154,8 @@ ux
 UX
 uz
 v0
+v2
+v3
 v4l
 vals
 ValueError
@@ -1217,4 +1251,3 @@ zoxide
 zquestz
 zsh
 Zsh
-lifecycle
