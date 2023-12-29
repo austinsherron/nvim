@@ -1,10 +1,11 @@
-local Telescope = require 'plugins.extensions.telescope'
-local Session   = require 'utils.api.session'
+local Telescope  = require 'plugins.extensions.telescope'
+local ProjectApi = require 'utils.api.project'
+local Session    = require 'utils.api.session'
 
 local telescope = require 'telescope'
 local config    = require 'telescope.config'
 
-config          = config.values
+config = config.values
 
 
 --- Contains functions that implement extended (custom) project and session management
@@ -13,17 +14,21 @@ config          = config.values
 ---@class Project
 local Project = {}
 
-
 local function default_action(selection)
   local project_dir = Table.safeget(selection, 'value')
   if project_dir == nil then return end
 
   local session = Session.get(project_dir)
-  if session == nil then return end
 
-  InfoQuietly('Swithing to project session=%s', { session.name })
+  if session == nil then
+    Info('No project session found; switching to project=%s', { project_dir })
+    return ProjectApi.switch(project_dir)
+  end
+
+  InfoQuietly('Switching to project session=%s', { session.name })
   Session.switch(session)
 end
+
 
 local function make_attachment_action()
   return Telescope.make_new_action(Safe.ify(default_action))

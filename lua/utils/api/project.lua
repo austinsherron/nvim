@@ -1,5 +1,6 @@
 local Lambda = require 'toolbox.functional.lambda'
 local Git    = require 'utils.api.git'
+local Buffer = require 'utils.api.vim.buffer'
 local System = require 'utils.api.vim.system'
 
 local Collectors = Stream.Collectors
@@ -77,6 +78,15 @@ end
 function Project.cwd_is_project()
   local current = Project.current()
   return current ~= nil and System.cwd() == current
+end
+
+
+--- Closes all buffers and changes the cwd to project_dir.
+---
+---@param project_dir string: the root dir of the project to cd into
+function Project.switch(project_dir)
+  Buffer.closeall()
+  System.cd(project_dir)
 end
 
 return Project

@@ -27,6 +27,8 @@ end
 --- writing; "how" to open the buffer
 ---@param path string|nil: optional; the path to the file to open, if any
 function Buffer.open(view_mode, path)
+  Debug('Buffer.open: %s %s', { view_mode, path })
+
   view_mode = ViewMode:or_default(view_mode)
   vim.cmd[view_mode](path)
 end
@@ -64,6 +66,7 @@ function Buffer.close(bufnr, force)
   local bangornot = ternary(force, '!', '')
   local cmd = fmt('silent bd%s %s', bangornot, bufnr)
 
+  Trace('Buffer.close: %s', { cmd })
   vim.cmd(cmd)
 end
 
@@ -74,6 +77,7 @@ end
 --- changed will be closed
 function Buffer.closeall(force)
   local bufnrs = Buffer.getall()
+  Debug('Buffer.closeall: closing buffers=%s', { bufnrs })
 
   for _, bufnr in ipairs(bufnrs) do
     Buffer.close(bufnr, force)

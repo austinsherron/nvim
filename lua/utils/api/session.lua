@@ -5,7 +5,7 @@ local Buffer = require 'utils.api.vim.buffer'
 local Paths  = require 'utils.api.vim.path'
 local System = require 'utils.api.vim.system'
 
-local DirScope = System.DirScope
+local safeget  = Table.safeget
 
 
 local SESSIONS_DIR = Paths.data() .. '/sessions'
@@ -28,15 +28,13 @@ SessionInfo.__index = SessionInfo
 --- session object
 ---@return SessionInfo: a new instance
 function SessionInfo.new(s)
-  Trace('SessionInfo.new(%s)', { s })
-
   local home = Env.home()
   local this = Table.combine(s, {
     dir_path = fmt('%s/%s', home, s.dir_path),
   })
 
   this = setmetatable(this, SessionInfo)
-  Trace('SessionInfo.new: dir_path=%s', { this.dir_path })
+  Trace('SessionInfo.new=%s', { this })
   return this
 end
 
@@ -64,6 +62,11 @@ function Session.exists()
 end
 
 
+local function filter_session()
+  return true
+end
+
+
 --- Gets existing session.
 ---
 ---@return SessionInfo[]: an array of sessions, if any exist
@@ -72,6 +75,7 @@ function Session.list()
 
   return Stream.new(sessions)
     :map(SessionInfo.new)
+    :filter(filter_session)
     :collect()
 end
 
@@ -81,23 +85,31 @@ end
 ---@param dir_path string: the absolute path of the dir that a session is tracking
 ---@param strict boolean|nil: optional, defaults to true; if true, raises an error if more
 --- than one matching session is found
----@return SessionInfo: the session w/ dir path == dir_path, if any
+---@return SessionInfo|nil: the session w/ dir path == dir_path, if any
 function Session.get(dir_path, strict)
   Debug('Session.get: fetching session for dir_path=%s', { dir_path })
   strict = Bool.or_default(strict, true)
 
   local matching = Stream.new(Session.list())
     :filter(function(s) return s.dir_path == dir_path end)
-    :filter(function(s) return s.branch == nil end)
+    :filter(filter_session)
     :collect()
 
   if strict and #matching > 1 then
     Err.raise('Found more than one matching session for dir=%s', dir_path)
   end
 
-  local session = (Table.unpack(matching)) or {}
-  Debug('Session.get: session=%s', { session })
+  local session = safeget(matching, 1)
+  Debug('Session.get: session=%s', { session or {} })
   return session
+end
+
+
+--- Gets the session for the cwd.
+---
+---@return SessionInfo|nil: the session for the cwd, if any
+function Session.current()
+  return Session.get(System.cwd())
 end
 
 
@@ -135,15 +147,19 @@ function Session.load(opts)
 end
 
 
---- Loads the "last" session.
+--- Loads the "last" session via the persisted.nvim plugin.
 function Session.load_last()
   Session.load({ last = true })
 end
 
 
---- Loads the session that maps to the cwd, if one exists.
+--- Loads the session that for the cwd, if one exists. If it doesn't, falls back to
+--- persisted.nvim plugin cwd session loading.
 function Session.load_for_cwd()
-  Session.load()
+  local current = Session.current()
+  local file_path = safeget(current, 'file_path')
+
+  Session.load({ session = file_path })
 end
 
 
@@ -175,7 +191,7 @@ end
 function Session.switch(session)
   Session.save()
   Buffer.closeall()
-  System.cd(session.dir_path, DirScope.TAB)
+  System.cd(session.dir_path)
   Session.load_session(session.file_path)
 end
 
