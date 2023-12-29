@@ -1,3 +1,4 @@
+local Lambda = require 'toolbox.functional.lambda'
 local Env    = require 'toolbox.system.env'
 local File   = require 'toolbox.system.file'
 local Path   = require 'toolbox.system.path'
@@ -5,7 +6,9 @@ local Buffer = require 'utils.api.vim.buffer'
 local Paths  = require 'utils.api.vim.path'
 local System = require 'utils.api.vim.system'
 
-local safeget  = Table.safeget
+local foreach = require('toolbox.utils.map').foreach
+
+local safeget = Table.safeget
 
 
 local SESSIONS_DIR = Paths.data() .. '/sessions'
@@ -22,7 +25,7 @@ local SESSIONS_DIR = Paths.data() .. '/sessions'
 local SessionInfo = {}
 SessionInfo.__index = SessionInfo
 
---- Constructor.
+--- Constructor
 ---
 ---@param s { name: string, file_path: string, dir_path: string }: a persisted.nvim
 --- session object
@@ -171,8 +174,16 @@ function Session.load_session(session)
 end
 
 
---- Saves the current session.
+--- Saves the current session after closing non-restorable buffers.
+---
+---@see Buffer.is_restorable
 function Session.save()
+  -- FIXME: figure out why this doesn't work
+  -- foreach(
+  --   Buffer.getall(Lambda.NOT(Buffer.is_restorable)),
+  --   Buffer.close
+  -- )
+
   api().save()
 
   local cwd = Path.basename(System.cwd())
