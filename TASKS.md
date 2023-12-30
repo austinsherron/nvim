@@ -133,13 +133,11 @@
 
 - [ ] Issue upgrading LuaSnip
 - [ ] Figure out why barbar diagnostics don't work
-- [ ] Fix aerial markdown issue
 - [ ] "Fix plugins extension" (?)
 - [ ] Disable cmdline auto-completion for specific commands (ls, for example)
 - [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
 - [ ] Bufresize should ignore certain window types (i.e.: nvimtree, diffview, side panel, etc.)
 - [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
-- [ ] Fix indent-blankline
 - [ ] Fix snippet loading
 - [ ] Fix statusline crowding in specific utility buffers (i.e.: nvimtree, diffview file tree, probably others)
 - [ ] Editorconfig line length constraints aren't being enforced
@@ -171,6 +169,8 @@
 - [x] Figure out why restoring sessions often causes barbar errors (switched session mgr from neovim-session-mgr to persisted.nvim + added custom session lifecycle mgmt)
 - [x] Check for nvim-surround treesitter dependency; if it has one, add it to TreesitterPlugin and make downstream changes
 - [x] Figure out cyclic import issue w/ logging
+- [x] Fix aerial markdown issue
+- [x] Fix indent-blankline
 
 ### Won't Do
 

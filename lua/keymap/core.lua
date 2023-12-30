@@ -1,6 +1,6 @@
 local KeyMapper = require 'utils.core.mapper'
 
-local HintFmttr = require('plugins.extensions.hydra').HintFormatter
+local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
 
 local KM = KeyMapper.new({ desc_prefix = 'core: ', nowait = true })

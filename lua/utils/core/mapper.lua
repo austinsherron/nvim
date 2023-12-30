@@ -5,7 +5,7 @@ local Lambda = require 'toolbox.functional.lambda'
 local Lazy   = require 'toolbox.utils.lazy'
 local Map    = require 'toolbox.utils.map'
 
-local Constants = require('plugins.extensions.hydra').Constants
+local Constants = require('plugins.extensions.interface.hydra').Constants
 local ternary   = require('toolbox.core.bool').ternary
 
 local filter  = Map.filter
@@ -204,13 +204,10 @@ end
 ---@private
 function KeyMapper:pop_options()
   if self.hydra ~= nil and not self.hydra_config:empty() then
-    print('popping hydra_config')
     self.hydra_config:pop()
   elseif self.hydra ~= nil then
-    print('resetting hydra')
     self.hydra = nil
   else
-    print('popping options')
     self.options:pop()
   end
 end

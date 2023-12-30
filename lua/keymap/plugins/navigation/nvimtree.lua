@@ -1,5 +1,5 @@
 local Flash     = require 'keymap.plugins.motion.flash'
-local NvTree    = require 'plugins.extensions.nvimtree'
+local NvTree    = require 'plugins.extensions.navigation.nvimtree'
 local KeyMapper = require 'utils.core.mapper'
 
 

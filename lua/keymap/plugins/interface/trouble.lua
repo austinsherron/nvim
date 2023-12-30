@@ -1,4 +1,4 @@
-local Hydra     = require 'plugins.extensions.hydra'
+local Hydra     = require 'plugins.extensions.interface.hydra'
 local KeyMapper = require 'utils.core.mapper'
 
 local HintFmttr = Hydra.HintFormatter

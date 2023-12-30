@@ -1,10 +1,10 @@
-local Project   = require 'plugins.extensions.project'
-local Session   = require 'plugins.extensions.session'
-local Telescope = require 'plugins.extensions.telescope'
+local Telescope = require 'plugins.extensions.search.telescope'
+local Project   = require 'plugins.extensions.workspace.project'
+local Session   = require 'plugins.extensions.workspace.session'
 local Builtins  = require 'telescope.builtin'
 local KeyMapper = require 'utils.core.mapper'
 
-local HintFmttr = require('plugins.extensions.hydra').HintFormatter
+local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
 
 local KM = KeyMapper.new({
