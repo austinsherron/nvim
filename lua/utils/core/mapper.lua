@@ -1,10 +1,15 @@
 local String = require 'toolbox.core.string'
 local Table  = require 'toolbox.core.table'
 local Stack  = require 'toolbox.extensions.stack'
+local Lambda = require 'toolbox.functional.lambda'
 local Lazy   = require 'toolbox.utils.lazy'
+local Map    = require 'toolbox.utils.map'
 
-local ternary = require('toolbox.core.bool').ternary
-local foreach = require('toolbox.utils.map').foreach
+local Constants = require('plugins.extensions.hydra').Constants
+local ternary   = require('toolbox.core.bool').ternary
+
+local filter  = Map.filter
+local foreach = Map.foreach
 
 local Hydra = Lazy.require('hydra')
 
@@ -12,10 +17,11 @@ local Hydra = Lazy.require('hydra')
 local DEFAULT_MODES = { 'n' }
 -- WARN: this is effectively duplicated in this file's unit tests
 local DEFAULT_OPTIONS = { noremap = true }
-local ESC_BINDING = {'<Esc>', nil, { desc = 'Exit' }}
+local DEFAULT_HYDRA_CONFIG = { invoke_on_body = true }
 
 ---@alias BindingOptions { desc_prefix: string|nil, desc: string|nil, nowait: boolean|nil, silent: boolean|nil }
 ---@alias Binding { lhs: string|nil, rhs: string|function|nil, options: BindingOptions|nil, modes: string[]|nil }
+---@alias ConfigRemovalOpts { count: integer|nil, purge: 'current'|'all'|nil }
 
 --- Type definition for a hydra binding.
 ---
@@ -36,6 +42,7 @@ local ESC_BINDING = {'<Esc>', nil, { desc = 'Exit' }}
 ---@class KeyMapper
 ---@field private hydra HydraBinding|nil
 ---@field private options Stack
+---@field private hydra_config Stack
 local KeyMapper = {}
 KeyMapper.__index = KeyMapper
 
@@ -45,8 +52,9 @@ KeyMapper.__index = KeyMapper
 ---@return KeyMapper: a new instance
 function KeyMapper.new(options)
   local this = {
-    hydrda  = nil,
-    options = Stack.new(),
+    hydrda       = nil,
+    options      = Stack.new(),
+    hydra_config = Stack.new(DEFAULT_HYDRA_CONFIG),
   }
   this.options:push(DEFAULT_OPTIONS)
 
@@ -65,7 +73,12 @@ end
 ---@param options BindingOptions: the options to use
 ---@return KeyMapper: self
 function KeyMapper:with(options)
-  self.options:push(options)
+  if self.hydra ~= nil then
+    self.hydra_config:push(options)
+  else
+    self.options:push(options)
+  end
+
   return self
 end
 
@@ -82,10 +95,9 @@ function KeyMapper:with_hydra(hydra)
 end
 
 
----@private
-function KeyMapper:get_merged_options(options)
+local function get_merged_options(options, stk)
   -- create a single array (stack, based on precedence) w/ all options
-  local all_options = Table.concat({ self.options:peekall(), { options or {}}})
+  local all_options = Table.concat({ stk:peekall(), { options or {}}})
   -- merge all options into single dict
   return Table.combine_many(all_options)
 end
@@ -94,7 +106,7 @@ end
 ---@private
 function KeyMapper:get_options(options)
   -- merge individual binding options, if any, w/ instance level options, if any
-  options = self:get_merged_options(options)
+  options = get_merged_options(options, self.options)
 
   if Table.nil_or_empty(options) then
     return {}
@@ -142,36 +154,46 @@ function KeyMapper:handle_esc(bindings)
     return
   end
 
-  Array.append(bindings, ESC_BINDING)
+  Array.append(bindings, Constants.ESC_BINDING)
+end
+
+
+---@private
+function KeyMapper:handle_fmttr(bindings)
+  local fmttr = Table.safeget(self.hydra, { 'config', 'hint', 'fmttr' })
+
+  if fmttr == nil then
+    return bindings
+  end
+
+  -- if there is a hint formatter, clear it out of the "hint" table before passing it
+  -- through to hydra, use it to create a formatted hint from bindings, and set each
+  -- binding's "desc" to false, to prevent hydra from including default hints
+  self.hydra.config.hint.fmttr = nil
+  self.hydra.hint = fmttr(bindings, Table.safeget(self.hydra, 'name'))
+
+  bindings = filter(bindings, Lambda.NOT(Lambda.EQUALS_THIS(Constants.VERTICAL_BREAK)))
+  foreach(bindings, function(b) Table.safeset(b, { 3, 'desc' }, false) end)
+
+  return bindings
 end
 
 
 ---@private
 ---@return HydraBinding
 function KeyMapper:get_hydra(bindings)
+  self.hydra.config = get_merged_options({}, self.hydra_config)
+
   self:handle_esc(bindings)
+  bindings = self:handle_fmttr(bindings)
 
-  local fmttr = Table.safeget(self.hydra, { 'config', 'hint', 'fmttr' })
-
-  if fmttr == nil then
-    Debug('No hydra formatter found')
-    return self.hydra
-  end
-
-  -- if there is a hint formatter, clear it out of the "hint" table before passing it
-  -- through to hydra, use it to create a formatted hint from bindings, and set each
-  -- binding's "desc" to false, to prevent hydra from including default hints
-  self.hydra.config.hint.fmtter = nil
-  self.hydra.hint = fmttr(bindings, Table.safeget(self.hydra, 'name'))
-
-  foreach(bindings, function(b) Table.safeset(b, { 3, 'desc' }, false) end)
-  return self.hydra
+  return Table.combine({ heads = bindings }, self.hydra)
 end
 
 
 ---@private
 function KeyMapper:do_hydra_binding(bindings)
-  local hydra = Table.combine({ heads = bindings }, self:get_hydra(bindings))
+  local hydra = self:get_hydra(bindings)
 
   Debug('Binding hydra=%s', { hydra })
   Hydra(hydra)
@@ -181,22 +203,53 @@ end
 
 ---@private
 function KeyMapper:pop_options()
-  if self.hydra ~= nil then
+  if self.hydra ~= nil and not self.hydra_config:empty() then
+    print('popping hydra_config')
+    self.hydra_config:pop()
+  elseif self.hydra ~= nil then
+    print('resetting hydra')
     self.hydra = nil
   else
+    print('popping options')
     self.options:pop()
   end
 end
 
 
---- Signals that we should no longer use the context most recently added from any source.
---- This includes options from the last call to KeyMapper.with or provided during
---- instantiation, or hydra binding context.
+---@private
+function KeyMapper:purge_context(purge)
+  if (purge == 'current' and self.hydra == nil) or purge == 'all' then
+    self.options = Stack.new()
+  end
+
+  if (purge == 'current' and self.hydra ~= nil) or purge == 'all' then
+    self.hydra = nil
+    self.hydra_config = Stack.new()
+  end
+
+  return self
+end
+
+
+--- Removes contextual configuration based on the provided context. Config is removed from
+--- the instance in LIFO order. Configuration from all sources is eligible for removal,
+--- including config added during instantiation, via KeyMapper.with, or via hydra binding.
+
+--- TODO: test
 ---
----@param count integer|nil: optional, defaults to 1; the number of contexts to remove
+---@param opts ConfigRemovalOpts|nil: optional, defaults to { count = 1 }; parameterizes
+--- config removal; count specifies the number of contexts to remove; purge indicates that
+--- either the 'current' context's configuration should be purged (i.e.: all of vim or all
+--- of hydra), or that 'all' contextual config from all sources should be purged
 ---@return KeyMapper: self
-function KeyMapper:done(count)
-  count = count or 1
+function KeyMapper:done(opts)
+  opts = opts or { count = 1 }
+
+  if opts.purge ~= nil then
+    return self:purge_context(opts.purge)
+  end
+
+  local count = opts.count or 1
 
   for _ = count - 1, 0, -1 do
     self:pop_options()
@@ -242,15 +295,6 @@ end
 ---@see KeyMapper.bind_one for argument descriptions
 function KeyMapper.quick_bind(lhs, rhs, options, modes)
   KeyMapper.new():bind_one(lhs, rhs, options, modes)
-end
-
-
---- Checks if binding == the escape binding.
----
----@param binding Binding: the binding to check
----@return boolean: true if binding == the escape binding, false otherwise
-function KeyMapper.is_esc_binding(binding)
-  return Array.equals(binding, ESC_BINDING)
 end
 
 

@@ -1,27 +1,25 @@
+local Hydra     = require 'plugins.extensions.hydra'
 local Test      = require 'utils.api.test'
 local KeyMapper = require 'utils.core.mapper'
 
+local Constants = Hydra.Constants
+local HintFmttr = Hydra.HintFormatter
 
 local KM = KeyMapper.new({ nowait = true })
 
 -- interactions ----------------------------------------------------------------
 
-KM:with({ desc_prefix = 'neotest: ' })
+KM:with_hydra({ name = '🚨 Neotest', body = "'t" })
+  :with({ hint = HintFmttr.middle_right_1(), color = 'pink' })
   :bind({
-    { '[t', Test.prev_failed, { desc = 'Previous failed test' }},
-    { ']t', Test.next_failed, { desc = 'Next failed test'     }},
-}):done()
-
-KM:with({ desc_prefix = 'neotest (view): ' })
-  :bind({
-    { "'to", Test.open_output,      { desc = 'open output'    }},
-    { "'ts", Test.display_summary,  { desc = 'toggle summary' }},
-}):done()
-
-KM:with({ desc_prefix = 'neotest (run): ' })
-  :bind({
-    { "'tf", Test.run_current_file,  { desc = 'run test(s) in current file' }},
-    { "'tl", Test.run_last,          { desc = 'run last test(s)'            }},
-    { "'tn", Test.run_nearest,       { desc = 'run nearest test(s)'         }},
-}):done()
+    { 'K', Test.prev_failed,      { desc = 'Previous failed test'        }},
+    { 'J', Test.next_failed,      { desc = 'Next failed test'            }},
+    Constants.VERTICAL_BREAK,
+    { 'o', Test.open_output,      { desc = 'open output'                 }},
+    { 's', Test.display_summary,  { desc = 'toggle summary'              }},
+    Constants.VERTICAL_BREAK,
+    { 'f', Test.run_current_file, { desc = 'run test(s) in current file' }},
+    { 'l', Test.run_last,         { desc = 'run last test(s)'            }},
+    { 'n', Test.run_nearest,      { desc = 'run nearest test(s)'         }},
+  }):done({ purge = 'current' })
 
