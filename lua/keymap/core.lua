@@ -1,5 +1,7 @@
 local KeyMapper = require 'utils.core.mapper'
 
+local HintFmttr = require('plugins.extensions.hydra').HintFormatter
+
 
 local KM = KeyMapper.new({ desc_prefix = 'core: ', nowait = true })
 
@@ -28,6 +30,7 @@ KM:bind({
 
 KM:bind({
   { '<C-N><C-N>', ':set invrelativenumber<CR>', { desc = 'toggle relative line #' }},
+  { '<leader>co', ':copen<CR>',                 { desc = 'open quickfix window'   }},
   { '<leader>cx', ':cclose<CR>',                { desc = 'close quickfix window'  }},
   { '<leader>v',  '<C-v>',                      { desc = 'enter column edit mode' }},
 })
@@ -60,16 +63,18 @@ KM:bind({
 })
 
 -- resize
+KM:with_hydra({ name = '⬅⬆⬇➡ Resize', body = '<leader>R' })
+KM:with_hydra({ config = { hint = HintFmttr.middle_right_1() }})
 KM:bind({
-  { '<C-r>j', ':resize -2<CR>',           { desc = 'resize "up" 2'     }},
-  { '<C-r>k', ':resize +2<CR>',           { desc = 'resize "down" 2'   }},
-  { '<C-r>l', ':vertical resize +2<CR>',  { desc = 'resize "left" 2'   }},
-  { '<C-r>h', ':vertical resize -2<CR>',  { desc = 'resize "right" 2'  }},
-  { '<C-r>J', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
-  { '<C-r>K', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
-  { '<C-r>L', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
-  { '<C-r>H', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
-})
+  { 'j', ':resize -2<CR>',           { desc = 'resize "up" 2'     }},
+  { 'k', ':resize +2<CR>',           { desc = 'resize "down" 2'   }},
+  { 'l', ':vertical resize +2<CR>',  { desc = 'resize "left" 2'   }},
+  { 'h', ':vertical resize -2<CR>',  { desc = 'resize "right" 2'  }},
+  { 'J', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
+  { 'K', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
+  { 'L', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
+  { 'H', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
+}):done()
 
 -- spellcheck ------------------------------------------------------------------
 

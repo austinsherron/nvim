@@ -29,6 +29,7 @@ app2
 AppImage
 AppImageLauncher
 args
+ArgumentTypeError
 Arial
 ArrayHandler
 ArrayToDictItemMapper
@@ -68,6 +69,7 @@ autogroup
 automations
 autopairs
 AutoPairs
+autosave
 autosession
 AWS
 backends
@@ -110,6 +112,7 @@ buf
 BufferClose
 BufferCloseAllButCurrent
 BufferGoto
+BufferInfo
 BufferLast
 bufferline
 BufferLineCloseLeft
@@ -132,6 +135,7 @@ buflisted
 BufNewFile
 bufnr
 bufnum
+bufopts
 BufRead
 bufresize
 bufs
@@ -181,6 +185,8 @@ CmpKM
 CmpSrc
 CodeContext
 codicons
+Collatz
+colnums
 colordiff
 colorizer
 colorscheme
@@ -376,6 +382,7 @@ flatmap
 flatpak
 Flatpak
 fmt
+fmttr
 fn
 FnNodeCallback
 FnSnippets
@@ -402,7 +409,9 @@ functionality
 fzf
 gcp
 GCP
+geeksforgeeks
 GenericNodes
+getall
 getcmdline
 getcwd
 geti2p
@@ -446,6 +455,8 @@ hardcoded
 hb4b
 hcl
 hg
+HintFormatter
+HintMenuFormatter
 hoc
 hostname
 HOSTNAME
@@ -456,6 +467,8 @@ html
 htop
 https
 hui
+HydraBinding
+HydraHint
 hz
 i2p
 I2P
@@ -505,6 +518,7 @@ Iterable
 iterables
 iteratively
 iterator's
+iter's
 IterUtils
 itsfoss
 javascript
@@ -636,6 +650,7 @@ MasonUpdate
 maxdepth
 MaybeCallable
 md
+MenuFormatter
 menuone
 mergeleft
 metafield
@@ -714,6 +729,7 @@ nothin
 nowait
 nui
 num
+numcols
 numhl
 nvar
 nvim
@@ -807,6 +823,9 @@ printf
 privatelink
 profiler
 programmatically
+progressbar
+progressbar2
+ProgressBarThreadPoolExecutor
 ProjectContext
 ProjectsExt
 prs
@@ -879,6 +898,7 @@ reqs
 require
 resize
 resizing
+restorable
 restow
 return
 retval
@@ -1063,6 +1083,7 @@ th
 TheAssassin
 there'd
 ThisThenLog
+ThreadPoolExecutor
 timeshift
 timestamp
 timewarrior
@@ -1186,9 +1207,11 @@ Wansmer
 WantedBy
 warnQuietly
 WarnQuietly
+webdriver
 Wenxuan
 wget
 whatsapp
+WhichKey
 whitespace
 whois
 whoopsie
