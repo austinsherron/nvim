@@ -11,6 +11,7 @@ local Barbar    = require 'plugins.config.interface.barbar'
 local Lightbulb = require 'plugins.config.interface.lightbulb'
 local Lualine   = require 'plugins.config.interface.lualine'
 local Sidebar   = require 'plugins.config.interface.sidebar'
+local Trouble   = require 'plugins.config.interface.trouble'
 local Priority  = require 'utils.plugins.priority'
 
 local Plugins = require('utils.plugins.plugin').plugins
@@ -85,9 +86,9 @@ return Plugins({
   ---- notify: pretty notifications
   {
     'rcarriga/nvim-notify',
+    lazy         = false,
     dependencies = { 'MunifTanjim/nui.nvim' },
 
-    lazy = false,
     -- we load this second since we want nvim-notify as early as possible; this comes after
     -- nui.nvim since that is a dependency of this
     priority = Priority.SECOND,
@@ -105,6 +106,25 @@ return Plugins({
     config = function(_, opts)
       require('sidebar-nvim').setup(opts)
     end
+  },
+  ---- trouble.nvim: fancy list for diagnostics, etc.
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts         = Trouble.opts(),
+
+    config = function(_, opts)
+      require('trouble').setup(opts)
+    end,
+  },
+  ---- todo-comments: highlight, list, search "TODO", "FIXME", etc. type comments
+  {
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+
+    config = function(_, opts)
+      require('todo-comments').setup(opts)
+    end,
   },
   ---- undotree: visualize a file/buffer's change history
   { 'mbbill/undotree' },

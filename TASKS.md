@@ -144,6 +144,7 @@
 - [ ] Fix statusline crowding in specific utility buffers (i.e.: nvimtree, diffview file tree, probably others)
 - [ ] Editorconfig line length constraints aren't being enforced
 - [ ] Fix issues w/ duplicate sessions (one w/ branch + one w/o)
+- [ ] Fix session save logic that closes non-restorable buffers
 
 ### Completed
 

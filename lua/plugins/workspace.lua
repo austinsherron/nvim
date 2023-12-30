@@ -33,5 +33,14 @@ return Plugins({
       require('project_nvim').setup(opts)
     end
   },
+  ---- scope: enhanced buffer + tab workflows
+  {
+    'tiagovla/scope.nvim',
+    opts = {},
+
+    config = function(_, opts)
+      require('scope').setup(opts)
+    end
+  },
 })
 

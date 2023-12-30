@@ -64,26 +64,26 @@ KM:bind({
 
 -- resize
 KM:with_hydra({ name = '⬅⬆⬇➡ Resize', body = '<leader>R' })
-KM:with_hydra({ config = { hint = HintFmttr.middle_right_1() }})
-KM:bind({
-  { 'j', ':resize -2<CR>',           { desc = 'resize "up" 2'     }},
-  { 'k', ':resize +2<CR>',           { desc = 'resize "down" 2'   }},
-  { 'l', ':vertical resize +2<CR>',  { desc = 'resize "left" 2'   }},
-  { 'h', ':vertical resize -2<CR>',  { desc = 'resize "right" 2'  }},
-  { 'J', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
-  { 'K', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
-  { 'L', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
-  { 'H', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
-}):done()
+  :with({ hint = HintFmttr.middle_right_1() })
+  :bind({
+    { 'j', ':resize -2<CR>',           { desc = 'resize "up" 2'     }},
+    { 'k', ':resize +2<CR>',           { desc = 'resize "down" 2'   }},
+    { 'l', ':vertical resize +2<CR>',  { desc = 'resize "left" 2'   }},
+    { 'h', ':vertical resize -2<CR>',  { desc = 'resize "right" 2'  }},
+    { 'J', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
+    { 'K', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
+    { 'L', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
+    { 'H', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
+  }):done({ purge = 'current' })
 
 -- spellcheck ------------------------------------------------------------------
 
 KM:with({ desc_prefix = 'spelling: ' })
-KM:bind({
-  { '<leader>da', 'zg',  { desc = 'add word to dict'                }},
-  { '<leader>dr', 'zug', { desc = 'remove word from dict'           }},
-  ---@note: overridden in handled in keymap/plugins/telescope.lua
-  -- FIXME: modifications to key mapper that added support for 'ignore' were totally fucked
-  -- { '<leader>dr', 'zg',  { desc = 'show suggestions', ignore = true }},
-}):done()
+  :bind({
+    { '<leader>da', 'zg',  { desc = 'add word to dict'                }},
+    { '<leader>dr', 'zug', { desc = 'remove word from dict'           }},
+    ---@note: overridden in handled in keymap/plugins/telescope.lua
+    -- FIXME: modifications to key mapper that added support for 'ignore' were totally fucked
+    -- { '<leader>dr', 'zg',  { desc = 'show suggestions', ignore = true }},
+  }):done()
 

@@ -191,16 +191,43 @@ function Telescope.make_selection_action(confirm, action, after)
 end
 
 
-local function make_search_packages_action()
+--- FIXME: this isn't working for some reason
+local function make_packages_live_grep_action()
   return Telescope.make_new_action(
     function(selection)
       local plugin_path = selection[1]
 
-      builtins.find_files({
+      builtins.live_grep({
         cwd          = plugin_path,
-        prompt_title = 'Search ' .. Path.basename(plugin_path) .. ' plugin files'
+        prompt_title = 'Live Grep in ' .. Path.basename(plugin_path) .. ' plugin files'
       })
     end
+  )
+end
+
+
+local function search_package_files_action(selection)
+  local plugin_path = selection[1]
+
+  builtins.find_files({
+    cwd          = plugin_path,
+    prompt_title = 'Search ' .. Path.basename(plugin_path) .. ' plugin files'
+  })
+end
+
+
+local function make_keymap()
+  return {
+    { 'i', '<C-w>', make_packages_live_grep_action() },
+    { 'n', 'fw',    make_packages_live_grep_action() },
+  }
+end
+
+
+local function make_attachment_action()
+  return Telescope.make_new_action(
+    Safe.ify(search_package_files_action),
+    make_keymap()
   )
 end
 
@@ -210,7 +237,7 @@ function Telescope.search_packages()
   local find_command = { 'find', Env.nvundle(), '-maxdepth',  '1', '-type', 'd' }
 
   builtins.find_files({
-    attach_mappings = make_search_packages_action(),
+    attach_mappings = make_attachment_action(),
     find_command    = find_command,
     path_display    = function(_, path) return Path.basename(path) end,
     prompt_title    = 'Search Plugins',
