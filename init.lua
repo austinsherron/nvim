@@ -14,7 +14,7 @@ Safe.require 'core.cmd.auto.before'    -- some cmds should load before plugins
 ---- plugins -------------------------------------------------------------------
 
 -- load plugins as early as reasonably possible
-Safe.require('utils.plugins.pluginmanager', function(m) m.init('plugins') end)
+Safe.require 'plugins'
 
 ---- commands, post ------------------------------------------------------------
 

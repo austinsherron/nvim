@@ -1,4 +1,4 @@
-local Hydra     = require 'plugins.extensions.hydra'
+local Hydra     = require 'plugins.extensions.interface.hydra'
 local Test      = require 'utils.api.test'
 local KeyMapper = require 'utils.core.mapper'
 

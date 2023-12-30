@@ -1,4 +1,4 @@
-local Telescope  = require 'plugins.extensions.telescope'
+local Telescope  = require 'plugins.extensions.search.telescope'
 local SessionApi = require 'utils.api.session'
 local Confirm    = require 'utils.api.vim.confirm'
 

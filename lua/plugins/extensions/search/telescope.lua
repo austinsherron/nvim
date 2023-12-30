@@ -1,4 +1,4 @@
-local NvTree = require 'plugins.extensions.nvimtree'
+local NvTree = require 'plugins.extensions.navigation.nvimtree'
 local Env    = require 'toolbox.system.env'
 local Path   = require 'toolbox.system.path'
 local TMerge = require 'utils.api.vim.tablemerge'

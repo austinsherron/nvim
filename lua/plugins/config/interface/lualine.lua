@@ -1,4 +1,4 @@
-local Custom = require 'plugins.extensions.lualine'
+local Custom = require 'plugins.extensions.interface.lualine'
 
 local navic = require 'nvim-navic'
 

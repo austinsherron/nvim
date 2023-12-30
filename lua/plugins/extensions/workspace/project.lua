@@ -1,4 +1,4 @@
-local Telescope  = require 'plugins.extensions.telescope'
+local Telescope  = require 'plugins.extensions.search.telescope'
 local ProjectApi = require 'utils.api.project'
 local Session    = require 'utils.api.session'
 
