@@ -60,6 +60,10 @@ return Plugins({
   },
   ---- fzf.vim: collection of fzf vim integrations/utilities
   { 'junegunn/fzf.vim' },
+  ---- hydra: custom shortcut repetitions, sub-modes, and sub-menus
+  ---- TODO: continue to convert specific key binding groups to hydra menus (i.e.: git,
+  ----       lsp, misc tools, etc.)
+  { 'anuvyklack/hydra.nvim' },
   ---- lightbulb: ide style 💡 to mark code actions
   {
     'kosayoda/nvim-lightbulb',

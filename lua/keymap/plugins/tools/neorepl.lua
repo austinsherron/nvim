@@ -6,9 +6,9 @@ local KM = KeyMapper.new({ desc_prefix = 'neorepl: ', silent = true, nowait = tr
 -- interactions ----------------------------------------------------------------
 
 KM:bind({
-    { '<leader>Rf', ':Repl e<CR>',      { desc = 'open'           }},
-    { '<leader>Rh', ':Repl split<CR>',  { desc = 'open in split'  }},
-    { '<leader>Rv', ':Repl vsplit<CR>', { desc = 'open in vsplit' }},
+    { '<leader>rf', ':Repl e<CR>',      { desc = 'open'           }},
+    { '<leader>rh', ':Repl split<CR>',  { desc = 'open in split'  }},
+    { '<leader>rv', ':Repl vsplit<CR>', { desc = 'open in vsplit' }},
 }):done()
 
 -- on_init ---------------------------------------------------------------------

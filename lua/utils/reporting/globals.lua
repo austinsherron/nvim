@@ -2,8 +2,7 @@ local Lazy = require 'toolbox.utils.lazy'
 
 
 -- globally accessible, lazy-loaded nvim logger instance
----@type fun(): l: NvimLogger
-GetLogger = Lazy.require('utils.reporting.logger')
+GetLogger = function() return Lazy.require('utils.reporting.logger') end
 
 -- global logging helpers
 function Trace(...) GetLogger():trace(...) end
