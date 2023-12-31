@@ -13,7 +13,7 @@ local function download(dst_path)
   local repo = Lazy.git_path()
 
   Git.clone(repo, dst_path, { filter = 'blob:none', branch = 'stable' })
-  InfoQuietly('Successfully downloaded %s', { repo })
+  Debug('Successfully downloaded %s', { repo })
 end
 
 --- Initializes the neovim plugin manager.
@@ -22,11 +22,11 @@ end
 --- importable source (file or directory) of plugin definitions, or a table that already contains
 --- plugin definitions.
 function PluginMgr.init(plugins)
-  InfoQuietly('Initializing plugin manager')
+  Debug('Initializing plugin manager')
   local lazy_path = Lazy.lazy_path()
 
   if not System.stat(lazy_path) then
-    InfoQuietly('Plugin manager not found at=%s; fetching', { lazy_path })
+    Warn('Plugin manager not found at=%s; fetching', { lazy_path })
     download(lazy_path)
   end
 

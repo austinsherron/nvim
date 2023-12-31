@@ -3,17 +3,18 @@ local Lazy = require 'toolbox.utils.lazy'
 local telescope = Lazy.require('telescope')
 
 
-local PICKERS = {
-  buffers = {
-    theme = 'ivy',
-  },
-  spell_suggest = {
-    theme = 'cursor',
-  },
+local DEFAULTS = {
+  layout_strategy = 'vertical',
 }
 
+-- TODO: configure these individually based on usability
+local PICKERS = {
+  buffers       = { theme = 'ivy'      },
+  spell_suggest = { theme = 'cursor'   },
+}
+
+-- TODO: configure these individually based on their setup params
 local EXTENSIONS = {
-  -- FIXME: can't actually figure how how to make config here work
   aerial    = {},
   emoji     = {},
   frecency  = {},
@@ -21,16 +22,11 @@ local EXTENSIONS = {
   persisted = {},
   projects  = {},
   scope     = {},
-  undo      = {
-    -- side_by_side    = true,
-    -- layout_strategy = 'vertical',
-    -- layout_config   = {
-    --   preview_height = 0.3,
-    -- },
-  },
+  undo      = {},
 }
 
 local OPTS = {
+  defaults   = DEFAULTS,
   pickers    = PICKERS,
   extensions = EXTENSIONS,
 }

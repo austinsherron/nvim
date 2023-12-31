@@ -214,6 +214,7 @@ cond
 conf
 config
 configmgr
+ConfigRemovalOpts
 configs
 ConfigStrategy
 ConfigStrategyIdentifier
@@ -592,6 +593,7 @@ ln
 load_balancers
 lockfile
 Lockscreen
+loclist
 LOG_FILE_BASE
 LogFn
 LogFormatter
@@ -1003,6 +1005,7 @@ SrcLabel
 SrcPriority
 src's
 StackHandler
+stackoverflow
 starbook
 StarBook
 starship
@@ -1067,6 +1070,7 @@ telescearch
 TelescopeAttachBindings
 TelescopeKeyBinding
 TelescopeKeyMapper
+TelescopeUtils
 TempFloatingWindow
 TemProject
 terraform
@@ -1181,6 +1185,7 @@ v4l
 vals
 ValueError
 vararg
+var's
 Veeva
 Venmo
 Ventura
@@ -1274,4 +1279,3 @@ zoxide
 zquestz
 zsh
 Zsh
-ConfigRemovalOpts

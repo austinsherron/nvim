@@ -10,7 +10,7 @@ local NvimTree = require 'plugins.config.navigation.nvimtree'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('navigation', {
   ---- nnn: file explorer w/ what seems like a cult-ish following
 
   ---- note: didn't love the nnn interface; perhaps I need to use it a bit more

@@ -102,6 +102,8 @@
 - [ ] Add ability to make file "un-executable" from nvim-tree
 - [ ] Configure auto-completion support for neorepl
 - [ ] Add barbar + session integration so buffers are restored in correct order
+- [ ] Integrate scopes.nvim w/ session manager
+- [ ] Configure layouts for individual telescope pickers, based on usability, and extensions, to the extent possible
 
 ### Completed
 
@@ -143,6 +145,7 @@
 - [ ] Editorconfig line length constraints aren't being enforced
 - [ ] Fix issues w/ duplicate sessions (one w/ branch + one w/o)
 - [ ] Fix session save logic that closes non-restorable buffers
+- [ ] Figure out why session seem not to save sometimes, or don't save w/ the right cwd
 
 ### Completed
 
@@ -171,6 +174,7 @@
 - [x] Figure out cyclic import issue w/ logging
 - [x] Fix aerial markdown issue
 - [x] Fix indent-blankline
+- [x] Figure out why telescope layout config params seem to not be respected sometimes (as it turns out, this seems to be an issues exclusively for extensions; unfortunately, extensions don't make guarantees about their configuration params, and so may not respect the same layout config options the builtin pickers do)
 
 ### Won't Do
 

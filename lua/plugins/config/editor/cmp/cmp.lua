@@ -29,7 +29,7 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.base(cmp)
-  InfoQuietly('Configuring nvim-cmp')
+  Debug('Configuring nvim-cmp base')
 
   cmp.setup({
     formatting = Cmp.formatting(),
@@ -44,6 +44,8 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.filetype(cmp)
+  Debug('Configuring nvim-cmp for filetypes')
+
   cmp.setup.filetype('gitcommit', {
     formatting = Cmp.formatting(),
     mapping    = CmpKM.make_mapping(),
@@ -52,7 +54,7 @@ function Cmp.filetype(cmp)
 end
 
 
--- TODO: this doesn't seem to work they way I want it to (or think/thought it should)
+-- FIXME: this doesn't seem to work they way I want it to (or think/thought it should)
 local function should_complete_cmdline()
   local cmd = Editor.cmdline()
   local firstword = String.firstword(cmd)
@@ -70,6 +72,8 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.cmdline(cmp)
+  Debug('Configuring nvim-cmp for cmdline')
+
   cmp.setup.cmdline(':', {
     enabled = should_complete_cmdline,
     mapping = cmp.mapping.preset.cmdline(),
@@ -82,6 +86,8 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.autopairs(cmp)
+  Debug('Configuring nvim-cmp for autopairs')
+
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
   cmp.event:on(
@@ -94,6 +100,8 @@ end
 --- Primary entry point to configuring nvim-cmp.
 ---@note: lsp cmp setup happens in nvim:lua/lsp/init.lua
 function Cmp.config()
+  InfoQuietly('Configuring nvim-cmp')
+
   local cmp = require 'cmp'
 
   Cmp.base(cmp)

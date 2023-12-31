@@ -16,7 +16,7 @@ local Priority    = require 'utils.plugins.priority'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('appearance', {
   ---- buf-resize: intuitively resize buffers when terminal dimensions change
   {
     'kwkarlwang/bufresize.nvim',

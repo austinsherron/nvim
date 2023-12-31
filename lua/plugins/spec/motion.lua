@@ -13,7 +13,7 @@ local NvimTmuxNav = require 'plugins.config.motion.nvimtmuxnav'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('motion', {
   --- flash: another "fast movement" plugin; a replacement for leap? (yes)
   {
     'folke/flash.nvim',

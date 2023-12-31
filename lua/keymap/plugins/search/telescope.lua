@@ -22,7 +22,7 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 'b',  Builtins.buffers,                    { desc = 'search buffers'                  }},
     { 'C',  Builtins.colorscheme,                { desc = 'search colorschemes'             }},
     { 'c',  '<cmd>Telescope aerial<CR>',         { desc = 'search code symbols'             }},
-    { 'd',  Builtins.diagnostics,                { desc = 'search code symbols'             }},
+    { 'd',  Builtins.diagnostics,                { desc = 'search diagnostics'              }},
     { 'e',  '<cmd>Telescope emoji<CR>',          { desc = 'search emojis'                   }},
     { 'F',  Telescope.contextual_find_all_files, { desc = 'search all files (hidden, etc.)' }},
     { 'f',  Telescope.contextual_find_files,     { desc = 'search files'                    }},

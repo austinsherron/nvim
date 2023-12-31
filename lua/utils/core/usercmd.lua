@@ -138,7 +138,7 @@ function UserCommand:create(config)
     create_cmd(config)
   end
 
-  InfoQuietly('Created usercmd (name=%s)', { config.name })
+  Debug('Created usercmd (name=%s)', { config.name })
 end
 
 
@@ -163,7 +163,7 @@ function UserCommand:delete(config)
     vim.api.nvim_del_user_command(config.name)
   end
 
-  InfoQuietly('Deleted usercmd (name=%s)', { config.name })
+  Debug('Deleted usercmd (name=%s)', { config.name })
 end
 
 return UserCommand

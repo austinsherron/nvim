@@ -16,7 +16,7 @@ local Plugins = require('utils.plugins.plugin').plugins
 local TsPlugin = Treesitter.TreesitterPlugin
 
 
-return Plugins({
+return Plugins('editor', {
   ---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
   {
     'windwp/nvim-autopairs',

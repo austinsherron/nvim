@@ -146,7 +146,7 @@ function Session.load(opts)
   Buffer.closeall()
   api().load(opts)
 
-  InfoQuietly(get_load_log_msg(opts))
+  Debug(get_load_log_msg(opts))
 end
 
 

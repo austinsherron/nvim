@@ -10,7 +10,7 @@ local Telescope = require 'plugins.config.search.telescope'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('search', {
   ---- searchbox: ui/ux enhancements for standard search/replace
   {
     'VonHeikemen/searchbox.nvim',
