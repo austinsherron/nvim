@@ -15,8 +15,8 @@ local function configure_if_necessary(cs, config)
     return cs
   end
 
-  InfoQuietly('Configuring colorscheme="%s"', { config.pkg })
-  Debug('Colorscheme opts=%s', { config.opts })
+  Debug('Configuring colorscheme="%s"', { config.pkg })
+  Trace('Colorscheme opts=%s', { config.opts })
 
   cs.opts = config.opts
   cs.config = function(_, opts)
@@ -36,7 +36,7 @@ end
 --- plugin will be disabled
 ---@return table: a lazy.nvim representation of a colorscheme plugin
 function ColorScheme(git_path, config, enabled)
-  InfoQuietly('Initializing colorscheme="%s"', { git_path })
+  Debug('Initializing colorscheme="%s"', { git_path })
 
   enabled = Bool.or_default(enabled, true)
 

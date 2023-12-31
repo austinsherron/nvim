@@ -19,7 +19,7 @@ local Plugins = require('utils.plugins.plugin').plugins
 local TsPlugin = Treesitter.TreesitterPlugin
 
 
-return Plugins({
+return Plugins('code', {
   ---- aerial: code outlines
   {
     'stevearc/aerial.nvim',

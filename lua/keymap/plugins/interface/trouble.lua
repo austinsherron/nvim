@@ -1,7 +1,6 @@
-local Hydra     = require 'plugins.extensions.interface.hydra'
 local KeyMapper = require 'utils.core.mapper'
 
-local HintFmttr = Hydra.HintFormatter
+local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
 local trouble = require 'trouble'
 
@@ -26,18 +25,19 @@ local KM = KeyMapper.new({
 
 -- interactions ----------------------------------------------------------------
 
-KM:bind_one('<leader>tr', open(), { desc = 'open default mode' })
+KM:bind_one('<leader>T', open(), { desc = 'open default mode' })
 
-KM:with_hydra({ name = '🚦 Trouble', body = '<leader>T' })
+KM:with_hydra({ name = '🚦 Trouble', body = '<leader>tr' })
   :with({ hint = HintFmttr.bottom_2(), color = 'blue' })
   :bind({
     { 'o',       open(),                        { desc = 'open default mode'               }},
     { 'w',       open('workspace_diagnostics'), { desc = 'open workspace diagnostics mode' }},
-    { 'd',       open('document_diagnostics'),  { desc = 'open document diagnostics mode'  }},
+    { 'f',       open('document_diagnostics'),  { desc = 'open document diagnostics mode'  }},
     { 't',       open('todo'),                  { desc = 'open todo comments mode'         }},
     { 'q',       open('quickfix'),              { desc = 'open quickfix mode'              }},
-    { 'l',       open('loclist'),               { desc = 'open loclist mode'               }},
-    { 'r',       refresh(),                     { desc = 'refresh'                         }},
+    { 'u',       open('lsp_references'),        { desc = 'open lsp references mode'        }},
+    { 'd',       open('lsp_definitions'),       { desc = 'open lsp definitions mode'       }},
+    { 'R',       refresh(),                     { desc = 'refresh'                         }},
     { 'x',       close(),                       { desc = 'close'                           }},
     { '<Enter>', open(),                        { desc = 'open default mode'               }},
   }):done({ purge = 'current' })

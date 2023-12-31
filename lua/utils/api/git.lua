@@ -121,7 +121,7 @@ function Config.set(key, value, section, scope)
   section = section or 'core'
   scope = scope or 'global'
 
-  InfoQuietly(
+  Debug(
     'Git.Config.set: setting %s.%s to %s (scope=%s)',
     { section, key, value, scope }
   )

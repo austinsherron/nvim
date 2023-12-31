@@ -17,7 +17,7 @@ local Priority  = require 'utils.plugins.priority'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('interface', {
   ---- alpha: landing page
   {
     'goolord/alpha-nvim',

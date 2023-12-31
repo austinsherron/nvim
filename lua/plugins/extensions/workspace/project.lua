@@ -1,4 +1,4 @@
-local Telescope  = require 'plugins.extensions.search.telescope'
+local Telescope  = require 'plugins.extensions.search.telescope.utils'
 local ProjectApi = require 'utils.api.project'
 local Session    = require 'utils.api.session'
 
@@ -21,7 +21,7 @@ local function default_action(selection)
   local session = Session.get(project_dir)
 
   if session == nil then
-    Info('No project session found; switching to project=%s', { project_dir })
+    Warn('No project session found; switching to project=%s', { project_dir })
     return ProjectApi.switch(project_dir)
   end
 

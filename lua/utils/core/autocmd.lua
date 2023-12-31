@@ -85,7 +85,7 @@ end
 ---@return AutoCommand: self
 function AutoCommand:withGroup(group, options)
   self.group = create_or_get_group(group, options)
-  InfoQuietly('Created augroup="%s"', { group })
+  Debug('Created augroup="%s"', { group })
   return self
 end
 
@@ -211,7 +211,7 @@ function AutoCommand:create(config)
   local id = Safe.call(function() return self:_create(config) end)
 
   if id ~= nil then
-    InfoQuietly(self:create_log_msg(id))
+    Debug(self:create_log_msg(id))
   end
 
   return id
@@ -239,7 +239,7 @@ function AutoCommand:delete(config)
   local id = Safe.call(function() return self:_delete(config) end)
 
   if id ~= nil then
-    InfoQuietly('Deleted autocmd (id=%s)', { id })
+    Debug('Deleted autocmd (id=%s)', { id })
   end
 
   return id

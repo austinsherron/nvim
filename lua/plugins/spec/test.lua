@@ -13,7 +13,7 @@ local Plugins = require('utils.plugins.plugin').plugins
 local TsPlugin = Treesitter.TreesitterPlugin
 
 
-return Plugins({
+return Plugins('test', {
   --- neotest: new-school nvim test runner/adapter
   {
     'nvim-neotest/neotest',

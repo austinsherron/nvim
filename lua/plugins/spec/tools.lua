@@ -16,7 +16,7 @@ local Plugins = require('utils.plugins.plugin').plugins
 local TsPlugin = Treesitter.TreesitterPlugin
 
 
-return Plugins({
+return Plugins('tools', {
   ---- 1password: integrates 1pw w/ nvim
   {
     'mrjones2014/op.nvim',

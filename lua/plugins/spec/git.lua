@@ -13,7 +13,7 @@ local Neogit   = require 'plugins.config.git.neogit'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('git', {
   ---- diff view: for looking at diffs...
   {
     'sindrets/diffview.nvim',

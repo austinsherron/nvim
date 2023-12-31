@@ -13,7 +13,7 @@ local Project    = require 'plugins.config.workspace.project'
 local Plugins = require('utils.plugins.plugin').plugins
 
 
-return Plugins({
+return Plugins('workspace', {
   ---- persisted: session manager forked from persistence.nvim (from the legendary folke)
   {
     'olimorris/persisted.nvim',

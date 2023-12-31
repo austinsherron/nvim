@@ -47,8 +47,7 @@ function CmpSrc:__call()
   -- hard coding this for now
   config.max_item_count = 5
 
-  InfoQuietly('CmpSrc: configuring nvim-cmp src=%s', { config.name })
-  Debug('CmpSrc: full config for nvim-cmp src=%s', { config })
+  Trace('CmpSrc: configuring nvim-cmp src=%s, config=%s', { config.name, config })
 
   return config
 end

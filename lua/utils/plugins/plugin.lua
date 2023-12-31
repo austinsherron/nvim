@@ -18,7 +18,7 @@ local function wrap_fn(name, fn_name, fn)
   return function(...)
     local fqdn = fmt('%s.%s', name, fn_name)
 
-    Debug('Lazy plugin setup: calling "%s"', { fqdn })
+    Trace('Lazy plugin setup: calling "%s"', { fqdn })
 
     return Safe.call(fn, 'log', fqdn, ...)
   end
@@ -32,7 +32,7 @@ end
 function Plugin.new(plugin)
   local name = plugin_name(plugin)
 
-  InfoQuietly('Initializing plugin="%s"', { name })
+  Debug('Initializing plugin="%s"', { name })
 
   Stream.new(Table.keys(plugin))
     :filter(function(k) return Type.isfunc(plugin[k]) end)
@@ -44,9 +44,12 @@ end
 
 --- Constructs multiple plugins from an array of plugin definitions.
 ---
+---@param category string: the category of plugin being loaded; used for logging
 ---@param plugins table[]: an array-like table of lazy.nvim plugin definitions
 ---@return Plugin[]: an array-like table of Plugin instances
-function Plugin.all(plugins)
+function Plugin.all(category, plugins)
+  InfoQuietly('Initializing %s plugins', { category })
+
   return Stream.new(plugins)
     :map(Plugin.new)
     :get()
