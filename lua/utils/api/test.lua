@@ -1,7 +1,7 @@
 local neotest = require 'neotest'
 
 
---- Contains utilities for running unit tests.
+--- Api wrapper around unit test runner plugin.
 ---
 ---@class Test
 local Test = {}

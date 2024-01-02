@@ -5,14 +5,15 @@
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
-local Lsp        = require 'lsp'
-local Aerial     = require 'plugins.config.code.aerial'
-local Fidget     = require 'plugins.config.code.fidget'
-local LuaSnip    = require 'plugins.config.code.luasnip'
-local Mason      = require 'plugins.config.code.mason'
-local SnipRun    = require 'plugins.config.code.sniprun'
-local Treesitter = require 'plugins.config.code.treesitter'
-local TreeSJ     = require 'plugins.config.code.treesj'
+local Lsp            = require 'lsp'
+local Aerial         = require 'plugins.config.code.aerial'
+local Fidget         = require 'plugins.config.code.fidget'
+local LuaSnip        = require 'plugins.config.code.luasnip'
+local Mason          = require 'plugins.config.code.mason'
+local SnipRun        = require 'plugins.config.code.sniprun'
+local SymbolsOutline = require 'plugins.config.code.outline'
+local Treesitter     = require 'plugins.config.code.treesitter'
+local TreeSJ         = require 'plugins.config.code.treesj'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
@@ -20,7 +21,7 @@ local TsPlugin = Treesitter.TreesitterPlugin
 
 
 return Plugins('code', {
-  ---- aerial: code outlines
+  ---- aerial: code outline (disabled while I try out symbols-outline)
   {
     'stevearc/aerial.nvim',
     enabled      = Treesitter.enabled(TsPlugin.AERIAL),
@@ -107,6 +108,15 @@ return Plugins('code', {
     config = function(_, opts)
       require('sniprun').setup(opts)
     end
+  },
+  ---- symbols-outline: code outline using lsp
+  {
+    'simrat39/symbols-outline.nvim',
+    opts = SymbolsOutline.opts(),
+
+    config = function(_, opts)
+      require('symbols-outline').setup(opts)
+    end,
   },
   ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
   {

@@ -17,7 +17,8 @@ local TreesitterPlugin = {
 }
 
 local TS_PLUGIN_ENABLEMENT = {
-  [TreesitterPlugin.AERIAL]           = true,
+  -- NOTE: disabled while I try out symbols-outline
+  [TreesitterPlugin.AERIAL]           = false,
   [TreesitterPlugin.AUTOPAIRS]        = true,
   [TreesitterPlugin.CMP_TREESITTER]   = true,
   [TreesitterPlugin.ENDWISE]          = true,

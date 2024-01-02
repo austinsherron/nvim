@@ -31,14 +31,14 @@ function NvimLogger.new(log_level, default_opts)
 
   return setmetatable({
     logger       = logger,
-    default_opts = default_opts or DEFAULT_OPTS,
+    default_opts = TMerge.mergeright(default_opts, DEFAULT_OPTS),
   }, NvimLogger)
 end
 
 
 ---@private
 function NvimLogger:do_log(method, to_log, args, opts)
-  opts = opts or {}
+  opts = TMerge.mergeright(opts or {}, self.default_opts, DEFAULT_OPTS)
 
   self.logger[method](self.logger, to_log, args, opts)
 
@@ -59,7 +59,7 @@ end
 ---@param args any[]?: an array of objects to format into to_log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:trace(to_log, args, opts)
-  self:do_log('trace', to_log, args, TMerge.mergeleft(DEFAULT_OPTS, opts))
+  self:do_log('trace', to_log, args, opts)
 end
 
 
@@ -69,7 +69,7 @@ end
 ---@param args any[]?: an array of objects to format into to_log
 ---@param opts NvimLoggerOpts?: options that control logging behavior
 function NvimLogger:debug(to_log, args, opts)
-  self:do_log('debug', to_log, args, TMerge.mergeleft(DEFAULT_OPTS, opts))
+  self:do_log('debug', to_log, args, opts)
 end
 
 

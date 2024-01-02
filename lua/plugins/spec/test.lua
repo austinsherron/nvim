@@ -14,7 +14,7 @@ local TsPlugin = Treesitter.TreesitterPlugin
 
 
 return Plugins('test', {
-  --- neotest: new-school nvim test runner/adapter
+  ---- neotest: new-school nvim test runner/adapter
   {
     'nvim-neotest/neotest',
     enabled = Treesitter.enabled(TsPlugin.NEOTEST),
@@ -28,11 +28,11 @@ return Plugins('test', {
 
     config = Neotest.config,
   },
-  --- neotest-python: python test adapter
+  ---- neotest-python: python test adapter
   { 'nvim-neotest/neotest-python' },
-  --- neotest-vim-test: bridge b/w neotest and vim-test
+  ---- neotest-vim-test: bridge b/w neotest and vim-test
   { 'nvim-neotest/neotest-vim-test' },
-  --- vim-test: old-school vim test runner/adapter
+  ---- vim-test: old-school vim test runner/adapter
   { 'vim-test/vim-test' },
 })
 

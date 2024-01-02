@@ -8,7 +8,7 @@ local Collectors = Stream.Collectors
 local project_nvim = require("project_nvim")
 
 
---- A thin api wrapper around project plugin.
+--- Api wrapper around project plugin.
 ---
 ---@class Project
 local Project = {}
