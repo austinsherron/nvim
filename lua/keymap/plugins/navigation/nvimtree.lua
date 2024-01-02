@@ -101,10 +101,6 @@ local function remapped_defaults(bufnr, api)
       { 'I',     api.tree.toggle_hidden_filter, { desc = 'Toggle Dotfiles'        }},
       { '<C-s>', NvTree.silent_open,            { desc = 'Open silently'          }},
   }):done()
-
-  -- note: important to know that this is 'q' at the time of writing: we need to remove
-  -- the 'q' default mapping above
-  Flash.jump()
 end
 
 
