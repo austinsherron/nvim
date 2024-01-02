@@ -1,6 +1,7 @@
-local Telescope  = require 'plugins.extensions.search.telescope.utils'
 local ProjectApi = require 'utils.api.project'
 local Session    = require 'utils.api.session'
+
+local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
 local telescope = require 'telescope'
 local config    = require 'telescope.config'
@@ -31,7 +32,7 @@ end
 
 
 local function make_attachment_action()
-  return Telescope.make_new_action(Safe.ify(default_action))
+  return ActionUtils.replace_default_action(Safe.ify(default_action))
 end
 
 

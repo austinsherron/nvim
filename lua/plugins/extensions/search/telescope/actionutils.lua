@@ -2,22 +2,28 @@ local actions      = require 'telescope.actions'
 local action_state = require 'telescope.actions.state'
 
 
+---@alias TelescopeKeyBinding { mode: string, key: string, action: string|function }
+---@alias TelescopeKeyMapper fun(mode: string|string[], key: string, action: string|function)
+---@alias TelescopeAttachBindings fun(prompt_buffer: integer, map: TelescopeKeyMapper): boolean
+---@alias TelescopeAction fun(selected: table, prompt_buffer: integer): boolean
+
 --- Contains utilities that abstract away some of the boilerplate of building and
 --- customizing telescope search constructs.
 ---
----@class TelescopeUtils
-local TelescopeUtils = {}
+---@class ActionUtils
+local ActionUtils = {}
 
 local function bind_keymap(keymap, map)
-    keymap = keymap or {}
+  keymap = keymap or {}
 
-    for _, binding in ipairs(keymap) do
-      if #binding ~= 3 then
-        Warn('Telescope ext: discarding invalid key binding=%s', { binding })
-      else
-        map(Table.unpack(binding))
-      end
+  for _, binding in ipairs(keymap) do
+    if #binding ~= 3 then
+      Warn('Telescope ext: discarding invalid key binding=%s', { binding })
+    else
+      binding[3] = ActionUtils.make_action(binding[3])
+      map(Table.unpack(binding))
     end
+  end
 end
 
 
@@ -28,12 +34,24 @@ end
 --- function; see :h telescope.mappings for details
 ---@return TelescopeAttachBindings: function that attaches key bindings to a picker and
 --- returns retval
-function TelescopeUtils.bind_keymap(keymap, retval)
+function ActionUtils.bind_keymap(keymap, retval)
   retval = Bool.or_default(retval, true)
 
   return function(_, map)
     bind_keymap(keymap, map)
     return retval
+  end
+end
+
+
+--- Wraps a function for use as a picker action.
+---
+---@param action TelescopeAction: the function to wrap
+---@return fun(bufnr: integer): boolean a function wrapped for use as a picker action
+function ActionUtils.make_action(action)
+  return function(bufnr)
+    local selected = action_state.get_selected_entry()
+    return action(selected, bufnr)
   end
 end
 
@@ -47,7 +65,7 @@ end
 --- function; see :h telescope.mappings for details
 ---@return (fun(pb: integer, _: any): r: true): a function used w/ telescope opts.attach_mappings
 --- to replace an existing picker's default action
-function TelescopeUtils.make_new_action(new_action, keymap, retval)
+function ActionUtils.replace_default_action(new_action, keymap, retval)
   retval = Bool.or_default(retval, true)
 
   return function(prompt_buffer, map)
@@ -79,7 +97,7 @@ end
 --- that runs after the primary action; intended for error processing, cleanup, etc.
 ---@return fun(pb: integer): n: nil: a function that performs some action when bound in a
 --- picker keymap
-function TelescopeUtils.make_selection_action(confirm, action, after)
+function ActionUtils.make_selection_action(confirm, action, after)
   return function(prompt_buffer)
     local selection = action_state.get_selected_entry()
 
@@ -99,5 +117,5 @@ function TelescopeUtils.make_selection_action(confirm, action, after)
   end
 end
 
-return TelescopeUtils
+return ActionUtils
 
