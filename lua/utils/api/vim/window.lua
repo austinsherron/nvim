@@ -25,7 +25,8 @@ end
 
 --- Closes the window w/ id winnr.
 ---
----@param winnr integer: the id of the window to close
+---@param winnr integer|nil: optional, defaults to the current window; the id of the
+--- window to close
 ---@param force boolean|nil: optional, defaults to false; if true, windows w/ unsaved
 --- changes will be closed
 function Window.close(winnr, force)

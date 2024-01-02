@@ -1,7 +1,8 @@
-local Flash     = require 'keymap.plugins.motion.flash'
-local NvTree    = require 'plugins.extensions.navigation.nvimtree'
+local TreeGit   = require 'plugins.extensions.git.treegit'
 local KeyMapper = require 'utils.core.mapper'
 
+local TreeActions = require('plugins.extensions.navigation').NvimTree.Actions
+local TreeSearch  = require('plugins.extensions.search').Telescope.TreeSearch
 
 local KM = KeyMapper.new({ desc_prefix = 'nvim-tree: ', silent = true, nowait = true })
 
@@ -41,7 +42,7 @@ local function default_mappings(bufnr, api)
       { '<C-r>', api.fs.rename_sub,                     { desc = 'Rename: Omit Filename'  }},
       { '<C-t>', api.node.open.tab,                     { desc = 'Open: New Tab'          }},
       { '<C-v>', api.node.open.vertical,                { desc = 'Open: Vertical Split'   }},
-   -- { '<C-x>', api.node.open.horizontal,              { desc = 'Open: Horizontal Split' }},
+      { '<C-x>', api.node.open.horizontal,              { desc = 'Open: Horizontal Split' }},
       { '<BS>',  api.node.navigate.parent_close,        { desc = 'Close Directory'        }},
       { '<CR>',  api.node.open.edit,                    { desc = 'Open'                   }},
       { '<Tab>', api.node.open.preview,                 { desc = 'Open Preview'           }},
@@ -58,13 +59,13 @@ local function default_mappings(bufnr, api)
       { '[c',    api.node.navigate.git.prev,            { desc = 'Prev Git'               }},
       { ']c',    api.node.navigate.git.next,            { desc = 'Next Git'               }},
       { 'd',     api.fs.remove,                         { desc = 'Delete'                 }},
-      { 'D',     api.fs.trash,                          { desc = 'Trash'                  }},
+   -- { 'D',     api.fs.trash,                          { desc = 'Trash'                  }},
       { 'E',     api.tree.expand_all,                   { desc = 'Expand All'             }},
       { 'e',     api.fs.rename_basename,                { desc = 'Rename: Basename'       }},
       { ']e',    api.node.navigate.diagnostics.next,    { desc = 'Next Diagnostic'        }},
       { '[e',    api.node.navigate.diagnostics.prev,    { desc = 'Prev Diagnostic'        }},
-      { 'F',     api.live_filter.clear,                 { desc = 'Clean Filter'           }},
-      { 'f',     api.live_filter.start,                 { desc = 'Filter'                 }},
+   -- { 'F',     api.live_filter.clear,                 { desc = 'Clean Filter'           }},
+   -- { 'f',     api.live_filter.start,                 { desc = 'Filter'                 }},
       { 'g?',    api.tree.toggle_help,                  { desc = 'Help'                   }},
       { 'gy',    api.fs.copy.absolute_path,             { desc = 'Copy Absolute Path'     }},
    -- { 'H',     api.tree.toggle_hidden_filter,         { desc = 'Toggle Dotfiles'        }},
@@ -97,9 +98,12 @@ end
 local function remapped_defaults(bufnr, api)
   KM:with({ buffer = bufnr })
     :bind({
-      { '<C-h>', api.node.open.horizontal,      { desc = 'Open: Horizontal Split' }},
-      { 'I',     api.tree.toggle_hidden_filter, { desc = 'Toggle Dotfiles'        }},
-      { '<C-s>', NvTree.silent_open,            { desc = 'Open silently'          }},
+      { 'I',     api.tree.toggle_hidden_filter,         { desc = 'Toggle Dotfiles'          }},
+      { '<C-s>', TreeActions.silent_open,               { desc = 'Open silently'            }},
+      { 'f',     TreeSearch.contextual_find_files,      { desc = 'Contexual find files'     }},
+      { 'F',     TreeSearch.contextual_find_all_files,  { desc = 'Contexual find all files' }},
+      -- note: group 'w' w/ other search bindings instead of custom mappings
+      { 'w',     TreeSearch.contextual_live_grep,       { desc = 'Contexual find words'     }},
   }):done()
 end
 
@@ -114,16 +118,17 @@ local function custom_mappings(bufnr, api)
       { 'H', api.tree.change_root_to_parent, { desc = 'Up'              }},
 
       -- bindings for git ops
-      { 's', NvTree.stage,                        { desc = 'stage node'   }},
-      -- note: "u" is a remapped default, but it's not in the remapped_defaults so it can
-      --       be grouped w/ other git bindings
-      { 'u', NvTree.unstage,                      { desc = 'unstage node' }},
-      { 'S', function() NvTree.stage(true) end,   { desc = 'stage repo'   }},
-      { 'U', function() NvTree.unstage(true) end, { desc = 'unstage repo' }},
+      { 's', TreeGit.stage,                        { desc = 'stage node'           }},
+      -- note: group '-', 'u', and 'D' w/ git bindings instead of remapped defaults
+      { '-', TreeGit.toggle_stage,                 { desc = 'toggle node stageing' }},
+      { 'u', TreeGit.unstage,                      { desc = 'unstage node'         }},
+      { 'S', function() TreeGit.stage(true) end,   { desc = 'stage repo'           }},
+      { 'U', function() TreeGit.unstage(true) end, { desc = 'unstage repo'         }},
+      { 'D', TreeGit.diffview,                     { desc = 'view diff'            }},
 
       -- misc bindings
-      { 'C', NvTree.copy_cursor_node_content, { desc = 'copy file content' }},
-      { 'X', NvTree.chmod_x,                  { desc = 'chmod +x'          }},
+      { 'C', TreeActions.copy_cursor_node_content, { desc = 'copy file content' }},
+      { 'X', TreeActions.chmod_x,                  { desc = 'chmod +x'          }},
   }):done()
 end
 

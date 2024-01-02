@@ -1,6 +1,7 @@
-local Telescope  = require 'plugins.extensions.search.telescope.utils'
 local SessionApi = require 'utils.api.session'
 local Confirm    = require 'utils.api.vim.confirm'
+
+local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
 local telescope = require 'telescope'
 local actions   = require 'telescope.actions'
@@ -28,7 +29,7 @@ local function make_delete_session_action()
   local after = function(_, _, pb) actions.close(pb) end
 
   return Safe.ify(
-    Telescope.make_selection_action(confirm, action, after)
+    ActionUtils.make_selection_action(confirm, action, after)
   )
 end
 
@@ -51,7 +52,7 @@ end
 
 
 local function make_attachment_action()
-  return Telescope.make_new_action(
+  return ActionUtils.replace_default_action(
     Safe.ify(default_action),
     make_keymap()
   )
