@@ -39,6 +39,8 @@ end
 local function projects_picker()
   telescope.extensions.projects.projects({
     attach_mappings = make_attachment_action(),
+    layout_strategy = 'vertical',
+    layout_config   = { height = 0.4, width = 0.5 },
   })
 end
 

@@ -1,9 +1,12 @@
 
 󰊕
+⦿
 24-bit
 64-bit
+abspath
 accessor
 accessors
+ActionUtils
 adb
 addall
 addflag
@@ -66,6 +69,7 @@ AutoCommandOp
 autocommand's
 autocommands
 autogroup
+autoload
 automations
 autopairs
 AutoPairs
@@ -128,6 +132,8 @@ BufferOrderByLanguage
 BufferPick
 BufferPin
 BufferPrevious
+BufferQuery
+BufferQueryOpts
 BufferRestore
 BufferState
 bufhidden
@@ -293,6 +299,7 @@ DirChanged
 directionality
 directionally
 dirname
+dirpath
 dir's
 dirs
 DirScope
@@ -313,6 +320,7 @@ Dp2Logger
 Dp2LogLevel
 dpkg
 dropbox
+dropdown
 Dropdown
 DSL
 dst
@@ -408,6 +416,7 @@ fullscreen
 func
 functionality
 fzf
+ƒ
 gcp
 GCP
 geeksforgeeks
@@ -420,6 +429,9 @@ getinfo
 getLogger
 GetLogger
 GetNotify
+getoption
+getparent
+getpath
 getter
 getwindowgeometry
 ggandor
@@ -428,12 +440,14 @@ git
 gitcommit
 gitconfig
 gitdir
+GitFile
 github
 gitignore
 gitignored
 gitleaks
 Gitleaks
 gitsigns
+GitStatus
 gke
 Gl
 globals
@@ -449,6 +463,7 @@ gsconnect
 GSConnect
 gThumb
 guake
+gutentags
 gz
 h3
 haha
@@ -508,7 +523,9 @@ invrelativenumber
 io
 ipairs
 IsArrayStrategy
+isdir
 isdirectory
+isfile
 ish
 isint
 items
@@ -582,6 +599,7 @@ LibreWolf
 lifecycle
 lightbulb
 linehl
+linewise
 linkedin
 LinkedIn
 linter
@@ -625,6 +643,7 @@ LSPs
 lspServer
 lua
 lua5
+luacov
 luafilesystem
 luajit
 LuaJIT
@@ -694,6 +713,7 @@ nav
 navic
 nbsp
 nd
+nearestdir
 nedges
 neo
 neodev
@@ -715,6 +735,7 @@ nmap
 nnn
 nnodes
 nnoremap
+NodeInfo
 NodesBuilder
 nofollow
 NOOP
@@ -752,12 +773,14 @@ nvimtree
 NvimTree
 NvimTreeFindFile
 NvimTreeFocus
+NvimTreeGenerateOnAttach
 NvimTreeToggle
 nvm
 nvr
 nvt
 Nvt
 NvTree
+NvTreeUtils
 nvundle
 NVUNDLE
 obj's
@@ -805,6 +828,7 @@ perf
 pfx
 pgp
 PINs
+pip3
 pipefail
 pkgs
 Plgn
@@ -884,10 +908,12 @@ regionality
 regTrig
 reindenting
 reineke
+rekey
 RelativeOrder
 RelativeOrdering
 RelativePosition
 relink
+relpath
 remappings
 repeatability
 repl
@@ -916,6 +942,7 @@ rjoin
 RJoinCursor
 rmv
 root
+rootpath
 route53
 rpad
 rsync
@@ -1040,8 +1067,10 @@ substr
 substring
 substrings
 sudo
+superset
 sush
 swp
+SymbolsOutline
 symlink
 symlinks
 Syngenta's
@@ -1058,6 +1087,7 @@ TableMerge
 TableValueMapper
 tabnew
 tabnext
+tabnr
 tabpages
 tabprevious
 TabState
@@ -1067,6 +1097,7 @@ TBD
 tbl
 tbls
 telescearch
+TelescopeAction
 TelescopeAttachBindings
 TelescopeKeyBinding
 TelescopeKeyMapper
@@ -1113,6 +1144,10 @@ tpm
 tracebacks
 traceQuietly
 Transunion
+TreeActions
+TreeGit
+TreeNode
+TreeSearch
 treesitter
 TreesitterPlugin
 treesj
@@ -1121,6 +1156,7 @@ TreeSJ
 TriggerLength
 truecolor
 truthy
+TScopeCommon
 TSJToggle
 TType
 TUI
@@ -1165,6 +1201,7 @@ urls
 usb
 userArgs
 usercmd
+usercmds
 UserCommand
 UserCommandConfig
 UserLog
@@ -1231,6 +1268,7 @@ windowNavigator
 WindowProperty
 WindowState
 WindowTransform
+winnr
 winpos
 winsize
 wip

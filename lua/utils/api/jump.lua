@@ -7,6 +7,10 @@ local flash = Lazy.require 'flash'
 --- Api wrapper around "jump" motion plugin.
 ---
 ---@class Jump
+---@field jump fun(args: table)
+---@field treesitter fun(args: table)
+---@field treesitter_search fun(args: table)
+---@field toggle fun(args: table)
 local Jump = {}
 Jump.__index = Jump
 
@@ -34,7 +38,7 @@ end
 ---
 ---@param forward boolean: if true, initiates a jump "ahead" of the cursor
 function Jump:directional(forward)
-  self['jump'](directional_args(forward))
+  self.jump(directional_args(forward))
 end
 
 
@@ -51,7 +55,7 @@ function Jump:to_line()
     },
   }
 
-  self['jump'](args)
+  self.jump(args)
 end
 
 
@@ -59,7 +63,7 @@ end
 ---
 ---@param forward boolean: if true, initiates a jump "ahead" of the cursor
 function Jump:ts_search(forward)
-  self['treesitter_search'](directional_args(forward))
+  self.treesitter_search(directional_args(forward))
 end
 
 

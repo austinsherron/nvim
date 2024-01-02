@@ -5,6 +5,7 @@ local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
 local telescope = require 'telescope'
 local actions   = require 'telescope.actions'
+local layouts   = require 'telescope.pickers.layout_strategies'
 
 local SessionInfo = SessionApi.SessionInfo
 
@@ -62,6 +63,8 @@ end
 local function sessions_picker()
   telescope.extensions.persisted.persisted({
     attach_mappings = make_attachment_action(),
+    layout_strategy = 'vertical',
+    layout_config   = { height = 0.4, width = 0.5 },
   })
 end
 

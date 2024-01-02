@@ -16,7 +16,7 @@ o.inccommand    = 'nosplit'        -- incremental live completion
 -- allows nvim to copy/paste to/from system clipboards
 opt.clipboard:append({ 'unnamedplus' })
 -- sessions save/restore these things
-o.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
+o.sessionoptions = 'buffers,curdir,folds,globals,help,tabpages,winsize,winpos,terminal'
 
 ---- spellcheck setting --------------------------------------------------------
 

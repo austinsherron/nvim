@@ -1,17 +1,17 @@
-local Lambda = require 'toolbox.functional.lambda'
 local Env    = require 'toolbox.system.env'
 local File   = require 'toolbox.system.file'
 local Path   = require 'toolbox.system.path'
+local Lazy   = require 'toolbox.utils.lazy'
 local Buffer = require 'utils.api.vim.buffer'
 local Paths  = require 'utils.api.vim.path'
 local System = require 'utils.api.vim.system'
 
-local foreach = require('toolbox.utils.map').foreach
-
 local safeget = Table.safeget
 
+local persisted = Lazy.require 'persisted'  ---@module 'persisted'
 
-local SESSIONS_DIR = Paths.data() .. '/sessions'
+
+local SESSIONS_DIR = Paths.data() .. '/sessions/'
 
 --- Contains information about a session.
 ---
@@ -49,10 +49,6 @@ local Session = {}
 ---@note: to expose SessionInfo
 Session.SessionInfo = SessionInfo
 
-local function api()
-  return require 'persisted'
-end
-
 ---@return string: the path to the directory where sessions are stored
 function Session.sessions_dir()
   return SESSIONS_DIR
@@ -61,7 +57,7 @@ end
 
 ---@return boolean: true if a session exists for the cwd, false otherwise
 function Session.exists()
-  return api().session_exists()
+  return persisted.session_exists()
 end
 
 
@@ -74,7 +70,7 @@ end
 ---
 ---@return SessionInfo[]: an array of sessions, if any exist
 function Session.list()
-  local sessions = api().list() or {}
+  local sessions = persisted.list() or {}
 
   return Stream.new(sessions)
     :map(SessionInfo.new)
@@ -144,9 +140,9 @@ function Session.load(opts)
   opts = opts or {}
 
   Buffer.closeall()
-  api().load(opts)
+  persisted.load(opts)
 
-  Debug(get_load_log_msg(opts))
+  Info(get_load_log_msg(opts))
 end
 
 
@@ -159,8 +155,8 @@ end
 --- Loads the session that for the cwd, if one exists. If it doesn't, falls back to
 --- persisted.nvim plugin cwd session loading.
 function Session.load_for_cwd()
-  local current = Session.current()
-  local file_path = safeget(current, 'file_path')
+  local current = Session.current() or {}
+  local file_path = current.file_path
 
   Session.load({ session = file_path })
 end
@@ -174,7 +170,9 @@ function Session.load_session(session)
 end
 
 
---- Saves the current session after closing non-restorable buffers.
+--- Saves the session for the cwd.
+---
+--- TODO: "...after closing non-restorable buffers."
 ---
 ---@see Buffer.is_restorable
 function Session.save()
@@ -184,10 +182,11 @@ function Session.save()
   --   Buffer.close
   -- )
 
-  api().save()
+  local session = Table.safeget(Session.current(), 'file_path')
+  persisted.save({ session = session })
 
   local cwd = Path.basename(System.cwd())
-  InfoQuietly('Session saved successfully for dir=%s', { cwd })
+  Info('Session saved successfully for dir=%s', { cwd })
 end
 
 
@@ -223,7 +222,7 @@ function Session.delete(session)
     return Warn('Session.delete: error deleting session=%s; err=%s', { name, err })
   end
 
-  InfoQuietly('Successfully deleted session=%s', { name })
+  Info('Successfully deleted session=%s', { name })
 end
 
 return Session
