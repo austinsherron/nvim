@@ -49,6 +49,7 @@ KM:bind({
 
 -- turn off highlight (i.e.: for search, as wall as for searchbox.nvim plugin)
 -- note: commented out here because it's bound with searchbox plugin key bindings
+
 -- KM:bind_one('<leader>hx', ':noh | :SearchBoxClear<CR>', { desc = 'cancel highlight' })
 
 -- buffers ---------------------------------------------------------------------

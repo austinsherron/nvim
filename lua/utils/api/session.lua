@@ -41,7 +41,7 @@ function SessionInfo.new(s)
   return this
 end
 
---- An thin api wrapper around session manager plugin.
+--- Api wrapper around session manager plugin.
 ---
 ---@class Session
 local Session = {}

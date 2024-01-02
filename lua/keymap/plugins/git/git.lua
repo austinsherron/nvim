@@ -11,7 +11,7 @@ KM:with({ desc_prefix = 'diffview: ' })
     { '<leader>dx', ':DiffviewClose<CR>',         { desc = 'close diff/merge view' }},
     { '<leader>dh', ':DiffviewFileHistory<CR>',   { desc = 'show all history'      }},
     { '<leader>df', ':DiffviewFileHistory %<CR>', { desc = 'show file history'     }},
-}):done()
+  }):done()
 
 -- lazygit ---------------------------------------------------------------------
 
@@ -21,10 +21,5 @@ KM:with({ desc_prefix = 'lazygit: ' })
     { '<leader>gf', ':LazyGitFilter<CR>',            { desc = 'view repo commits'            }},
     { '<leader>gc', ':LazyGitCurrentFile<CR>',       { desc = "open for current file's repo" }},
     { '<leader>gF', ':LazyGitFilterCurrentFile<CR>', { desc = 'view file commits'            }},
-}):done()
-
-
--- neogit ----------------------------------------------------------------------
-
-KM:bind_one('<leader>G', ':Neogit<CR>', { desc = 'neogit: open' })
+  }):done()
 
