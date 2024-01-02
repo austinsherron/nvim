@@ -7,15 +7,11 @@ local KM = KeyMapper.new({ desc_prefix = 'flash: ', nowait = true })
 -- interactions ----------------------------------------------------------------
 
 KM:bind({
--- TODO: consider removing: commenting this out for now, as I never use it
---{ 'q',     flash('jump'),              { desc = 'jump'                      }, { 'n', 'x', 'o' }},
-
   { ';',     function() Jump:directional(true) end,  { desc = 'jump forward'                },  { 'n', 'x'      }},
   { '"',     function() Jump:directional(false) end, { desc = 'jump backward'               },  { 'n', 'x'      }},
+  { 'T',     function() Jump:ts_search(true) end,    { desc = 'jump forward w/ treesitter'  },  { 'n', 'x', 'o' }},
   { ',',     function() Jump:to_line() end,          { desc = 'jump to line'                },  { 'n', 'x'      }},
-  { 't',     function() Jump:ts_search(true) end,    { desc = 'jump forward w/ treesitter'  },  { 'x', 'o'      }},
-  { 'T',     function() Jump:ts_search(false) end,   { desc = 'jump backward w/ treesitter' },  { 'x', 'o'      }},
-  { 'Q',     Jump['treesitter'],                     { desc = 'jump to treesitter symbol'   },  { 'n', 'x', 'o' }},
-  { '<M-s>', Jump['toggle'],                         { desc = 'toggle flash search'         }},
+  { 'Q',     Jump.treesitter,                        { desc = 'jump to treesitter symbol'   },  { 'n', 'x', 'o' }},
+  { '<M-s>', Jump.toggle,                            { desc = 'toggle flash search'         }},
 })
 

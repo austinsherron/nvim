@@ -31,7 +31,7 @@ function NvimLogger.new(log_level, default_opts)
 
   return setmetatable({
     logger       = logger,
-    default_opts = TMerge.mergeright(default_opts, DEFAULT_OPTS),
+    default_opts = TMerge.mergeright(default_opts or {}, DEFAULT_OPTS),
   }, NvimLogger)
 end
 

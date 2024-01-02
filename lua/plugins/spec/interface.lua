@@ -83,6 +83,15 @@ return Plugins('interface', {
       require('lualine').setup(opts)
     end
   },
+  ---- marks: enhanced mark experience
+  {
+    'chentoast/marks.nvim',
+    opts = {},
+
+    config = function(_, opts)
+      require('marks').setup(opts)
+    end,
+  },
   ---- notify: pretty notifications
   {
     'rcarriga/nvim-notify',

@@ -136,7 +136,11 @@ end
 ---@param callback AutoCommandCallback: callback to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withCallback(callback)
-  self.callback = callback
+  self.callback = function(...)
+    Debug(self:log_msg(self.id, 'Running'))
+    return callback(...)
+  end
+
   return self
 end
 
@@ -188,10 +192,11 @@ end
 
 
 ---@private
-function AutoCommand:create_log_msg(id)
+function AutoCommand:log_msg(id, action)
   return fmt(
-    'Created autocmd (id=%d, desc=%s)',
-    id,
+    '%s autocmd (id=%d, desc=%s)',
+    action,
+    (id or '?'),
     (self.desc or '?')
   )
 end
@@ -211,7 +216,7 @@ function AutoCommand:create(config)
   local id = Safe.call(function() return self:_create(config) end)
 
   if id ~= nil then
-    Debug(self:create_log_msg(id))
+    Debug(self:log_msg(id, 'Created'))
   end
 
   return id
@@ -222,7 +227,7 @@ end
 function AutoCommand:_delete(config)
   config = TMerge.mergeleft(self, config or {})
 
-  validate({ 'id' }, config, 'delete')
+  validate({ 'id' }, config, 'deleted')
 
   vim.api.nvim_del_autocmd(config.id)
   return config.id
@@ -239,7 +244,7 @@ function AutoCommand:delete(config)
   local id = Safe.call(function() return self:_delete(config) end)
 
   if id ~= nil then
-    Debug('Deleted autocmd (id=%s)', { id })
+    Debug(self:log_msg(id, 'Deleted'))
   end
 
   return id

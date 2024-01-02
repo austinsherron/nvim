@@ -106,11 +106,13 @@ function CmpKM.make_mapping()
   local luasnip = require 'luasnip'
 
   return cmp.mapping.preset.insert({
-    ['<Tab>']   = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip),          { 'i', 's' }),
-    ['<Down>']  = cmp.mapping(make_next_choice(luasnip),                    { 'i', 's' }),
-    ['<Up>']    = cmp.mapping(make_prev_choice(luasnip),                    { 'i', 's' }),
-    ['<C-x>']   = cmp.mapping(make_close_cmp_menu(cmp),                     { 'i', 's' }),
+    ['<Tab>']   = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's'      }),
+    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip),          { 'i', 's'      }),
+    ['<Right>'] = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'n', 'i', 's' }),
+    ['<Left>']  = cmp.mapping(make_prev_or_contract(cmp, luasnip),          { 'n', 'i', 's' }),
+    ['<Down>']  = cmp.mapping(make_next_choice(luasnip),                    { 'i', 's'      }),
+    ['<Up>']    = cmp.mapping(make_prev_choice(luasnip),                    { 'i', 's'      }),
+    ['<C-x>']   = cmp.mapping(make_close_cmp_menu(cmp),                     { 'i', 's'      }),
     ['<CR>']    = cmp.mapping({
       i = make_select_with_enter(cmp),
       s = cmp.mapping.confirm({ select = true }),

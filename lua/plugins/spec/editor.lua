@@ -28,6 +28,7 @@ return Plugins('editor', {
   ---- cmp: completion engine
   {
     'hrsh7th/nvim-cmp',
+    event  = { 'InsertEnter', 'CmdlineEnter' },
     config = Cmp.config,
   },
   ---- cmp-buffer: fuzzy completion of buffer contents
