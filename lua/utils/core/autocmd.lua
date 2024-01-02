@@ -227,7 +227,7 @@ end
 function AutoCommand:_delete(config)
   config = TMerge.mergeleft(self, config or {})
 
-  validate({ 'id' }, config, 'deleted')
+  validate({ 'id' }, config, 'delete')
 
   vim.api.nvim_del_autocmd(config.id)
   return config.id
