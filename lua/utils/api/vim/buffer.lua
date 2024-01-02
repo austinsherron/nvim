@@ -6,6 +6,17 @@ local enum = require('toolbox.extensions.enum').enum
 
 local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 
+
+--- Parameterizes buffer queries.
+---
+---@class BufferQuery<S, T>
+---@field filter (fun(bufnr: integer): boolean)|false|nil: filter value passed to
+--- Buffer.getall
+---@field query (fun(bufnr: integer): boolean)|false|nil: query filter applied after
+--- above filter
+---@field xfm (fun(bufnr: integer): `T`)|nil: optional buffer transform applied to results
+---@field collector (fun(b: `T[]`): `S`)|nil: optional buffer collector applied to results
+
 --- Specifies how to view/open a buffer.
 ---
 ---@enum ViewMode
@@ -19,8 +30,9 @@ local ViewMode = enum({
 ---
 ---@enum Option
 local Option = enum({
-  HIDDEN = 'bufhidden',
-  TYPE   = 'buftype',
+  FILETYPE = 'filetype',
+  HIDDEN   = 'bufhidden',
+  TYPE     = 'buftype',
 })
 
 --- Contains information about a buffer.
@@ -29,6 +41,7 @@ local Option = enum({
 ---@field id integer: the buffer's id
 ---@field name string: the buffer's name
 ---@field type string: the value of the buffer's type option
+---@field filetype string: the buffer's filetype
 local BufferInfo = {}
 BufferInfo.__index = BufferInfo
 
@@ -37,11 +50,12 @@ BufferInfo.__index = BufferInfo
 ---@note: See class docs for param descriptions.
 ---
 ---@return BufferInfo: a new instance
-function BufferInfo.new(bufnr, name, type)
+function BufferInfo.new(bufnr, name, type, filetype)
   return setmetatable({
-    id   = bufnr,
-    name = name,
-    type = type,
+    id       = bufnr,
+    name     = name,
+    type     = type,
+    filetype = filetype,
   }, BufferInfo)
 end
 
@@ -49,8 +63,8 @@ end
 ---@return string: a string representation of this instance
 function BufferInfo:__tostring()
   return fmt(
-    'Buffer(id=%s, name=%s, type=%s)',
-    self.id, self.name, self.type
+    'Buffer(id=%s, name=%s, type=%s, filetype=%s)',
+    self.id, self.name, self.type, self.filetype
   )
 end
 
@@ -59,21 +73,30 @@ end
 ---@class Buffer
 local Buffer = {}
 
+---@return integer: the id of the current buffer, i.e.: where the cursor is
+function Buffer.current()
+  return vim.api.nvim_get_current_buf()
+end
+
+
 --- Gets the name of the buffer w/ id == bufnr.
 ---
----@param bufnr integer: the id of the buffer
+---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
 ---@return string: the name of the buffer w/ id == bufnr, or the empty string ('') if it
 --- doesn't exist
 function Buffer.getname(bufnr)
+  bufnr = bufnr or Buffer.current()
   return vim.api.nvim_buf_get_name(bufnr)
 end
 
 
 --- Checks if the buffer w/ id == bufnr has a name.
 ---
----@param bufnr integer: the id of the buffer to check
+---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
+--- to check
 ---@return boolean: true if the buffer w/ id == bufnr has a name, false otherwise
 function Buffer.hasname(bufnr)
+  bufnr = bufnr or Buffer.current()
   return String.not_nil_or_empty(Buffer.getname(bufnr))
 end
 
@@ -84,6 +107,8 @@ end
 --- id or the type of the buffer to check
 ---@return boolean: true if the buffer is normal, false otherwise
 function Buffer.is_normal(bufopts)
+  bufopts = bufopts or { id = Buffer.current() }
+
   local buftype = bufopts.type or Buffer.getoption(bufopts.id, Option.TYPE)
   return String.nil_or_empty(buftype)
 end
@@ -92,9 +117,11 @@ end
 --- Checks if a buffer is listed.
 ---
 ---@see vim.fn.buflisted
----@param bufnr integer: the number of the buffer to check
+---@param bufnr integer|nil: optional, defaults to current buffer; the number of the
+--- buffer to check
 ---@return boolean: true if the buffer w/ id bufnr is listed, false otherwise
 function Buffer.is_listed(bufnr)
+  bufnr = bufnr or Buffer.current()
   return vim.fn.buflisted(bufnr) == 1
 end
 
@@ -103,11 +130,20 @@ end
 ---
 ---@see vim.api.nvim_buf_get_option
 ---
----@param bufnr integer: the id of the buffer for which to retrieve an option
+---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
+--- for which to retrieve an option
 ---@param option Option: the option to retrieve
 ---@return any|nil: the value of the option for buffer bufnr, if any
 function Buffer.getoption(bufnr, option)
-  return vim.api.nvim_buf_get_option(bufnr, tostring(option))
+  bufnr = bufnr or Buffer.current()
+  option = vim.api.nvim_buf_get_option(bufnr, tostring(option))
+
+  if option ~= nil then
+    return option
+  end
+
+  -- fall back to if the prior option retrieval method yields no value
+  return vim.api.nvim_get_option_value(option, { buffer = bufnr })
 end
 
 
@@ -116,9 +152,12 @@ end
 ---@note: Adapted from a similar function implemented in neovim-session-manager:
 ---       https://github.com/Shatur/neovim-session-manager/blob/master/lua/session_manager/utils.lua#L128
 ---
----@param bufnr integer: the id of the buffer to check
+---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer to
+--- check
 ---@return boolean: true if the buffer is can be restored, false otherwise
 function Buffer.is_restorable(bufnr)
+  bufnr = bufnr or Buffer.current()
+
   local buftype = Buffer.getoption(bufnr, Option.TYPE)
   local is_normal = Buffer.is_normal({ type = buftype })
 
@@ -132,14 +171,39 @@ end
 
 --- Gets a BufferInfo for the provided bufnr.
 ---
----@param bufnr integer: the if of the buffer for which to get info
+---@param bufnr integer|nil: optional, defaults to current buffer; the if of the buffer
+--- for which to get info
 ---@return BufferInfo: buffer info for the provided bufnr
 function Buffer.info(bufnr)
+  bufnr = bufnr or Buffer.current()
+
   return BufferInfo.new(
     bufnr,
     Buffer.getname(bufnr),
-    Buffer.getoption(bufnr, Option.TYPE)
+    Buffer.getoption(bufnr, Option.TYPE),
+    Buffer.getoption(bufnr, Option.FILETYPE)
   )
+end
+
+
+local function get_buffer_filters(filter)
+  if filter ~= false and (filter ~= nil and type(filter) ~= 'function') then
+    Err.raise('Buffer.getall: unrecognized filter=%s', filter)
+  end
+
+  local default = ternary(
+    filter == false,
+    function() return Lambda.TRUE end,
+    function() return Buffer.is_listed end
+  )
+
+  local optional = ternary(
+    type(filter) == 'function',
+    function() return filter end,
+    function() return Lambda.TRUE end
+  )
+
+  return default, optional
 end
 
 
@@ -147,18 +211,39 @@ end
 ---
 ---@see vim.api.nvim_list_bufs()
 ---@generic T
----@param filter (fun(bufnr: integer): boolean)|nil optional; filters buffer ids
+---@param filter (fun(bufnr: integer): boolean)|false|nil: optional; filters buffer ids;
+--- if false, uses non filter and returns all buffers (i.e.: possible hidden, unlisted,
+--- etc.)
 ---@param xfm (fun(bufnr: integer): T)|nil optional; transforms buffer ids
 ---@return T[]: current buffer handles, or buffer handles transformed by xfm, if provided
 function Buffer.getall(filter, xfm)
-  filter = filter or Lambda.IDENTITY
   xfm = xfm or Lambda.IDENTITY
 
+  local def_filter, opt_filter = get_buffer_filters(filter)
+
   return Stream.new(vim.api.nvim_list_bufs())
-    :filter(Buffer.is_listed)
-    :filter(filter)
+    :filter(def_filter)
+    :filter(opt_filter)
     :map(xfm)
     :collect()
+end
+
+
+--- Perform a buffer query according to opts.
+---
+---@generic T
+---@param opts BufferQuery|nil: parameterizes buffer query
+---@return T|nil: zero or more buffers queried using opts
+function Buffer.find(opts)
+  opts = opts or {}
+
+  local query = opts.query or Lambda.TRUE
+  local xfm = opts.xfm or Lambda.IDENTITY
+
+  return Stream.new(Buffer.getall(opts.filter))
+    :filter(query)
+    :map(xfm)
+    :collect(opts.collector)
 end
 
 
@@ -186,7 +271,7 @@ end
 ---
 ---@param bufnr integer: the id of the buffer to close
 ---@param force boolean|nil: optional, defaults to false; if true, buffers w/ unsaved
---- changed will be closed
+--- changes will be closed
 function Buffer.close(bufnr, force)
   force = Bool.or_default(force, false)
 
