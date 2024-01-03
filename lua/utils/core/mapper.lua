@@ -11,7 +11,7 @@ local ternary   = require('toolbox.core.bool').ternary
 local filter  = Map.filter
 local foreach = Map.foreach
 
-local Hydra = Lazy.require('hydra')
+local Hydra = Lazy.require 'hydra'
 
 
 local DEFAULT_MODES = { 'n' }

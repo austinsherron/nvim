@@ -9,7 +9,9 @@ local Lsp            = require 'lsp'
 local Aerial         = require 'plugins.config.code.aerial'
 local Fidget         = require 'plugins.config.code.fidget'
 local LuaSnip        = require 'plugins.config.code.luasnip'
+local LspSaga        = require 'plugins.config.code.lspsaga'
 local Mason          = require 'plugins.config.code.mason'
+local Neodev         = require 'plugins.config.code.neodev'
 local SnipRun        = require 'plugins.config.code.sniprun'
 local SymbolsOutline = require 'plugins.config.code.outline'
 local Treesitter     = require 'plugins.config.code.treesitter'
@@ -46,6 +48,19 @@ return Plugins('code', {
       require('fidget').setup(opts)
     end,
   },
+  ---- lspsaga: "improves the neovim built-in lsp experience"
+  {
+    'nvimdev/lspsaga.nvim',
+    opts         = LspSaga.opts(),
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+
+    config = function(_, opts)
+      require('lspsaga').setup(opts)
+    end
+  },
   ---- LuaSnip: snippets engine (...written in Lua)
   {
     'L3MON4D3/LuaSnip',
@@ -75,7 +90,8 @@ return Plugins('code', {
   ---- neodev: make lsp aware of (n)vim apis and plugins
   {
     'folke/neodev.nvim',
-    opts = {},
+    dependencies = 'neovim/nvim-lspconfig',
+    opts         = Neodev.opts(),
 
     config = function(_, opts)
       require('neodev').setup(opts)
@@ -91,8 +107,10 @@ return Plugins('code', {
     config = Lsp.config,
   },
   ---- nvim navic: for showing code context in status bar(s)
+  ---- TODO: trying out lspsaga's winbar; remove if I decide to stick w/ that
   {
     'SmiteshP/nvim-navic',
+    enabled      = false,
     dependencies = { 'neovim/nvim-lspconfig' },
 
     config = function()

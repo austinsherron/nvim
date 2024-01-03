@@ -7,7 +7,7 @@ local Trouble = {}
 ---@return table: a table that contains configuration values for the trouble plugin
 function Trouble.opts()
   return {
-    position = 'right',
+    position = 'bottom',
   }
 end
 

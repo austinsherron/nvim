@@ -9,8 +9,16 @@ local DEFAULTS = {
 
 -- TODO: configure these individually based on usability
 local PICKERS = {
-  buffers       = { theme = 'ivy'      },
-  spell_suggest = { theme = 'cursor'   },
+  buffers       = { theme           = 'ivy'        },
+  colorscheme   = { theme           = 'cursor'     },
+  diagnostics   = { layout_strategy = 'horizontal' },
+  git_bcommits  = { layout_strategy = 'horizontal' },
+  git_stash     = { layout_strategy = 'horizontal' },
+  help_tags     = { layout_strategy = 'horizontal' },
+  man_pages     = { theme           = 'ivy'        },
+  -- TODO: see if I can make the dropdown lower, or put the viewer below the prompt
+  treesitter    = { theme           = 'dropdown'   },
+  spell_suggest = { theme           = 'cursor'     },
 }
 
 -- TODO: configure these individually based on their setup params

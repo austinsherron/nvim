@@ -4,13 +4,18 @@ local KeyMapper = require 'utils.core.mapper'
 
 local KM = KeyMapper.new({ desc_prefix = 'lsp: ' })
 
+local function lspsaga(cmd)
+  return fmt(':Lspsaga %s<CR>', cmd)
+end
 
 local function global_mappings()
   KM:bind({
-    { "'e", vim.diagnostic.open_float, { desc = 'open diagnostic hover' }},
-    { '[d', vim.diagnostic.goto_prev,  { desc = 'prev diagnostic'       }},
-    { ']d', vim.diagnostic.goto_next,  { desc = 'next diagnostic'       }},
-    { "'l", vim.diagnostic.setloclist, { desc = 'diagnostics list'      }},
+    { "'e", vim.diagnostic.open_float,           { desc = 'open diagnostic hover' }},
+ -- { '[d', vim.diagnostic.goto_prev,            { desc = 'prev diagnostic'       }},
+ -- { ']d', vim.diagnostic.goto_next,            { desc = 'next diagnostic'       }},
+    { '[d', ':Lspsaga diagnostic_jump_prev<CR>', { desc = 'prev diagnostic'       }},
+    { ']d', ':Lspsaga diagnostic_jump_next<CR>', { desc = 'next diagnostic'       }},
+    { "'l", vim.diagnostic.setloclist,           { desc = 'diagnostics list'      }},
   })
 end
 
@@ -33,22 +38,29 @@ local function after_attach_mappings(ev)
   KM:with({ buffer = ev.buf })
     :bind({
       -- find/go to...
-      { 'gD', vim.lsp.buf.declaration,     { desc = 'jump to declaration'    }},
-      { 'gd', vim.lsp.buf.definition,      { desc = 'jump to definition'     }},
-      { 'gi', vim.lsp.buf.implementation,  { desc = 'jump to implementation' }},
-      { 'gr', vim.lsp.buf.references,      { desc = 'show references'        }},
-      { 'gT', vim.lsp.buf.type_definition, { desc = 'type definition'        }},
+      { 'gD',  vim.lsp.buf.declaration,         { desc = 'jump to declaration'    }},
+      { 'gd',  vim.lsp.buf.definition,          { desc = 'jump to definition'     }},
+      { 'vd',  lspsaga('peek_definition'),      { desc = 'view definition'        }},
+      { 'gd',  lspsaga('goto_definition'),      { desc = 'jump to definition'     }},
+      { 'gi',  vim.lsp.buf.implementation,      { desc = 'jump to implementation' }},
+      { 'gr',  lspsaga('finder'),               { desc = 'show references'        }},
+      { 'vT',  lspsaga('peek_type_definition'), { desc = 'view declaration'       }},
+      { 'gT',  lspsaga('goto_type_definition'), { desc = 'jump to declaration'    }},
+      { "'ci", lspsaga('incoming_calls'),       { desc = 'view incoming calls'    }},
+      { "'co", lspsaga('outgoing_calls'),       { desc = 'view outgoing calls'    }},
       -- semantic info
-      { "'h", vim.lsp.buf.hover,          { desc = 'open hover'     }},
+      { "'h", lspsaga('hover_doc'),       { desc = 'open hover'     }},
       { "'s", vim.lsp.buf.signature_help, { desc = 'signature help' }},
       -- workspace inspection/manipulation
       { "'wa", vim.lsp.buf.add_workspace_folder,    { desc = 'add wkspce dir'   }},
       { "'wr", vim.lsp.buf.remove_workspace_folder, { desc = 'rm wkspce dir'    }},
       { "'wl", inspect_wkspace_dirs,                { desc = 'list wkspce dirs' }},
       -- do...
-      { "'r",  vim.lsp.buf.rename,      { desc = 'rename'      }},
-      { "'f",  format,                  { desc = 'format'      }},
-      { "'ca", vim.lsp.buf.code_action, { desc = 'code action' }},
+      { "'r",  ':Lspsaga rename<CR>',          { desc = 'rename'      }},
+   -- TODO: implement w/ popup for args
+   -- { "'R",  ':Lspsaga project_replace<CR>', { desc = 'replace'     }},
+      { "'f",  format,                         { desc = 'format'      }},
+      { "'ca", lspsaga('code_action'),         { desc = 'code action' }},
   })
   :done()
 end

@@ -77,6 +77,7 @@ function Treesitter.opts()
       'json',
       'lua',
       'markdown',
+      'markdown_inline',
       'python',
       'query',
       'sql',

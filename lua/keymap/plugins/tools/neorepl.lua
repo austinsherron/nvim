@@ -1,6 +1,10 @@
-local NeoReplExt = require 'plugins.extensions.tools.neorepl'
+local View       = require 'utils.api.vim.view'
 local KeyMapper  = require 'utils.core.mapper'
 
+
+local function close()
+  View.close({ filetype = 'neorepl' })
+end
 
 local KM = KeyMapper.new({ desc_prefix = 'neorepl: ', silent = true, nowait = true })
 
@@ -10,7 +14,7 @@ KM:bind({
     { '<leader>rf', ':Repl e<CR>',      { desc = 'open'           }},
     { '<leader>rh', ':Repl split<CR>',  { desc = 'open in split'  }},
     { '<leader>rv', ':Repl vsplit<CR>', { desc = 'open in vsplit' }},
-    { '<leader>rx', NeoReplExt.close,   { desc = 'close'          }},
+    { '<leader>rx', close,              { desc = 'close'          }},
 }):done()
 
 -- on_init ---------------------------------------------------------------------

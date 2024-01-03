@@ -1,47 +1,6 @@
+local Highlight = require 'utils.api.vim.interface.__highlight'
 
---- A builder for highlight group definitions.
----
----@class Highlight
----@field name string: the highlight's identifier
----@field private hg table
-local Highlight = {}
-Highlight.__index = Highlight
-
---- Constructor
----
----@param name string: the highlight's identifier
----@return Highlight: a new instance
-function Highlight.new(name)
-  return setmetatable({ name = name, hg = {}}, Highlight)
-end
-
-
---- Sets this instance's foreground color via the "fg" property.
----
----@param fg string: a string representation of a color, i.e.: a color name or a hex value
----@return Highlight: this instance
-function Highlight:foreground(fg)
-  self.hg.fg = fg
-  return self
-end
-
-
---- Sets this instance's background color via the "bg" property.
----
----@param bg string: a string representation of a color, i.e.: a color name or a hex value
----@return Highlight: this instance
-function Highlight:background(bg)
-  self.hg.bg = bg
-  return self
-end
-
-
---- Builds and returns the highlight definition.
----
----@return table: a highlight definition constructed from this instance
-function Highlight:build()
-  return self.hg
-end
+local foreach = require('toolbox.utils.map').foreach
 
 
 --- Contains utilities for interacting w/ nvim ui elements.
@@ -64,6 +23,29 @@ function Interface.set_highlight(highlight, bufnr)
   vim.api.nvim_set_hl(bufnr, highlight.name, hg)
 
   Debug('Highlight=%s created for bufnr=%s; def=%s', { highlight.name, bufnr, hg })
+end
+
+local DIAGNOSTIC_SIGNS = {
+  { name = 'DiagnosticSignError', icon = '' },
+  { name = 'DiagnosticSignWarn',  icon = '' },
+  { name = 'DiagnosticSignHint',  icon = '' },
+  { name = 'DiagnosticSignInfo',  icon = '' },
+}
+
+--- Registers the provided sign w/ nvim.
+---
+---@param sign { name: string, icon: string }: the sign to register
+function Interface.define_sign(sign)
+  vim.fn.sign_define(
+    sign.name,
+    { texthl = sign.name, text = sign.icon, numhl = '' }
+  )
+end
+
+
+--- Initializes interface customizations.
+function Interface.init()
+  foreach(DIAGNOSTIC_SIGNS, Interface.define_sign)
 end
 
 return Interface

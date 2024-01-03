@@ -22,8 +22,10 @@ function TreeActions.copy_cursor_node_content()
     return
   end
 
-  if not TreeNode:is_file() then
-    Warn('TreeActions: cannot copy content of node=%s: not a file', { node.name })
+  -- FIXME: this should probably use "not TreeNode:isfile", but that's not working and
+  --        it's not immediately clear why
+  if TreeNode:isdir() then
+    Warn('TreeActions: cannot copy content of node=%s, type="%s": not a file', { node.name, node.type })
     Debug('TreeActions: node=%s', { node })
     return
   end

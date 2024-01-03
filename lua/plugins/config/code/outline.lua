@@ -10,6 +10,13 @@ function SymbolsOutline.opts()
   return {
     autofold_depth = 0,
     position       = 'right',
+    keymaps        = {
+      hover_symbol = 'h',
+      fold         = 'zo',
+      unfold       = 'zc',
+      fold_all     = 'zO',
+      unfold_all   = 'zC',
+    },
   }
 end
 

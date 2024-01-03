@@ -136,6 +136,8 @@ BufferQuery
 BufferQueryOpts
 BufferRestore
 BufferState
+BufferTabMap
+BufferTabMapping
 bufhidden
 buflisted
 BufNewFile
@@ -245,6 +247,7 @@ curr
 currentline
 cursorhold
 CursorHold
+customizations
 Customizations
 cvt
 cwd
@@ -285,6 +288,7 @@ devicons
 devilspie2
 devlispie2
 DevOps
+DiagnosticSign
 dialogs
 dict's
 dicts
@@ -310,6 +314,7 @@ DMV
 docstring
 Docstring
 docstrings
+DocStringSnippets
 doo
 dotfiles
 Dotfiles
@@ -456,6 +461,7 @@ golang
 gomod
 GOPATH
 gosum
+goto
 gpg
 gpgsign
 GroupIndex
@@ -633,6 +639,7 @@ LSP
 LspAttach
 lspconfig
 LspConfig
+LspDiagnosticSign
 LspKeymap
 lspkind
 LspKind
@@ -640,6 +647,9 @@ LspKM
 LspLibrary
 LspManager
 LSPs
+lspsaga
+LspSaga
+lspsaga's
 lspServer
 lua
 lua5
@@ -842,7 +852,9 @@ positionals
 POSIX
 ppa
 pre
+prepend
 Prepend
+Prepends
 prev
 prev_hunk
 printf
@@ -1234,6 +1246,7 @@ verions
 VeryLazy
 vi
 ViewMode
+ViewState
 VimEnter
 VimLeave
 vimrc
@@ -1263,6 +1276,7 @@ whois
 whoopsie
 wikipedia
 williamboman
+winbar
 WindowConfig
 WindowController
 WindowEvent
@@ -1304,6 +1318,7 @@ xinput
 xlsx
 xmodmap
 xmodmaprc
+xpcall
 xplr
 xpm
 xrandr
