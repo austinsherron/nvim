@@ -7,12 +7,12 @@
 --]]
 
 -- local alpha = require 'plugins.config.interface.alphanvim'
-local Barbar    = require 'plugins.config.interface.barbar'
-local Lightbulb = require 'plugins.config.interface.lightbulb'
-local Lualine   = require 'plugins.config.interface.lualine'
-local Sidebar   = require 'plugins.config.interface.sidebar'
-local Trouble   = require 'plugins.config.interface.trouble'
-local Priority  = require 'utils.plugins.priority'
+local Barbar      = require 'plugins.config.interface.barbar'
+local Lightbulb   = require 'plugins.config.interface.lightbulb'
+local Lualine     = require 'plugins.config.interface.lualine'
+local SmartSplits = require 'plugins.config.interface.smartsplits'
+local Trouble     = require 'plugins.config.interface.trouble'
+local Priority    = require 'utils.plugins.priority'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
@@ -107,13 +107,13 @@ return Plugins('interface', {
       vim.notify = require('notify')
     end
   },
-  ---- sidebar: module sidebar (TODO: configure further)
+  ---- smart-splits: better navigation and management of splits
   {
-    'sidebar-nvim/sidebar.nvim',
-    opts = Sidebar.opts(),
+    'mrjones2014/smart-splits.nvim',
+    opts = SmartSplits.opts(),
 
     config = function(_, opts)
-      require('sidebar-nvim').setup(opts)
+      require('smart-splits').setup(opts)
     end
   },
   ---- trouble.nvim: fancy list for diagnostics, etc.

@@ -925,6 +925,9 @@ req
 reqs
 require
 resize
+resized
+ResizeDirection
+Resizes
 resizing
 restorable
 restow
@@ -1013,6 +1016,7 @@ signingkey
 silentopen
 silversearcher
 sli
+SmartSplits
 SmiteshP
 snapd
 snippetBuilder
@@ -1265,6 +1269,7 @@ WindowEvent
 WindowHandler
 WindowManager
 windowNavigator
+WindowOpDirection
 WindowProperty
 WindowState
 WindowTransform

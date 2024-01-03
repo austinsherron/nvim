@@ -5,7 +5,6 @@ local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
 local telescope = require 'telescope'
 local actions   = require 'telescope.actions'
-local layouts   = require 'telescope.pickers.layout_strategies'
 
 local SessionInfo = SessionApi.SessionInfo
 

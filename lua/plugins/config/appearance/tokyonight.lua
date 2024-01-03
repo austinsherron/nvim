@@ -21,7 +21,6 @@ function TokyoNight.config()
       },
       sidebars = {
         'NvimTree',
-        'SidebarNvim',
         'aerial',
         'DiffviewFiles',
         'spectre_panel',

@@ -1,12 +1,14 @@
 
 # To-Do Lists
 
-## Plugins/Tooling
+## To-Do
+
+### Plugins/Tooling
 
 - [x] Auto-completion (revisit for advanced configuration)
     - [ ] `cmp-conventionalcommits`
     - [ ] `cmp-dictionary`
-- [ ] Auto-correction (?)
+- [ ] Auto-correction of diagnostics/linting errors
 - [ ] Auto-imports
 - [ ] Case Changer (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
 - [ ] Code generation (see snippets)
@@ -16,17 +18,145 @@
 - [ ] Formatting
 - [ ] General prettiness (😅)
 - [ ] Inline docs/hints
+- [ ] Linting
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [ ] Renaming/refactoring
 - [ ] Snippets
 - [ ] Tag generator, viewer, and associated plugins
+    - [ ] Generator - gutentags
 - [ ] The Line - a stylized indicator that a line is (almost) too long
 - [ ] Unit test integrations
     - [x] Ability to run from nvim
     - [ ] Ability to view/act on results
     - [ ] Ability to debug and step through execution
 
-### Completed
+### LSP Support
+
+- [ ] Fish
+- [ ] Go
+- [ ] Java
+- [ ] JavaScript
+- [ ] Json
+- [ ] K8S Yaml
+- [ ] Terraform
+- [ ] Toml
+- [ ] TypeScript
+- [ ] Yaml
+- [ ] Zsh
+
+### Tasks
+
+- [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling
+- [ ] Incorporate tabs (and windows?) into workflows (not very concrete)
+- [ ] How can I open multiple files at once w/ nvimtree?
+- [ ] Change diff/merge view colors to something that makes for better UX
+- [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
+- [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
+- [ ] Create lualine extensions for diffview, undotree, and spectre
+- [ ] Add ability to refactor imports on file move
+- [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
+- [ ] Git interactions from nvimtree (partially there w/ stage/unstage)
+- [ ] Add LuaSnip custom snippets
+- [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
+- [ ] Refactor nvim utils to separate repo? (at least those that would be/are useful for plugins as well)
+- [ ] Use lsp hooks to plug into lsp, instead of baking dependent code directly into lsp setup
+- [ ] Continue comments only in docstrings
+- [ ] Automatically add new params to docstrings
+- [ ] Add unit tests
+- [ ] Add more systematic logging
+- [ ] Add more systematic error-handling
+- [ ] Change diagnostic symbols to something snazzier
+- [ ] Add tracebacks to error logging
+- [ ] Add ability to make file "un-executable" from nvim-tree
+- [ ] Configure auto-completion support for neorepl
+- [ ] Add barbar + session integration so buffers are restored in correct order
+- [ ] Integrate scopes.nvim w/ session manager
+- [ ] Configure layouts for individual telescope pickers, based on usability, and extensions, to the extent possible
+- [ ] Hydra menu for interacting w/ log files
+- [ ] Convert user commands to lua apis?
+- [ ] Add ability to open spectre in a arbitrary splits, own buffer, tab, modal, etc.
+
+### Fixes
+
+- [ ] Issue upgrading LuaSnip
+- [ ] Figure out why barbar diagnostics don't work
+- [ ] "Fix plugins extension" (?)
+- [ ] Disable cmdline auto-completion for specific commands (ls, for example)
+- [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
+- [ ] Bufresize should ignore certain window types (i.e.: nvimtree, diffview, side panel, etc.)
+- [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
+- [ ] Fix snippet loading
+- [ ] Fix statusline crowding in specific utility buffers (i.e.: nvimtree, diffview file tree, probably others)
+- [ ] Editorconfig line length constraints aren't being enforced
+- [ ] Fix issues w/ duplicate sessions (one w/ branch + one w/o)
+- [ ] Fix session save logic that closes non-restorable buffers
+- [ ] Figure out why session seem not to save sometimes, or don't save w/ the right cwd
+
+### Ideas
+
+#### Refactor
+
+- [ ] Change parameter position, or otherwise change parameters
+    - [ ] Update docs
+    - [ ] Update call sites
+- [ ] Make function, method, field, etc public/private/package/protected
+    - [ ] For lua, convert function to/from local
+- [ ] Easily wrap values in function calls/or arbitrary braces
+- [ ] Easily move functions/methods w/in a file
+- [ ] Moving files w/ path dependent imports changes imports
+- [ ] Change case style (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
+- [ ] Auto-fill completed function params
+- [ ] Deleting a control structure and automatically reindenting interior code
+- [ ] Remove control structure, i.e.: remove loops/if statements/etc, fix indentation/formatting of code contained therein
+
+#### File Create Sub-Menu
+
+Menu in file-explorer (i.e.: nvim-tree) that allows you to choose specific kinds of files/dirs to create. Can include custom types as well as templates. Some examples:
+
+- [ ] New lang specific file
+  - [ ] lua
+  - [ ] python
+  - [ ] shell (i.e.: bash)
+- [ ] New lang specific folder structure
+  - [ ] Python project (i.e.: w/ project.toml)
+  - [ ] Python module (i.e.: w/ __init__.py)
+- [ ] Create missing function/method/var, etc.
+
+#### Buffer/Tab Interaction Feature
+
+- [ ] Pretty status/interaction menu consisting of
+    - [ ] Tabs
+    - [ ] Buffers, grouped by tabs if possible
+- [ ] Interactions include
+    - [ ] Navigating to tab
+    - [ ] Navigating to buffer
+    - [ ] Opening/creating tabs
+    - [ ] Opening/creating buffers
+    - [ ] Closing/deleting tabs
+    - [ ] Closing/deleting buffers
+    - [ ] Renaming tabs
+    - [ ] Moving tabs?
+    - [ ] Moving/regrouping buffers?
+
+#### Inspection Menu
+
+Hydra menu w/ that enables contextual inspections, including:
+
+- [ ] Checking cwd
+- [ ] Current buffer info
+- [ ] Current tab info
+- [ ] Current window info
+- [ ] If session is recording
+
+#### Log Interactions
+
+- [ ] Update logs opener to make buffer non-modifiable
+- [ ] Update logs opener to set custom filetype
+- [ ] Add buffer menu that lists logs available for exploration
+
+## Done
+
+### Plugins/Tooling
 
 - [x] Auto-pairs
 - [x] Code searching utility (always room for improvement here)
@@ -55,57 +185,13 @@
 - [x] Telescope
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
 
-## LSP Support
-
-- [ ] Fish
-- [ ] Go
-- [ ] Java
-- [ ] JavaScript
-- [ ] Json
-- [ ] K8S Yaml
-- [ ] Terraform
-- [ ] Toml
-- [ ] TypeScript
-- [ ] Yaml
-- [ ] Zsh
-
-### Completed
+### LSP Support
 
 - [x] Bash
 - [x] Python3
 - [x] Lua
 
-## Tasks
-
-- [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling
-- [ ] Incorporate tabs (and windows?) into workflows (not very concrete)
-- [ ] How can I open multiple files at once w/ nvimtree?
-- [ ] Change diff/merge view colors to something that makes for better UX
-- [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
-- [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
-- [ ] Create lualine extensions for diffview, undotree, and spectre
-- [ ] Add ability to refactor imports on file move
-- [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
-- [ ] Git interactions from nvimtree (partially there w/ stage/unstage)
-- [ ] Add LuaSnip custom snippets
-- [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
-- [ ] Refactor nvim utils to separate repo? (at least those that would be/are useful for plugins as well)
-- [ ] Use lsp hooks to plug into lsp, instead of baking dependent code directly into lsp setup
-- [ ] Continue comments only in docstrings
-- [ ] Automatically add new params to docstrings
-- [ ] Add unit tests
-- [ ] Add more systematic logging
-- [ ] Add more systematic error-handling
-- [ ] Spectre in a modal?
-- [ ] Change diagnostic symbols to something snazzier
-- [ ] Add tracebacks to error logging
-- [ ] Add ability to make file "un-executable" from nvim-tree
-- [ ] Configure auto-completion support for neorepl
-- [ ] Add barbar + session integration so buffers are restored in correct order
-- [ ] Integrate scopes.nvim w/ session manager
-- [ ] Configure layouts for individual telescope pickers, based on usability, and extensions, to the extent possible
-
-### Completed
+### Tasks
 
 - [x] Make gitsigns symbols more obvious (seems to be based on the colorscheme, but enabling numhl seems to have helped)
 - [x] Add ability to optionally suppress notifications when logging w/ nvim logger
@@ -130,24 +216,10 @@
 - [x] Add Lualine support for projects
 - [x] Add Lualine support for sessions
 - [x] Add ability to make file executable from nvim-tree
+- [x] Add override key bindings for nvimtree contextual search (constrained contextual search to nvimtree buffer, updated relevant global key bindings to use builtins instead of contextual search functions)
+- [x] Add ability to close neorepl from outside of its buffer
 
-## Fixes
-
-- [ ] Issue upgrading LuaSnip
-- [ ] Figure out why barbar diagnostics don't work
-- [ ] "Fix plugins extension" (?)
-- [ ] Disable cmdline auto-completion for specific commands (ls, for example)
-- [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
-- [ ] Bufresize should ignore certain window types (i.e.: nvimtree, diffview, side panel, etc.)
-- [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
-- [ ] Fix snippet loading
-- [ ] Fix statusline crowding in specific utility buffers (i.e.: nvimtree, diffview file tree, probably others)
-- [ ] Editorconfig line length constraints aren't being enforced
-- [ ] Fix issues w/ duplicate sessions (one w/ branch + one w/o)
-- [ ] Fix session save logic that closes non-restorable buffers
-- [ ] Figure out why session seem not to save sometimes, or don't save w/ the right cwd
-
-### Completed
+### Fixes
 
 - [x] !!! Diagnose and fix Treesitter issues (see fb465783acaa09ac0f8c1ab07eac6e22948f8ea3 for resolution notes)
 - [x] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/ (ended up being an issues w/ the way "require paths" were being constructed for recursive calls)
@@ -175,39 +247,12 @@
 - [x] Fix aerial markdown issue
 - [x] Fix indent-blankline
 - [x] Figure out why telescope layout config params seem to not be respected sometimes (as it turns out, this seems to be an issues exclusively for extensions; unfortunately, extensions don't make guarantees about their configuration params, and so may not respect the same layout config options the builtin pickers do)
+- [x] Figure out why additional key bindings to packages telescope finder aren't working (they weren't using the telescope api to get the selected value)
 
-### Won't Do
+#### Won't Do
 
 - [x] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
     - [x] I no longer use auto-session (at least for the time being)
 
-## Ideas
-
-### Refactor:
-
-- [ ] Change parameter position, or otherwise change parameters
-    - [ ] Update docs
-    - [ ] Update call sites
-- [ ] Make function, method, field, etc public/private/package/protected
-    - [ ] For lua, convert function to/from local
-- [ ] Easily wrap values in function calls/or arbitrary braces
-- [ ] Easily move functions/methods w/in a file
-- [ ] Moving files w/ path dependent imports changes imports
-- [ ] Change case style (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
-- [ ] Auto-fill completed function params
-- [ ] Deleting a control structure and automatically reindenting interior code
-- [ ] Remove control structure, i.e.: remove loops/if statements/etc, fix indentation/formatting of code contained therein
-
-### File Create Sub-Menu:
-
-Menu in file-explorer (i.e.: nvim-tree) that allows you to choose specific kinds of files/dirs to create. Can include custom types as well as templates. Some examples:
-
-- [ ] New lang specific file
-  - [ ] lua
-  - [ ] python
-  - [ ] shell (i.e. bash)
-- [ ] New lang specific folder structure
-  - [ ] Python project (i.e. w/ project.toml)
-  - [ ] Python module (i.e. w/ __init__.py)
-- [ ] Create missing function/method/var, etc.
+### Ideas
 
