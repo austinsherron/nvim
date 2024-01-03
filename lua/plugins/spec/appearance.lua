@@ -18,14 +18,7 @@ local Plugins = require('utils.plugins.plugin').plugins
 
 return Plugins('appearance', {
   ---- buf-resize: intuitively resize buffers when terminal dimensions change
-  {
-    'kwkarlwang/bufresize.nvim',
-    opts = {},
-
-    config = function(_, opts)
-      require('bufresize').setup(opts)
-    end
-  },
+  { 'kwkarlwang/bufresize.nvim' },
   ---- colorschemes: using a strongly typed wrapper to enforce consistent colorscheme
   ----               plugin attributes
   ColorScheme('catppuccin/nvim'),

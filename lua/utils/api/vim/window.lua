@@ -1,5 +1,20 @@
+local Lazy = require 'toolbox.utils.lazy'
 local Buffer = require 'utils.api.vim.buffer'
 
+local enum = require('toolbox.extensions.enum').enum
+
+local smart_splits = Lazy.require 'smart-splits'
+
+
+--- Directions in which a window can be resized, swapped, etc..
+---
+---@enum WindowOpDirection
+local WindowOpDirection = enum({
+  LEFT  = 'left',
+  RIGHT = 'right',
+  UP    = 'up',
+  DOWN  = 'down',
+})
 
 --- Contains utilities for interacting w/ (n)vim windows.
 ---
@@ -35,6 +50,26 @@ function Window.close(winnr, force)
 
   vim.api.nvim_win_close(winnr, force)
 end
+
+
+--- Resizes the current window in a direction.
+---
+---@param direction WindowOpDirection: the direction in which to resize a window
+function Window.resize(direction)
+  smart_splits['resize_' .. direction]()
+end
+
+
+--- Swaps the current buffer to another window in a direction.
+---
+---@param direction WindowOpDirection: the direction of the window to which to swap the
+--- current buffer
+function Window.swap(direction)
+  smart_splits['swap_buf_' .. direction]()
+end
+
+---@note: so ResizeDirection is publicly exposed
+Window.ResizeDirection = WindowOpDirection
 
 return Window
 

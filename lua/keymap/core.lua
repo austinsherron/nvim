@@ -63,20 +63,6 @@ KM:bind({
   { '<leader>bv', ':vsplit<CR>', { desc = 'open vertical split'   }},
 })
 
--- resize
-KM:with_hydra({ name = '⬅⬆⬇➡ Resize', body = '<leader>R' })
-  :with({ hint = HintFmttr.middle_right_1() })
-  :bind({
-    { 'j', ':resize -2<CR>',           { desc = 'resize "up" 2'     }},
-    { 'k', ':resize +2<CR>',           { desc = 'resize "down" 2'   }},
-    { 'l', ':vertical resize +2<CR>',  { desc = 'resize "left" 2'   }},
-    { 'h', ':vertical resize -2<CR>',  { desc = 'resize "right" 2'  }},
-    { 'J', ':resize -10<CR>',          { desc = 'resize "up" 10'    }},
-    { 'K', ':resize +10<CR>',          { desc = 'resize "down" 10'  }},
-    { 'L', ':vertical resize +10<CR>', { desc = 'resize "left" 10'  }},
-    { 'H', ':vertical resize -10<CR>', { desc = 'resize "right" 10' }},
-  }):done({ purge = 'current' })
-
 -- spellcheck ------------------------------------------------------------------
 
 KM:with({ desc_prefix = 'spelling: ' })
