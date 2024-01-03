@@ -5,9 +5,16 @@ local KM = KeyMapper.new({ desc_prefix = 'tabs: ', nowait = true })
 
 -- navigation ------------------------------------------------------------------
 
+-- next
 KM:bind({
-  { '<leader>tn', ':tabnext<CR>',     { desc = 'next'     }},
+  { '<leader>tn', ':tabnext<CR>', { desc = 'next' }},
+  { '<M-=>',      ':tabnext<CR>', { desc = 'next' }},
+})
+
+-- prev
+KM:bind({
   { '<leader>tp', ':tabprevious<CR>', { desc = 'previous' }},
+  { '<M-->',      ':tabprevious<CR>', { desc = 'previous' }},
 })
 
 -- core ops --------------------------------------------------------------------

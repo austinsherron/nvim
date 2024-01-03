@@ -27,6 +27,17 @@ function Window.current()
 end
 
 
+--- Gets the window's buffer id.
+---
+---@param winnr integer|nil: optional, defaults to current window; the window for which to
+--- get a buffer id
+---@return integer: the buffer's current window id
+function Window.tobuf(winnr)
+  winnr = winnr or Window.current()
+  return vim.api.nvim_win_get_buf(winnr)
+end
+
+
 --- Gets the buffer's current window id.
 ---
 ---@param bufnr integer|nil: optional, defaults to current buffer; the buffer for which to

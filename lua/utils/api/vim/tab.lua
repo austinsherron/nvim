@@ -10,6 +10,16 @@ function Tab.current()
 end
 
 
+--- Gets the windows associated w/ the provided tab.
+---
+--- @param tabnr integer|nil: optional, defaults to the current tab; the id of the tab to
+---@return integer[]: an array of ids of windows associated w/ the provided tab
+function Tab.windows(tabnr)
+  tabnr = tabnr or Tab.current()
+  return vim.api.nvim_tabpage_list_wins(tabnr)
+end
+
+
 --- Opens a new tab.
 function Tab.open()
   vim.api.nvim_command('tabnew')

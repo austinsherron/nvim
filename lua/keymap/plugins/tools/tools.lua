@@ -20,3 +20,14 @@ KM:with({ desc_prefix = 'neogen: ' })
     { '<leader>Dc', ':Neogen class<CR>', { desc = 'class docstring'    }},
 }):done()
 
+-- terminal --------------------------------------------------------------------
+
+-- NOTE: this actually comes from a code plugin, but because all other lspsaga key
+--       bindings are in the lsp keymap, this seems like a more appropriate place for this
+--       binding
+KM:bind_one(
+  '<leader>tt',
+  ':Lspsaga term_toggle<CR>',
+  { desc = 'floating terminal (lspsaga)' }
+)
+

@@ -14,8 +14,9 @@ local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 --- Buffer.getall
 ---@field query (fun(bufnr: integer): boolean)|false|nil: query filter applied after
 --- above filter
----@field xfm (fun(bufnr: integer): `T`)|nil: optional buffer transform applied to results
----@field collector (fun(b: `T[]`): `S`)|nil: optional buffer collector applied to results
+---@field xfm (fun(bufnr: integer): `T`): optional, defaults to Buffer.info; buffer
+--- transform applied to results
+---@field collector (fun(b: `T[]`): `S`): optional buffer collector applied to results
 
 --- Specifies how to view/open a buffer.
 ---
@@ -234,15 +235,15 @@ end
 ---@generic T
 ---@param opts BufferQuery|nil: parameterizes buffer query
 ---@return T|nil: zero or more buffers queried using opts
-function Buffer.find(opts)
+function Buffer.query(opts)
   opts = opts or {}
 
   local query = opts.query or Lambda.TRUE
-  local xfm = opts.xfm or Lambda.IDENTITY
+  local xfm = opts.xfm or Buffer.info
 
   return Stream.new(Buffer.getall(opts.filter))
-    :filter(query)
     :map(xfm)
+    :filter(query)
     :collect(opts.collector)
 end
 

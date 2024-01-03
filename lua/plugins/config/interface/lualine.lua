@@ -1,15 +1,15 @@
 local Custom = require 'plugins.extensions.interface.lualine'
 
-local navic = require 'nvim-navic'
+-- TODO: trying out lspsaga's winbar; remove if I decide to stick w/ that
+-- local navic = require 'nvim-navic'
 
-
-local function get_code_context()
-  return navic.get_location()
+local function is_code_context_available()
+  return require('lspsaga.symbol.winbar') ~= nil
 end
 
 
-local function is_navic_available()
-  return navic.is_available()
+local function get_code_context()
+  return require('lspsaga.symbol.winbar').get_bar()
 end
 
 --- Contains functions for configuring the lualine plugin.
@@ -36,8 +36,8 @@ function Lualine.opts()
       },
       lualine_c = {{
         get_code_context,
-        cond       = is_navic_available,
-        draw_empty = true,
+        cond       = is_code_context_available,
+        draw_empty = false,
       }},
     },
     sections = {

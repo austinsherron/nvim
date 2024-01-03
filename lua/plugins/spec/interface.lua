@@ -65,15 +65,6 @@ return Plugins('interface', {
   ---- TODO: continue to convert specific key binding groups to hydra menus (i.e.: git,
   ----       lsp, misc tools, etc.)
   { 'anuvyklack/hydra.nvim' },
-  ---- lightbulb: ide style 💡 to mark code actions
-  {
-    'kosayoda/nvim-lightbulb',
-    opts = Lightbulb.opts(),
-
-    config = function(_, opts)
-      require('nvim-lightbulb').setup(opts)
-    end
-  },
   ---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',
