@@ -172,7 +172,7 @@ end
 
 --- Gets a BufferInfo for the provided bufnr.
 ---
----@param bufnr integer|nil: optional, defaults to current buffer; the if of the buffer
+---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
 --- for which to get info
 ---@return BufferInfo: buffer info for the provided bufnr
 function Buffer.info(bufnr)

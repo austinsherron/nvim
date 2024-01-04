@@ -3,7 +3,7 @@ local KeyMapper = require 'utils.core.mapper'
 
 local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
-local Dir = Window.ResizeDirection
+local Dir = Window.WindowOpDirection
 
 local Notify = require 'notify'
 

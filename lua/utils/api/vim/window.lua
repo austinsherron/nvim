@@ -6,6 +6,11 @@ local enum = require('toolbox.extensions.enum').enum
 local smart_splits = Lazy.require 'smart-splits'
 
 
+--- Contains utilities for interacting w/ (n)vim windows.
+---
+---@class Window
+local Window = {}
+
 --- Directions in which a window can be resized, swapped, etc..
 ---
 ---@enum WindowOpDirection
@@ -16,10 +21,32 @@ local WindowOpDirection = enum({
   DOWN  = 'down',
 })
 
---- Contains utilities for interacting w/ (n)vim windows.
+--- Contains info about a window and the buffer it displays.
 ---
----@class Window
-local Window = {}
+---@class WindowBuffer
+---@field id integer: the window's id
+---@field buffer BufferInfo: info about the buffer the window displays
+local WindowBuffer = {}
+WindowBuffer.__index = WindowBuffer
+
+--- Constructor
+---
+---@param id integer|nil: optional, defaults to current window; see field docstring for
+--- info
+---@return WindowBuffer: a new instance
+function WindowBuffer.new(id)
+  id = id or Window.current()
+
+  return setmetatable({
+    id     = id,
+    buffer = Buffer.info(Window.tobuf(id)),
+  }, WindowBuffer)
+end
+
+---@note: so WindowOpDirection is publicly exposed
+Window.WindowOpDirection = WindowOpDirection
+---@note: so WindowBuffer is publicly exposed
+Window.WindowBuffer = WindowBuffer
 
 ---@return integer: the id of the current window, i.e.: where the cursor is
 function Window.current()
@@ -46,6 +73,17 @@ end
 function Window.frombuf(bufnr)
   bufnr = bufnr or Buffer.current()
   return vim.fn.bufwinnr(bufnr)
+end
+
+
+--- Gets a WindowBuffer for the provided winnr.
+---
+---@param winnr integer|nil: optional, defaults to current window; the id of the window
+--- for which to get info
+---@return WindowBuffer: window buffer for the provided winnr
+function Window.buffer(winnr)
+  winnr = winnr or Window.current()
+  return WindowBuffer.new(winnr)
 end
 
 
@@ -78,9 +116,6 @@ end
 function Window.swap(direction)
   smart_splits['swap_buf_' .. direction]()
 end
-
----@note: so ResizeDirection is publicly exposed
-Window.ResizeDirection = WindowOpDirection
 
 return Window
 
