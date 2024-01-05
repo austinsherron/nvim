@@ -23,7 +23,7 @@ end
 
 UserCommand.new()
   :withName('UserLogs')
-  :withCmd(Safe.ify(function(...) open_nvim_log(...) end, 'log', 'UserLogs'), '?')
+  :withCmd(Safe.ify(function(...) open_nvim_log(...) end, { prefix = 'UserLogs' }), '?')
   :withDesc('Opens the nvim user log; params: view_mode - optional; @see Buffer.ViewMode')
   :create()
 

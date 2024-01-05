@@ -18,9 +18,10 @@ function LspSaga.opts()
     },
     finder = {
       keys = {
-        shuttle = { 'L', 'H' },
-        split   = 'h',
-        vsplit  = 'v'
+        shuttle        = { 'L', 'H' },
+        split          = 'h',
+        toggle_or_open = { 'o', '<Enter>' },
+        vsplit         = 'v'
       }
     },
     lightbulb = {

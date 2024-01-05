@@ -1,4 +1,6 @@
 
+---@alias ErrorHandlerOpts { handler: OnErrStrategy, prefix: string|nil }
+
 --- Provides methods for "safely" performing various actions. In this context, "safely"
 --- means "w/ error handling".
 ---
@@ -10,13 +12,15 @@ local Safe = {}
 ---@see OnErr
 ---
 ---@param to_call function: the function to call
----@param error_handler OnErrStrategy?: how to handle errors; defaults to "notify"
----@param prefix string?: optional prefix for error msg
----@param ... any?: args to pass to f
----@return any?: the value returned by to_call
-function Safe.call(to_call, error_handler, prefix, ...)
-  error_handler = error_handler or 'notify'
-  return OnErr[error_handler](to_call, prefix, ...)
+---@param opts ErrorHandlerOpts|nil: optional, defaults to { handler = 'notify' }; handler
+--- specifies how to handle errors; prefix is an optional prefix for error messages
+---@param ... any: args to pass to to_call
+---@return any|nil: the value returned by to_call
+function Safe.call(to_call, opts, ...)
+  opts = opts or {}
+
+  local handler = opts.handler or 'notify'
+  return OnErr[handler](to_call, opts.prefix, ...)
 end
 
 
@@ -27,12 +31,11 @@ end
 ---
 ---@generic T
 ---@param to_call fun(...): T|nil
----@param error_handler OnErrStrategy|nil
----@param prefix string|nil
+---@param opts ErrorHandlerOpts|nil
 ---@return fun(...): T|nil
-function Safe.ify(to_call, error_handler, prefix)
+function Safe.ify(to_call, opts)
   return function(...)
-    return Safe.call(to_call, error_handler, prefix, ...)
+    return Safe.call(to_call, opts, ...)
   end
 end
 
@@ -43,18 +46,18 @@ end
 ---
 ---@param to_require string: the import string that references a lua module to require (import)
 ---@param and_then (fun(m: any?): r: any?)?: optional function to call on the result of the require
----@param error_handler OnErrStrategy?: how to handle errors; defaults to "notify"
----@param prefix string?: optional prefix for error msg
+---@param opts ErrorHandlerOpts|nil: optional, defaults to { handler = 'notify' }; handler
+--- specifies how to handle errors; prefix is an optional prefix for error messages
 ---@return any?: the value returned by the required module, or nil if there's an error
-function Safe.require(to_require, and_then, error_handler, prefix)
+function Safe.require(to_require, and_then, opts)
   local to_call = function() return require(to_require) end
-  local m = Safe.call(to_call, error_handler, prefix)
+  local m = Safe.call(to_call, opts)
 
   if not and_then then
     return m
   end
 
-  return Safe.call(function() return and_then(m) end, error_handler, prefix)
+  return Safe.call(function() return and_then(m) end, opts)
 end
 
 return Safe

@@ -20,3 +20,5 @@ Safe   = require 'utils.error.safe'
 fmt     = String.fmt
 ternary = Bool.ternary
 
+InfoQuietly('Globals initialized')
+

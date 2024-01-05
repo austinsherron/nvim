@@ -25,14 +25,31 @@ NvimLogger.__index = NvimLogger
 ---@param log_level LogLevel?: the current log level optional
 ---@param default_opts NvimLoggerOpts?: default logger options can be overridden
 --- via method level options arguments
+---@param label string|nil: optional; an optional prefix label for logged messages
 ---@return NvimLogger: a new NvimLogger instance
-function NvimLogger.new(log_level, default_opts)
-  local logger = Logger.new(LoggerType.NVIM, log_level or LogLevel.default())
+function NvimLogger.new(log_level, default_opts, label)
+  local logger = Logger.new(
+    LoggerType.NVIM,
+    log_level or LogLevel.default(),
+    label
+  )
 
   return setmetatable({
     logger       = logger,
     default_opts = TMerge.mergeright(default_opts or {}, DEFAULT_OPTS),
   }, NvimLogger)
+end
+
+
+--- Creates a new sub-logger from this instance using the provided label.
+---
+---@param label string: a prefix label for logged messages
+---@return NvimLogger: a new sub-logger instance w/ the provided label
+function NvimLogger:sub(label)
+  return setmetatable({
+    logger       = self.logger:sub(label),
+    default_opts = self.default_opts or {},
+  })
 end
 
 
