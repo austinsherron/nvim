@@ -43,3 +43,5 @@ KeyMapper.quick_bind('<Space>', '<Nop>')
 globals.mapleader = ' '
 globals.maplocalleader = ' '
 
+InfoQuietly('Bootstrapping complete')
+

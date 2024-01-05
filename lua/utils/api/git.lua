@@ -70,12 +70,11 @@ end
 
 ---@return boolean: true if the cwd is in a git repo, false otherwise
 function Git.in_repo()
-  local f = function()
-    local ok, _ = Bool.as_bool(System.run('git rev-parse --is-inside-work-tree'))
-    return ok
+  local fn = function()
+    return System.run('git rev-parse --is-inside-work-tree')
   end
 
-  return OnErr.return_false(f)
+  return (OnErr.as_bool(fn))
 end
 
 

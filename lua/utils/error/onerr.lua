@@ -75,9 +75,8 @@ end
 ---@param ... any?: args to pass to f
 ---@return boolean: true if the function completes w/out error, false otherwise
 ---@return any?: the result of f, if any
-function OnErr.return_false(f, ...)
-  local ok, res = pcall(f, ...)
-  return ok, res
+function OnErr.as_bool(f, ...)
+  return pcall(f, ...)
 end
 
 

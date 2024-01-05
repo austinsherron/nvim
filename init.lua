@@ -23,8 +23,9 @@ Safe.require 'core.cmd.user'
 
 ---- config --------------------------------------------------------------------
 
--- remaining configuration:
 Safe.require 'keymap'                  -- keymap
 Safe.require 'core.settings'           -- core settings
 Safe.require 'core.appearance'         -- colorscheme
+
+InfoQuietly('Neovim initialization complete')
 

@@ -20,7 +20,7 @@ local function wrap_fn(name, fn_name, fn)
 
     Trace('Lazy plugin setup: calling "%s"', { fqdn })
 
-    return Safe.call(fn, 'log', fqdn, ...)
+    return Safe.call(fn, { prefix = fqdn }, ...)
   end
 end
 

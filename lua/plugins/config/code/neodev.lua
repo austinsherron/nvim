@@ -10,6 +10,7 @@ function Neodev.opts()
     library = {
       plugins = {
         'LuaSnip',
+        'lspconfig',
         'lspsaga.nvim',
         'scope.nvim',
         'telescope.nvim',
