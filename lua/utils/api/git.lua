@@ -3,7 +3,7 @@ local Path   = require 'toolbox.system.path'
 local System = require 'utils.api.vim.system'
 
 local enum = require('toolbox.extensions.enum').enum
-local map  = require('toolbox.utils.map').map
+
 
 --- Contains functions for interacting w/ git.
 ---

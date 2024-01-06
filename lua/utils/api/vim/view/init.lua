@@ -21,30 +21,35 @@ local function buffer_filter(attrs)
 end
 
 
---- Closes a view for buffers w/ BufferInfo props == attrs, in tab w/ id == tabnr.
+local function query_buffers(attrs, tabnr)
+  attrs = attrs or {}
+  tabnr = tabnr or Tab.current()
+
+  local winnrs = Tab.windows(tabnr)
+
+  return Stream.new(winnrs)
+    :map(Window.tobuf)
+    :map(Buffer.info)
+    :filter(buffer_filter(attrs))
+    :collect()
+end
+
+
+--- Closes a view for buffers w/ BufferInfo props == attrs--or the current buffer if attrs == nil--in tab w/ id == tabnr.
 ---
 ---@param attrs BufferInfo|nil: used to find the view to close by matching buffers to
 --- these attrs
 ---@param tabnr integer|nil: optional, defaults to the current tab; the tab in which to
 --- close views
 function View.close(attrs, tabnr)
-  attrs = attrs or {}
-  tabnr = tabnr or Tab.current()
-
-  local winnrs = Tab.windows(tabnr)
-  local bufs = Stream.new(winnrs)
-    :map(Window.tobuf)
-    :map(Buffer.info)
-    :filter(buffer_filter(attrs))
-    :collect()
-
-  if Table.nil_or_empty(bufs) then
-    return
-  end
+  local bufs = ternary(
+    attrs == nil,
+    { Buffer.info() },
+    function() return query_buffers(attrs, tabnr) end
+  )
 
   -- windows close automatically
-  Stream.new(bufs)
-    :foreach(function(b) Buffer.close(b.id) end)
+  foreach(bufs, function(b) Buffer.close(b.id) end)
 end
 
 return View

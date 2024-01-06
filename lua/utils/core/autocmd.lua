@@ -138,7 +138,7 @@ end
 function AutoCommand:withCallback(callback)
   self.callback = function(...)
     Debug(self:log_msg(self.id, 'Running'))
-    return callback(...)
+    return Safe.call(callback, {}, ...)
   end
 
   return self

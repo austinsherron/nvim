@@ -37,9 +37,7 @@ local function do_log(level, to_log, args, opts)
 
   args = args or {}
   opts = opts or {}
-
-  opts = Table.combine({ with_date = false }, opts)
-  to_log = LogFormatter.format(LogLevel.NIL, to_log, args, opts)
+  to_log = LogFormatter.notify_format(to_log, args, opts)
 
   -- persistent == true means timeout == false, i.e.: no timeout
   local persistent, rest = Table.split_one(opts, 'persistent')
