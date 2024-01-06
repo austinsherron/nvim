@@ -1,6 +1,5 @@
+local View      = require 'utils.api.vim.view'
 local KeyMapper = require 'utils.core.mapper'
-
-local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
 
 local KM = KeyMapper.new({ desc_prefix = 'core: ', nowait = true })
@@ -15,9 +14,10 @@ KM:bind({
   { '<M-w>',     ':w<CR>',    { desc = 'save one'        }},
   { '<leader>W', ':wqa!<CR>', { desc = 'save all + quit' }},
   -- close/quit
-  { '<leader>q', ':q<CR>',   { desc = 'quit/close'     }},
-  { '<leader>Q', ':qa<CR>',  { desc = 'quit/close all' }},
-  { '<leader>!', ':qa!<CR>', { desc = 'force quit'     }},
+  { '<leader>e', View.close, { desc = 'close buffer + window' }},
+  { '<leader>q', ':q<CR>',   { desc = 'quit/close'            }},
+  { '<leader>Q', ':qa<CR>',  { desc = 'quit/close all'        }},
+  { '<leader>!', ':qa!<CR>', { desc = 'force quit'            }},
   -- <esc>
   { 'jh',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
   { 'hj',    '<Esc>', { desc = 'exit/back' }, { 'i' }},

@@ -1,15 +1,8 @@
-local String = require 'toolbox.core.string'
-local Table  = require 'toolbox.core.table'
 local Stack  = require 'toolbox.extensions.stack'
 local Lambda = require 'toolbox.functional.lambda'
 local Lazy   = require 'toolbox.utils.lazy'
-local Map    = require 'toolbox.utils.map'
 
 local Constants = require('plugins.extensions.interface.hydra').Constants
-local ternary   = require('toolbox.core.bool').ternary
-
-local filter  = Map.filter
-local foreach = Map.foreach
 
 local Hydra = Lazy.require 'hydra'
 

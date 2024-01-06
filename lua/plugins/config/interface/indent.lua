@@ -2,8 +2,6 @@ local Interface = require 'utils.api.vim.interface'
 
 local Highlight = Interface.Highlight
 
-local foreach = require('toolbox.utils.map').foreach
-
 local hooks = require 'ibl.hooks'
 
 

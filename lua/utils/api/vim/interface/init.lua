@@ -1,7 +1,5 @@
 local Highlight = require 'utils.api.vim.interface.__highlight'
 
-local foreach = require('toolbox.utils.map').foreach
-
 
 --- Contains utilities for interacting w/ nvim ui elements.
 ---

@@ -1,8 +1,6 @@
 local Num  = require 'toolbox.core.num'
 local Iter = require 'toolbox.utils.iter'
 
-local map = require('toolbox.utils.map').map
-
 
 --- Container for constants.
 local Constants = {}
