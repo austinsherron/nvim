@@ -23,7 +23,6 @@ local PICKERS = {
 
 -- TODO: configure these individually based on their setup params
 local EXTENSIONS = {
-  -- aerial    = {},
   emoji     = {},
   frecency  = {},
   notify    = {},

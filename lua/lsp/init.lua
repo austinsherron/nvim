@@ -25,9 +25,8 @@ local function get_config_for_server(lsp_server, capabilities, navic_attach)
   -- TODO: figure out how to better organize code so plugin specific lsp conf doesn't
   --       need to be centralized here
   local cmp_conf = { capabilities = capabilities }
-  local navic_conf = { on_attach = navic_attach }
 
-  return Table.combine_many({ cmp_conf, navic_conf, server_conf })
+  return Table.combine_many({ cmp_conf, server_conf })
 end
 
 
@@ -35,7 +34,6 @@ end
 function Lsp.config()
   local lspconfig    = require 'lspconfig'
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  local navic_attach = require('nvim-navic').attach
 
   for _, lsp_server in ipairs(LSP_SERVERS) do
     local conf = get_config_for_server(lsp_server, capabilities, navic_attach)
