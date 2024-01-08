@@ -31,6 +31,7 @@ app1
 app2
 AppImage
 AppImageLauncher
+ArgParse
 args
 ArgumentTypeError
 Arial
@@ -126,6 +127,7 @@ BufferLineGoToBuffer
 BufferLinePick
 BufferLineTogglePin
 BufferNext
+BufferOption
 BufferOrderByBufferNumber
 BufferOrderByDirectory
 BufferOrderByLanguage
@@ -335,6 +337,7 @@ EC2
 EdenEast
 EdgeDirction
 editorconfig
+efm
 EKS
 elseif
 elsif
@@ -352,6 +355,7 @@ env
 EnvironmentVariableNotSetException
 envs
 envvar
+EnvVar
 EOF
 eol
 eq
@@ -399,6 +403,7 @@ fmt
 fmttr
 fn
 FnNodeCallback
+fns
 FnSnippets
 folke
 folke's
@@ -581,6 +586,7 @@ kwargs
 L3MON4D3
 Lamano
 lang
+langserver
 lazygit
 LazyGit
 LazyGitCurrentFile
@@ -623,6 +629,7 @@ LogFn
 LogFormatter
 LoggerLevel
 LoggerType
+LoggerTypeOpts
 LoggerTypes
 LoggerUtils
 LogLevel
@@ -742,6 +749,7 @@ nextIdx
 nightfox
 NixOS
 nmap
+#nmarshal
 nnn
 nnodes
 nnoremap
@@ -809,6 +817,8 @@ OpenShot
 opensuse
 opsec
 optional's
+OptionKey
+OptionType
 orDefault
 os
 otherwssie
@@ -960,6 +970,7 @@ root
 rootpath
 route53
 rpad
+rpc
 rsync
 rtp
 run
@@ -968,6 +979,7 @@ runnables
 runtime
 s3
 SafeClass
+safeset
 SafeTest
 saml
 sayonara
@@ -1035,6 +1047,7 @@ snippetBuilder
 SnippetBuilder
 sniprun
 SnipRun
+SortOps
 spamtest
 spc
 spectre
@@ -1073,6 +1086,7 @@ stringified
 stringify
 stringifying
 strs
+struct
 stsh
 subcommand
 subdir
@@ -1202,6 +1216,7 @@ UnknownHostException
 unknownPlugin
 unlink
 unm
+unmarshal
 Unmounts
 unnamedplus
 unordered
@@ -1245,6 +1260,7 @@ Ventura
 verions
 VeryLazy
 vi
+viewmode
 ViewMode
 ViewState
 VimEnter
@@ -1277,6 +1293,7 @@ whoopsie
 wikipedia
 williamboman
 winbar
+WindowBuffer
 WindowConfig
 WindowController
 WindowEvent
@@ -1337,4 +1354,3 @@ zoxide
 zquestz
 zsh
 Zsh
-WindowBuffer

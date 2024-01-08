@@ -6,7 +6,6 @@
 --]]
 
 local Lsp            = require 'lsp'
-local Aerial         = require 'plugins.config.code.aerial'
 local Fidget         = require 'plugins.config.code.fidget'
 local LuaSnip        = require 'plugins.config.code.luasnip'
 local LspSaga        = require 'plugins.config.code.lspsaga'
@@ -23,20 +22,6 @@ local TsPlugin = Treesitter.TreesitterPlugin
 
 
 return Plugins('code', {
-  ---- aerial: code outline (disabled while I try out symbols-outline)
-  {
-    'stevearc/aerial.nvim',
-    enabled      = Treesitter.enabled(TsPlugin.AERIAL),
-    opts         = Aerial.opts(),
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'nvim-treesitter/nvim-treesitter',
-    },
-
-    config = function(_, opts)
-      require('aerial').setup(opts)
-    end
-  },
   ---- fidget: show lsp progress outside of statusline
   {
     'j-hui/fidget.nvim',

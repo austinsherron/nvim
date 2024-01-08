@@ -47,6 +47,8 @@ return Plugins('tools', {
       require('link-visitor').setup(opts)
     end
   },
+  ---- log highlighting: syntax highlighting for logs
+  { 'MTDL9/vim-log-highlighting' },
   ---- markdown preview: for previewing markdown documents 🤔
   {
     'iamcco/markdown-preview.nvim',

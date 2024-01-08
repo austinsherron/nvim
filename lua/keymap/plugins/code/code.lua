@@ -3,16 +3,6 @@ local KeyMapper = require 'utils.core.mapper'
 
 local KM = KeyMapper.new({ nowait = true })
 
--- aerial ----------------------------------------------------------------------
-
--- NOTE: disabled while I try out symbols-outline
-
--- KM:with({ desc_prefix = 'aerial: ' })
---   :bind({
---   { '<leader>a', ':AerialToggle<CR>',    { desc = 'toggle sidebar' }},
---   { '<leader>A', ':AerialNavToggle<CR>', { desc = 'toggle popup'   }},
--- }):done()
-
 -- mason -----------------------------------------------------------------------
 
 KM:with({ desc_prefix = 'mason: ' })
@@ -28,7 +18,7 @@ KM:with({ desc_prefix = 'sniprun: ' })
 -- symbols-outline -------------------------------------------------------------
 
 KM:with({ desc_prefix = 'symbols-outline: ' })
-  :bind({{ '<leader>a', ':SymbolsOutline<CR>', { desc = 'toggle sidebar' }}})
+  :bind({{ '<leader>2', ':SymbolsOutline<CR>', { desc = 'toggle sidebar' }}})
   :done()
 
 -- treesj ---------------------------------------------------------------------

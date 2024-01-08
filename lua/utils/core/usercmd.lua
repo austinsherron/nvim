@@ -45,14 +45,23 @@ function UserCommand:withBufnum(bufnum)
 end
 
 
+local function wrap_cmd_if_necessary(cmd)
+  if String.is(cmd) then
+    return cmd
+  end
+
+  return Safe.ify(cmd)
+end
+
+
 --- Adds cmd to instance.
 ---
 ---@param cmd string|function: cmd to add to instance
 ---@param nargs integer|string|nil: the number of parameters the command accepts; use "?" for
 --- variable # of params, or omit if no parameters
 ---@return UserCommand: self
-function UserCommand:withCmd(cmd, nargs)
-  self.cmd = cmd
+function UserCommand:withCmd(cmd, nargs, ...)
+  self.cmd = wrap_cmd_if_necessary(cmd)
 
   if nargs ~= nil then
     self:withOpt('nargs', nargs)
@@ -164,6 +173,44 @@ function UserCommand:delete(config)
   end
 
   Debug('Deleted usercmd (name=%s)', { config.name })
+end
+
+--- Contains utils for parsing user command arguments.
+---
+---@class ArgParse
+local ArgParse = {}
+
+---@note: so ArgParse is publicly exposed
+UserCommand.ArgParse = ArgParse
+
+--- Parses user command arguments.
+---
+---@param opts { fargs: table|nil }|nil: opts table passed into user command callbacks
+---@return string[]|{ [string]: string }: an array or dict of user command args
+function ArgParse.parse(opts)
+  local fargs = Table.safeget(opts, 'fargs')
+
+  if Table.nil_or_empty(fargs) then
+    return {}
+  end
+
+  ---@diagnostic disable-next-line: need-check-nil, param-type-mismatch
+  local splitargs = String.split(fargs[1])
+  local args = {}
+
+  for _, arg in ipairs(splitargs) do
+    local splitarg = String.split(arg, '=')
+
+    if #splitarg == 1 then
+      Array.append(args, splitarg[1])
+    elseif #splitarg == 2 then
+      args[splitarg[1]] = splitarg[2]
+    else
+      Err.raise('UserCommand.ArgParse.parse: invalid arg format: %s', arg)
+    end
+  end
+
+  return args
 end
 
 return UserCommand

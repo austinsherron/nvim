@@ -8,7 +8,7 @@ local KM = KeyMapper.new({ desc_prefix = 'inspect: ', nowait = true })
 
 -- interactions ----------------------------------------------------------------
 
-KM:with_hydra({ name = 'Inspect', body = '<leader>I' })
+KM:with_hydra({ name = '🔍 Inspect', body = '<leader>I' })
   :with({ hint = HintFmttr.middle_2(), color = 'pink', esc = true })
   :bind({
     { 'd', Inspect.cwd,    { desc = 'cwd'            }},

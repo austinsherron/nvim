@@ -132,9 +132,10 @@ function KeyMapper:do_vim_binding(lhs, rhs, options, modes)
   options = self:get_options(options)
   modes = modes or DEFAULT_MODES
 
-  Trace('Binding lhs="%s" to rhs="%s" (opts=%s, modes=%s)', { lhs, rhs, options, modes })
+  Debug('Binding lhs="%s" to rhs="%s"', { lhs, rhs })
+  Trace('Binding opts=%s, modes=%s', { options, modes })
   vim.keymap.set(modes, lhs, rhs, options)
-  Trace('Binding processed successfully')
+  Debug('Binding processed successfully')
 end
 
 
@@ -188,7 +189,8 @@ end
 function KeyMapper:do_hydra_binding(bindings)
   local hydra = self:get_hydra(bindings)
 
-  Debug('Binding hydra=%s', { hydra })
+  Debug('Binding hydra=%s', { hydra.name })
+  Trace('Hydra binding=%s', { hydra })
   Hydra(hydra)
   Debug('Hydra bindings processed successfully')
 end

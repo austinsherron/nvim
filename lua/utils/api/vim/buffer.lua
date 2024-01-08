@@ -6,6 +6,24 @@ local enum = require('toolbox.extensions.enum').enum
 
 local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 
+--- Specifies how to view/open a buffer.
+---
+---@enum ViewMode
+local ViewMode = enum({
+  STANDALONE = { key = 'e',      label = 'buffer', binding = 'f' },     -- open standalone buffer
+  SPLIT      = { key = 'split',  label = 'split' , binding = 'h' },     -- open buffer in split (over-under)
+  VSPLIT     = { key = 'vsplit', label = 'vsplit', binding = 'v' },     -- open buffer in vertical split (side-by-side)
+}, 'STANDALONE')
+
+--- Buffer option keys (names). See :h help-buffer-options.
+---
+---@enum OptionKey
+local OptionKey = enum({
+  FILETYPE   = 'filetype',
+  HIDDEN     = 'bufhidden',
+  MODIFIABLE = 'modifiable',
+  TYPE       = 'buftype',
+})
 
 --- Parameterizes buffer queries.
 ---
@@ -18,23 +36,11 @@ local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 --- transform applied to results
 ---@field collector (fun(b: `T[]`): `S`): optional buffer collector applied to results
 
---- Specifies how to view/open a buffer.
+--- Models a buffer option w/ a value.
 ---
----@enum ViewMode
-local ViewMode = enum({
-  STANDALONE = 'e',         -- open standalone buffer
-  SPLIT      = 'split',     -- open buffer in split (over-under)
-  VSPLIT     = 'vsplit',    -- open buffer in vertical split (side-by-side)
-}, 'STANDALONE')
-
---- Buffer options. See :h help-buffer-options.
----
----@enum Option
-local Option = enum({
-  FILETYPE = 'filetype',
-  HIDDEN   = 'bufhidden',
-  TYPE     = 'buftype',
-})
+---@class BufferOption
+---@field key OptionKey: the option key/name
+---@field value any: the option value
 
 --- Contains information about a buffer.
 ---
@@ -110,7 +116,7 @@ end
 function Buffer.is_normal(bufopts)
   bufopts = bufopts or { id = Buffer.current() }
 
-  local buftype = bufopts.type or Buffer.getoption(bufopts.id, Option.TYPE)
+  local buftype = bufopts.type or Buffer.getoption(bufopts.id, OptionKey.TYPE)
   return String.nil_or_empty(buftype)
 end
 
@@ -133,7 +139,7 @@ end
 ---
 ---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
 --- for which to retrieve an option
----@param option Option: the option to retrieve
+---@param option OptionKey: the option to retrieve
 ---@return any|nil: the value of the option for buffer bufnr, if any
 function Buffer.getoption(bufnr, option)
   bufnr = bufnr or Buffer.current()
@@ -159,7 +165,7 @@ end
 function Buffer.is_restorable(bufnr)
   bufnr = bufnr or Buffer.current()
 
-  local buftype = Buffer.getoption(bufnr, Option.TYPE)
+  local buftype = Buffer.getoption(bufnr, OptionKey.TYPE)
   local is_normal = Buffer.is_normal({ type = buftype })
 
   if not is_normal then
@@ -181,8 +187,8 @@ function Buffer.info(bufnr)
   return BufferInfo.new(
     bufnr,
     Buffer.getname(bufnr),
-    Buffer.getoption(bufnr, Option.TYPE),
-    Buffer.getoption(bufnr, Option.FILETYPE)
+    Buffer.getoption(bufnr, OptionKey.TYPE),
+    Buffer.getoption(bufnr, OptionKey.FILETYPE)
   )
 end
 
@@ -248,23 +254,36 @@ function Buffer.query(opts)
 end
 
 
---- Gets a buffer option value.
---- Opens an empty standalone buffer.
-function Buffer.blank()
-  vim.cmd('enew')
+--- Sets option values on a buffer.
+---
+---@param opts { bufnr: integer|nil, options: BufferOption[] }: contains the options to
+--- set; optionally sets the options on buffer == opts.bufnr, or the current buffer if not
+--- included
+function Buffer.setoptions(opts)
+  local bufnr = opts.bufnr or Buffer.current()
+
+  for _, option in ipairs(opts.options) do
+    vim.api.nvim_buf_set_option(bufnr, tostring(option.key), option.value)
+  end
 end
 
 
 --- Opens a buffer, either transient w/ no file, or for the file at path, if provided.
 ---
----@param view_mode string|nil: optional, defaults to ViewMode.STANDALONE at the time of
+---@param viewmode ViewMode|nil: optional, defaults to ViewMode.STANDALONE at the time of
 --- writing; "how" to open the buffer
 ---@param path string|nil: optional; the path to the file to open, if any
-function Buffer.open(view_mode, path)
-  Debug('Buffer.open: %s %s', { view_mode, path })
+---@param options BufferOption[]|nil: optional; options to set on the opened buffer
+function Buffer.open(viewmode, path, options)
+  Debug('Buffer.open: viewmode=%s, path=%s', { viewmode, path })
 
-  view_mode = ViewMode:or_default(view_mode)
-  vim.cmd[view_mode](path)
+  viewmode = ViewMode:or_default(viewmode)
+  options = options or {}
+
+  ---@diagnostic disable-next-line: need-check-nil, undefined-field
+  vim.cmd[viewmode.key](path)
+
+  Buffer.setoptions({ options = options })
 end
 
 
@@ -299,8 +318,8 @@ end
 
 ---@note: so ViewMode is publicly accessible
 Buffer.ViewMode = ViewMode
----@note: so Option is publicly accessible
-Buffer.Option = Option
+---@note: so OptionKey is publicly accessible
+Buffer.OptionKey = OptionKey
 ---@note: so BufferInfo is publicly accessible
 Buffer.BufferInfo = BufferInfo
 
