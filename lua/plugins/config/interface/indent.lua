@@ -20,7 +20,7 @@ local HIGHLIGHT_NAMES = Table.values(
 )
 
 local function set_highlights()
-  foreach(HIGHLIGHTS, Interface.set_highlight)
+  foreach(HIGHLIGHTS, function(h) Interface.set_highlight(h) end)
 end
 
 
@@ -37,9 +37,6 @@ local Indent = {}
 --- plugin
 function Indent.opts()
   return {
-    indent = {
-      char = '┃',
-    },
     scope = {
       highlight  = HIGHLIGHT_NAMES,
       show_start = false,

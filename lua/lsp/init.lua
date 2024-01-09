@@ -1,7 +1,11 @@
+local Env = require 'toolbox.system.env'
+local LspAC = require 'lsp.autocmds'
 local LspKM = require 'lsp.keymap'
+local Path = require 'toolbox.system.path'
+local Shell = require 'toolbox.system.shell'
 
-
-local LSP_SERVERS = { 'bashls', 'lua_ls', 'pyright' }
+local LOGGER = GetLogger 'LSP'
+local SERVERS_PATH = Env.nvim_root() .. '/lua/lsp/servers'
 
 --- Configures neovim LSP and related functionality.
 ---
@@ -10,17 +14,11 @@ local Lsp = {}
 
 ---@return string[]: an array-like table w/ configured lsp servers
 function Lsp.servers()
-  return LSP_SERVERS
+  return map(Shell.ls(SERVERS_PATH), Path.trim_extension)
 end
 
-
-local function require_config_for_server(lsp_server)
-  return require('lsp.servers.' .. lsp_server)
-end
-
-
-local function get_config_for_server(lsp_server, capabilities, navic_attach)
-  local server_conf = require_config_for_server(lsp_server)
+local function get_config_for_server(lsp_server, capabilities)
+  local server_conf = require('lsp.servers.' .. lsp_server)
 
   -- TODO: figure out how to better organize code so plugin specific lsp conf doesn't
   --       need to be centralized here
@@ -29,19 +27,20 @@ local function get_config_for_server(lsp_server, capabilities, navic_attach)
   return Table.combine_many({ cmp_conf, server_conf })
 end
 
-
 --- Entry point to LSP configuration.
 function Lsp.config()
-  local lspconfig    = require 'lspconfig'
+  local lspconfig = require 'lspconfig'
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  for _, lsp_server in ipairs(LSP_SERVERS) do
-    local conf = get_config_for_server(lsp_server, capabilities, navic_attach)
-    lspconfig[lsp_server].setup(conf)
+  for _, server in ipairs(Lsp.servers()) do
+    local conf = get_config_for_server(server, capabilities)
+    lspconfig[server].setup(conf)
+
+    LOGGER:debug('Configured server=%s: %s', { server, conf })
   end
 
-  LspKM.add_keymap()
+  LspAC.create()
+  LspKM.bind_globals()
 end
 
 return Lsp
-

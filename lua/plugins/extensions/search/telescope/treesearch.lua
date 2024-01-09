@@ -21,7 +21,7 @@ local function warn_for_missing_path(node)
   local msg = 'TreeSearch: no node path found for node=%s (likely searching '
            .. 'root node); falling back to non-contextual search'
 
-  return Warn(msg, { node.name })
+  return GetLogger('EXT'):warn(msg, { node.name })
 end
 
 

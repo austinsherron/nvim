@@ -4,6 +4,7 @@ local Lambda = require 'toolbox.functional.lambda'
 local enum = require('toolbox.extensions.enum').enum
 
 
+local LOGGER = GetLogger('VIEW')
 local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 
 --- Specifies how to view/open a buffer.
@@ -275,7 +276,7 @@ end
 ---@param path string|nil: optional; the path to the file to open, if any
 ---@param options BufferOption[]|nil: optional; options to set on the opened buffer
 function Buffer.open(viewmode, path, options)
-  Debug('Buffer.open: viewmode=%s, path=%s', { viewmode, path })
+  LOGGER:debug('Buffer.open: viewmode=%s, path=%s', { viewmode, path })
 
   viewmode = ViewMode:or_default(viewmode)
   options = options or {}
@@ -298,7 +299,7 @@ function Buffer.close(bufnr, force)
   local bangornot = ternary(force, '!', '')
   local cmd = fmt('silent bd%s %s', bangornot, bufnr)
 
-  Debug('Buffer.close: %s', { cmd })
+  LOGGER:debug('Buffer.close: %s', { cmd })
   vim.cmd(cmd)
 end
 
@@ -309,7 +310,7 @@ end
 --- changed will be closed
 function Buffer.closeall(force)
   local bufnrs = Buffer.getall()
-  Debug('Buffer.closeall: closing buffers=%s', { bufnrs })
+  LOGGER:debug('Buffer.closeall: closing buffers=%s', { bufnrs })
 
   for _, bufnr in ipairs(bufnrs) do
     Buffer.close(bufnr, force)

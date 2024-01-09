@@ -7,6 +7,8 @@ local Editor  = require 'utils.api.vim.editor'
 -- external
 local lspkind = require 'lspkind'
 
+
+local LOGGER = GetLogger('CMP')
 local CMDLINE_DISABLED_CMDS = Set.of('ls')
 
 --- Contains functions for configuring the nvim-cmp plugin.
@@ -29,7 +31,7 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.base(cmp)
-  Debug('Configuring nvim-cmp base')
+  LOGGER:debug('Configuring base')
 
   cmp.setup({
     formatting = Cmp.formatting(),
@@ -44,7 +46,7 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.filetype(cmp)
-  Debug('Configuring nvim-cmp for filetypes')
+  LOGGER:debug('Configuring filetypes')
 
   cmp.setup.filetype('gitcommit', {
     formatting = Cmp.formatting(),
@@ -60,7 +62,7 @@ local function should_complete_cmdline()
   local firstword = String.firstword(cmd)
 
   if CMDLINE_DISABLED_CMDS:contains(firstword) then
-    Debug('Cmp: cmdline cmp is disabled for cmd=%s', { cmd })
+    LOGGER:debug('Cmdline completion disabled for cmd=%s', { cmd })
     return false
   end
 
@@ -72,7 +74,7 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.cmdline(cmp)
-  Debug('Configuring nvim-cmp for cmdline')
+  LOGGER:debug('Configuring cmdline')
 
   cmp.setup.cmdline(':', {
     enabled = should_complete_cmdline,
@@ -86,7 +88,7 @@ end
 ---
 ---@param cmp table: the cmp module
 function Cmp.autopairs(cmp)
-  Debug('Configuring nvim-cmp for autopairs')
+  LOGGER:debug('Configuring autopairs')
 
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
@@ -100,7 +102,7 @@ end
 --- Primary entry point to configuring nvim-cmp.
 ---@note: lsp cmp setup happens in nvim:lua/lsp/init.lua
 function Cmp.config()
-  InfoQuietly('Configuring nvim-cmp')
+  LOGGER:info('Starting configuration')
 
   local cmp = require 'cmp'
 

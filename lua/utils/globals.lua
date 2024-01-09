@@ -1,8 +1,9 @@
 ---@note: we want global functions w/ lowercased names
 ---@diagnostic disable: lowercase-global
 
--- logging utils
-require 'utils.reporting.globals'
+-- logger factory and notification service
+GetLogger = require 'utils.reporting.loggers'
+Notify    = require 'utils.reporting.notify'
 
 -- generally useful, oft imported utils
 Array  = require 'toolbox.core.array'
@@ -24,5 +25,5 @@ foreach = Map.foreach
 map     = Map.map
 fmt     = String.fmt
 
-InfoQuietly('Globals initialized')
+GetLogger('INIT'):info('Globals initialized')
 

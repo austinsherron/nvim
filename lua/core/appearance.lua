@@ -7,5 +7,5 @@ vim.cmd.colorscheme 'nightfox'
 
 Safe.require('utils.api.vim.interface').init()
 
-InfoQuietly('Appearance initialized')
+GetLogger('INIT'):info('Appearance initialized')
 

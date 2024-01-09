@@ -1,8 +1,20 @@
+local TMerge = require 'utils.api.vim.tablemerge'
 local Validate = require 'toolbox.utils.validate'
-local TMerge   = require 'utils.api.vim.tablemerge'
 
+local LOGGER = GetLogger 'AUTOCMD'
 
----@alias AutoCommandCallbackParams { id: number, event: string, group: number?, match: string, buf: number, file: string, data: any }
+--- Models params passed to autocommand callbacks.  See :h nvim_create_autocmd for field
+--- descriptions.
+---
+---@class AutoCommandCallbackParams
+---@field id number
+---@field event string
+---@field group number|nil
+---@field match string
+---@field buf number
+---@field file string
+---@field data any
+
 ---@alias AutoCommandCallback fun(p: AutoCommandCallbackParams): r: boolean|nil
 
 --- Wrapper around vim.api autocommand functions.
@@ -36,7 +48,6 @@ function AutoCommand.new(config)
   return setmetatable(config, AutoCommand)
 end
 
-
 --- Adds id to instance.
 ---
 ---@param id number: id to add to instance
@@ -45,7 +56,6 @@ function AutoCommand:withId(id)
   self.id = id
   return self
 end
-
 
 --- Adds event to instance.
 ---
@@ -57,7 +67,6 @@ function AutoCommand:withEvent(event)
   return self
 end
 
-
 --- Adds events to instance.
 ---
 ---@param events string[]: events to add to instance
@@ -67,18 +76,14 @@ function AutoCommand:withEvents(events)
   return self
 end
 
-
 local function create_or_get_group(group_name, options)
-  return Safe.call(
-    vim.api.nvim_create_augroup,
-    { prefix = 'AutoCommand > Group > Create' },
-    group_name,
-    options or {}
-  )
+  return Safe.call(vim.api.nvim_create_augroup, { prefix = 'AutoCommand > Group > Create' }, group_name, options or {})
 end
 
-
 --- Adds group to instance.
+---
+--- FIXME: using groups seems to cause problems; specifically, subsequent usage of a group
+---        after creation seems to wipe out commands that previously used the group
 ---
 --- Note: if a group w/ name == group doesn't already exist, this method will create it.
 ---
@@ -88,10 +93,9 @@ end
 ---@return AutoCommand: self
 function AutoCommand:withGroup(group, options)
   self.group = create_or_get_group(group, options)
-  Debug('Created augroup="%s"', { group })
+  LOGGER:debug('Created augroup="%s"', { group })
   return self
 end
-
 
 --- Adds pattern to instance.
 ---
@@ -103,7 +107,6 @@ function AutoCommand:withPattern(pattern)
   return self
 end
 
-
 --- Adds patterns to instance.
 ---
 ---@param patterns string[]: patterns to add to instance
@@ -112,7 +115,6 @@ function AutoCommand:withPatterns(patterns)
   self.pattern = Table.concat({ self.pattern or {}, patterns })
   return self
 end
-
 
 --- Adds buffer id to instance.
 ---
@@ -123,7 +125,6 @@ function AutoCommand:withBuffer(buffer)
   return self
 end
 
-
 --- Adds description to instance.
 ---
 ---@param desc string: desc to add to instance
@@ -133,20 +134,18 @@ function AutoCommand:withDesc(desc)
   return self
 end
 
-
 -- Adds callback to instance.
 --
 ---@param callback AutoCommandCallback: callback to add to instance
 ---@return AutoCommand: self
 function AutoCommand:withCallback(callback)
   self.callback = function(...)
-    Debug(self:log_msg(self.id, 'Running'))
+    LOGGER:debug(self:log_msg(self.id, 'Running'))
     return Safe.call(callback, { prefix = 'AutoCommand > Run' }, ...)
   end
 
   return self
 end
-
 
 --- Adds opts to instance.
 ---
@@ -156,7 +155,6 @@ function AutoCommand:withOpts(opts)
   self.opts = opts or {}
   return self
 end
-
 
 --- Adds individual opt to instance.
 ---
@@ -171,39 +169,31 @@ function AutoCommand:withOpt(key, opt)
   return self
 end
 
-
 local function validate(required, config, op)
   Validate.required(required, config, op .. ' autocommand(s)')
 end
 
-
 ---@private
+---@return number|nil
 function AutoCommand:_create(config)
   config = TMerge.mergeleft(self, config or {})
 
   local options, rest = Table.split_one(config, 'opts')
   config = TMerge.mergeleft(options, rest)
 
-  validate({ 'event', { 'callback', 'command' }}, config, 'create')
+  validate({ 'event', { 'callback', 'command' } }, config, 'create')
 
   local event, opts = Table.split_one(config, 'event')
-  Debug('Creating autocmd for event="%s" with opts=%s', { event, opts })
+  LOGGER:debug('Creating autocmd for event="%s" with opts=%s', { event, opts })
 
   self.id = vim.api.nvim_create_autocmd(event, opts)
   return self.id
 end
 
-
 ---@private
 function AutoCommand:log_msg(id, action)
-  return fmt(
-    '%s autocmd (id=%d, desc=%s)',
-    action,
-    (id or '?'),
-    (self.desc or '?')
-  )
+  return fmt('%s autocmd (id=%d, desc=%s)', action, (id or '?'), (self.desc or '?'))
 end
-
 
 --- Creates an autocommand.
 ---
@@ -213,23 +203,17 @@ end
 ---@param config table?: configures the autocommand; merged w/ config that
 --- exists in the instance, w/ values in config overriding instance config if collisions
 --- are encountered
----@return number: the id of the created autocommand
+---@return number|nil: the id of the created autocommand
 ---@error if event and callback or command don't exist in config or in this instance
 function AutoCommand:create(config)
-  local id = Safe.call(
-    AutoCommand._create,
-    { prefix = 'AutoCommand > Create' },
-    self,
-    config
-  )
+  local id = Safe.call(AutoCommand._create, { prefix = 'AutoCommand > Create' }, self, config)
 
   if id ~= nil then
-    Debug(self:log_msg(id, 'Created'))
+    LOGGER:debug(self:log_msg(id, 'Created'))
   end
 
   return id
 end
-
 
 ---@private
 function AutoCommand:_delete(config)
@@ -241,7 +225,6 @@ function AutoCommand:_delete(config)
   return config.id
 end
 
-
 --- Deletes an autocommand.
 ---
 ---@param config table?: configures the autocommand; merged w/ config that
@@ -249,19 +232,13 @@ end
 ---are encountered
 ---@error if id doesn't exist in config or in this instance
 function AutoCommand:delete(config)
-  local id = Safe.call(
-    AutoCommand._delete,
-    { prefix = 'AutoCommand > Delete' },
-    self,
-    config
-  )
+  local id = Safe.call(AutoCommand._delete, { prefix = 'AutoCommand > Delete' }, self, config)
 
   if id ~= nil then
-    Debug(self:log_msg(id, 'Deleted'))
+    LOGGER:debug(self:log_msg(id, 'Deleted'))
   end
 
   return id
 end
 
 return AutoCommand
-

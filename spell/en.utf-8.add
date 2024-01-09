@@ -49,6 +49,7 @@ AssertionType
 AssertModifier
 AssertModifiers
 AssertMsgType
+async
 attr
 attrs
 augroup
@@ -360,6 +361,7 @@ EOF
 eol
 eq
 Equifax
+ErrorHandlerOpts
 errorhandling
 errorQuietly
 ErrorQuietly
@@ -624,6 +626,7 @@ load_balancers
 lockfile
 Lockscreen
 loclist
+LOGER
 LOG_FILE_BASE
 LogFn
 LogFormatter
@@ -644,9 +647,11 @@ lpad
 lsp
 LSP
 LspAttach
+LspAutocmds
 lspconfig
 LspConfig
 LspDiagnosticSign
+LspFormatOpts
 LspKeymap
 lspkind
 LspKind

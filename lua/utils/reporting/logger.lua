@@ -9,7 +9,7 @@ local Notify     = require 'utils.reporting.notify'
 ---@alias NvimLoggerOpts { persistent: boolean?, user_facing: boolean? }
 
 ---@type NvimLoggerOpts
-local DEFAULT_OPTS = { persistent = false, user_facing = true }
+local DEFAULT_OPTS = { persistent = false, user_facing = false }
 
 --- A neovim runtime logger.
 ---
@@ -49,7 +49,7 @@ function NvimLogger:sub(label)
   return setmetatable({
     logger       = self.logger:sub(label),
     default_opts = self.default_opts or {},
-  })
+  }, NvimLogger)
 end
 
 

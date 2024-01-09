@@ -2,6 +2,8 @@ local Validate = require 'toolbox.utils.validate'
 local TMerge   = require 'utils.api.vim.tablemerge'
 
 
+local LOGGER = GetLogger('USERCMD')
+
 ---@alias UserCommandConfig { name: string?, cmd: (string|function)?, bufnum: integer?, opts: table? }
 
 --- Wrapper around vim.api user command functions.
@@ -147,7 +149,7 @@ function UserCommand:create(config)
     create_cmd(config)
   end
 
-  Debug('Created usercmd (name=%s)', { config.name })
+  LOGGER:debug('Created usercmd (name=%s)', { config.name })
 end
 
 
@@ -172,7 +174,7 @@ function UserCommand:delete(config)
     vim.api.nvim_del_user_command(config.name)
   end
 
-  Debug('Deleted usercmd (name=%s)', { config.name })
+  LOGGER:debug('Deleted usercmd (name=%s)', { config.name })
 end
 
 --- Contains utils for parsing user command arguments.
