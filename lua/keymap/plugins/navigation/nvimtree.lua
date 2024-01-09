@@ -4,7 +4,7 @@ local TreeGit = require 'plugins.extensions.git.treegit'
 local TreeActions = require('plugins.extensions.navigation').NvimTree.Actions
 local TreeSearch = require('plugins.extensions.search').Telescope.TreeSearch
 
-local KM = KeyMapper.new({ desc_prefix = 'nvim-tree: ', silent = true, nowait = true })
+local KM = KeyMapper.new({ desc_prefix = 'nvim-tree: ', nowait = true })
 
 -- interactions ----------------------------------------------------------------
 

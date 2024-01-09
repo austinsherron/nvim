@@ -5,7 +5,7 @@ local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
 local Dir = Window.WindowOpDirection
 
-local KM = KeyMapper.new({ desc_prefix = 'smart-splits: ', nowait = true, silent = true })
+local KM = KeyMapper.new({ desc_prefix = 'smart-splits: ', nowait = true })
 
 -- interactions ----------------------------------------------------------------
 

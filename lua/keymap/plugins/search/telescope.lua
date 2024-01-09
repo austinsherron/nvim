@@ -12,7 +12,6 @@ local TreeSearch = Search.Telescope.TreeSearch
 local KM = KeyMapper.new({
   desc_prefix = 'telescope: ',
   nowait = true,
-  silent = true,
 })
 
 -- find ------------------------------------------------------------------------

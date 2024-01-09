@@ -3,7 +3,7 @@ local KeyMapper = require 'utils.core.mapper'
 local notify = require 'notify'
 local todo = require 'todo-comments'
 
-local KM = KeyMapper.new({ nowait = true, silent = true })
+local KM = KeyMapper.new({ nowait = true })
 
 -- alpha -----------------------------------------------------------------------
 

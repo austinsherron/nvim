@@ -9,7 +9,7 @@ local Hydra = Lazy.require 'hydra'
 local LOGGER = GetLogger 'KEYMAP'
 local DEFAULT_MODES = { 'n' }
 -- WARN: this is effectively duplicated in this file's unit tests
-local DEFAULT_OPTIONS = { noremap = true }
+local DEFAULT_OPTIONS = { noremap = true, silent = true }
 local DEFAULT_HYDRA_CONFIG = { invoke_on_body = true }
 
 ---@alias BindingOptions { desc_prefix: string|nil, desc: string|nil, nowait: boolean|nil, silent: boolean|nil }
