@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the symbols-outline plugin.
 ---
 ---@class SymbolsOutline
@@ -9,16 +8,15 @@ local SymbolsOutline = {}
 function SymbolsOutline.opts()
   return {
     autofold_depth = 0,
-    position       = 'right',
-    keymaps        = {
+    position = 'right',
+    keymaps = {
       hover_symbol = 'h',
-      fold         = 'zo',
-      unfold       = 'zc',
-      fold_all     = 'zO',
-      unfold_all   = 'zC',
+      fold = 'zo',
+      unfold = 'zc',
+      fold_all = 'zO',
+      unfold_all = 'zC',
     },
   }
 end
 
 return SymbolsOutline
-

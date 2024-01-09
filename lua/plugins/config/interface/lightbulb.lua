@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the lightbulb plugin.
 ---
 ---@class Lightbulb
@@ -17,4 +16,3 @@ function Lightbulb.opts()
 end
 
 return Lightbulb
-

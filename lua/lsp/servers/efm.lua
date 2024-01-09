@@ -1,5 +1,4 @@
-
-local LOGGER = GetLogger('EFM')
+local LOGGER = GetLogger 'EFM'
 
 local FORMATTERS = {
   lua = 'stylua',
@@ -13,7 +12,6 @@ local function get_efm_config(type, component)
   return require(fmt('efmls-configs.%ss.%s', type, component))
 end
 
-
 local function log(type, lang, name, config)
   LOGGER:debug('%s config for lang=%s, name=%s: %s', {
     String.capitalize(type),
@@ -22,7 +20,6 @@ local function log(type, lang, name, config)
     config,
   })
 end
-
 
 local function make_component_config(components, type, configs)
   configs = configs or {}
@@ -39,7 +36,6 @@ local function make_component_config(components, type, configs)
   return configs
 end
 
-
 local function make_langagues_block()
   local configs = make_component_config(FORMATTERS, 'formatter')
   return make_component_config(LINTERS, 'linter', configs)
@@ -47,9 +43,8 @@ end
 
 return {
   init_options = { documentFormatting = true },
-  settings     = {
+  settings = {
     rootMarkers = { '.git/' },
-    languages   = make_langagues_block(),
+    languages = make_langagues_block(),
   },
 }
-

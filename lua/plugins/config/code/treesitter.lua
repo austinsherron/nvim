@@ -1,31 +1,30 @@
-
 --- Strongly-typed representation of plugins w/ a dependency on treesitter.
 ---
 ---@enum TreesitterPlugin
 local TreesitterPlugin = {
-  AUTOPAIRS        = 'autopairs',
-  CMP_TREESITTER   = 'cmp-treesitter',
-  ENDWISE          = 'endwise',
+  AUTOPAIRS = 'autopairs',
+  CMP_TREESITTER = 'cmp-treesitter',
+  ENDWISE = 'endwise',
   INDENT_BLANKLINE = 'indent-blankline',
-  NEOGEN           = 'neogen',
-  NEOTEST          = 'neotest',
-  PLAYGROUND       = 'playground',
-  SURROUND         = 'surround',
-  TS_RAINBOW       = 'ts-rainbow2',
-  TREESJ           = 'treesj',
+  NEOGEN = 'neogen',
+  NEOTEST = 'neotest',
+  PLAYGROUND = 'playground',
+  SURROUND = 'surround',
+  TS_RAINBOW = 'ts-rainbow2',
+  TREESJ = 'treesj',
 }
 
 local TS_PLUGIN_ENABLEMENT = {
-  [TreesitterPlugin.AUTOPAIRS]        = true,
-  [TreesitterPlugin.CMP_TREESITTER]   = true,
-  [TreesitterPlugin.ENDWISE]          = true,
+  [TreesitterPlugin.AUTOPAIRS] = true,
+  [TreesitterPlugin.CMP_TREESITTER] = true,
+  [TreesitterPlugin.ENDWISE] = true,
   [TreesitterPlugin.INDENT_BLANKLINE] = true,
-  [TreesitterPlugin.NEOGEN]           = true,
-  [TreesitterPlugin.NEOTEST]          = true,
-  [TreesitterPlugin.PLAYGROUND]       = true,
-  [TreesitterPlugin.SURROUND]         = true,
-  [TreesitterPlugin.TREESJ]           = true,
-  [TreesitterPlugin.TS_RAINBOW]       = true,
+  [TreesitterPlugin.NEOGEN] = true,
+  [TreesitterPlugin.NEOTEST] = true,
+  [TreesitterPlugin.PLAYGROUND] = true,
+  [TreesitterPlugin.SURROUND] = true,
+  [TreesitterPlugin.TREESJ] = true,
+  [TreesitterPlugin.TS_RAINBOW] = true,
 }
 
 local TS_ENABLED = true
@@ -51,12 +50,10 @@ function Treesitter.enabled(plugin)
   return TS_ENABLED and (plugin == nil or TS_PLUGIN_ENABLEMENT[plugin])
 end
 
-
 ---@return table: build (install/update workflow) opts for treesitter plugin
 function Treesitter.build()
   return { with_sync = true }
 end
-
 
 ---@return table: configures the treesitter plugin
 function Treesitter.opts()
@@ -108,4 +105,3 @@ function Treesitter.opts()
 end
 
 return Treesitter
-

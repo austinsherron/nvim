@@ -1,4 +1,3 @@
-
 -- appearance ------------------------------------------------------------------
 
 --[[
@@ -7,27 +6,26 @@
   useful); appearance is the place for things that provide aesthetic value only
 --]]
 
-local LspKind     = require 'plugins.config.appearance.lspkind'
-local Nightfox    = require 'plugins.config.appearance.nightfox'
-local TokyoNight  = require 'plugins.config.appearance.tokyonight'
 local ColorScheme = require 'utils.plugins.colorscheme'
-local Priority    = require 'utils.plugins.priority'
+local LspKind = require 'plugins.config.appearance.lspkind'
+local Nightfox = require 'plugins.config.appearance.nightfox'
+local Priority = require 'utils.plugins.priority'
+local TokyoNight = require 'plugins.config.appearance.tokyonight'
 
 local Plugins = require('utils.plugins.plugin').plugins
-
 
 return Plugins('appearance', {
   ---- buf-resize: intuitively resize buffers when terminal dimensions change
   { 'kwkarlwang/bufresize.nvim' },
   ---- colorschemes: using a strongly typed wrapper to enforce consistent colorscheme
   ----               plugin attributes
-  ColorScheme('catppuccin/nvim'),
-  ColorScheme('projekt0n/github-nvim-theme'),
-  ColorScheme('rebelot/kanagawa.nvim'),
-  ColorScheme('marko-cerovac/material.nvim'),
+  ColorScheme 'catppuccin/nvim',
+  ColorScheme 'projekt0n/github-nvim-theme',
+  ColorScheme 'rebelot/kanagawa.nvim',
+  ColorScheme 'marko-cerovac/material.nvim',
   ColorScheme('EdenEast/nightfox.nvim', Nightfox.config()),
-  ColorScheme('AlexvZyl/nordic.nvim'),
-  ColorScheme('rose-pine/neovim'),
+  ColorScheme 'AlexvZyl/nordic.nvim',
+  ColorScheme 'rose-pine/neovim',
   ColorScheme('folke/tokyonight.nvim', TokyoNight.config()),
   ---- dressing.nvim: ui/ux treatments for vim input/select
   {
@@ -35,7 +33,7 @@ return Plugins('appearance', {
 
     config = function()
       require('dressing').setup()
-    end
+    end,
   },
   ---- lspkind: icons for lsp completion items
   {
@@ -44,7 +42,7 @@ return Plugins('appearance', {
 
     config = function(_, opts)
       require('lspkind').init(opts)
-    end
+    end,
   },
   ---- nui: ui components
   {
@@ -56,4 +54,3 @@ return Plugins('appearance', {
     priority = Priority.FIRST,
   },
 })
-

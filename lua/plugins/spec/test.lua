@@ -1,17 +1,15 @@
-
 -- test ------------------------------------------------------------------------
 
 --[[
   enable unit testing and related functionality
 --]]
 
+local Neotest = require 'plugins.config.test.neotest'
 local Treesitter = require 'plugins.config.code.treesitter'
-local Neotest    = require 'plugins.config.test.neotest'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
 local TsPlugin = Treesitter.TreesitterPlugin
-
 
 return Plugins('test', {
   ---- neotest: new-school nvim test runner/adapter
@@ -35,4 +33,3 @@ return Plugins('test', {
   ---- vim-test: old-school vim test runner/adapter
   { 'vim-test/vim-test' },
 })
-

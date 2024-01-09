@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the tokyonight colorscheme.
 ---
 --- TODO: I'm not 100% sure that this works, but I'm not using this colorscheme at the
@@ -11,13 +10,13 @@ local TokyoNight = {}
 --- tokyonight colorscheme
 function TokyoNight.config()
   return {
-    pkg  = 'tokyonight',
+    pkg = 'tokyonight',
     opts = {
-      style  = 'moon',
+      style = 'moon',
       styles = {
-        comments  = { italic = true },
+        comments = { italic = true },
         variables = { bold = true },
-        sidebars  = 'transparent',
+        sidebars = 'transparent',
       },
       sidebars = {
         'NvimTree',
@@ -32,4 +31,3 @@ function TokyoNight.config()
 end
 
 return TokyoNight
-

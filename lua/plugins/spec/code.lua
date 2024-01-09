@@ -1,25 +1,23 @@
-
 -- code ------------------------------------------------------------------------
 
 --[[
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
-local Lsp            = require 'lsp'
-local Fidget         = require 'plugins.config.code.fidget'
-local LuaSnip        = require 'plugins.config.code.luasnip'
-local LspSaga        = require 'plugins.config.code.lspsaga'
-local Mason          = require 'plugins.config.code.mason'
-local Neodev         = require 'plugins.config.code.neodev'
-local SnipRun        = require 'plugins.config.code.sniprun'
+local Fidget = require 'plugins.config.code.fidget'
+local Lsp = require 'lsp'
+local LspSaga = require 'plugins.config.code.lspsaga'
+local LuaSnip = require 'plugins.config.code.luasnip'
+local Mason = require 'plugins.config.code.mason'
+local Neodev = require 'plugins.config.code.neodev'
+local SnipRun = require 'plugins.config.code.sniprun'
 local SymbolsOutline = require 'plugins.config.code.outline'
-local Treesitter     = require 'plugins.config.code.treesitter'
-local TreeSJ         = require 'plugins.config.code.treesj'
+local TreeSJ = require 'plugins.config.code.treesj'
+local Treesitter = require 'plugins.config.code.treesitter'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
 local TsPlugin = Treesitter.TreesitterPlugin
-
 
 return Plugins('code', {
   ---- efm-configs: oob efm configs for formatters and linters
@@ -30,9 +28,9 @@ return Plugins('code', {
   ---- fidget: show lsp progress outside of statusline
   {
     'j-hui/fidget.nvim',
-    tag   = 'legacy',
+    tag = 'legacy',
     event = 'LspAttach',
-    opts  = Fidget.opts(),
+    opts = Fidget.opts(),
 
     config = function(_, opts)
       require('fidget').setup(opts)
@@ -41,7 +39,7 @@ return Plugins('code', {
   ---- lspsaga: "improves the neovim built-in lsp experience"
   {
     'nvimdev/lspsaga.nvim',
-    opts         = LspSaga.opts(),
+    opts = LspSaga.opts(),
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       'nvim-tree/nvim-web-devicons',
@@ -49,14 +47,14 @@ return Plugins('code', {
 
     config = function(_, opts)
       require('lspsaga').setup(opts)
-    end
+    end,
   },
   ---- LuaSnip: snippets engine (...written in Lua)
   {
     'L3MON4D3/LuaSnip',
     version = '<1>.*',
-    build   = 'make install_jsregexp',
-    config  = LuaSnip.config,
+    build = 'make install_jsregexp',
+    config = LuaSnip.config,
   },
   ---- mason: package manager for lsp/dap servers, linters, formatters, etc.
   {
@@ -65,27 +63,27 @@ return Plugins('code', {
 
     config = function()
       require('mason').setup()
-    end
+    end,
   },
   ---- mason lsp-config: integration b/w mason and nvim lsp-config
   {
     'williamboman/mason-lspconfig.nvim',
-    opts         = Mason.opts(),
+    opts = Mason.opts(),
     dependencies = { 'williamboman/mason.nvim' },
 
     config = function(_, opts)
       require('mason-lspconfig').setup(opts)
-    end
+    end,
   },
   ---- neodev: make lsp aware of (n)vim apis and plugins
   {
     'folke/neodev.nvim',
     dependencies = 'neovim/nvim-lspconfig',
-    opts         = Neodev.opts(),
+    opts = Neodev.opts(),
 
     config = function(_, opts)
       require('neodev').setup(opts)
-    end
+    end,
   },
   ---- nvim lsp-config: makes it easier to configure nvim's built in lsp (code semantics)
   {
@@ -100,22 +98,22 @@ return Plugins('code', {
   ---- TODO: trying out lspsaga's winbar; remove if I decide to stick w/ that
   {
     'SmiteshP/nvim-navic',
-    enabled      = false,
+    enabled = false,
     dependencies = { 'neovim/nvim-lspconfig' },
 
     config = function()
-      require('nvim-navic')
-    end
+      require 'nvim-navic'
+    end,
   },
   ---- sniprun: run snippets of code on the fly
   {
     'michaelb/sniprun',
-    opts  = SnipRun.opts(),
+    opts = SnipRun.opts(),
     build = 'bash install.sh',
 
     config = function(_, opts)
       require('sniprun').setup(opts)
-    end
+    end,
   },
   ---- symbols-outline: code outline using lsp
   {
@@ -130,7 +128,7 @@ return Plugins('code', {
   {
     'nvim-treesitter/nvim-treesitter',
     enabled = Treesitter.enabled(),
-    opts    = Treesitter.opts(),
+    opts = Treesitter.opts(),
 
     build = function()
       require('nvim-treesitter.install').update(Treesitter.build())
@@ -143,8 +141,8 @@ return Plugins('code', {
   ---- TreeSJ: split/join semantic blocks of code
   {
     'Wansmer/treesj',
-    enabled      = Treesitter.enabled(TsPlugin.TREESJ),
-    opts         = TreeSJ.opts(),
+    enabled = Treesitter.enabled(TsPlugin.TREESJ),
+    opts = TreeSJ.opts(),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
     config = function(_, opts)
@@ -152,4 +150,3 @@ return Plugins('code', {
     end,
   },
 })
-

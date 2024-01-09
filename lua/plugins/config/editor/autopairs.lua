@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the autopairs plugin.
 ---
 ---@class Autopairs
@@ -6,10 +5,9 @@ local Autopairs = {}
 
 local function opts()
   return {
-    check_ts = true
+    check_ts = true,
   }
 end
-
 
 --- Configures the autopairs plugin.
 function Autopairs.config()
@@ -20,4 +18,3 @@ function Autopairs.config()
 end
 
 return Autopairs
-

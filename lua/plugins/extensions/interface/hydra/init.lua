@@ -1,9 +1,8 @@
 local Menu = require 'plugins.extensions.interface.hydra.menu'
-local Num  = require 'toolbox.core.num'
+local Num = require 'toolbox.core.num'
 
 local Constants = Menu.Constants
 local MenuFmttr = Menu.MenuFormatter
-
 
 ---@alias HintMenuFormatter fun(b: Binding[], name: string|nil): string
 ---@alias HydraHint { fmttr: HintMenuFormatter, position: string, border: string, type: string }
@@ -22,13 +21,11 @@ function HintFormatter.new()
   return setmetatable({}, HintFormatter)
 end
 
-
 local function make_fmt(columns)
   return function(bindings, name)
     return MenuFmttr.format(bindings, columns, name)
   end
 end
-
 
 local function parse_name(k)
   local parts = String.split(k, '_')
@@ -37,7 +34,7 @@ local function parse_name(k)
     Err.raise('Hydra.HintFormatter: function name should consist of 2/3 tokens separated by "_" (%s)', k)
   end
 
-  if not Num.isstrint(Array.index(parts, -1))  then
+  if not Num.isstrint(Array.index(parts, -1)) then
     Err.raise('Hydra.HintFormatter: the function name token after the last "_" must be an int (%s)', k)
   end
 
@@ -49,18 +46,16 @@ local function parse_name(k)
   return position, colnums
 end
 
-
 local function make_hint_opts(position, cols)
-  return function() return
-    {
-      border   = 'rounded',
-      fmttr    = make_fmt(cols),
+  return function()
+    return {
+      border = 'rounded',
+      fmttr = make_fmt(cols),
       position = position,
-      type     = 'window',
+      type = 'window',
     }
   end
 end
-
 
 --- Custom index metamethod that expects function name keys of the following form:
 ---
@@ -84,7 +79,6 @@ end
 return {
   ---@note: we don't strictly need to export this here, but it makes the client interface
   --- cleaner
-  Constants     = Constants,
+  Constants = Constants,
   HintFormatter = HintFormatter.new(),
 }
-

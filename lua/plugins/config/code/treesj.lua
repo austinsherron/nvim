@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the treesj plugin.
 ---
 ---@class TreeSJ
@@ -12,4 +11,3 @@ function TreeSJ.opts()
 end
 
 return TreeSJ
-

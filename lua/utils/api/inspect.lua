@@ -1,11 +1,10 @@
-local Buffer  = require 'utils.api.vim.buffer'
-local System  = require 'utils.api.vim.system'
-local Tab     = require 'utils.api.vim.tab'
-local Window  = require 'utils.api.vim.window'
+local Buffer = require 'utils.api.vim.buffer'
+local System = require 'utils.api.vim.system'
+local Tab = require 'utils.api.vim.tab'
+local Window = require 'utils.api.vim.window'
 
-local Collectors   = Stream.Collectors
+local Collectors = Stream.Collectors
 local WindowBuffer = Window.WindowBuffer
-
 
 --- Contains utilities for inspecting nvim state.
 ---
@@ -14,11 +13,7 @@ local Inspect = {}
 
 --- Displays info the cwd.
 function Inspect.cwd()
-  Notify.info(
-    'CWD: %s',
-    { System.cwd() },
-    { title = 'CWD' }
-  )
+  Notify.info('CWD: %s', { System.cwd() }, { title = 'CWD' })
 end
 
 local BUFFER_TEMPLATE = [[
@@ -37,25 +32,17 @@ Current %s:
 local function fmtbuf(buf, indent)
   indent = indent or '  '
 
-  local bufstr = fmt(
-    BUFFER_TEMPLATE,
-    buf.id, buf.name, buf.type, buf.filetype
-  )
+  local bufstr = fmt(BUFFER_TEMPLATE, buf.id, buf.name, buf.type, buf.filetype)
 
   return indent .. String.join(String.split_lines(bufstr) or {}, '\n' .. indent)
 end
-
 
 --- Displays info about the current buffer.
 function Inspect.buffer()
   local buf = Buffer.info()
   local bufstr = fmtbuf(buf)
 
-  Notify.info(
-    INSPECT_TEMPLATE,
-    { 'buffer', bufstr },
-    { title = 'Current Buffer' }
-  )
+  Notify.info(INSPECT_TEMPLATE, { 'buffer', bufstr }, { title = 'Current Buffer' })
 end
 
 local WINDOW_TEMPLATE = [[
@@ -68,26 +55,15 @@ local function fmtwin(winbuf, indent)
   indent = indent or '  '
 
   local bufstr = fmtbuf(winbuf.buffer, indent .. '  ')
-  return fmt(
-    WINDOW_TEMPLATE,
-    indent,
-    winbuf.id,
-    indent,
-    bufstr
-  )
+  return fmt(WINDOW_TEMPLATE, indent, winbuf.id, indent, bufstr)
 end
-
 
 --- Displays info about the current window.
 function Inspect.window()
   local winbuf = Window.buffer()
   local winstr = fmtwin(winbuf, '    ')
 
-  Notify.info(
-    INSPECT_TEMPLATE,
-    { 'window', winstr },
-    { title = 'Current Window' }
-  )
+  Notify.info(INSPECT_TEMPLATE, { 'window', winstr }, { title = 'Current Window' })
 end
 
 local TAB_TEMPLATE = [[
@@ -104,15 +80,12 @@ function Inspect.tab()
   local tab = Tab.current()
   local winstrs = Stream.new(Tab.windows(tab))
     :map(WindowBuffer.new)
-    :map(function(w) return fmtwin(w, '    ') end)
-    :collect(Collectors.joining('\n'))
+    :map(function(w)
+      return fmtwin(w, '    ')
+    end)
+    :collect(Collectors.joining '\n')
 
-  Notify.info(
-    TAB_TEMPLATE,
-    { tab, winstrs },
-    { title = 'Current Tab' }
-  )
+  Notify.info(TAB_TEMPLATE, { tab, winstrs }, { title = 'Current Tab' })
 end
 
 return Inspect
-

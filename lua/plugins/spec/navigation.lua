@@ -1,4 +1,3 @@
-
 -- navigation ------------------------------------------------------------------
 
 --[[
@@ -8,7 +7,6 @@
 local NvimTree = require 'plugins.config.navigation.nvimtree'
 
 local Plugins = require('utils.plugins.plugin').plugins
-
 
 return Plugins('navigation', {
   ---- nnn: file explorer w/ what seems like a cult-ish following
@@ -21,18 +19,17 @@ return Plugins('navigation', {
 
     config = function()
       require('nnn').setup()
-    end
+    end,
   },
   ---- nvim-tree: file explorer
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version      = '*',
-    opts         = NvimTree.opts(),
+    version = '*',
+    opts = NvimTree.opts(),
 
     config = function(_, opts)
       require('nvim-tree').setup(opts)
     end,
   },
 })
-

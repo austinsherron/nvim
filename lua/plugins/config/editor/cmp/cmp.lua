@@ -1,15 +1,14 @@
 -- internal
-local CmpKM   = require 'keymap.plugins.editor.cmp'
-local Src     = require 'plugins.config.editor.cmp.sources'
+local CmpKM = require 'keymap.plugins.editor.cmp'
+local Editor = require 'utils.api.vim.editor'
 local LuaSnip = require 'plugins.config.code.luasnip'
-local Editor  = require 'utils.api.vim.editor'
+local Src = require 'plugins.config.editor.cmp.sources'
 
 -- external
 local lspkind = require 'lspkind'
 
-
-local LOGGER = GetLogger('CMP')
-local CMDLINE_DISABLED_CMDS = Set.of('ls')
+local LOGGER = GetLogger 'CMP'
+local CMDLINE_DISABLED_CMDS = Set.of 'ls'
 
 --- Contains functions for configuring the nvim-cmp plugin.
 ---
@@ -26,35 +25,32 @@ function Cmp.formatting()
   }
 end
 
-
 --- Base auto-completion configuration.
 ---
 ---@param cmp table: the cmp module
 function Cmp.base(cmp)
-  LOGGER:debug('Configuring base')
+  LOGGER:debug 'Configuring base'
 
   cmp.setup({
     formatting = Cmp.formatting(),
-    mapping    = CmpKM.make_mapping(),
-    sources    = cmp.config.sources(Src.for_base()),
-    snippet    = { expand = LuaSnip.expand },
+    mapping = CmpKM.make_mapping(),
+    sources = cmp.config.sources(Src.for_base()),
+    snippet = { expand = LuaSnip.expand },
   })
 end
-
 
 --- Auto-completion configuration for misc filetypes.
 ---
 ---@param cmp table: the cmp module
 function Cmp.filetype(cmp)
-  LOGGER:debug('Configuring filetypes')
+  LOGGER:debug 'Configuring filetypes'
 
   cmp.setup.filetype('gitcommit', {
     formatting = Cmp.formatting(),
-    mapping    = CmpKM.make_mapping(),
-    sources    = cmp.config.sources(Src.for_gitcommit()),
+    mapping = CmpKM.make_mapping(),
+    sources = cmp.config.sources(Src.for_gitcommit()),
   })
 end
-
 
 -- FIXME: this doesn't seem to work they way I want it to (or think/thought it should)
 local function should_complete_cmdline()
@@ -69,12 +65,11 @@ local function should_complete_cmdline()
   return true
 end
 
-
 --- Auto-completion configuration for command line (i.e.: `:`) (if native_menu = false).
 ---
 ---@param cmp table: the cmp module
 function Cmp.cmdline(cmp)
-  LOGGER:debug('Configuring cmdline')
+  LOGGER:debug 'Configuring cmdline'
 
   cmp.setup.cmdline(':', {
     enabled = should_complete_cmdline,
@@ -83,26 +78,21 @@ function Cmp.cmdline(cmp)
   })
 end
 
-
 --- Auto-completion configuration that inserts parens after function names, etc.
 ---
 ---@param cmp table: the cmp module
 function Cmp.autopairs(cmp)
-  LOGGER:debug('Configuring autopairs')
+  LOGGER:debug 'Configuring autopairs'
 
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
-  cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-  )
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
-
 
 --- Primary entry point to configuring nvim-cmp.
 ---@note: lsp cmp setup happens in nvim:lua/lsp/init.lua
 function Cmp.config()
-  LOGGER:info('Starting configuration')
+  LOGGER:info 'Starting configuration'
 
   local cmp = require 'cmp'
 
@@ -113,4 +103,3 @@ function Cmp.config()
 end
 
 return Cmp
-

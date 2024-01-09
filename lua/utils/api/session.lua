@@ -1,17 +1,16 @@
-local Env    = require 'toolbox.system.env'
-local File   = require 'toolbox.system.file'
-local Path   = require 'toolbox.system.path'
-local Lazy   = require 'toolbox.utils.lazy'
 local Buffer = require 'utils.api.vim.buffer'
-local Paths  = require 'utils.api.vim.path'
+local Env = require 'toolbox.system.env'
+local File = require 'toolbox.system.file'
+local Lazy = require 'toolbox.utils.lazy'
+local Path = require 'toolbox.system.path'
+local Paths = require 'utils.api.vim.path'
 local System = require 'utils.api.vim.system'
 
 local safeget = Table.safeget
 
-local persisted = Lazy.require 'persisted'  ---@module 'persisted'
+local persisted = Lazy.require 'persisted' ---@module 'persisted'
 
-
-local LOGGER = GetLogger('SESSION')
+local LOGGER = GetLogger 'SESSION'
 local SESSIONS_DIR = Paths.data() .. '/sessions/'
 
 --- Contains information about a session.
@@ -55,17 +54,14 @@ function Session.sessions_dir()
   return SESSIONS_DIR
 end
 
-
 ---@return boolean: true if a session exists for the cwd, false otherwise
 function Session.exists()
   return persisted.session_exists()
 end
 
-
 local function filter_session()
   return true
 end
-
 
 --- Gets existing session.
 ---
@@ -73,12 +69,8 @@ end
 function Session.list()
   local sessions = persisted.list() or {}
 
-  return Stream.new(sessions)
-    :map(SessionInfo.new)
-    :filter(filter_session)
-    :collect()
+  return Stream.new(sessions):map(SessionInfo.new):filter(filter_session):collect()
 end
-
 
 --- Gets the session w/ dir path == dir_path, if any.
 ---
@@ -91,7 +83,9 @@ function Session.get(dir_path, strict)
   strict = Bool.or_default(strict, true)
 
   local matching = Stream.new(Session.list())
-    :filter(function(s) return s.dir_path == dir_path end)
+    :filter(function(s)
+      return s.dir_path == dir_path
+    end)
     :filter(filter_session)
     :collect()
 
@@ -104,14 +98,12 @@ function Session.get(dir_path, strict)
   return session
 end
 
-
 --- Gets the session for the cwd.
 ---
 ---@return SessionInfo|nil: the session for the cwd, if any
 function Session.current()
   return Session.get(System.cwd())
 end
-
 
 local function get_load_log_msg(opts)
   -- WARN: this correctness of this logic is dependent on the impl of persisted.load;
@@ -125,7 +117,6 @@ local function get_load_log_msg(opts)
     return 'Loaded last session'
   end
 end
-
 
 --- Closes all buffers and loads a session based on opts:
 ---
@@ -146,12 +137,10 @@ function Session.load(opts)
   LOGGER:info(get_load_log_msg(opts), {}, { user_facing = true })
 end
 
-
 --- Loads the "last" session via the persisted.nvim plugin.
 function Session.load_last()
   Session.load({ last = true })
 end
-
 
 --- Loads the session that for the cwd, if one exists. If it doesn't, falls back to
 --- persisted.nvim plugin cwd session loading.
@@ -162,14 +151,12 @@ function Session.load_for_cwd()
   Session.load({ session = file_path })
 end
 
-
 --- Loads the session file at the provided path.
 ---
 ---@param session string: a path to a session file
 function Session.load_session(session)
   Session.load({ session = session })
 end
-
 
 --- Saves the session for the cwd.
 ---
@@ -190,7 +177,6 @@ function Session.save()
   LOGGER:info('Session saved successfully for dir=%s', { cwd }, { user_facing = true })
 end
 
-
 --- Switches from the current to the provided session. Switching a session involves:
 ---
 ---  * Saving the current session
@@ -205,7 +191,6 @@ function Session.switch(session)
   System.cd(session.dir_path)
   Session.load_session(session.file_path)
 end
-
 
 --- Deletes the file associated w/ the provided session.
 ---
@@ -227,4 +212,3 @@ function Session.delete(session)
 end
 
 return Session
-

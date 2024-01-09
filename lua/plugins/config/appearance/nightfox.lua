@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the nightfox colorscheme.
 ---
 ---@class Nightfox : ColorSchemeConfigurator
@@ -8,11 +7,11 @@ local Nightfox = {}
 --- colorscheme
 function Nightfox.config()
   return {
-    pkg  = 'nightfox',
+    pkg = 'nightfox',
     opts = {
       options = {
         modules = {
-          alpha    = true,
+          alpha = true,
           nvimtree = true,
         },
       },
@@ -21,4 +20,3 @@ function Nightfox.config()
 end
 
 return Nightfox
-

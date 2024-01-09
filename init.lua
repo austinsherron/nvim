@@ -27,4 +27,3 @@ Safe.require 'core.settings' -- core settings
 Safe.require 'core.appearance' -- colorscheme
 
 GetLogger('INIT'):info 'Neovim initialization complete'
-

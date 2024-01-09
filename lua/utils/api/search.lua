@@ -5,7 +5,6 @@ local Mode = Editor.Mode
 
 local searchbox = require 'searchbox'
 
-
 DEFAULT_OPTS = {
   case_sensitive = false,
 }
@@ -13,16 +12,16 @@ DEFAULT_OPTS = {
 MATCH_OPTS = function(reverse)
   local title = ternary(reverse == true, ' (Reverse)', '')
   return {
-    title         = 'Match All Search' .. title,
+    title = 'Match All Search' .. title,
     clear_matches = false,
-    reverse       = reverse,
+    reverse = reverse,
   }
 end
 
 REPLACE_OPTS = function(force)
   local title = ternary(force == true, 'Force', 'Safe')
   return {
-    title          = fmt('Find/Replace (%s)', title),
+    title = fmt('Find/Replace (%s)', title),
     case_sensitive = true,
   }
 end
@@ -51,28 +50,22 @@ local function api()
   return searchbox
 end
 
-
 local function searchopts(opts, type_opts)
   opts = opts or {}
 
   local special, rest = Table.split(opts, { 'force', 'case_sensitive' })
   local confirm = ternary(special.force == true, 'off', 'menu')
 
-  local modifier = ternary(
-    special.case_sensitive == true,
-    'case-sensitive',
-    'ignore-case'
-  )
+  local modifier = ternary(special.case_sensitive == true, 'case-sensitive', 'ignore-case')
 
   special = {
-    confirm     = confirm,
-    modifier    = modifier,
+    confirm = confirm,
+    modifier = modifier,
     visual_mode = Editor.is_mode(Mode.VISUAL),
   }
 
   return TMerge.mergeright(rest, special, type_opts or {}, DEFAULT_OPTS)
 end
-
 
 --- Performs standard incsearch.
 ---
@@ -81,7 +74,6 @@ function Search.incsearch(opts)
   opts = searchopts(opts)
   api().incsearch(opts)
 end
-
 
 --- Performs search that highlights matches as the query is typed.
 ---
@@ -95,7 +87,6 @@ function Search.match_all(opts)
   api().match_all(opts)
 end
 
-
 --- Finds and replaces search text in the current buffer.
 ---
 ---@param opts SearchOpts|nil: parameterizes search and replacement
@@ -106,12 +97,10 @@ function Search.replace(opts)
   api().replace(opts)
 end
 
-
 --- Clears search highlighting.
 function Search.clear()
   api().clear_matches()
-  vim.cmd('noh')
+  vim.cmd 'noh'
 end
 
 return Search
-

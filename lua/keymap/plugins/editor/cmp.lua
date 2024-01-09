@@ -1,11 +1,9 @@
-
 -- note: most of this code, or at least the core logic of it, was sourced from
 --       https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
 local function has_words_before()
   local line, col = Table.unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
 end
-
 
 --- Mapping function for <Tab>. Its logic:
 ---
@@ -27,7 +25,6 @@ local function make_select_expand_or_complete(cmp, luasnip)
   end
 end
 
-
 --- Mapping function for <S-Tab>. Its logic:
 ---
 ---   1) if the completion menu is visible, select the previous item
@@ -45,7 +42,6 @@ local function make_prev_or_contract(cmp, luasnip)
   end
 end
 
-
 local function make_change_choice(direction, luasnip)
   return function(fallback)
     if luasnip.choice_active() then
@@ -56,16 +52,13 @@ local function make_change_choice(direction, luasnip)
   end
 end
 
-
 local function make_next_choice(luasnip)
   return make_change_choice(1, luasnip)
 end
 
-
 local function make_prev_choice(luasnip)
   return make_change_choice(-1, luasnip)
 end
-
 
 ---  Mapping function for <CR>. Its logic:
 ---
@@ -81,7 +74,6 @@ local function make_select_with_enter(cmp)
     end
   end
 end
-
 
 local function make_close_cmp_menu(cmp)
   return function(fallback)
@@ -106,14 +98,14 @@ function CmpKM.make_mapping()
   local luasnip = require 'luasnip'
 
   return cmp.mapping.preset.insert({
-    ['<Tab>']   = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's'      }),
-    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip),          { 'i', 's'      }),
+    ['<Tab>'] = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip), { 'i', 's' }),
     ['<Right>'] = cmp.mapping(make_select_expand_or_complete(cmp, luasnip), { 'n', 'i', 's' }),
-    ['<Left>']  = cmp.mapping(make_prev_or_contract(cmp, luasnip),          { 'n', 'i', 's' }),
-    ['<Down>']  = cmp.mapping(make_next_choice(luasnip),                    { 'i', 's'      }),
-    ['<Up>']    = cmp.mapping(make_prev_choice(luasnip),                    { 'i', 's'      }),
-    ['<C-x>']   = cmp.mapping(make_close_cmp_menu(cmp),                     { 'i', 's'      }),
-    ['<CR>']    = cmp.mapping({
+    ['<Left>'] = cmp.mapping(make_prev_or_contract(cmp, luasnip), { 'n', 'i', 's' }),
+    ['<Down>'] = cmp.mapping(make_next_choice(luasnip), { 'i', 's' }),
+    ['<Up>'] = cmp.mapping(make_prev_choice(luasnip), { 'i', 's' }),
+    ['<C-x>'] = cmp.mapping(make_close_cmp_menu(cmp), { 'i', 's' }),
+    ['<CR>'] = cmp.mapping({
       i = make_select_with_enter(cmp),
       s = cmp.mapping.confirm({ select = true }),
       c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
@@ -122,4 +114,3 @@ function CmpKM.make_mapping()
 end
 
 return CmpKM
-

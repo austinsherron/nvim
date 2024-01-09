@@ -1,15 +1,13 @@
-
 -- motion ----------------------------------------------------------------------
 
 --[[
    control on-screen (as opposed to file-system) movement
 --]]
 
-local Flash       = require 'plugins.config.motion.flash'
+local Flash = require 'plugins.config.motion.flash'
 local NvimTmuxNav = require 'plugins.config.motion.nvimtmuxnav'
 
 local Plugins = require('utils.plugins.plugin').plugins
-
 
 return Plugins('motion', {
   ---- flash: another "fast movement" plugin; a replacement for leap? (yes)
@@ -19,7 +17,7 @@ return Plugins('motion', {
 
     config = function(_, opts)
       require('flash').setup(opts)
-    end
+    end,
   },
   ---- nvim-tmux navigation: integration b/w nvim + tmux (pane nav shortcuts)
   {
@@ -28,7 +26,6 @@ return Plugins('motion', {
 
     config = function(_, opts)
       require('nvim-tmux-navigation').setup(opts)
-    end
+    end,
   },
 })
-

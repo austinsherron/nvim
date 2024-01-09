@@ -1,4 +1,3 @@
-
 -- editor ----------------------------------------------------------------------
 
 --[[
@@ -6,29 +5,28 @@
   manipulation, etc.
 --]]
 
+local AutoPairs = require 'plugins.config.editor.autopairs'
+local Cmp = require 'plugins.config.editor.cmp.cmp'
+local Indent = require 'plugins.config.interface.indent'
 local Treesitter = require 'plugins.config.code.treesitter'
-local AutoPairs  = require 'plugins.config.editor.autopairs'
-local Cmp        = require 'plugins.config.editor.cmp.cmp'
-local Indent     = require 'plugins.config.interface.indent'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
 local TsPlugin = Treesitter.TreesitterPlugin
 
-
 return Plugins('editor', {
   ---- auto-pairs: automatic insertion of closing "x", where = ", ', ), }, etc.
   {
     'windwp/nvim-autopairs',
-    enabled      = Treesitter.enabled(TsPlugin.AUTOPAIRS),
-    event        = 'InsertEnter',
+    enabled = Treesitter.enabled(TsPlugin.AUTOPAIRS),
+    event = 'InsertEnter',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config       = AutoPairs.config
+    config = AutoPairs.config,
   },
   ---- cmp: completion engine
   {
     'hrsh7th/nvim-cmp',
-    event  = { 'InsertEnter', 'CmdlineEnter' },
+    event = { 'InsertEnter', 'CmdlineEnter' },
     config = Cmp.config,
   },
   ---- cmp-buffer: fuzzy completion of buffer contents
@@ -94,7 +92,7 @@ return Plugins('editor', {
   ---- cmp-treesitter: fuzzy completion of treesitter nodes
   {
     'ray-x/cmp-treesitter',
-    enabled      = Treesitter.enabled(TsPlugin.CMP_TREESITTER),
+    enabled = Treesitter.enabled(TsPlugin.CMP_TREESITTER),
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
   ---- comment: manipulate code comments easily
@@ -103,49 +101,48 @@ return Plugins('editor', {
 
     config = function()
       require('Comment').setup()
-    end
+    end,
   },
   ---- editor config: language specific file formatting
   { 'gpanders/editorconfig.nvim' },
   ---- indent-blankline: indentation guides
   {
     'lukas-reineke/indent-blankline.nvim',
-    enabled      = Treesitter.enabled(TsPlugin.INDENT_BLANKLINE),
+    enabled = Treesitter.enabled(TsPlugin.INDENT_BLANKLINE),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
-    config = Indent.config
+    config = Indent.config,
   },
   ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
   {
     'HiPhish/nvim-ts-rainbow2',
-    enabled      = Treesitter.enabled(TsPlugin.TS_RAINBOW),
+    enabled = Treesitter.enabled(TsPlugin.TS_RAINBOW),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   ---- surround: efficient manipulation of brackets, quotes, etc.
   {
     'kylechui/nvim-surround',
-    enabled      = Treesitter.enabled(TsPlugin.SURROUND),
-    version      = '*',    -- use for stability; omit to use `main` branch for the latest features
-    event        = 'VeryLazy',
+    enabled = Treesitter.enabled(TsPlugin.SURROUND),
+    version = '*', -- use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
     config = function()
       require('nvim-surround').setup()
-    end
+    end,
   },
   ---- treesitter-endwise: automatically close various semantic structures, i.e.: if-then-end, etc.
   ---- TODO: doesn't work at the moment (08/25/2023, after "fixing" treesitter highlight issue)
   {
     'RRethy/nvim-treesitter-endwise',
-    enabled      = Treesitter.enabled(TsPlugin.ENDWISE),
+    enabled = Treesitter.enabled(TsPlugin.ENDWISE),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    event        = 'InsertEnter',
+    event = 'InsertEnter',
   },
   ---- treesitter-playground: view treesitter functional info in nvim
   {
     'nvim-treesitter/playground',
-    enabled      = Treesitter.enabled(TsPlugin.PLAYGROUND),
+    enabled = Treesitter.enabled(TsPlugin.PLAYGROUND),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 })
-

@@ -1,24 +1,20 @@
-local Type     = require 'toolbox.meta.type'
-local Lazy     = require 'toolbox.utils.lazy'
+local Lazy = require 'toolbox.utils.lazy'
+local Type = require 'toolbox.meta.type'
 local Validate = require 'toolbox.utils.validate'
 
-local api = Lazy.require 'nvim-tree.api'  ---@module 'nvim-tree.api'
-
+local api = Lazy.require 'nvim-tree.api' ---@module 'nvim-tree.api'
 
 local function cursor_node()
   return api.tree.get_node_under_cursor()
 end
 
-
 local function is_tree_open()
   return api.tree.is_visible()
 end
 
-
 local function is_tree_focused()
   return api.tree.is_tree_buf()
 end
-
 
 local function tree_in_use()
   return is_tree_open() and is_tree_focused()
@@ -60,7 +56,6 @@ function TreeNode.new(node)
   return setmetatable(props, TreeNode)
 end
 
-
 --- Returns the currently focused nvim-tree node. More precisely, it returns the node that
 --- is currently under the cursor, if it exists. If focused is true, the nvim-tree buffer
 --- must be both visible and active for a node to be returned; if focused is false, nvimtree
@@ -81,13 +76,11 @@ function TreeNode.at_cursor(focused)
   return TreeNode.new()
 end
 
-
 ---@return boolean: true if this instance was constructed w/ a nil node info, false
 --- otherwise
 function TreeNode:empty()
   return self == EMPTY_NODE
 end
-
 
 ---@error if abspath is nil
 ---@return string: the absolute path of the node
@@ -99,7 +92,6 @@ function TreeNode:getpath()
   return self.abspath
 end
 
-
 ---@return string: the absolute path of this node, if it's a dir, or the node's
 --- parent's path otherwise
 function TreeNode:nearestdir()
@@ -110,24 +102,20 @@ function TreeNode:nearestdir()
   return self:getparent():getpath()
 end
 
-
 ---@return TreeNode: this node's parent
 function TreeNode:getparent()
   return TreeNode.new(self.parent)
 end
-
 
 ---@return boolean: true if this node is a dir node, false otherwise
 function TreeNode:isdir()
   return self.type == 'directory'
 end
 
-
 ---@return true: true if this node is a file node, false otherwise
 function TreeNode:isfile()
   return self.type == 'file'
 end
-
 
 --- Checks if this instance equals o.
 ---
@@ -135,19 +123,14 @@ end
 ---@return boolean: true if this instance == o (i.e.: has the same key/value pairs), false
 --- otherwise
 function TreeNode:__eq(o)
-  return Type.is(o, TreeNode)
-     and self.name == o.name
-     and self.abspath == o.abspath
-     and self.type == o.type
+  return Type.is(o, TreeNode) and self.name == o.name and self.abspath == o.abspath and self.type == o.type
 end
-
 
 local function append_if_not_nil(arr, attr, attrname)
   if attr ~= nil then
     Array.append(arr, fmt('%s=%s', attrname, attr))
   end
 end
-
 
 ---@return string: a string representation of this instance
 function TreeNode:__tostring()
@@ -169,4 +152,3 @@ function TreeNode:__tostring()
 end
 
 return TreeNode
-

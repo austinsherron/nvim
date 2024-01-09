@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring diffview.
 ---
 ---@class Diffview
@@ -16,4 +15,3 @@ function Diffview.opts()
 end
 
 return Diffview
-

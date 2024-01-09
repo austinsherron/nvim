@@ -1,4 +1,3 @@
-
 --- Contains utilities for interacting w/ (n)vim tabs.
 ---
 ---@class Tab
@@ -9,7 +8,6 @@ function Tab.current()
   return vim.api.nvim_get_current_tabpage()
 end
 
-
 --- Gets the windows associated w/ the provided tab.
 ---
 --- @param tabnr integer|nil: optional, defaults to the current tab; the id of the tab to
@@ -19,12 +17,10 @@ function Tab.windows(tabnr)
   return vim.api.nvim_tabpage_list_wins(tabnr)
 end
 
-
 --- Opens a new tab.
 function Tab.open()
-  vim.api.nvim_command('tabnew')
+  vim.api.nvim_command 'tabnew'
 end
-
 
 --- Closes the tab w/ id tabnr.
 ---
@@ -36,4 +32,3 @@ function Tab.close(tabnr)
 end
 
 return Tab
-

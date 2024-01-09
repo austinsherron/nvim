@@ -1,4 +1,3 @@
-
 -- interface -------------------------------------------------------------------
 
 --[[
@@ -7,15 +6,14 @@
 --]]
 
 -- local alpha = require 'plugins.config.interface.alphanvim'
-local Barbar      = require 'plugins.config.interface.barbar'
-local Lightbulb   = require 'plugins.config.interface.lightbulb'
-local Lualine     = require 'plugins.config.interface.lualine'
+local Barbar = require 'plugins.config.interface.barbar'
+local Lightbulb = require 'plugins.config.interface.lightbulb'
+local Lualine = require 'plugins.config.interface.lualine'
+local Priority = require 'utils.plugins.priority'
 local SmartSplits = require 'plugins.config.interface.smartsplits'
-local Trouble     = require 'plugins.config.interface.trouble'
-local Priority    = require 'utils.plugins.priority'
+local Trouble = require 'plugins.config.interface.trouble'
 
 local Plugins = require('utils.plugins.plugin').plugins
-
 
 return Plugins('interface', {
   ---- alpha: landing page
@@ -32,32 +30,30 @@ return Plugins('interface', {
   {
     'romgrk/barbar.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts         = Barbar.opts(),
+    opts = Barbar.opts(),
   },
   ---- bqf (better quickfix window): makes quickfix window more user-friendly
   {
     'kevinhwang91/nvim-bqf',
     dependencies = { 'junegunn/fzf.vim' },
   },
-  ---- bufferline: another buffer bar; note: disabled since barbar does what I want
-  ----             it to for now
-  ({
+  {
     'akinsho/bufferline.nvim',
-    enabled      = false,
+    enabled = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    version      = '*',
+    version = '*',
 
     config = function()
       require('bufferline').setup({})
-    end
-  }),
+    end,
+  },
   ---- fzf: fuzzy-finder
   {
     'junegunn/fzf',
 
     build = function()
       vim.fn['fzf#install']()
-    end
+    end,
   },
   ---- fzf.vim: collection of fzf vim integrations/utilities
   { 'junegunn/fzf.vim' },
@@ -72,7 +68,7 @@ return Plugins('interface', {
 
     config = function(_, opts)
       require('lualine').setup(opts)
-    end
+    end,
   },
   ---- marks: enhanced mark experience
   {
@@ -86,7 +82,7 @@ return Plugins('interface', {
   ---- notify: pretty notifications
   {
     'rcarriga/nvim-notify',
-    lazy         = false,
+    lazy = false,
     dependencies = { 'MunifTanjim/nui.nvim' },
 
     -- we load this second since we want nvim-notify as early as possible; this comes after
@@ -95,8 +91,8 @@ return Plugins('interface', {
 
     -- substitute all native vim notifications
     config = function()
-      vim.notify = require('notify')
-    end
+      vim.notify = require 'notify'
+    end,
   },
   ---- smart-splits: better navigation and management of splits
   {
@@ -105,13 +101,13 @@ return Plugins('interface', {
 
     config = function(_, opts)
       require('smart-splits').setup(opts)
-    end
+    end,
   },
   ---- trouble.nvim: fancy list for diagnostics, etc.
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts         = Trouble.opts(),
+    opts = Trouble.opts(),
 
     config = function(_, opts)
       require('trouble').setup(opts)
@@ -140,7 +136,6 @@ return Plugins('interface', {
 
     config = function(_, opts)
       require('which-key').setup(opts)
-    end
+    end,
   },
 })
-

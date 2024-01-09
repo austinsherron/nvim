@@ -2,7 +2,6 @@
 
 local stdpath = vim.fn.stdpath
 
-
 --- Contains methods for interacting w/ various user "system" directories.
 ---
 ---@class Path
@@ -10,32 +9,27 @@ local Path = {}
 
 ---@return string: the path to the cache dir
 function Path.cache()
-  return stdpath('cache')
+  return stdpath 'cache'
 end
-
 
 ---@return string: the path to the config dir
 function Path.config()
-  return stdpath('config')
+  return stdpath 'config'
 end
-
 
 ---@return string: the path to the data dir
 function Path.data()
-  return stdpath('data')
+  return stdpath 'data'
 end
-
 
 ---@return string: the path to the log dir
 function Path.log()
-  return stdpath('log')
+  return stdpath 'log'
 end
-
 
 ---@return string: the path to the state dir
 function Path.state()
-  return stdpath('state')
+  return stdpath 'state'
 end
 
 return Path
-

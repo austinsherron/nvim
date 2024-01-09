@@ -1,29 +1,28 @@
-local Set    = require 'toolbox.extensions.set'
 local Lambda = require 'toolbox.functional.lambda'
+local Set = require 'toolbox.extensions.set'
 
 local enum = require('toolbox.extensions.enum').enum
 
-
-local LOGGER = GetLogger('VIEW')
+local LOGGER = GetLogger 'VIEW'
 local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 
 --- Specifies how to view/open a buffer.
 ---
 ---@enum ViewMode
 local ViewMode = enum({
-  STANDALONE = { key = 'e',      label = 'buffer', binding = 'f' },     -- open standalone buffer
-  SPLIT      = { key = 'split',  label = 'split' , binding = 'h' },     -- open buffer in split (over-under)
-  VSPLIT     = { key = 'vsplit', label = 'vsplit', binding = 'v' },     -- open buffer in vertical split (side-by-side)
+  STANDALONE = { key = 'e', label = 'buffer', binding = 'f' }, -- open standalone buffer
+  SPLIT = { key = 'split', label = 'split', binding = 'h' }, -- open buffer in split (over-under)
+  VSPLIT = { key = 'vsplit', label = 'vsplit', binding = 'v' }, -- open buffer in vertical split (side-by-side)
 }, 'STANDALONE')
 
 --- Buffer option keys (names). See :h help-buffer-options.
 ---
 ---@enum OptionKey
 local OptionKey = enum({
-  FILETYPE   = 'filetype',
-  HIDDEN     = 'bufhidden',
+  FILETYPE = 'filetype',
+  HIDDEN = 'bufhidden',
   MODIFIABLE = 'modifiable',
-  TYPE       = 'buftype',
+  TYPE = 'buftype',
 })
 
 --- Parameterizes buffer queries.
@@ -60,20 +59,16 @@ BufferInfo.__index = BufferInfo
 ---@return BufferInfo: a new instance
 function BufferInfo.new(bufnr, name, type, filetype)
   return setmetatable({
-    id       = bufnr,
-    name     = name,
-    type     = type,
+    id = bufnr,
+    name = name,
+    type = type,
     filetype = filetype,
   }, BufferInfo)
 end
 
-
 ---@return string: a string representation of this instance
 function BufferInfo:__tostring()
-  return fmt(
-    'Buffer(id=%s, name=%s, type=%s, filetype=%s)',
-    self.id, self.name, self.type, self.filetype
-  )
+  return fmt('Buffer(id=%s, name=%s, type=%s, filetype=%s)', self.id, self.name, self.type, self.filetype)
 end
 
 --- Contains utilities for interacting w/ (n)vim buffers.
@@ -86,7 +81,6 @@ function Buffer.current()
   return vim.api.nvim_get_current_buf()
 end
 
-
 --- Gets the name of the buffer w/ id == bufnr.
 ---
 ---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
@@ -97,7 +91,6 @@ function Buffer.getname(bufnr)
   return vim.api.nvim_buf_get_name(bufnr)
 end
 
-
 --- Checks if the buffer w/ id == bufnr has a name.
 ---
 ---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
@@ -107,7 +100,6 @@ function Buffer.hasname(bufnr)
   bufnr = bufnr or Buffer.current()
   return String.not_nil_or_empty(Buffer.getname(bufnr))
 end
-
 
 --- Checks if a buffer is "normal" (i.e.: has no "type" option).
 ---
@@ -121,7 +113,6 @@ function Buffer.is_normal(bufopts)
   return String.nil_or_empty(buftype)
 end
 
-
 --- Checks if a buffer is listed.
 ---
 ---@see vim.fn.buflisted
@@ -132,7 +123,6 @@ function Buffer.is_listed(bufnr)
   bufnr = bufnr or Buffer.current()
   return vim.fn.buflisted(bufnr) == 1
 end
-
 
 --- Gets the option value for a buffer, if it exists.
 ---
@@ -153,7 +143,6 @@ function Buffer.getoption(bufnr, option)
   -- fall back to if the prior option retrieval method yields no value
   return vim.api.nvim_get_option_value(option, { buffer = bufnr })
 end
-
 
 --- Checks if a buffer is restorable, i.e.: via a session.
 ---
@@ -176,7 +165,6 @@ function Buffer.is_restorable(bufnr)
   return Buffer.is_listed(bufnr) and Buffer.hasname(bufnr)
 end
 
-
 --- Gets a BufferInfo for the provided bufnr.
 ---
 ---@param bufnr integer|nil: optional, defaults to current buffer; the id of the buffer
@@ -193,27 +181,25 @@ function Buffer.info(bufnr)
   )
 end
 
-
 local function get_buffer_filters(filter)
   if filter ~= false and (filter ~= nil and type(filter) ~= 'function') then
     Err.raise('Buffer.getall: unrecognized filter=%s', filter)
   end
 
-  local default = ternary(
-    filter == false,
-    function() return Lambda.TRUE end,
-    function() return Buffer.is_listed end
-  )
+  local default = ternary(filter == false, function()
+    return Lambda.TRUE
+  end, function()
+    return Buffer.is_listed
+  end)
 
-  local optional = ternary(
-    type(filter) == 'function',
-    function() return filter end,
-    function() return Lambda.TRUE end
-  )
+  local optional = ternary(type(filter) == 'function', function()
+    return filter
+  end, function()
+    return Lambda.TRUE
+  end)
 
   return default, optional
 end
-
 
 --- Gets listed (i.e.: open/visible) buffer ids.
 ---
@@ -229,13 +215,8 @@ function Buffer.getall(filter, xfm)
 
   local def_filter, opt_filter = get_buffer_filters(filter)
 
-  return Stream.new(vim.api.nvim_list_bufs())
-    :filter(def_filter)
-    :filter(opt_filter)
-    :map(xfm)
-    :collect()
+  return Stream.new(vim.api.nvim_list_bufs()):filter(def_filter):filter(opt_filter):map(xfm):collect()
 end
-
 
 --- Perform a buffer query according to opts.
 ---
@@ -248,12 +229,8 @@ function Buffer.query(opts)
   local query = opts.query or Lambda.TRUE
   local xfm = opts.xfm or Buffer.info
 
-  return Stream.new(Buffer.getall(opts.filter))
-    :map(xfm)
-    :filter(query)
-    :collect(opts.collector)
+  return Stream.new(Buffer.getall(opts.filter)):map(xfm):filter(query):collect(opts.collector)
 end
-
 
 --- Sets option values on a buffer.
 ---
@@ -267,7 +244,6 @@ function Buffer.setoptions(opts)
     vim.api.nvim_buf_set_option(bufnr, tostring(option.key), option.value)
   end
 end
-
 
 --- Opens a buffer, either transient w/ no file, or for the file at path, if provided.
 ---
@@ -287,7 +263,6 @@ function Buffer.open(viewmode, path, options)
   Buffer.setoptions({ options = options })
 end
 
-
 --- Closes the buffer w/ id bufnr.
 ---
 ---@param bufnr integer: the id of the buffer to close
@@ -302,7 +277,6 @@ function Buffer.close(bufnr, force)
   LOGGER:debug('Buffer.close: %s', { cmd })
   vim.cmd(cmd)
 end
-
 
 --- Closes all listed (i.e.: open/visible) buffers.
 ---
@@ -325,4 +299,3 @@ Buffer.OptionKey = OptionKey
 Buffer.BufferInfo = BufferInfo
 
 return Buffer
-

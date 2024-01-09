@@ -1,4 +1,3 @@
-
 -- colorscheme -----------------------------------------------------------------
 
 vim.cmd.colorscheme 'nightfox'
@@ -7,5 +6,4 @@ vim.cmd.colorscheme 'nightfox'
 
 Safe.require('utils.api.vim.interface').init()
 
-GetLogger('INIT'):info('Appearance initialized')
-
+GetLogger('INIT'):info 'Appearance initialized'

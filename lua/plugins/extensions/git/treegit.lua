@@ -2,20 +2,14 @@ local Git = require 'utils.api.git'
 
 local TreeNode = require('plugins.extensions.navigation').NvimTree.TreeNode
 
-
 --- Contains functions that implement custom nvimtree-git integrations.
 ---
 ---@class TreeGit
 local TreeGit = {}
 
 local function path_for_git_op(all)
-  return ternary(
-    all,
-    Git.repo_root(),
-    TreeNode.at_cursor():getpath()
-  )
+  return ternary(all, Git.repo_root(), TreeNode.at_cursor():getpath())
 end
-
 
 --- Opens a diff view of the cursor node file(s).
 function TreeGit.diffview()
@@ -23,7 +17,6 @@ function TreeGit.diffview()
 
   require('diffview').open({ 'HEAD', '--', path })
 end
-
 
 --- Toggles the git staging status of the cursor node file(s).
 function TreeGit.toggle_stage()
@@ -36,7 +29,6 @@ function TreeGit.toggle_stage()
   end
 end
 
-
 --- Stages the file(s) corresponding to the node under the cursor, or all files in the
 --- repo if all is true.
 ---
@@ -47,7 +39,6 @@ function TreeGit.stage(all)
 
   Git.stage(path_for_git_op(all))
 end
-
 
 --- Unstages the file(s) corresponding to the node under the cursor, or all files in the
 --- repo if all is true.
@@ -61,4 +52,3 @@ function TreeGit.unstage(all)
 end
 
 return TreeGit
-

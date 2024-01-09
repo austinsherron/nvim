@@ -1,8 +1,7 @@
+local TMerge = require 'utils.api.vim.tablemerge'
 local Validate = require 'toolbox.utils.validate'
-local TMerge   = require 'utils.api.vim.tablemerge'
 
-
-local LOGGER = GetLogger('USERCMD')
+local LOGGER = GetLogger 'USERCMD'
 
 ---@alias UserCommandConfig { name: string?, cmd: (string|function)?, bufnum: integer?, opts: table? }
 
@@ -25,7 +24,6 @@ function UserCommand.new(config)
   return setmetatable(config or {}, UserCommand)
 end
 
-
 --- Adds name to instance.
 ---
 ---@param name string: name to add to instance
@@ -34,7 +32,6 @@ function UserCommand:withName(name)
   self.name = name
   return self
 end
-
 
 --- Adds bufnum to instance. Causes user command to be created as buffer local. Calling w/
 --- nil will reset that behavior.
@@ -46,7 +43,6 @@ function UserCommand:withBufnum(bufnum)
   return self
 end
 
-
 local function wrap_cmd_if_necessary(cmd)
   if String.is(cmd) then
     return cmd
@@ -54,7 +50,6 @@ local function wrap_cmd_if_necessary(cmd)
 
   return Safe.ify(cmd)
 end
-
 
 --- Adds cmd to instance.
 ---
@@ -72,7 +67,6 @@ function UserCommand:withCmd(cmd, nargs, ...)
   return self
 end
 
-
 --- Adds description to instance.
 ---
 ---@param desc string: desc to add to instance
@@ -82,7 +76,6 @@ function UserCommand:withDesc(desc)
   return self
 end
 
-
 --- Adds opts to instance.
 ---
 ---@param opts table: opts to add to instance
@@ -91,7 +84,6 @@ function UserCommand:withOpts(opts)
   self.opts = opts
   return self
 end
-
 
 --- Adds individual opt to instance.
 ---
@@ -106,26 +98,17 @@ function UserCommand:withOpt(key, opt)
   return self
 end
 
-
 local function validate(required, config, op)
   Validate.required(required, config, op .. ' user command(s)')
 end
 
-
 local function create_buf_cmd(config)
-  vim.api.nvim_buf_create_user_command(
-    config.bufnum,
-    config.name,
-    config.cmd,
-    config.opts
-  )
+  vim.api.nvim_buf_create_user_command(config.bufnum, config.name, config.cmd, config.opts)
 end
-
 
 local function create_cmd(config)
   vim.api.nvim_create_user_command(config.name, config.cmd, config.opts)
 end
-
 
 --- Creates a user command. Command is buffer local if bufnum is in config or exists in
 --- this instance.
@@ -151,7 +134,6 @@ function UserCommand:create(config)
 
   LOGGER:debug('Created usercmd (name=%s)', { config.name })
 end
-
 
 --- Deletes a user command. Command is considered buffer local if bufnum is in config or
 --- exists in this instance.
@@ -216,4 +198,3 @@ function ArgParse.parse(opts)
 end
 
 return UserCommand
-

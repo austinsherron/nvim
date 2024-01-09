@@ -1,5 +1,4 @@
-local Path   = require 'utils.api.vim.path'
-
+local Path = require 'utils.api.vim.path'
 
 local GIT_PATH = 'folke/lazy.nvim'
 local PLUGINS_PATH = Path.config() .. '/packages'
@@ -15,17 +14,15 @@ local Lazy = {}
 --- manager
 function Lazy.opts()
   return {
-    root     = PLUGINS_PATH,
+    root = PLUGINS_PATH,
     lockfile = LOCKFILE_PATH,
   }
 end
-
 
 ---@return string: the path to the repo on github.com
 function Lazy.git_path()
   return GIT_PATH
 end
-
 
 ---@return string: the path to the system's lazy.nvim installation
 function Lazy.lazy_path()
@@ -33,4 +30,3 @@ function Lazy.lazy_path()
 end
 
 return Lazy
-

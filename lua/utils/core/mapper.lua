@@ -1,13 +1,12 @@
-local Stack  = require 'toolbox.extensions.stack'
 local Lambda = require 'toolbox.functional.lambda'
-local Lazy   = require 'toolbox.utils.lazy'
+local Lazy = require 'toolbox.utils.lazy'
+local Stack = require 'toolbox.extensions.stack'
 
 local Constants = require('plugins.extensions.interface.hydra').Constants
 
 local Hydra = Lazy.require 'hydra'
 
-
-local LOGGER = GetLogger('KEYMAP')
+local LOGGER = GetLogger 'KEYMAP'
 local DEFAULT_MODES = { 'n' }
 -- WARN: this is effectively duplicated in this file's unit tests
 local DEFAULT_OPTIONS = { noremap = true }
@@ -46,19 +45,20 @@ KeyMapper.__index = KeyMapper
 ---@return KeyMapper: a new instance
 function KeyMapper.new(options)
   local this = {
-    hydrda       = nil,
-    options      = Stack.new(),
+    hydrda = nil,
+    options = Stack.new(),
     hydra_config = Stack.new(DEFAULT_HYDRA_CONFIG),
   }
   this.options:push(DEFAULT_OPTIONS)
 
-  if Table.not_nil_or_empty(options --[[@as table]]) then
+  if
+    Table.not_nil_or_empty(options --[[@as table]])
+  then
     this.options:push(options or {})
   end
 
   return setmetatable(this, KeyMapper)
 end
-
 
 --- Adds a set of binding options to use w/ all subsequent bind calls until KeyMapper.done
 --- is called. Multiple calls to KeyMapper.with will add options to the instance in last
@@ -76,7 +76,6 @@ function KeyMapper:with(options)
   return self
 end
 
-
 --- Adds hydra binding config to the instance, or combines hydra w/ self.hydra if
 --- self.hydra ~= nil. Calling this method signals to the mapper that subsequent calls to
 --- "bind" should create a hydra mapping, as opposed to a standard vim key binding.
@@ -88,14 +87,12 @@ function KeyMapper:with_hydra(hydra)
   return self
 end
 
-
 local function get_merged_options(options, stk)
   -- create a single array (stack, based on precedence) w/ all options
-  local all_options = Table.concat({ stk:peekall(), { options or {}}})
+  local all_options = Table.concat({ stk:peekall(), { options or {} } })
   -- merge all options into single dict
   return Table.combine_many(all_options)
 end
-
 
 ---@private
 function KeyMapper:get_options(options)
@@ -120,12 +117,10 @@ function KeyMapper:get_options(options)
   return final_opts
 end
 
-
 ---@private
 function KeyMapper:get_desc()
   return String.alphanum(self:get_options().desc or '')
 end
-
 
 -- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim.lua.keymaps.lua
 ---@private
@@ -136,9 +131,8 @@ function KeyMapper:do_vim_binding(lhs, rhs, options, modes)
   LOGGER:debug('Binding lhs="%s" to rhs="%s"', { lhs, rhs })
   LOGGER:trace('Binding opts=%s, modes=%s', { options, modes })
   vim.keymap.set(modes, lhs, rhs, options)
-  LOGGER:debug('Binding processed successfully')
+  LOGGER:debug 'Binding processed successfully'
 end
-
 
 ---@private
 function KeyMapper:handle_esc(bindings)
@@ -151,7 +145,6 @@ function KeyMapper:handle_esc(bindings)
 
   Array.append(bindings, Constants.ESC_BINDING)
 end
-
 
 ---@private
 function KeyMapper:handle_fmttr(bindings)
@@ -168,11 +161,12 @@ function KeyMapper:handle_fmttr(bindings)
   self.hydra.hint = fmttr(bindings, Table.safeget(self.hydra, 'name'))
 
   bindings = filter(bindings, Lambda.NOT(Lambda.EQUALS_THIS(Constants.VERTICAL_BREAK)))
-  foreach(bindings, function(b) Table.safeset(b, { 3, 'desc' }, false) end)
+  foreach(bindings, function(b)
+    Table.safeset(b, { 3, 'desc' }, false)
+  end)
 
   return bindings
 end
-
 
 ---@private
 ---@return HydraBinding
@@ -185,7 +179,6 @@ function KeyMapper:get_hydra(bindings)
   return Table.combine({ heads = bindings }, self.hydra)
 end
 
-
 ---@private
 function KeyMapper:do_hydra_binding(bindings)
   local hydra = self:get_hydra(bindings)
@@ -193,9 +186,8 @@ function KeyMapper:do_hydra_binding(bindings)
   LOGGER:debug('Binding hydra=%s', { hydra.name })
   LOGGER:trace('Hydra binding=%s', { hydra })
   Hydra(hydra)
-  LOGGER:debug('Hydra bindings processed successfully')
+  LOGGER:debug 'Hydra bindings processed successfully'
 end
-
 
 ---@private
 function KeyMapper:pop_options()
@@ -207,7 +199,6 @@ function KeyMapper:pop_options()
     self.options:pop()
   end
 end
-
 
 ---@private
 function KeyMapper:purge_context(purge)
@@ -222,7 +213,6 @@ function KeyMapper:purge_context(purge)
 
   return self
 end
-
 
 --- Removes contextual configuration based on the provided context. Config is removed from
 --- the instance in LIFO order. Configuration from all sources is eligible for removal,
@@ -251,7 +241,6 @@ function KeyMapper:done(opts)
   return self
 end
 
-
 --- Binds the provided key bindings.
 ---
 ---@param bindings Binding[]: the key bindings to bind
@@ -263,12 +252,13 @@ function KeyMapper:bind(bindings)
   if self.hydra ~= nil then
     self:do_hydra_binding(bindings)
   else
-    foreach(bindings, function(b) self:do_vim_binding(Table.unpack(b)) end)
+    foreach(bindings, function(b)
+      self:do_vim_binding(Table.unpack(b))
+    end)
   end
 
   return self
 end
-
 
 --- Binds a single key binding.
 ---
@@ -278,9 +268,8 @@ end
 ---@param modes string[]|nil: the vim modes in which the binding should take effect
 ---@return KeyMapper: self
 function KeyMapper:bind_one(lhs, rhs, options, modes)
-  return self:bind({{ lhs, rhs, options, modes }})
+  return self:bind({ { lhs, rhs, options, modes } })
 end
-
 
 --- Binds a single key binding w/out an instantiated key mapper. Note that this functions
 --- is not intended for repeated calls in the same general location.
@@ -290,11 +279,9 @@ function KeyMapper.quick_bind(lhs, rhs, options, modes)
   KeyMapper.new():bind_one(lhs, rhs, options, modes)
 end
 
-
 ---@note: exposed primarily for testing, though I don't think there's any harm in exposing
 --- them
 KeyMapper.DEFAULT_MODES = DEFAULT_MODES
 KeyMapper.DEFAULT_OPTIONS = DEFAULT_OPTIONS
 
 return KeyMapper
-

@@ -1,6 +1,5 @@
 local Highlight = require 'utils.api.vim.interface.__highlight'
 
-
 --- Contains utilities for interacting w/ nvim ui elements.
 ---
 ---@class Interface
@@ -25,21 +24,17 @@ end
 
 local DIAGNOSTIC_SIGNS = {
   { name = 'DiagnosticSignError', icon = '' },
-  { name = 'DiagnosticSignWarn',  icon = '' },
-  { name = 'DiagnosticSignHint',  icon = '' },
-  { name = 'DiagnosticSignInfo',  icon = '' },
+  { name = 'DiagnosticSignWarn', icon = '' },
+  { name = 'DiagnosticSignHint', icon = '' },
+  { name = 'DiagnosticSignInfo', icon = '' },
 }
 
 --- Registers the provided sign w/ nvim.
 ---
 ---@param sign { name: string, icon: string }: the sign to register
 function Interface.define_sign(sign)
-  vim.fn.sign_define(
-    sign.name,
-    { texthl = sign.name, text = sign.icon, numhl = '' }
-  )
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.icon, numhl = '' })
 end
-
 
 --- Initializes interface customizations.
 function Interface.init()
@@ -47,4 +42,3 @@ function Interface.init()
 end
 
 return Interface
-

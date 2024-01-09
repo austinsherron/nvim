@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the LSP Kind plugin.
 ---
 ---@class LspKind
@@ -41,4 +40,3 @@ function LspKind.opts()
 end
 
 return LspKind
-

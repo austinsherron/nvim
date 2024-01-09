@@ -1,6 +1,5 @@
 local Env = require 'toolbox.system.env'
 
-
 local SNIPPET_LIBRARY = Env.code_root() .. '/snippets/lua/snippets/library/'
 
 --- Contains functions for configuring the luasnip plugin.
@@ -16,13 +15,12 @@ function LuaSnip.expand(args)
   require('luasnip').lsp_expand(args.body)
 end
 
-
 --- Configures the luasnip plugin.
 function LuaSnip.config()
   local luasnip = require 'luasnip'
 
   luasnip.config.set_config({
-    history      = false,
+    history = false,
     updateevents = 'TextChanged,TextChangedI',
   })
 
@@ -31,4 +29,3 @@ function LuaSnip.config()
 end
 
 return LuaSnip
-

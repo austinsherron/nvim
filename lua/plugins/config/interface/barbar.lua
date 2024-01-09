@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring barbar.
 ---
 ---@class Barbar
@@ -10,15 +9,14 @@ function Barbar.opts()
     animation = true,
     clickable = false,
     focus_on_close = 'previous',
-    no_name_title  = 'unnamed',
+    no_name_title = 'unnamed',
 
     icons = {
       diagnostics = {
         enabled = true,
-      }
-    }
+      },
+    },
   }
 end
 
 return Barbar
-

@@ -1,15 +1,13 @@
-
 -- workspace -------------------------------------------------------------------
 
 --[[
   contains autocommands related to workspaces, i.e.: projects, session, etc.
 --]]
 
-local Session = require 'utils.api.session'
 local Autocmd = require 'utils.core.autocmd'
+local Session = require 'utils.api.session'
 
-
-GetLogger('AUTOCMD'):info('Creating workspace autocmds')
+GetLogger('AUTOCMD'):info 'Creating workspace autocmds'
 
 -- FIXME: see FIXME in Session.save
 -- local function save_session()
@@ -43,4 +41,3 @@ Autocmd.new()
   :withOpt('nested', true)
   :withCallback(load_cwd_session)
   :create()
-
