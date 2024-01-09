@@ -7,7 +7,6 @@
 
 -- local alpha = require 'plugins.config.interface.alphanvim'
 local Barbar = require 'plugins.config.interface.barbar'
-local Lightbulb = require 'plugins.config.interface.lightbulb'
 local Lualine = require 'plugins.config.interface.lualine'
 local Priority = require 'utils.plugins.priority'
 local SmartSplits = require 'plugins.config.interface.smartsplits'

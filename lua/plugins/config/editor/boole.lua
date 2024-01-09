@@ -1,0 +1,93 @@
+--- Contains functions for configuring the boole plugin.
+---
+---@class Boole
+local Boole = {}
+
+---@return table: a table that contains configuration values for the boole plugin
+function Boole.opts()
+  return {
+    mappings = {
+      increment = '<C-a>',
+      decrement = '<C-x>',
+    },
+    additions = {
+      { 'pairs', 'ipairs' },
+      { 'if', 'elseif', 'else' },
+      { 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec' },
+      {
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'Jun',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      },
+      { 'sun', 'mon', 'tues', 'wed', 'thu', 'fri', 'sat' },
+      { 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' },
+      {
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'c',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
+      },
+      {
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'C',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+      },
+    },
+  }
+end
+
+return Boole

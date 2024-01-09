@@ -6,6 +6,7 @@
 --]]
 
 local AutoPairs = require 'plugins.config.editor.autopairs'
+local Boole = require 'plugins.config.editor.boole'
 local Cmp = require 'plugins.config.editor.cmp.cmp'
 local Indent = require 'plugins.config.interface.indent'
 local Treesitter = require 'plugins.config.code.treesitter'
@@ -22,6 +23,15 @@ return Plugins('editor', {
     event = 'InsertEnter',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = AutoPairs.config,
+  },
+  ---- boole: smarter toggling, toggle-loops, etc.
+  {
+    'nat-418/boole.nvim',
+    opts = Boole.opts(),
+
+    config = function(_, opts)
+      require('boole').setup(opts)
+    end,
   },
   ---- cmp: completion engine
   {
