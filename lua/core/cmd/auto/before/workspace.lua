@@ -9,7 +9,7 @@ local Session = require 'utils.api.session'
 local Autocmd = require 'utils.core.autocmd'
 
 
-InfoQuietly('Creating user workspace autocmds')
+GetLogger('AUTOCMD'):info('Creating workspace autocmds')
 
 -- FIXME: see FIXME in Session.save
 -- local function save_session()

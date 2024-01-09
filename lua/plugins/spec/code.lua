@@ -22,6 +22,11 @@ local TsPlugin = Treesitter.TreesitterPlugin
 
 
 return Plugins('code', {
+  ---- efm-configs: oob efm configs for formatters and linters
+  {
+    'creativenull/efmls-configs-nvim',
+    dependencies = { 'neovim/nvim-lspconfig' },
+  },
   ---- fidget: show lsp progress outside of statusline
   {
     'j-hui/fidget.nvim',

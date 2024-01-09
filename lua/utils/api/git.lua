@@ -2,8 +2,11 @@ local File   = require 'toolbox.system.file'
 local Path   = require 'toolbox.system.path'
 local System = require 'utils.api.vim.system'
 
-local enum = require('toolbox.extensions.enum').enum
+local as_bool = require('toolbox.error.onerr').as_bool
+local enum    = require('toolbox.extensions.enum').enum
 
+
+local LOGGER = GetLogger()
 
 --- Contains functions for interacting w/ git.
 ---
@@ -74,7 +77,7 @@ function Git.in_repo()
     return System.run('git rev-parse --is-inside-work-tree')
   end
 
-  return (OnErr.as_bool(fn))
+  return (as_bool(fn))
 end
 
 
@@ -238,7 +241,7 @@ function Config.set(key, value, section, scope)
   section = section or 'core'
   scope = scope or 'global'
 
-  Debug(
+  LOGGER:debug(
     'Git.Config.set: setting %s.%s to %s (scope=%s)',
     { section, key, value, scope }
   )
@@ -253,8 +256,7 @@ end
 ---@param ... string|nil: arguments to the editor command
 function Config.set_editor(editor, ...)
   if not System.executable(editor) then
-    Error(fmt('Git.Config.set_editor: no such executable exists: %s', editor))
-    -- Err.raise('Git.Config.set_editor: no such executable exists: %s', editor)
+    LOGGER:error('Git.Config.set_editor: no such executable exists: %s', { editor })
   end
 
   local cmd_parts = Table.concat({{ editor }, Table.pack(...) })

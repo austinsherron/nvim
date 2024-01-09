@@ -20,7 +20,7 @@ function Interface.set_highlight(highlight, bufnr)
   local hg = highlight:build()
   vim.api.nvim_set_hl(bufnr, highlight.name, hg)
 
-  Debug('Highlight=%s created for bufnr=%s; def=%s', { highlight.name, bufnr, hg })
+  GetLogger('UI'):debug('Highlight=%s created for bufnr=%s; def=%s', { highlight.name, bufnr, hg })
 end
 
 local DIAGNOSTIC_SIGNS = {

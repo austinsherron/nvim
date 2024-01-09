@@ -4,10 +4,9 @@ local Session    = require 'utils.api.session'
 local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
 local telescope = require 'telescope'
-local config    = require 'telescope.config'
 
-config = config.values
 
+local LOGGER = GetLogger('SESSION')
 
 --- Contains functions that implement extended (custom) project and session management
 --- functionality.
@@ -22,11 +21,11 @@ local function default_action(selection)
   local session = Session.get(project_dir)
 
   if session == nil then
-    Warn('No project session found; switching to project=%s', { project_dir })
+    LOGGER:warn('No project session found; switching to project=%s', { project_dir })
     return ProjectApi.switch(project_dir)
   end
 
-  InfoQuietly('Switching to project session=%s', { session.name })
+  LOGGER:info('Switching to project session=%s', { session.name })
   Session.switch(session)
 end
 

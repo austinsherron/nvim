@@ -1,7 +1,6 @@
 local Lazy = require 'toolbox.utils.lazy'
 
-local telescope = Lazy.require('telescope')
-
+local telescope = Lazy.require 'telescope'
 
 local DEFAULTS = {
   layout_strategy = 'vertical',
@@ -9,32 +8,32 @@ local DEFAULTS = {
 
 -- TODO: configure these individually based on usability
 local PICKERS = {
-  buffers       = { theme           = 'ivy'        },
-  colorscheme   = { theme           = 'cursor'     },
-  diagnostics   = { layout_strategy = 'horizontal' },
-  git_bcommits  = { layout_strategy = 'horizontal' },
-  git_stash     = { layout_strategy = 'horizontal' },
-  help_tags     = { layout_strategy = 'horizontal' },
-  man_pages     = { theme           = 'ivy'        },
+  buffers = { theme = 'ivy' },
+  colorscheme = { theme = 'cursor' },
+  diagnostics = { layout_strategy = 'horizontal' },
+  git_bcommits = { layout_strategy = 'horizontal' },
+  git_stash = { layout_strategy = 'horizontal' },
+  help_tags = { layout_strategy = 'horizontal' },
+  man_pages = { theme = 'ivy' },
   -- TODO: see if I can make the dropdown lower, or put the viewer below the prompt
-  treesitter    = { theme           = 'dropdown'   },
-  spell_suggest = { theme           = 'cursor'     },
+  treesitter = { theme = 'dropdown' },
+  spell_suggest = { theme = 'cursor' },
 }
 
 -- TODO: configure these individually based on their setup params
 local EXTENSIONS = {
-  emoji     = {},
-  frecency  = {},
-  notify    = {},
+  emoji = {},
+  frecency = {},
+  notify = {},
   persisted = {},
-  projects  = {},
-  scope     = {},
-  undo      = {},
+  projects = {},
+  scope = {},
+  undo = {},
 }
 
 local OPTS = {
-  defaults   = DEFAULTS,
-  pickers    = PICKERS,
+  defaults = DEFAULTS,
+  pickers = PICKERS,
   extensions = EXTENSIONS,
 }
 
@@ -55,4 +54,3 @@ function Telescope.config()
 end
 
 return Telescope
-

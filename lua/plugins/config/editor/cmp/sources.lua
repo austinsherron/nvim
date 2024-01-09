@@ -1,6 +1,8 @@
 local Buffer = require 'utils.api.vim.buffer'
 
 
+local LOGGER = GetLogger('CMP')
+
 ---@note: used to compute group_index; a src's place in the array is its relative ordering
 --- in completion results
 local ORDER = {
@@ -47,7 +49,7 @@ function CmpSrc:__call()
   -- hard coding this for now
   config.max_item_count = 5
 
-  Trace('CmpSrc: configuring nvim-cmp src=%s, config=%s', { config.name, config })
+  LOGGER:trace('Configuring src=%s, config=%s', { config.name, config })
 
   return config
 end

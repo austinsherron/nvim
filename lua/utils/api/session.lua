@@ -11,6 +11,7 @@ local safeget = Table.safeget
 local persisted = Lazy.require 'persisted'  ---@module 'persisted'
 
 
+local LOGGER = GetLogger('SESSION')
 local SESSIONS_DIR = Paths.data() .. '/sessions/'
 
 --- Contains information about a session.
@@ -37,7 +38,7 @@ function SessionInfo.new(s)
   })
 
   this = setmetatable(this, SessionInfo)
-  Trace('SessionInfo.new=%s', { this })
+  LOGGER:trace('SessionInfo.new=%s', { this })
   return this
 end
 
@@ -86,7 +87,7 @@ end
 --- than one matching session is found
 ---@return SessionInfo|nil: the session w/ dir path == dir_path, if any
 function Session.get(dir_path, strict)
-  Debug('Session.get: fetching session for dir_path=%s', { dir_path })
+  LOGGER:debug('get: fetching session for dir_path=%s', { dir_path })
   strict = Bool.or_default(strict, true)
 
   local matching = Stream.new(Session.list())
@@ -99,7 +100,7 @@ function Session.get(dir_path, strict)
   end
 
   local session = safeget(matching, 1)
-  Debug('Session.get: session=%s', { session or {} })
+  LOGGER:debug('get: session=%s', { session or {} })
   return session
 end
 
@@ -142,7 +143,7 @@ function Session.load(opts)
   Buffer.closeall()
   persisted.load(opts)
 
-  Info(get_load_log_msg(opts))
+  LOGGER:info(get_load_log_msg(opts), {}, { user_facing = true })
 end
 
 
@@ -186,7 +187,7 @@ function Session.save()
   persisted.save({ session = session })
 
   local cwd = Path.basename(System.cwd())
-  Info('Session saved successfully for dir=%s', { cwd })
+  LOGGER:info('Session saved successfully for dir=%s', { cwd }, { user_facing = true })
 end
 
 
@@ -219,10 +220,10 @@ function Session.delete(session)
   local err = File.delete(path)
 
   if err ~= nil then
-    return Warn('Session.delete: error deleting session=%s; err=%s', { name, err })
+    LOGGER:warn('Session.delete: error deleting session=%s; err=%s', { name, err })
+  else
+    LOGGER:info('Successfully deleted session=%s', { name }, { user_facing = true })
   end
-
-  Info('Successfully deleted session=%s', { name })
 end
 
 return Session

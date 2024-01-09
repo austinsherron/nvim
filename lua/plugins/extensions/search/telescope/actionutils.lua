@@ -18,7 +18,7 @@ local function bind_keymap(keymap, map)
 
   for _, binding in ipairs(keymap) do
     if #binding ~= 3 then
-      Warn('Telescope ext: discarding invalid key binding=%s', { binding })
+      GetLogger('EXT'):warn('Telescope: discarding invalid key binding=%s', { binding })
     else
       binding[3] = ActionUtils.make_action(binding[3])
       map(Table.unpack(binding))

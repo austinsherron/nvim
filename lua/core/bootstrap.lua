@@ -43,5 +43,5 @@ KeyMapper.quick_bind('<Space>', '<Nop>')
 globals.mapleader = ' '
 globals.maplocalleader = ' '
 
-InfoQuietly('Bootstrapping complete')
+GetLogger('INIT'):info('Bootstrapping complete')
 

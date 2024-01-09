@@ -38,7 +38,7 @@ local function default_action(selection)
   ---@note: assuming here that the selected session exists
   local session = SessionInfo.new(selection)
 
-  InfoQuietly('Switching to session=%s', { session.name })
+  GetLogger('SESSION'):info('Switching to session=%s', { session.name })
   SessionApi.switch(session)
 end
 

@@ -92,5 +92,5 @@ o.splitright = true
 -- vim.opt.path:append { '**' }             -- add directories upwards as search path
 -- o.updatetime = 1000                      -- save to swp after 1s of not typing (why set if swap = false?)
 
-InfoQuietly('Settings initialized')
+GetLogger('INIT'):info('Settings initialized')
 

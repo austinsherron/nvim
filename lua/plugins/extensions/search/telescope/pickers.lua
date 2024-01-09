@@ -32,7 +32,7 @@ local function cd_into_package(selection, prompt_buffer)
   local plugin_path = selection[1]
   actions.close(prompt_buffer)
 
-  Debug('Chaging cwd to plugin dir=%s', { plugin_path })
+  GetLogger('EXT'):debug('Chaging cwd to plugin dir=%s', { plugin_path })
 
   Tab.open()
   System.cd(plugin_path)

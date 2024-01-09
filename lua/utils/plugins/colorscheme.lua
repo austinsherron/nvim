@@ -2,6 +2,8 @@ local Bool     = require 'toolbox.core.bool'
 local Priority = require 'utils.plugins.priority'
 
 
+local LOGGER = GetLogger('UI')
+
 ---@note: the name "ColorScheme" seems to clash w/ a similarly name class from tokyonight
 ---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias ColorScheme { [1]: string, lazy: boolean, priority: Priority, config: fun(_, opts: table) }
@@ -15,8 +17,8 @@ local function configure_if_necessary(cs, config)
     return cs
   end
 
-  Debug('Configuring colorscheme="%s"', { config.pkg })
-  Trace('Colorscheme opts=%s', { config.opts })
+  LOGGER:debug('Configuring colorscheme="%s"', { config.pkg })
+  LOGGER:trace('Colorscheme opts=%s', { config.opts })
 
   cs.opts = config.opts
   cs.config = function(_, opts)
@@ -35,8 +37,8 @@ end
 ---@param enabled boolean|nil: optional, defaults to true; if false, the colorscheme
 --- plugin will be disabled
 ---@return table: a lazy.nvim representation of a colorscheme plugin
-function ColorScheme(git_path, config, enabled)
-  Debug('Initializing colorscheme="%s"', { git_path })
+local function colorScheme(git_path, config, enabled)
+  LOGGER:debug('Initializing colorscheme="%s"', { git_path })
 
   enabled = Bool.or_default(enabled, true)
 
@@ -50,5 +52,5 @@ function ColorScheme(git_path, config, enabled)
   }, config)
 end
 
-return ColorScheme
+return colorScheme
 

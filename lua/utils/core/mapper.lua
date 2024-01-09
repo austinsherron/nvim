@@ -7,6 +7,7 @@ local Constants = require('plugins.extensions.interface.hydra').Constants
 local Hydra = Lazy.require 'hydra'
 
 
+local LOGGER = GetLogger('KEYMAP')
 local DEFAULT_MODES = { 'n' }
 -- WARN: this is effectively duplicated in this file's unit tests
 local DEFAULT_OPTIONS = { noremap = true }
@@ -132,10 +133,10 @@ function KeyMapper:do_vim_binding(lhs, rhs, options, modes)
   options = self:get_options(options)
   modes = modes or DEFAULT_MODES
 
-  Debug('Binding lhs="%s" to rhs="%s"', { lhs, rhs })
-  Trace('Binding opts=%s, modes=%s', { options, modes })
+  LOGGER:debug('Binding lhs="%s" to rhs="%s"', { lhs, rhs })
+  LOGGER:trace('Binding opts=%s, modes=%s', { options, modes })
   vim.keymap.set(modes, lhs, rhs, options)
-  Debug('Binding processed successfully')
+  LOGGER:debug('Binding processed successfully')
 end
 
 
@@ -189,10 +190,10 @@ end
 function KeyMapper:do_hydra_binding(bindings)
   local hydra = self:get_hydra(bindings)
 
-  Debug('Binding hydra=%s', { hydra.name })
-  Trace('Hydra binding=%s', { hydra })
+  LOGGER:debug('Binding hydra=%s', { hydra.name })
+  LOGGER:trace('Hydra binding=%s', { hydra })
   Hydra(hydra)
-  Debug('Hydra bindings processed successfully')
+  LOGGER:debug('Hydra bindings processed successfully')
 end
 
 
@@ -257,7 +258,7 @@ end
 ---@return KeyMapper: self
 function KeyMapper:bind(bindings)
   local type = ternary(self.hydra == nil, 'vim', 'hydra')
-  Debug('Processing %s %s key binding(s) for %s', { #bindings, type, self:get_desc() })
+  LOGGER:debug('Processing %s %s key binding(s) for %s', { #bindings, type, self:get_desc() })
 
   if self.hydra ~= nil then
     self:do_hydra_binding(bindings)

@@ -14,7 +14,7 @@ local Inspect = {}
 
 --- Displays info the cwd.
 function Inspect.cwd()
-  Info(
+  Notify.info(
     'CWD: %s',
     { System.cwd() },
     { title = 'CWD' }
@@ -51,7 +51,7 @@ function Inspect.buffer()
   local buf = Buffer.info()
   local bufstr = fmtbuf(buf)
 
-  Info(
+  Notify.info(
     INSPECT_TEMPLATE,
     { 'buffer', bufstr },
     { title = 'Current Buffer' }
@@ -83,7 +83,7 @@ function Inspect.window()
   local winbuf = Window.buffer()
   local winstr = fmtwin(winbuf, '    ')
 
-  Info(
+  Notify.info(
     INSPECT_TEMPLATE,
     { 'window', winstr },
     { title = 'Current Window' }
@@ -107,7 +107,7 @@ function Inspect.tab()
     :map(function(w) return fmtwin(w, '    ') end)
     :collect(Collectors.joining('\n'))
 
-  Info(
+  Notify.info(
     TAB_TEMPLATE,
     { tab, winstrs },
     { title = 'Current Tab' }

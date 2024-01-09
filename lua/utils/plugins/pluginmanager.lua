@@ -3,6 +3,8 @@ local Git    = require 'utils.api.git'
 local System = require 'utils.api.vim.system'
 
 
+local LOGGER = GetLogger('PLUGINS')
+
 --- Responsible for plugin orchestration, as well as hiding the impl details of the Neovim
 --- plugin manager.
 ---
@@ -13,7 +15,7 @@ local function download(dst_path)
   local repo = Lazy.git_path()
 
   Git.clone(repo, dst_path, { filter = 'blob:none', branch = 'stable' })
-  Debug('Successfully downloaded %s', { repo })
+  LOGGER:debug('Successfully downloaded %s', { repo })
 end
 
 --- Initializes the neovim plugin manager.
@@ -22,18 +24,18 @@ end
 --- importable source (file or directory) of plugin definitions, or a table that already contains
 --- plugin definitions.
 function PluginMgr.init(plugins)
-  Debug('Initializing plugin manager')
+  LOGGER:debug('Initializing plugin manager')
   local lazy_path = Lazy.lazy_path()
 
   if not System.stat(lazy_path) then
-    Warn('Plugin manager not found at=%s; fetching', { lazy_path })
+    LOGGER:warn('Plugin manager not found at=%s; fetching', { lazy_path })
     download(lazy_path)
   end
 
   System.add_to_rtp(lazy_path)
   require('lazy').setup(plugins, Lazy.opts())
 
-  InfoQuietly('Plugin manager initialized')
+  LOGGER:info('Plugin manager initialized')
 end
 
 return PluginMgr
