@@ -1,15 +1,14 @@
 ---@diagnostic disable: undefined-field
 
+local Editor = require 'utils.api.vim.editor'
+local File = require 'toolbox.system.file'
+local Lazy = require 'toolbox.utils.lazy'
+local System = require 'utils.api.vim.system'
 local TreeNode = require 'plugins.extensions.navigation.nvimtree.treenode'
-local File     = require 'toolbox.system.file'
-local Lazy     = require 'toolbox.utils.lazy'
-local Editor   = require 'utils.api.vim.editor'
-local System   = require 'utils.api.vim.system'
 
 local api = Lazy.require 'nvim-tree.api'
 
-
-local LOGGER = GetLogger('EXT')
+local LOGGER = GetLogger 'EXT'
 
 --- Contains functions that implement extended (custom) nvimtree functionality.
 ---
@@ -38,7 +37,6 @@ function TreeActions.copy_cursor_node_content()
   LOGGER:info('Successfully copied to clipboard contents of %s', { node.name }, { user_facing = true })
 end
 
-
 --- Opens the cursor node file w/out changing focus from the tree buffer.
 function TreeActions.silent_open()
   local node = TreeNode.at_cursor()
@@ -50,7 +48,6 @@ function TreeActions.silent_open()
   api.node.open.edit(node.node)
   api.tree.focus()
 end
-
 
 --- Adds executable file permissions to the file/dir referenced by the cursor node.
 function TreeActions.chmod_x()
@@ -64,4 +61,3 @@ function TreeActions.chmod_x()
 end
 
 return TreeActions
-

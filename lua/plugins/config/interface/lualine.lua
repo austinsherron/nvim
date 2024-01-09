@@ -4,9 +4,8 @@ local Custom = require 'plugins.extensions.interface.lualine'
 -- local navic = require 'nvim-navic'
 
 local function is_code_context_available()
-  return require('lspsaga.symbol.winbar') ~= nil
+  return require 'lspsaga.symbol.winbar' ~= nil
 end
-
 
 local function get_code_context()
   return require('lspsaga.symbol.winbar').get_bar()
@@ -22,11 +21,11 @@ function Lualine.opts()
   return {
     extensions = { 'aerial', 'nvim-tree' },
     winbar = {
-      lualine_a = {{
+      lualine_a = { {
         'tabs',
-        mode            = 0,
+        mode = 0,
         use_mode_colors = true,
-      }},
+      } },
       lualine_b = {
         'filetype',
         'fileformat',
@@ -34,23 +33,24 @@ function Lualine.opts()
         Custom.project_context(),
         'diagnostics',
       },
-      lualine_c = {{
-        get_code_context,
-        cond       = is_code_context_available,
-        draw_empty = false,
-      }},
+      lualine_c = {
+        {
+          get_code_context,
+          cond = is_code_context_available,
+          draw_empty = false,
+        },
+      },
     },
     sections = {
-      lualine_b = {{ 'filename', path = 1            }},
-      lualine_c = {  'searchcount', 'selectioncount'  },
-      lualine_x = {  'diff', 'branch'                 },
+      lualine_b = { { 'filename', path = 1 } },
+      lualine_c = { 'searchcount', 'selectioncount' },
+      lualine_x = { 'diff', 'branch' },
     },
     inactive_winbar = {
-      lualine_a = {{ 'tabs', mode = 0, use_mode_colors = true }},
-      lualine_b = {  'filetype', 'fileformat', 'encoding'      },
+      lualine_a = { { 'tabs', mode = 0, use_mode_colors = true } },
+      lualine_b = { 'filetype', 'fileformat', 'encoding' },
     },
   }
 end
 
 return Lualine
-

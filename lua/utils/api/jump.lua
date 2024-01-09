@@ -1,8 +1,7 @@
 local Introspect = require 'toolbox.meta.introspect'
-local Lazy       = require 'toolbox.utils.lazy'
+local Lazy = require 'toolbox.utils.lazy'
 
 local flash = Lazy.require 'flash'
-
 
 --- Api wrapper around "jump" motion plugin.
 ---
@@ -21,15 +20,14 @@ function Jump.new()
   return setmetatable({}, Jump)
 end
 
-
 local function directional_args(forward)
   forward = Bool.or_default(forward)
 
   return {
     search = {
-      forward      = forward,
+      forward = forward,
       multi_window = false,
-      wrap         = false,
+      wrap = false,
     },
   }
 end
@@ -41,23 +39,21 @@ function Jump:directional(forward)
   self.jump(directional_args(forward))
 end
 
-
 --- Initiate linewise jump.
 function Jump:to_line()
   local args = {
-    label   = {
+    label = {
       after = { 0, 0 },
     },
     pattern = '^',
-    search  = {
+    search = {
       max_length = 0,
-      mode       = 'search',
+      mode = 'search',
     },
   }
 
   self.jump(args)
 end
-
 
 --- Initiate direction treesitter search.
 ---
@@ -65,7 +61,6 @@ end
 function Jump:ts_search(forward)
   self.treesitter_search(directional_args(forward))
 end
-
 
 --- Custom index metamethod that returns a function that directly calls the jump plugin.
 ---
@@ -82,4 +77,3 @@ function Jump:__index(k)
 end
 
 return Jump.new()
-

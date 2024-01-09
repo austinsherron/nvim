@@ -1,6 +1,5 @@
-local View      = require 'utils.api.vim.view'
 local KeyMapper = require 'utils.core.mapper'
-
+local View = require 'utils.api.vim.view'
 
 local KM = KeyMapper.new({ desc_prefix = 'core: ', nowait = true })
 
@@ -10,29 +9,29 @@ local KM = KeyMapper.new({ desc_prefix = 'core: ', nowait = true })
 
 KM:bind({
   -- save
-  { '<leader>w', ':w<CR>',    { desc = 'save one'        }},
-  { '<M-w>',     ':w<CR>',    { desc = 'save one'        }},
-  { '<leader>W', ':wqa!<CR>', { desc = 'save all + quit' }},
+  { '<leader>w', ':w<CR>', { desc = 'save one' } },
+  { '<M-w>', ':w<CR>', { desc = 'save one' } },
+  { '<leader>W', ':wqa!<CR>', { desc = 'save all + quit' } },
   -- close/quit
-  { '<leader>e', View.close, { desc = 'close buffer + window' }},
-  { '<leader>q', ':q<CR>',   { desc = 'quit/close'            }},
-  { '<leader>Q', ':qa<CR>',  { desc = 'quit/close all'        }},
-  { '<leader>!', ':qa!<CR>', { desc = 'force quit'            }},
+  { '<leader>e', View.close, { desc = 'close buffer + window' } },
+  { '<leader>q', ':q<CR>', { desc = 'quit/close' } },
+  { '<leader>Q', ':qa<CR>', { desc = 'quit/close all' } },
+  { '<leader>!', ':qa!<CR>', { desc = 'force quit' } },
   -- <esc>
-  { 'jh',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
-  { 'hj',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
-  { 'jk',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
-  { 'kj',    '<Esc>', { desc = 'exit/back' }, { 'i' }},
-  { '<C-c>', '<Esc>', { desc = 'exit/back' }, { 'i' }},
+  { 'jh', '<Esc>', { desc = 'exit/back' }, { 'i' } },
+  { 'hj', '<Esc>', { desc = 'exit/back' }, { 'i' } },
+  { 'jk', '<Esc>', { desc = 'exit/back' }, { 'i' } },
+  { 'kj', '<Esc>', { desc = 'exit/back' }, { 'i' } },
+  { '<C-c>', '<Esc>', { desc = 'exit/back' }, { 'i' } },
 })
 
 -- misc ops --
 
 KM:bind({
-  { '<C-N><C-N>', ':set invrelativenumber<CR>', { desc = 'toggle relative line #' }},
-  { '<leader>co', ':copen<CR>',                 { desc = 'open quickfix window'   }},
-  { '<leader>cx', ':cclose<CR>',                { desc = 'close quickfix window'  }},
-  { '<leader>v',  '<C-v>',                      { desc = 'enter column edit mode' }},
+  { '<C-N><C-N>', ':set invrelativenumber<CR>', { desc = 'toggle relative line #' } },
+  { '<leader>co', ':copen<CR>', { desc = 'open quickfix window' } },
+  { '<leader>cx', ':cclose<CR>', { desc = 'close quickfix window' } },
+  { '<leader>v', '<C-v>', { desc = 'enter column edit mode' } },
 })
 
 -- motion ----------------------------------------------------------------------
@@ -41,8 +40,8 @@ KM:bind({
 
 KM:bind({
   -- lets j and k move inside a visually wrapped line
-  { 'j', 'gj', { desc = 'cursor down (wrapped)' }},
-  { 'k', 'gk', { desc = 'cursor up (wrapped)'   }},
+  { 'j', 'gj', { desc = 'cursor down (wrapped)' } },
+  { 'k', 'gk', { desc = 'cursor up (wrapped)' } },
 })
 
 -- display --------------------------------------------------------------------
@@ -59,18 +58,18 @@ KM:bind({
 
 -- open splits
 KM:bind({
-  { '<leader>bh', ':split<CR>',  { desc = 'open horizontal split' }},
-  { '<leader>bv', ':vsplit<CR>', { desc = 'open vertical split'   }},
+  { '<leader>bh', ':split<CR>', { desc = 'open horizontal split' } },
+  { '<leader>bv', ':vsplit<CR>', { desc = 'open vertical split' } },
 })
 
 -- spellcheck ------------------------------------------------------------------
 
 KM:with({ desc_prefix = 'spelling: ' })
   :bind({
-    { '<leader>da', 'zg',  { desc = 'add word to dict'                }},
-    { '<leader>dr', 'zug', { desc = 'remove word from dict'           }},
+    { '<leader>da', 'zg', { desc = 'add word to dict' } },
+    { '<leader>dr', 'zug', { desc = 'remove word from dict' } },
     ---@note: overridden in handled in keymap/plugins/telescope.lua
     -- FIXME: modifications to key mapper that added support for 'ignore' were totally fucked
     -- { '<leader>dr', 'zg',  { desc = 'show suggestions', ignore = true }},
-  }):done()
-
+  })
+  :done()

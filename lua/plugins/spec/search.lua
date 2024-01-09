@@ -1,4 +1,3 @@
-
 -- search ----------------------------------------------------------------------
 
 --[[
@@ -8,7 +7,6 @@
 local Telescope = require 'plugins.config.search.telescope'
 
 local Plugins = require('utils.plugins.plugin').plugins
-
 
 return Plugins('search', {
   ---- searchbox: ui/ux enhancements for standard search/replace
@@ -21,7 +19,7 @@ return Plugins('search', {
   ---- telescope: fuzzy pop-out search
   {
     'nvim-telescope/telescope.nvim',
-    tag          = '0.1.1',
+    tag = '0.1.1',
     dependencies = {
       'debugloop/telescope-undo.nvim',
       'nvim-lua/plenary.nvim',
@@ -35,6 +33,5 @@ return Plugins('search', {
   {
     'nvim-telescope/telescope-frecency.nvim',
     dependencies = { 'kkharji/sqlite.lua' },
-  }
+  },
 })
-

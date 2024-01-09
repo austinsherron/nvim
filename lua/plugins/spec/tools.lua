@@ -1,4 +1,3 @@
-
 -- tools -----------------------------------------------------------------------
 
 --[[
@@ -8,13 +7,12 @@
   plugins
 --]]
 
+local NeoRepl = require 'plugins.config.tools.neorepl'
 local Treesitter = require 'plugins.config.code.treesitter'
-local NeoRepl    = require 'plugins.config.tools.neorepl'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
 local TsPlugin = Treesitter.TreesitterPlugin
-
 
 return Plugins('tools', {
   ---- 1password: integrates 1pw w/ nvim
@@ -25,7 +23,7 @@ return Plugins('tools', {
 
     config = function(_, opts)
       require('op').setup(opts)
-    end
+    end,
   },
   ---- colorizer: high perf color highlighter
   ---- TODO: configure
@@ -35,7 +33,7 @@ return Plugins('tools', {
 
     config = function(_, opts)
       require('colorizer').setup(opts)
-    end
+    end,
   },
   ---- link visitor: open links from nvim
   {
@@ -45,7 +43,7 @@ return Plugins('tools', {
 
     config = function(_, opts)
       require('link-visitor').setup(opts)
-    end
+    end,
   },
   ---- log highlighting: syntax highlighting for logs
   { 'MTDL9/vim-log-highlighting' },
@@ -57,9 +55,9 @@ return Plugins('tools', {
   ---- neogen: docstring generation
   {
     'danymat/neogen',
-    enabled      = Treesitter.enabled(TsPlugin.NEOGEN),
+    enabled = Treesitter.enabled(TsPlugin.NEOGEN),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config       = true,
+    config = true,
   },
   ---- neorepl: (n)vim api enabled repl, right here in nvim
   {
@@ -68,9 +66,8 @@ return Plugins('tools', {
 
     config = function(_, opts)
       require('neorepl').config(opts)
-    end
+    end,
   },
   ---- plenary.nvim: lua utilities; a dependency for many, many plugins...
   { 'nvim-lua/plenary.nvim' },
 })
-

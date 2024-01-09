@@ -1,8 +1,7 @@
 ---@diagnostic disable: invisible, undefined-field
 
-local Dict      = require 'toolbox.core.dict'
+local Dict = require 'toolbox.core.dict'
 local KeyMapper = require 'utils.core.mapper'
-
 
 -- TODO: finish this (and work on unit tests more generally)
 describe('KeyMapper', function()
@@ -28,9 +27,7 @@ describe('KeyMapper', function()
 
   describe(':with(options)', function()
     it('should add new options to the instance', function()
-      local KM = KeyMapper.new()
-        :with(options1)
-        :with(options2)
+      local KM = KeyMapper.new():with(options1):with(options2)
 
       assert.equals(#KM.options, 3)
       assert.equals(KM.options:pop(), options2)
@@ -41,49 +38,42 @@ describe('KeyMapper', function()
 
   describe(':get_merged_options(options)', function()
     it(function()
-      local KM = KeyMapper.new()
-        :with(options1)
-        :with(options2)
+      local KM = KeyMapper.new():with(options1):with(options2)
 
       local expected = {
         desc_prefix = 'some-plugin: ',
-        noremap     = true ,
+        noremap = true,
         -- WARN: this effectively duplicates the local constant DEFAULT_OPTIONS
-        nowait      = true,
+        nowait = true,
       }
       assert.True(Dict.equals(KM:get_merged_options(), expected))
     end, 'should merge instance options w/o options arg')
     it('should merge instance options w/ options arg', function()
-      local KM = KeyMapper.new()
-        :with(options1)
-        :with(options2)
+      local KM = KeyMapper.new():with(options1):with(options2)
 
       local expected = {
         desc_prefix = 'some-plugin: ',
-        noremap     = true ,
+        noremap = true,
         -- WARN: this effectively duplicates the local constant DEFAULT_OPTIONS
-        nowait      = true,
-        silent      = true,
+        nowait = true,
+        silent = true,
       }
       assert.True(Dict.equals(KM:get_merged_options({ silent = true }), expected))
     end)
     it('should keep values from more recently pushed options, if collisions occur', function()
-      local KM = KeyMapper.new()
-        :with(options1)
-        :with(options2)
-        :with({ nowait = false })
+      local KM = KeyMapper.new():with(options1):with(options2):with({ nowait = false })
 
       local expected = {
-        desc        = 'does something',
+        desc = 'does something',
         desc_prefix = 'some-plugin: ',
-        noremap     = true ,
+        noremap = true,
         -- WARN: this effectively duplicates the local constant DEFAULT_OPTIONS
-        nowait      = false,
-        silent      = false,
+        nowait = false,
+        silent = false,
       }
 
       local options = {
-        desc   = 'does something',
+        desc = 'does something',
         silent = false,
       }
 
@@ -93,19 +83,15 @@ describe('KeyMapper', function()
 
   describe(':get_options(options)', function()
     it('should create a full desc w/ desc_prefix and desc', function()
-      local KM = KeyMapper.new()
-        :with(options1)
-        :with(options2)
-        :with({ desc = 'does something' })
+      local KM = KeyMapper.new():with(options1):with(options2):with({ desc = 'does something' })
 
       local expected = {
-        desc        = 'some-plugin: does something',
-        noremap     = true ,
+        desc = 'some-plugin: does something',
+        noremap = true,
         -- WARN: this effectively duplicates the local constant DEFAULT_OPTIONS
-        nowait      = true,
+        nowait = true,
       }
       assert.True(Dict.equals(KM:get_options(), expected))
     end)
   end)
 end)
-

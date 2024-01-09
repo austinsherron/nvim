@@ -1,6 +1,5 @@
 local Session = require 'utils.api.session'
 
-
 --- Contains functions for configuring the persisted session manager plugin.
 ---
 ---@class Persisted
@@ -17,4 +16,3 @@ function Persisted.opts()
 end
 
 return Persisted
-

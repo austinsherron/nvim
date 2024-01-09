@@ -1,8 +1,7 @@
-local Table        = require 'toolbox.core.table'
 local LogFormatter = require 'toolbox.log.formatter'
-local LogLevel     = require 'toolbox.log.level'
-local NvimConfig   = require 'utils.config'
-
+local LogLevel = require 'toolbox.log.level'
+local NvimConfig = require 'utils.config'
+local Table = require 'toolbox.core.table'
 
 --- Specifies what kind of message is being logged, and its level of
 --- importance/visibility/urgency.
@@ -11,8 +10,8 @@ local NvimConfig   = require 'utils.config'
 local Urgency = {
   TRACE = vim.log.levels.TRACE,
   DEBUG = vim.log.levels.DEBUG,
-  INFO  = vim.log.levels.INFO,
-  WARN  = vim.log.levels.WARN,
+  INFO = vim.log.levels.INFO,
+  WARN = vim.log.levels.WARN,
   ERROR = vim.log.levels.ERROR,
 }
 
@@ -26,14 +25,14 @@ local function current_level()
   return Urgency[urgency] or Urgency.WARN
 end
 
-
 local function should_notify(level)
   return level >= current_level()
 end
 
-
 local function do_log(level, to_log, args, opts)
-  if not should_notify(level) then return end
+  if not should_notify(level) then
+    return
+  end
 
   args = args or {}
   opts = opts or {}
@@ -46,7 +45,6 @@ local function do_log(level, to_log, args, opts)
   vim.notify(to_log, level, rest)
 end
 
-
 --- Logs a "trace" level message via the vim.notify api.
 ---
 ---@param to_log any: the formattable string or object to log
@@ -55,7 +53,6 @@ end
 function Notify.trace(to_log, args, opts)
   do_log(Urgency.TRACE, to_log, args, opts)
 end
-
 
 --- Logs a "debug" level message via the vim.notify api.
 ---
@@ -66,7 +63,6 @@ function Notify.debug(to_log, args, opts)
   do_log(Urgency.DEBUG, to_log, args, opts)
 end
 
-
 --- Logs an "info" level message via the vim.notify api.
 ---
 ---@param to_log any: the formattable string or object to log
@@ -76,7 +72,6 @@ function Notify.info(to_log, args, opts)
   do_log(Urgency.INFO, to_log, args, opts)
 end
 
-
 --- Logs a "warn" level message via the vim.notify api.
 ---
 ---@param to_log any: the formattable string or object to log
@@ -85,7 +80,6 @@ end
 function Notify.warn(to_log, args, opts)
   do_log(Urgency.WARN, to_log, args, opts)
 end
-
 
 --- Logs an "error" level message via the vim.notify api.
 ---
@@ -97,4 +91,3 @@ function Notify.error(to_log, args, opts)
 end
 
 return Notify
-

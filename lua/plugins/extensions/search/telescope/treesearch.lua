@@ -1,10 +1,9 @@
-local Path   = require 'toolbox.system.path'
+local Path = require 'toolbox.system.path'
 local TMerge = require 'utils.api.vim.tablemerge'
 
 local TreeNode = require('plugins.extensions.navigation').NvimTree.TreeNode
 
 local builtins = require 'telescope.builtin'
-
 
 --- Contains functions that implement extended (custom) nvimtree telescope search
 --- functionality. Current extensions include:
@@ -19,16 +18,14 @@ local TreeSearch = {}
 
 local function warn_for_missing_path(node)
   local msg = 'TreeSearch: no node path found for node=%s (likely searching '
-           .. 'root node); falling back to non-contextual search'
+    .. 'root node); falling back to non-contextual search'
 
   return GetLogger('EXT'):warn(msg, { node.name })
 end
 
-
 local function make_picker_title(title, node_path)
   return title .. ' (in ' .. Path.basename(node_path) .. ')'
 end
-
 
 --- Executes a search function constrained to the nvimtree dir under the cursor, or the
 --- parent dir of the file under the cursor, if any. Otherwise, executes an unconstrained
@@ -55,13 +52,12 @@ function TreeSearch.do_contextual_search(f, title, opts)
   end
 
   opts = TMerge.mergeleft({
-    cwd          = node_path,
-    prompt_title = make_picker_title(title, node_path)
+    cwd = node_path,
+    prompt_title = make_picker_title(title, node_path),
   }, opts)
 
   return f(opts)
 end
-
 
 --- Calls Telescope.do_contextual_search w/ the `find_files` telescope builtin.
 ---
@@ -73,18 +69,16 @@ function TreeSearch.contextual_find_files(opts)
   return TreeSearch.do_contextual_search(builtins.find_files, 'Find Files', opts)
 end
 
-
 --- Same as Telescope.contextual_find_files but includes all hidden files in the search.
 ---
 ---@see Telescope.contextual_find_files
 function TreeSearch.contextual_find_all_files()
   return TreeSearch.contextual_find_files({
-    hidden           = true,
-    no_ignore        = true,
+    hidden = true,
+    no_ignore = true,
     no_ignore_parent = true,
-})
+  })
 end
-
 
 --- Calls Telescope.do_contextual_search w/ the `live_grep` telescope builtin.
 ---
@@ -95,4 +89,3 @@ function TreeSearch.contextual_live_grep(opts)
 end
 
 return TreeSearch
-

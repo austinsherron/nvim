@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the sniprun plugin.
 ---
 ---@class SnipRun
@@ -16,4 +15,3 @@ function SnipRun.opts()
 end
 
 return SnipRun
-

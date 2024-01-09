@@ -1,8 +1,7 @@
-local Bool     = require 'toolbox.core.bool'
+local Bool = require 'toolbox.core.bool'
 local Priority = require 'utils.plugins.priority'
 
-
-local LOGGER = GetLogger('UI')
+local LOGGER = GetLogger 'UI'
 
 ---@note: the name "ColorScheme" seems to clash w/ a similarly name class from tokyonight
 ---@diagnostic disable-next-line: duplicate-doc-alias
@@ -22,12 +21,13 @@ local function configure_if_necessary(cs, config)
 
   cs.opts = config.opts
   cs.config = function(_, opts)
-    Safe.call(function() require(config.pkg).setup(opts) end)
+    Safe.call(function()
+      require(config.pkg).setup(opts)
+    end)
   end
 
   return cs
 end
-
 
 --- Util function for constructing colorscheme plugins. Helps maintain consistency of
 --- props that should change together.
@@ -44,8 +44,8 @@ local function colorScheme(git_path, config, enabled)
 
   return configure_if_necessary({
     git_path,
-    enabled  = enabled,
-    lazy     = false,
+    enabled = enabled,
+    lazy = false,
     -- colorschemes are loaded w/ high priority, as discussed here:
     -- https://github.com/folke/lazy.nvim > Plugin Spec > priority
     priority = Priority.THIRD,
@@ -53,4 +53,3 @@ local function colorScheme(git_path, config, enabled)
 end
 
 return colorScheme
-

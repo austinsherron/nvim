@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the neodev plugin.
 ---
 ---@class Neodev
@@ -20,4 +19,3 @@ function Neodev.opts()
 end
 
 return Neodev
-

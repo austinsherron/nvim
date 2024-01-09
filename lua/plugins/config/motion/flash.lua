@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the flash plugin.
 ---
 ---@class Flash
@@ -13,7 +12,7 @@ function Flash.opts()
     label = {
       rainbow = {
         enabled = true,
-        shade   = 5,
+        shade = 5,
       },
     },
     highlight = {
@@ -21,7 +20,7 @@ function Flash.opts()
     },
     modes = {
       char = {
-        enabled     = true,
+        enabled = true,
         jump_labels = true,
       },
     },
@@ -29,4 +28,3 @@ function Flash.opts()
 end
 
 return Flash
-

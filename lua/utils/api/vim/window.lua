@@ -1,10 +1,9 @@
-local Lazy = require 'toolbox.utils.lazy'
 local Buffer = require 'utils.api.vim.buffer'
+local Lazy = require 'toolbox.utils.lazy'
 
 local enum = require('toolbox.extensions.enum').enum
 
 local smart_splits = Lazy.require 'smart-splits'
-
 
 --- Contains utilities for interacting w/ (n)vim windows.
 ---
@@ -15,10 +14,10 @@ local Window = {}
 ---
 ---@enum WindowOpDirection
 local WindowOpDirection = enum({
-  LEFT  = 'left',
+  LEFT = 'left',
   RIGHT = 'right',
-  UP    = 'up',
-  DOWN  = 'down',
+  UP = 'up',
+  DOWN = 'down',
 })
 
 --- Contains info about a window and the buffer it displays.
@@ -38,7 +37,7 @@ function WindowBuffer.new(id)
   id = id or Window.current()
 
   return setmetatable({
-    id     = id,
+    id = id,
     buffer = Buffer.info(Window.tobuf(id)),
   }, WindowBuffer)
 end
@@ -53,7 +52,6 @@ function Window.current()
   return vim.api.nvim_get_current_win()
 end
 
-
 --- Gets the window's buffer id.
 ---
 ---@param winnr integer|nil: optional, defaults to current window; the window for which to
@@ -63,7 +61,6 @@ function Window.tobuf(winnr)
   winnr = winnr or Window.current()
   return vim.api.nvim_win_get_buf(winnr)
 end
-
 
 --- Gets the buffer's current window id.
 ---
@@ -75,7 +72,6 @@ function Window.frombuf(bufnr)
   return vim.fn.bufwinnr(bufnr)
 end
 
-
 --- Gets a WindowBuffer for the provided winnr.
 ---
 ---@param winnr integer|nil: optional, defaults to current window; the id of the window
@@ -85,7 +81,6 @@ function Window.buffer(winnr)
   winnr = winnr or Window.current()
   return WindowBuffer.new(winnr)
 end
-
 
 --- Closes the window w/ id winnr.
 ---
@@ -100,14 +95,12 @@ function Window.close(winnr, force)
   vim.api.nvim_win_close(winnr, force)
 end
 
-
 --- Resizes the current window in a direction.
 ---
 ---@param direction WindowOpDirection: the direction in which to resize a window
 function Window.resize(direction)
   smart_splits['resize_' .. direction]()
 end
-
 
 --- Swaps the current buffer to another window in a direction.
 ---
@@ -118,4 +111,3 @@ function Window.swap(direction)
 end
 
 return Window
-

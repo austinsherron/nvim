@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the trouble plugin.
 ---
 ---@class Trouble
@@ -12,4 +11,3 @@ function Trouble.opts()
 end
 
 return Trouble
-

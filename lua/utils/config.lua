@@ -1,7 +1,6 @@
-local Bool   = require 'toolbox.core.bool'
+local Bool = require 'toolbox.core.bool'
+local Env = require 'toolbox.system.env'
 local String = require 'toolbox.core.string'
-local Env    = require 'toolbox.system.env'
-
 
 --- Reads neovim configuration values from the environment. Neovim config env vars are
 --- prefixed w/ "NEOVIM_".
@@ -17,7 +16,6 @@ NvimConfig.__index = NvimConfig
 function NvimConfig.new()
   return setmetatable({}, NvimConfig)
 end
-
 
 --- Custom index metamethod that permits the reading of neovim config env vars via
 --- function calls of the following from:
@@ -35,4 +33,3 @@ function NvimConfig:__index(k)
 end
 
 return NvimConfig.new()
-

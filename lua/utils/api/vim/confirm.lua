@@ -1,9 +1,10 @@
 local confirm = vim.fn.confirm
 
-
-local DEFAULT_CHOICES   = { 'yes', 'no' }
-local DEFAULT_CHOICE    = 2
-local DEFAULT_CONFIRMED = function(ci) return ci == 1 end
+local DEFAULT_CHOICES = { 'yes', 'no' }
+local DEFAULT_CHOICE = 2
+local DEFAULT_CONFIRMED = function(ci)
+  return ci == 1
+end
 
 --- Contains utilities for interacting w/ the vim.fn.confirm api, i.e.: creating and
 --- interacting w/ confirmation dialogs.
@@ -18,10 +19,13 @@ local Confirm = {}
 function Confirm.fmt_choices(choices)
   return Stream.new(choices)
     :map(String.capitalize)
-    :map(function(c) return '&' .. c end)
-    :collect(function(cs) return String.join(cs, '\n') end)
+    :map(function(c)
+      return '&' .. c
+    end)
+    :collect(function(cs)
+      return String.join(cs, '\n')
+    end)
 end
-
 
 --- Constructs a confirmation dialog.
 ---
@@ -45,4 +49,3 @@ function Confirm.dialog(msg, choices, default_choice, confirmed)
 end
 
 return Confirm
-

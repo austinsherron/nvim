@@ -1,6 +1,5 @@
 local NvimTreeKM = require 'keymap.plugins.navigation.nvimtree'
 
-
 --- Contains functions for configuring the nvimtree plugin.
 ---
 ---@class NvimTree
@@ -11,7 +10,7 @@ function NvimTree.opts()
   return {
     actions = {
       open_file = {
-        quit_on_open = false
+        quit_on_open = false,
       },
     },
 
@@ -25,7 +24,7 @@ function NvimTree.opts()
 
     on_attach = NvimTreeKM.on_attach,
 
-    respect_buf_cwd = true,     -- for projects integration
+    respect_buf_cwd = true, -- for projects integration
 
     renderer = {
       group_empty = true,
@@ -38,7 +37,7 @@ function NvimTree.opts()
     -- for projects integration
     update_focused_file = {
       enable = true,
-      update_root = true
+      update_root = true,
     },
 
     view = {
@@ -49,4 +48,3 @@ function NvimTree.opts()
 end
 
 return NvimTree
-

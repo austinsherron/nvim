@@ -1,4 +1,3 @@
-
 --- Contains functions for configuring the lspsaga plugin.
 ---
 ---@class LspSaga
@@ -9,20 +8,20 @@ function LspSaga.opts()
   return {
     definition = {
       keys = {
-        close  = '<M-q>',
-        edit   = '<M-o>',
-        split  = '<M-h>',
+        close = '<M-q>',
+        edit = '<M-o>',
+        split = '<M-h>',
         vsplit = '<M-v>',
-        tab    = '<M-t>',
+        tab = '<M-t>',
       },
     },
     finder = {
       keys = {
-        shuttle        = { 'L', 'H' },
-        split          = 'h',
+        shuttle = { 'L', 'H' },
+        split = 'h',
         toggle_or_open = { 'o', '<Enter>' },
-        vsplit         = 'v'
-      }
+        vsplit = 'v',
+      },
     },
     lightbulb = {
       virtual_text = false,
@@ -39,4 +38,3 @@ function LspSaga.opts()
 end
 
 return LspSaga
-

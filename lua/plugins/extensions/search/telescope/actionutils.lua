@@ -1,6 +1,5 @@
-local actions      = require 'telescope.actions'
 local action_state = require 'telescope.actions.state'
-
+local actions = require 'telescope.actions'
 
 ---@alias TelescopeKeyBinding { mode: string, key: string, action: string|function }
 ---@alias TelescopeKeyMapper fun(mode: string|string[], key: string, action: string|function)
@@ -26,7 +25,6 @@ local function bind_keymap(keymap, map)
   end
 end
 
-
 --- Utility for attaching key bindings to a picker w/out changing its default action.
 ---
 ---@param keymap TelescopeKeyBinding[]|nil: optional; picker action key bindings
@@ -43,7 +41,6 @@ function ActionUtils.bind_keymap(keymap, retval)
   end
 end
 
-
 --- Wraps a function for use as a picker action.
 ---
 ---@param action TelescopeAction: the function to wrap
@@ -54,7 +51,6 @@ function ActionUtils.make_action(action)
     return action(selected, bufnr)
   end
 end
-
 
 --- Utility that makes it easier to replace an existing picker's default action.
 ---
@@ -71,18 +67,15 @@ function ActionUtils.replace_default_action(new_action, keymap, retval)
   return function(prompt_buffer, map)
     bind_keymap(keymap, map)
 
-    actions.select_default:replace(
-      function()
-        actions.close(prompt_buffer)
-        local selection = action_state.get_selected_entry()
-        new_action(selection)
-      end
-    )
+    actions.select_default:replace(function()
+      actions.close(prompt_buffer)
+      local selection = action_state.get_selected_entry()
+      new_action(selection)
+    end)
 
     return retval
   end
 end
-
 
 --- Creates a function intended for use w/ custom picker key bindings.
 ---
@@ -118,4 +111,3 @@ function ActionUtils.make_selection_action(confirm, action, after)
 end
 
 return ActionUtils
-

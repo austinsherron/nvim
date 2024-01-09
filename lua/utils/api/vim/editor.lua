@@ -1,11 +1,10 @@
 local enum = require('toolbox.extensions.enum').enum
 
-
 --- Represents different "locations" to which text can be copied.
 ---
 ---@enum Register
 local Register = {
-  UNNAMED      = '*',
+  UNNAMED = '*',
   UNNAMED_PLUS = '+',
 }
 
@@ -13,13 +12,13 @@ local Register = {
 ---
 ---@enum Mode
 local Mode = enum({
-  COMMAND  = 'c',
-  INSERT   = 'i',
-  NORMAL   = 'n',
-  SELECT   = 's',
+  COMMAND = 'c',
+  INSERT = 'i',
+  NORMAL = 'n',
+  SELECT = 's',
   TERMINAL = 't',
-  VISUAL   = 'v',
-  X        = 'x',
+  VISUAL = 'v',
+  X = 'x',
 })
 
 --- Nearly non-existent wrapper around nvim functions related to editor interactions.
@@ -40,12 +39,11 @@ function Editor.mode()
   local mode = vim.api.nvim_get_mode().mode
 
   if mode == nil then
-    Err.raise('Editor.mode: unable to find editor mode')
+    Err.raise 'Editor.mode: unable to find editor mode'
   end
 
   return Mode[mode]
 end
-
 
 --- Checks if the editor's current mode == the provided mode.
 ---
@@ -55,12 +53,10 @@ function Editor.is_mode(mode)
   return mode == Mode[Editor.mode()]
 end
 
-
 ---@see vim.fn.getcmdline
 function Editor.cmdline()
   return vim.fn.getcmdline()
 end
-
 
 --- Copies text to the provided register, or to the system register if none is provided.
 ---
@@ -73,4 +69,3 @@ function Editor.copy(text, register)
 end
 
 return Editor
-

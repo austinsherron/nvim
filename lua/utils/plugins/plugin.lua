@@ -1,7 +1,6 @@
 local Type = require 'toolbox.meta.type'
 
-
-local LOGGER = GetLogger('PLUGINS')
+local LOGGER = GetLogger 'PLUGINS'
 
 --- An adapter that takes a lazy.nvim plugin definition and wraps all function references
 --- in error handling.
@@ -15,7 +14,6 @@ local function plugin_name(plugin)
   return plugin[1] or '?'
 end
 
-
 local function wrap_fn(name, fn_name, fn)
   return function(...)
     local fqdn = fmt('%s.%s', name, fn_name)
@@ -25,7 +23,6 @@ local function wrap_fn(name, fn_name, fn)
     return Safe.call(fn, { prefix = fqdn }, ...)
   end
 end
-
 
 --- Constructor
 ---
@@ -37,12 +34,15 @@ function Plugin.new(plugin)
   LOGGER:debug('Initializing "%s"', { name })
 
   Stream.new(Table.keys(plugin))
-    :filter(function(k) return Type.isfunc(plugin[k]) end)
-    :foreach(function(k) plugin[k] = wrap_fn(name, k, plugin[k]) end)
+    :filter(function(k)
+      return Type.isfunc(plugin[k])
+    end)
+    :foreach(function(k)
+      plugin[k] = wrap_fn(name, k, plugin[k])
+    end)
 
   return setmetatable(plugin, Plugin)
 end
-
 
 --- Constructs multiple plugins from an array of plugin definitions.
 ---
@@ -52,13 +52,10 @@ end
 function Plugin.all(category, plugins)
   LOGGER:info('Initializing category="%s"', { category })
 
-  return Stream.new(plugins)
-    :map(Plugin.new)
-    :get()
+  return Stream.new(plugins):map(Plugin.new):get()
 end
 
 return {
-  plugin  = Plugin.new,
+  plugin = Plugin.new,
   plugins = Plugin.all,
 }
-

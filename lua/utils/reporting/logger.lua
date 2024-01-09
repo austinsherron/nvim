@@ -1,10 +1,9 @@
-local LogLevel   = require 'toolbox.log.level'
-local Logger     = require 'toolbox.log.logger'
+local LogLevel = require 'toolbox.log.level'
+local Logger = require 'toolbox.log.logger'
 local LoggerType = require 'toolbox.log.type'
-local TMerge     = require 'utils.api.vim.tablemerge'
+local Notify = require 'utils.reporting.notify'
 local NvimConfig = require 'utils.config'
-local Notify     = require 'utils.reporting.notify'
-
+local TMerge = require 'utils.api.vim.tablemerge'
 
 ---@alias NvimLoggerOpts { persistent: boolean?, user_facing: boolean? }
 
@@ -28,18 +27,13 @@ NvimLogger.__index = NvimLogger
 ---@param label string|nil: optional; an optional prefix label for logged messages
 ---@return NvimLogger: a new NvimLogger instance
 function NvimLogger.new(log_level, default_opts, label)
-  local logger = Logger.new(
-    LoggerType.NVIM,
-    log_level or LogLevel.default(),
-    label
-  )
+  local logger = Logger.new(LoggerType.NVIM, log_level or LogLevel.default(), label)
 
   return setmetatable({
-    logger       = logger,
+    logger = logger,
     default_opts = TMerge.mergeright(default_opts or {}, DEFAULT_OPTS),
   }, NvimLogger)
 end
-
 
 --- Creates a new sub-logger from this instance using the provided label.
 ---
@@ -47,11 +41,10 @@ end
 ---@return NvimLogger: a new sub-logger instance w/ the provided label
 function NvimLogger:sub(label)
   return setmetatable({
-    logger       = self.logger:sub(label),
+    logger = self.logger:sub(label),
     default_opts = self.default_opts or {},
   }, NvimLogger)
 end
-
 
 ---@private
 function NvimLogger:do_log(method, to_log, args, opts)
@@ -69,7 +62,6 @@ function NvimLogger:do_log(method, to_log, args, opts)
   Notify[method](to_log, args, opts)
 end
 
-
 --- Logs a "trace" level message during neovim runtime.
 ---
 ---@param to_log any: the formattable string or object to log
@@ -78,7 +70,6 @@ end
 function NvimLogger:trace(to_log, args, opts)
   self:do_log('trace', to_log, args, opts)
 end
-
 
 --- Logs a "debug" level message during neovim runtime.
 ---
@@ -89,7 +80,6 @@ function NvimLogger:debug(to_log, args, opts)
   self:do_log('debug', to_log, args, opts)
 end
 
-
 --- Logs an "info" level message during neovim runtime.
 ---
 ---@param to_log any: the formattable string or object to log
@@ -98,7 +88,6 @@ end
 function NvimLogger:info(to_log, args, opts)
   self:do_log('info', to_log, args, opts)
 end
-
 
 --- Logs a "warn" level message during neovim runtime.
 ---
@@ -109,7 +98,6 @@ function NvimLogger:warn(to_log, args, opts)
   self:do_log('warn', to_log, args, opts)
 end
 
-
 --- Logs an "error" level message during neovim runtime.
 ---
 ---@param to_log any: the formattable string or object to log
@@ -119,16 +107,13 @@ function NvimLogger:error(to_log, args, opts)
   self:do_log('error', to_log, args, opts)
 end
 
-
 ---@return string: the path to the log file
 function NvimLogger:log_path()
   return self.logger:log_path()
 end
-
 
 local function current_level()
   return NvimConfig.log_level() or LogLevel.default()
 end
 
 return NvimLogger.new(current_level())
-

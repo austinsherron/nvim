@@ -1,11 +1,10 @@
-local Shell     = require 'toolbox.system.shell'
 local KeyMapper = require 'utils.core.mapper'
-local Path      = require 'utils.api.vim.path'
+local Path = require 'utils.api.vim.path'
+local Shell = require 'toolbox.system.shell'
 
 local globals = vim.g
-local o       = vim.o
-local opt     = vim.opt
-
+local o = vim.o
+local opt = vim.opt
 
 -- note: settings that should come before everything else
 
@@ -43,5 +42,4 @@ KeyMapper.quick_bind('<Space>', '<Nop>')
 globals.mapleader = ' '
 globals.maplocalleader = ' '
 
-GetLogger('INIT'):info('Bootstrapping complete')
-
+GetLogger('INIT'):info 'Bootstrapping complete'

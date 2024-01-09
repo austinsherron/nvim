@@ -1,7 +1,6 @@
-local Path    = require 'toolbox.system.path'
+local Path = require 'toolbox.system.path'
 local Project = require 'utils.api.project'
 local Session = require 'utils.api.session'
-
 
 ---@alias LualineComponent { [1]: fun(): string, cond: fun(): boolean, draw_empty: boolean }
 
@@ -17,7 +16,6 @@ function ProjectContext.is_available()
   return Project.cwd_in_project()
 end
 
-
 ---@return string: the current project, cwd, and session context
 function ProjectContext.get()
   local cwd_is_project = Project.cwd_is_project()
@@ -29,7 +27,6 @@ function ProjectContext.get()
 
   return fmt('%s%s %s', project, bang_or_not, icon)
 end
-
 
 ---@return boolean: true if the component should be drawn when empty, false otherwise
 function ProjectContext.draw_empty()
@@ -47,10 +44,9 @@ local Lualine = {}
 function Lualine.project_context()
   return {
     ProjectContext.get,
-    cond       = ProjectContext.is_available,
+    cond = ProjectContext.is_available,
     draw_empty = true,
   }
 end
 
 return Lualine
-

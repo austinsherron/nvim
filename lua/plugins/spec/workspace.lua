@@ -1,4 +1,3 @@
-
 -- workspace -------------------------------------------------------------------
 
 --[[
@@ -7,18 +6,17 @@
   groupings/filtered views of the same
 --]]
 
-local Persisted  = require 'plugins.config.workspace.persisted'
-local Project    = require 'plugins.config.workspace.project'
+local Persisted = require 'plugins.config.workspace.persisted'
+local Project = require 'plugins.config.workspace.project'
 
 local Plugins = require('utils.plugins.plugin').plugins
-
 
 return Plugins('workspace', {
   ---- persisted: session manager forked from persistence.nvim (from the legendary folke)
   {
     'olimorris/persisted.nvim',
     event = 'VimEnter',
-    opts  = Persisted.opts(),
+    opts = Persisted.opts(),
 
     config = function(_, opts)
       require('persisted').setup(opts)
@@ -31,7 +29,7 @@ return Plugins('workspace', {
 
     config = function(_, opts)
       require('project_nvim').setup(opts)
-    end
+    end,
   },
   ---- scope: enhanced buffer + tab workflows
   {
@@ -40,7 +38,6 @@ return Plugins('workspace', {
 
     config = function(_, opts)
       require('scope').setup(opts)
-    end
+    end,
   },
 })
-
