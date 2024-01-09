@@ -9,10 +9,14 @@
 local ColorScheme = require 'utils.plugins.colorscheme'
 local LspKind = require 'plugins.config.appearance.lspkind'
 local Nightfox = require 'plugins.config.appearance.nightfox'
+local Noice = require 'plugins.config.appearance.noice'
 local Priority = require 'utils.plugins.priority'
 local TokyoNight = require 'plugins.config.appearance.tokyonight'
+local Treesitter = require 'plugins.config.code.treesitter'
 
 local Plugins = require('utils.plugins.plugin').plugins
+
+local TsPlugin = Treesitter.TreesitterPlugin
 
 return Plugins('appearance', {
   ---- buf-resize: intuitively resize buffers when terminal dimensions change
@@ -42,6 +46,22 @@ return Plugins('appearance', {
 
     config = function(_, opts)
       require('lspkind').init(opts)
+    end,
+  },
+  ---- noice: ui overhaul for messages, cmdline, and popup menu
+  {
+    'folke/noice.nvim',
+    enabled = Treesitter.enabled(TsPlugin.NOICE),
+    event = 'VeryLazy',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = Noice.opts(),
+
+    config = function(_, opts)
+      require('noice').setup(opts)
     end,
   },
   ---- nui: ui components

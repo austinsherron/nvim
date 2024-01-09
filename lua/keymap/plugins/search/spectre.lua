@@ -3,7 +3,6 @@ local KeyMapper = require 'utils.core.mapper'
 local KM = KeyMapper.new({
   desc_prefix = 'spectre: ',
   nowait = true,
-  silent = true,
 })
 
 local function spectre_cmd(cmd, select_word)

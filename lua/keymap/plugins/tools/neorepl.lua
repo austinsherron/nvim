@@ -5,7 +5,7 @@ local function close()
   View.close({ filetype = 'neorepl' })
 end
 
-local KM = KeyMapper.new({ desc_prefix = 'neorepl: ', silent = true, nowait = true })
+local KM = KeyMapper.new({ desc_prefix = 'neorepl: ', nowait = true })
 
 -- interactions ----------------------------------------------------------------
 

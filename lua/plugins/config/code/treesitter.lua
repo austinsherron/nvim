@@ -8,6 +8,7 @@ local TreesitterPlugin = {
   INDENT_BLANKLINE = 'indent-blankline',
   NEOGEN = 'neogen',
   NEOTEST = 'neotest',
+  NOICE = 'noice',
   PLAYGROUND = 'playground',
   SURROUND = 'surround',
   TS_RAINBOW = 'ts-rainbow2',
@@ -21,6 +22,7 @@ local TS_PLUGIN_ENABLEMENT = {
   [TreesitterPlugin.INDENT_BLANKLINE] = true,
   [TreesitterPlugin.NEOGEN] = true,
   [TreesitterPlugin.NEOTEST] = true,
+  [TreesitterPlugin.NOICE] = true,
   [TreesitterPlugin.PLAYGROUND] = true,
   [TreesitterPlugin.SURROUND] = true,
   [TreesitterPlugin.TREESJ] = true,
@@ -60,7 +62,6 @@ function Treesitter.opts()
   return {
     -- parser install options
     auto_install = false,
-    -- TODO: figure out why treesitter installs these every time nvim is started
     ensure_installed = {
       'bash',
       'go',
@@ -73,6 +74,7 @@ function Treesitter.opts()
       'markdown',
       'markdown_inline',
       'python',
+      'regex',
       'query',
       'sql',
       'terraform',
