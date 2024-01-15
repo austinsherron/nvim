@@ -7,7 +7,7 @@ local KM = KeyMapper.new({ nowait = true })
 
 -- alpha -----------------------------------------------------------------------
 
-KM:with({ desc_prefix = 'alpha: ' }):bind({ { '<leader>0', ':Alpha<CR>', { desc = 'open startpage' } } }):done()
+KM:with({ desc_prefix = 'alpha: ' }):bind_one('<leader>0', ':Alpha<CR>', { desc = 'open startpage' }):done()
 
 -- notify ----------------------------------------------------------------------
 
@@ -15,12 +15,7 @@ local function dismiss()
   notify.dismiss({ pending = false, silent = false })
 end
 
-KM:with({ desc_prefix = 'notify: ' })
-  :bind({
-    { '<leader>3', ':Notifications<CR>', { desc = 'notification history' } },
-    { '<leader>~', dismiss, { desc = 'dismiss notifications' } },
-  })
-  :done()
+KM:with({ desc_prefix = 'notify: ' }):bind_one('<leader>~', dismiss, { desc = 'dismiss notifications' }):done()
 
 -- todo-comments ---------------------------------------------------------------
 
@@ -34,5 +29,5 @@ KM:with({ desc_prefix = 'todo-comments: ' })
 -- undotree --------------------------------------------------------------------
 
 KM:with({ desc_prefix = 'undotree: ' })
-  :bind({ { '<leader>4', ':UndotreeToggle | UndotreeFocus<CR>', { desc = 'toggle' } } })
+  :bind_one('<leader>3', ':UndotreeToggle | UndotreeFocus<CR>', { desc = 'toggle' })
   :done()

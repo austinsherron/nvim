@@ -15,15 +15,9 @@
 - [ ] Code actions
 - [ ] Debugger
 - [ ] File templates
-- [ ] Formatting
-- [ ] General prettiness (😅)
-- [ ] Inline docs/hints
-- [ ] Linting
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [ ] Renaming/refactoring
 - [ ] Snippets
-- [ ] Tag generator, viewer, and associated plugins
-    - [ ] Generator - gutentags
 - [ ] The Line - a stylized indicator that a line is (almost) too long
 - [ ] Unit test integrations
     - [x] Ability to run from nvim
@@ -72,7 +66,6 @@
 - [ ] Add barbar + session integration so buffers are restored in correct order
 - [ ] Integrate scopes.nvim w/ session manager
 - [ ] Configure layouts for individual telescope pickers, based on usability, and extensions, to the extent possible
-- [ ] Hydra menu for interacting w/ log files
 - [ ] Convert user commands to lua apis?
 - [ ] Add ability to open spectre in a arbitrary splits, own buffer, tab, modal, etc.
 
@@ -167,10 +160,14 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Docstring template insertion (explore configuration options)
 - [x] Filetree/explorer (not 100% happy, need to look into neo-tree, etc.)
 - [x] Find + replace
+- [x] Formatting
 - [x] Fuzzy-find commands
+- [x] General prettiness (😅)
 - [x] Git in-file indicators (again, not 100% happy, want to continue exploring)
 - [x] Git history interactions (i.e.: file history, git blame, etc.)
 - [x] Git state interactions (commit, merge, rebase, cherry-pick, etc.) (lazygit)
+- [x] Inline docs/hints
+- [x] Linting
 - [x] Merge tool (...at least needs further configuration)
 - [x] Notifications
 - [x] Persistent undo history
@@ -184,6 +181,11 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Tab/buffer bar
 - [x] Telescope
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
+
+#### Won't Do
+
+- [x] Tag generator, viewer, and associated plugins
+    - [x] Generator - gutentags
 
 ### LSP Support
 
@@ -218,6 +220,7 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Add ability to make file executable from nvim-tree
 - [x] Add override key bindings for nvimtree contextual search (constrained contextual search to nvimtree buffer, updated relevant global key bindings to use builtins instead of contextual search functions)
 - [x] Add ability to close neorepl from outside of its buffer
+- [x] Hydra menu for interacting w/ log files
 
 ### Fixes
 

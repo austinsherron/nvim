@@ -14,7 +14,7 @@ end
 
 local function global_mappings()
   KM:bind({
-    { "'e", vim.diagnostic.open_float, { desc = 'open diagnostic hover' } },
+    { "'d", vim.diagnostic.open_float, { desc = 'open diagnostic hover' } },
     { '[d', ':Lspsaga diagnostic_jump_prev<CR>', { desc = 'prev diagnostic' } },
     { ']d', ':Lspsaga diagnostic_jump_next<CR>', { desc = 'next diagnostic' } },
     { "'l", vim.diagnostic.setloclist, { desc = 'diagnostics list' } },
@@ -39,7 +39,7 @@ function LspKM.bind_after_attach(bufnr)
   KM:with({ buffer = bufnr })
     :bind({
       -- info/inspect
-      { "'i", ':LspInfo<CR>', { desc = 'view lsp status' } },
+      { "'I", ':LspInfo<CR>', { desc = 'view lsp status' } },
       -- find/go to...
       { 'gD', vim.lsp.buf.declaration, { desc = 'jump to declaration' } },
       { 'gd', vim.lsp.buf.definition, { desc = 'jump to definition' } },

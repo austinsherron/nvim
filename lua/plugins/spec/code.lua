@@ -105,6 +105,19 @@ return Plugins('code', {
       require 'nvim-navic'
     end,
   },
+  ---- refactoring: extract/inline variable, functions, and blocks
+  {
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-treesitter/nvim-treesitter' },
+    },
+    opts = {},
+
+    config = function(_, opts)
+      require('refactoring').setup(opts)
+    end,
+  },
   ---- sniprun: run snippets of code on the fly
   {
     'michaelb/sniprun',
