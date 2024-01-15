@@ -22,7 +22,7 @@ local function make_type_binding(type, viewmode)
 end
 
 local function make_type_bindings(type)
-  return Stream.new(ViewMode:values())
+  return Stream.new(ViewMode:sorted())
     :map(function(v)
       return make_type_binding(type, v)
     end)
