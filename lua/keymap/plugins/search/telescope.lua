@@ -16,32 +16,39 @@ local KM = KeyMapper.new({
 
 -- find ------------------------------------------------------------------------
 
+local function make_tscope_cmd(cmd, raw)
+  return function()
+    cmd = ternary(raw == true, cmd, 'Telescope ' .. cmd)
+    Safe.call(vim.api.nvim_command, {}, cmd)
+  end
+end
+
 KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
   :with({ hint = HintFmttr.bottom_3(), color = 'teal', esc = true })
   :bind({
     { 'a', Builtins.builtin, { desc = 'search telescope built-ins' } },
     { 'b', Builtins.buffers, { desc = 'search buffers' } },
     { 'C', Builtins.colorscheme, { desc = 'search colorschemes' } },
-    { 'c', '<cmd>Telescope aerial<CR>', { desc = 'search code symbols' } },
     { 'd', Builtins.diagnostics, { desc = 'search diagnostics' } },
-    { 'e', '<cmd>Telescope emoji<CR>', { desc = 'search emojis' } },
+    { 'e', make_tscope_cmd 'emoji', { desc = 'search emojis' } },
     { 'F', TreeSearch.contextual_find_all_files, { desc = 'search all files (hidden, etc.)' } },
     { 'f', Builtins.find_files, { desc = 'search files' } },
     { 'gc', Builtins.git_bcommits, { desc = 'search git commits' } },
     { 'gs', Builtins.git_stash, { desc = 'search git stashes' } },
     { 'h', Builtins.help_tags, { desc = 'search help tags' } },
-    { 'H', '<cmd>Telescope undo<CR>', { desc = 'search undo history' } },
+    { 'H', make_tscope_cmd 'undo', { desc = 'search undo history' } },
     { 'm', Builtins.man_pages, { desc = 'search man pages' } },
     { 'N', Pickers.search_packages, { desc = 'search plugin files' } },
-    { 'n', '<cmd>Telescope notify<CR>', { desc = 'search notification history' } },
+    { 'n', make_tscope_cmd 'notify', { desc = 'search notification history' } },
     { 'p', Project.picker, { desc = 'search projects' } },
-    { 'r', '<cmd>Telescope frecency<CR>', { desc = 'search "frecent"' } },
+    { 'r', make_tscope_cmd 'frecency', { desc = 'search "frecent"' } },
     { 's', Session.picker, { desc = 'search sessions' } },
     { 'T', Builtins.treesitter, { desc = 'search treesitter symbols' } },
-    { 't', '<cmd>TodoTelescope<CR>', { desc = 'search todo comments' } },
+    { 't', make_tscope_cmd('TodoTelescope', true), { desc = 'search todo comments' } },
     { 'u', Builtins.lsp_references, { desc = 'find usages' } },
     { 'w', Builtins.live_grep, { desc = 'find words' } },
-    { 'z', '<cmd>Telescope zoxide list<CR>', { desc = 'find zoxide dirs' } },
+    { 'y', make_tscope_cmd 'yaml_schema', { desc = 'find yaml schemas' } },
+    { 'z', make_tscope_cmd 'zoxide list', { desc = 'find zoxide dirs' } },
   })
   :done({ purge = 'current' })
 

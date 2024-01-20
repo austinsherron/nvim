@@ -68,6 +68,7 @@
 - [ ] Configure layouts for individual telescope pickers, based on usability, and extensions, to the extent possible
 - [ ] Convert user commands to lua apis?
 - [ ] Add ability to open spectre in a arbitrary splits, own buffer, tab, modal, etc.
+- [ ] Add ability to specify max log size and to "retire" (update name to include date, or something similar) and create a new log file
 
 ### Fixes
 
@@ -221,6 +222,7 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Add override key bindings for nvimtree contextual search (constrained contextual search to nvimtree buffer, updated relevant global key bindings to use builtins instead of contextual search functions)
 - [x] Add ability to close neorepl from outside of its buffer
 - [x] Hydra menu for interacting w/ log files
+- [x] Add mechanism for automatically installing language components, not just lsp servers
 
 ### Fixes
 

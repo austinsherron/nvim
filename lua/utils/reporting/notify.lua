@@ -1,5 +1,4 @@
 local LogFormatter = require 'toolbox.log.formatter'
-local LogLevel = require 'toolbox.log.level'
 local NvimConfig = require 'utils.config'
 local Table = require 'toolbox.core.table'
 

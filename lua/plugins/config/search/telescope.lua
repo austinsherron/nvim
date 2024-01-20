@@ -29,6 +29,7 @@ local EXTENSIONS = {
   projects = {},
   scope = {},
   undo = {},
+  yaml_schema = {},
   zoxide = {},
 }
 

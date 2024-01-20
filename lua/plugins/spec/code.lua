@@ -5,7 +5,6 @@
 --]]
 
 local Fidget = require 'plugins.config.code.fidget'
-local Lsp = require 'lsp'
 local LspSaga = require 'plugins.config.code.lspsaga'
 local LuaSnip = require 'plugins.config.code.luasnip'
 local Mason = require 'plugins.config.code.mason'
@@ -92,7 +91,6 @@ return Plugins('code', {
       'williamboman/mason-lspconfig.nvim',
       'folke/neodev.nvim',
     },
-    config = Lsp.config,
   },
   ---- nvim navic: for showing code context in status bar(s)
   ---- TODO: trying out lspsaga's winbar; remove if I decide to stick w/ that
@@ -164,5 +162,14 @@ return Plugins('code', {
     config = function(_, opts)
       require('treesj').setup(opts)
     end,
+  },
+  ---- yaml-companion: get, set, and auto-detect yaml schemas in buffers
+  {
+    'someone-stole-my-name/yaml-companion.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
   },
 })
