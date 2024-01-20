@@ -1,12 +1,10 @@
----@diagnostic disable: undefined-field
-
 local Editor = require 'utils.api.vim.editor'
 local File = require 'toolbox.system.file'
 local Lazy = require 'toolbox.utils.lazy'
 local System = require 'utils.api.vim.system'
 local TreeNode = require 'plugins.extensions.navigation.nvimtree.treenode'
 
-local api = Lazy.require 'nvim-tree.api'
+local api = Lazy.require 'nvim-tree.api' ---@module 'nvim-tree.api'
 
 local LOGGER = GetLogger 'EXT'
 
@@ -32,9 +30,12 @@ function TreeActions.copy_cursor_node_content()
   end
 
   local content = File.read(node:getpath())
-  Editor.copy(content or '')
 
-  LOGGER:info('Successfully copied to clipboard contents of %s', { node.name }, { user_facing = true })
+  if Editor.copy(content or '') then
+    LOGGER:info('Successfully copied to clipboard contents of %s', { node.name }, { user_facing = true })
+  else
+    LOGGER:warn('Unable to copy to clipboard contents of %s', { node.name })
+  end
 end
 
 --- Opens the cursor node file w/out changing focus from the tree buffer.

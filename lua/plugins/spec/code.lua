@@ -118,6 +118,9 @@ return Plugins('code', {
       require('refactoring').setup(opts)
     end,
   },
+  ---- ropevim: vim integration w/ python refactoring library
+  ---- TODO: setup/configure
+  { 'python-rope/ropevim' },
   ---- sniprun: run snippets of code on the fly
   {
     'michaelb/sniprun',

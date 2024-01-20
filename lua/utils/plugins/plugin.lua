@@ -52,7 +52,7 @@ end
 function Plugin.all(category, plugins)
   LOGGER:info('Initializing category="%s"', { category })
 
-  return Stream.new(plugins):map(Plugin.new):get()
+  return Stream.new(plugins):map(Plugin.new):collect()
 end
 
 return {

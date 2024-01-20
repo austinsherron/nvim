@@ -7,15 +7,8 @@ local SymbolsOutline = {}
 --- plugin
 function SymbolsOutline.opts()
   return {
-    autofold_depth = 0,
+    autofold_depth = 1,
     position = 'right',
-    keymaps = {
-      hover_symbol = 'h',
-      fold = 'zo',
-      unfold = 'zc',
-      fold_all = 'zO',
-      unfold_all = 'zC',
-    },
   }
 end
 
