@@ -1,4 +1,4 @@
-local Confirm = require 'utils.api.vim.confirm'
+local Interaction = require 'utils.api.vim.interaction'
 local SessionApi = require 'utils.api.session'
 
 local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
@@ -15,7 +15,7 @@ local Session = {}
 
 local function make_delete_session_action()
   local confirm = function(s, _)
-    return Confirm.dialog(fmt('Are you sure you want to delete %s ?', s.display(s)))
+    return Interaction.confirmation_dialog(fmt('Are you sure you want to delete %s ?', s.display(s)))
   end
 
   local action = function(s, _)

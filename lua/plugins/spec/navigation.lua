@@ -32,4 +32,6 @@ return Plugins('navigation', {
       require('nvim-tree').setup(opts)
     end,
   },
+  ---- zoxide: use zoxide in (n)vim (note: zoxide installation is a prereq)
+  { 'nanotee/zoxide.vim' },
 })

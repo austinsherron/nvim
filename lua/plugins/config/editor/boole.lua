@@ -11,8 +11,11 @@ function Boole.opts()
       decrement = '<C-x>',
     },
     additions = {
-      { 'pairs', 'ipairs' },
+      { 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'OFF' },
+      { 'trace', 'debug', 'info', 'warn', 'error' },
+      { 'and', 'or' },
       { 'if', 'elseif', 'else' },
+      { 'pairs', 'ipairs' },
       { 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec' },
       {
         'January',

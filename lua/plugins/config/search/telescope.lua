@@ -29,6 +29,7 @@ local EXTENSIONS = {
   projects = {},
   scope = {},
   undo = {},
+  zoxide = {},
 }
 
 local OPTS = {
