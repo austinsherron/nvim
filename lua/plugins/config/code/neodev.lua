@@ -11,6 +11,7 @@ function Neodev.opts()
         'LuaSnip',
         'lspconfig',
         'lspsaga.nvim',
+        'mason.nvim',
         'scope.nvim',
         'telescope.nvim',
       },

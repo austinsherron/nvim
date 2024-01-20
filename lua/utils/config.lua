@@ -28,8 +28,11 @@ end
 --- representation of the env var at "NEOVIM_[upper(k)]", or nil if the env var doesn't
 --- exist
 function NvimConfig:__index(k)
-  k = 'NEOVIM_' .. String.upper(k)
-  return Bool.convert_if(Env[k])
+  return function()
+    k = 'NEOVIM_' .. String.upper(k)
+    --- FIXME: Env:get should work here, but it's not... 🙃
+    return Bool.convert_if(Env[k]())
+  end
 end
 
 return NvimConfig.new()

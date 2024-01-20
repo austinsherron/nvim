@@ -25,5 +25,6 @@ Safe.require 'core.cmd.user'
 Safe.require 'keymap' -- keymap
 Safe.require 'core.settings' -- core settings
 Safe.require 'core.appearance' -- colorscheme
+Safe.require 'lsp' -- language servers, etc.
 
 GetLogger('INIT'):info 'Neovim initialization complete'

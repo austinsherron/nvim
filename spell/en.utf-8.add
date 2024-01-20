@@ -109,6 +109,7 @@ bluetooth
 bolding
 bonjour
 bool
+boole
 boolean
 bork
 borked
@@ -176,6 +177,7 @@ checkin
 checksum
 CHECKSUM
 checkThirdParty
+Chezmoi
 chmod
 ChoiceBuilder
 ChoiceNode
@@ -226,6 +228,7 @@ conf
 config
 configmgr
 ConfigRemovalOpts
+config's
 configs
 ConfigStrategy
 ConfigStrategyIdentifier
@@ -292,6 +295,7 @@ devilspie2
 devlispie2
 DevOps
 DiagnosticSign
+dialog's
 dialogs
 dict's
 dicts
@@ -319,6 +323,7 @@ Docstring
 docstrings
 DocStringSnippets
 doo
+dotfile
 dotfiles
 Dotfiles
 dotphiles
@@ -339,6 +344,7 @@ EdenEast
 EdgeDirction
 editorconfig
 efm
+efmls
 EKS
 elseif
 elsif
@@ -523,6 +529,7 @@ infoQuietly
 InfoQuietly
 init
 initializer
+Inlines
 inputrc
 InsertEnter
 InsertMode
@@ -530,6 +537,7 @@ install's
 instantiation
 insteadOf
 integrations
+intel
 IntelliJ
 InternalOptions
 invrelativenumber
@@ -665,6 +673,7 @@ lspsaga's
 lspServer
 lua
 lua5
+luacheck
 luacov
 luafilesystem
 luajit
@@ -682,6 +691,8 @@ luassert
 luaunit
 LuaUnit
 lukas
+M3
+macbook
 MacBook
 macchiato
 machinerc
@@ -725,6 +736,7 @@ mullvadvpn
 musl
 mv
 mysql
+namesonly
 namespace
 NamingStrategy
 NamingStrategyKey
@@ -761,6 +773,7 @@ nnoremap
 NodeInfo
 NodesBuilder
 nofollow
+noice
 NOOP
 noopener
 Nop
@@ -831,6 +844,7 @@ OverloadArg
 OverloadDefinition
 OverloadParam
 OverloadTypedArg
+PackageManager
 param
 parameterizable
 parameterize
@@ -870,6 +884,7 @@ pre
 prepend
 Prepend
 Prepends
+prereq
 prev
 prev_hunk
 printf
@@ -951,9 +966,11 @@ repr
 req
 reqs
 require
+requiredness
 resize
 resized
 ResizeDirection
+resizes
 Resizes
 resizing
 restorable
@@ -973,6 +990,7 @@ RJoinCursor
 rmv
 root
 rootpath
+ropevim
 route53
 rpad
 rpc
@@ -989,6 +1007,9 @@ SafeTest
 saml
 sayonara
 Scalability
+schemas
+schemastore
+SchemaStore
 scm
 searchbox
 SearchBoxClear
@@ -1052,6 +1073,7 @@ snippetBuilder
 SnippetBuilder
 sniprun
 SnipRun
+sortable
 SortOps
 spamtest
 spc
@@ -1093,6 +1115,7 @@ stringifying
 strs
 struct
 stsh
+stylua
 subcommand
 subdir
 submodule
@@ -1165,6 +1188,7 @@ tmux
 to_call
 todo
 TODO
+tofile
 tokyo
 tokyonight
 TokyoNight
@@ -1262,6 +1286,7 @@ var's
 Veeva
 Venmo
 Ventura
+venv
 verions
 VeryLazy
 vi
@@ -1347,6 +1372,7 @@ xrandr
 x's
 xsel
 xxxxxxhello
+Yadm
 yaml
 Yaml
 yq
@@ -1359,12 +1385,3 @@ zoxide
 zquestz
 zsh
 Zsh
-luacheck
-stylua
-venv
-boole
-noice
-tofile
-Inlines
-sortable
-ropevim
