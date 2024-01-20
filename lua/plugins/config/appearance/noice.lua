@@ -6,6 +6,9 @@ local Noice = {}
 ---@return table: a table that contains configuration values for the noice plugin
 function Noice.opts()
   return {
+    messages = {
+      enabled = false,
+    },
     lsp = {
       override = {
         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,

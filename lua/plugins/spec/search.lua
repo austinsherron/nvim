@@ -34,4 +34,6 @@ return Plugins('search', {
     'nvim-telescope/telescope-frecency.nvim',
     dependencies = { 'kkharji/sqlite.lua' },
   },
+  ---- telescope-zoxide: telescearch zoxide
+  { 'jvgrootveld/telescope-zoxide' },
 })

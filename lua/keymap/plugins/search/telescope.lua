@@ -41,6 +41,7 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 't', '<cmd>TodoTelescope<CR>', { desc = 'search todo comments' } },
     { 'u', Builtins.lsp_references, { desc = 'find usages' } },
     { 'w', Builtins.live_grep, { desc = 'find words' } },
+    { 'z', '<cmd>Telescope zoxide list<CR>', { desc = 'find zoxide dirs' } },
   })
   :done({ purge = 'current' })
 
