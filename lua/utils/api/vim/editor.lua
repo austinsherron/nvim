@@ -63,9 +63,10 @@ end
 ---@param text string: the text to copy
 ---@param register Register|nil: optional, defaults to "UNNAMED_PLUS"; the location to
 --- which to copy text; determines where the text can be pasted
+---@return boolean: true on success, false on failure
 function Editor.copy(text, register)
   register = register or Register.UNNAMED_PLUS
-  vim.fn.setreg(register, text)
+  return vim.fn.setreg(register, text) == 0
 end
 
 return Editor
