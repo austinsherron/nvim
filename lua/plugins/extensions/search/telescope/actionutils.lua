@@ -110,4 +110,14 @@ function ActionUtils.make_selection_action(confirm, action, after)
   end
 end
 
+-- Generally useful constants.
+ActionUtils.Constants = {
+  -- When passed to builtins.find_files, performs search on hidden and ignored files.
+  FIND_ALL_FILES_OPTS = {
+    hidden = true,
+    no_ignore = true,
+    no_ignore_parent = true,
+  },
+}
+
 return ActionUtils
