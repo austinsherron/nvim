@@ -1,5 +1,4 @@
 local Lambda = require 'toolbox.functional.lambda'
-local Lazy = require 'toolbox.utils.lazy'
 local Stack = require 'toolbox.extensions.stack'
 
 local Constants = require('plugins.extensions.interface.hydra').Constants

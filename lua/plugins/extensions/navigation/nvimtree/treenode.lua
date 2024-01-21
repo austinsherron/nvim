@@ -1,4 +1,3 @@
-local Lazy = require 'toolbox.utils.lazy'
 local Type = require 'toolbox.meta.type'
 local Validate = require 'toolbox.utils.validate'
 

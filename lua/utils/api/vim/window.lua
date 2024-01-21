@@ -1,5 +1,4 @@
 local Buffer = require 'utils.api.vim.buffer'
-local Lazy = require 'toolbox.utils.lazy'
 
 local enum = require('toolbox.extensions.enum').enum
 

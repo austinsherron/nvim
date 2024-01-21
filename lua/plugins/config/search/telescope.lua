@@ -1,5 +1,3 @@
-local Lazy = require 'toolbox.utils.lazy'
-
 local telescope = Lazy.require 'telescope'
 
 local DEFAULTS = {

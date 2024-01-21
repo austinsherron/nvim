@@ -21,6 +21,7 @@ globals = {
   'Table',
   'Err',
   'Set',
+  'Lazy',
   'Map',
   'OnErr',
   'Safe',

@@ -1,5 +1,3 @@
-local Lazy = require 'toolbox.utils.lazy'
-
 local refactoring = Lazy.require 'refactoring' ---@module 'refactoring'
 
 --- Api for refactoring functionality.
