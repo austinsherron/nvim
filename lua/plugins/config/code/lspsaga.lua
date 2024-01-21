@@ -28,7 +28,7 @@ function LspSaga.opts()
     },
     rename = {
       keys = {
-        quit = 'q',
+        quit = '<leader>q',
       },
     },
     symbol_in_winbar = {

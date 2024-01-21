@@ -59,7 +59,8 @@ KM:bind({
 -- open splits
 KM:bind({
   { '<leader>bh', ':split<CR>', { desc = 'open horizontal split' } },
-  { '<leader>bv', ':vsplit<CR>', { desc = 'open vertical split' } },
+  { '<leader>-', ':split<CR>', { desc = 'open horizontal split' } },
+  { '<leader>|', ':vsplit<CR>', { desc = 'open vertical split' } },
 })
 
 -- spellcheck ------------------------------------------------------------------

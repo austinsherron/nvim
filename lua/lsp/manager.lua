@@ -14,7 +14,8 @@ local FORMATTERS = {
   lua = { 'stylua' },
   python = { 'black', 'isort' },
   sh = { 'shfmt' },
-  yaml = { 'yamlfmt' }, -- TODO: no OOB efmls config
+  -- TODO: no OOB efmls config
+  yaml = { 'yamlfmt' },
 }
 
 local LINTERS = {

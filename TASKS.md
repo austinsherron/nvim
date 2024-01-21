@@ -11,12 +11,11 @@
 - [ ] Auto-correction of diagnostics/linting errors
 - [ ] Auto-imports
 - [ ] Case Changer (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
-- [ ] Code generation (see snippets)
 - [ ] Code actions
 - [ ] Debugger
 - [ ] File templates
 - [ ] Opening in existing nvim instances (neovim-remote)
-- [ ] Renaming/refactoring
+- [ ] Refactoring
 - [ ] Snippets
 - [ ] The Line - a stylized indicator that a line is (almost) too long
 - [ ] Unit test integrations
@@ -173,6 +172,7 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Notifications
 - [x] Persistent undo history
 - [x] Project manager (still wanna see what other options are out there though)
+- [x] Renaming
 - [x] Session manager
 - [x] Sniprun
 - [x] Start screen? (again, wanna explore)

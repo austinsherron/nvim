@@ -118,7 +118,11 @@ return Plugins('code', {
   },
   ---- ropevim: vim integration w/ python refactoring library
   ---- TODO: setup/configure
-  { 'python-rope/ropevim' },
+  ---- FIXME: was wreaking all kinds of havoc w/ python files
+  {
+    'python-rope/ropevim',
+    enabled = false,
+  },
   ---- sniprun: run snippets of code on the fly
   {
     'michaelb/sniprun',

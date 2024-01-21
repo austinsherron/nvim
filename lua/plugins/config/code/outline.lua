@@ -9,6 +9,9 @@ function SymbolsOutline.opts()
   return {
     autofold_depth = 1,
     position = 'right',
+    keymaps = {
+      close = { '<leader>q' },
+    },
   }
 end
 

@@ -108,10 +108,12 @@ local function get_load_log_msg(opts)
   -- WARN: this correctness of this logic is dependent on the impl of persisted.load;
   --       specifically, if opts.session is present and last == true, opts.session is
   --       loaded instead of the last session
+  local dir = Path.basename(System.cwd())
+
   if String.not_nil_or_empty(opts.session) then
-    return fmt('Loaded session file=%s', opts.session)
+    return fmt('Loaded session file for dir=%s', dir)
   elseif not opts.last then
-    return fmt('Loaded session for cwd=%s', System.cwd())
+    return fmt('Loaded session for cwd=%s', dir)
   else
     return 'Loaded last session'
   end
@@ -173,7 +175,7 @@ function Session.save()
   persisted.save({ session = session })
 
   local cwd = Path.basename(System.cwd())
-  LOGGER:info('Session saved successfully for dir=%s', { cwd }, { user_facing = true })
+  LOGGER:info('Saved session for dir=%s', { cwd }, { user_facing = true })
 end
 
 --- Switches from the current to the provided session. Switching a session involves:
