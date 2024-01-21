@@ -18,24 +18,37 @@ local function is_forcequit(res)
   return res == KEYBOARD_INT
 end
 
-local function handle_input_success(ok, res, required)
-  if required and String.nil_or_empty(res) then
+local function handle_input_success(ok, res, custom)
+  local required = custom.required
+  local default = custom.default
+
+  if required and String.nil_or_empty(res) and String.nil_or_empty(default) then
     Notify.warn 'Input is required'
   end
 
-  return not ok, ternary(String.not_nil_or_empty(res), res)
+  return not ok, ternary(String.not_nil_or_empty(res), res, default)
 end
 
-local function callinput(opts, required)
+local function callinput(opts, custom)
   local ok, res = pcall(vim.fn.input, opts)
 
   if ok then
-    return handle_input_success(ok, res, required)
+    return handle_input_success(ok, res, custom)
   elseif not is_forcequit(res) then
     Err.raise('Interaction: error encountered processing input: %s', res)
   else
     return not ok, nil
   end
+end
+
+local function make_prompt(prompt, custom)
+  local final_prompt = fmt('%s: ', prompt)
+
+  if String.nil_or_empty(custom.default) then
+    return final_prompt
+  end
+
+  return fmt('%s(default = %s) ', final_prompt, custom.default)
 end
 
 --- Wrapper around vim.fn.input that adds "requiredness" functionality. If opts.require ==
@@ -49,13 +62,13 @@ end
 ---@return string|nil: the user input string, or nil if it was empty/the user canceled
 ---@return boolean: true if the user canceled, false otherwise
 function Interaction.input(prompt, opts)
-  local required, rest = Table.split_one(opts or {}, 'required')
-  opts = Table.combine(rest, { prompt = prompt })
+  local custom, rest = Table.split(opts or {}, { 'required', 'default' })
+  opts = Table.combine(rest, { prompt = make_prompt(prompt, custom) })
 
-  local forcequit, input = callinput(opts, required)
+  local forcequit, input = callinput(opts, custom)
 
-  while input == nil and required and not forcequit do
-    forcequit, input = callinput(opts, required)
+  while input == nil and custom.required and not forcequit do
+    forcequit, input = callinput(opts, custom)
   end
 
   return input, forcequit

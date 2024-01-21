@@ -10,7 +10,7 @@ local KM = KeyMapper.new({ nowait = true })
 local function make_zd_fn(cmd, scope, fuzzy)
   return function()
     local fuzzystr = ternary(fuzzy == true, ' (Fuzzy)', '')
-    local prompt = fmt('%s %s%s: ', scope, 'ZD', fuzzystr)
+    local prompt = fmt('%s %s%s', scope, 'ZD', fuzzystr)
     local query = Interaction.input(prompt)
 
     if query ~= nil then

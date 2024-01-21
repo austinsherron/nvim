@@ -137,12 +137,12 @@ end
 --- dialogs: one for the text to replace, and one for the text w/ which to replace. If
 --- either input is canceled, the function exits w/o performing any action.
 function Lsp.replace()
-  local to_replace = get_replace_arg 'Replace in project: '
+  local to_replace = get_replace_arg 'Replace in project'
   if to_replace == nil then
     return
   end
 
-  local replace_with = get_replace_arg 'With: '
+  local replace_with = get_replace_arg 'With'
   if replace_with == nil then
     return
   end
