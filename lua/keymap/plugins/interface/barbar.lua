@@ -18,7 +18,7 @@ KM:bind({
   { '<M-[>', ':BufferPrevious<CR>', { desc = 'previous' } },
 })
 
--- jump to... --
+-- select --
 
 -- arbitrary buffer w/ dynamic hot key
 KM:bind_one('<leader>j', ':BufferPick<CR>', { desc = 'jump to...' })
@@ -69,7 +69,11 @@ KM:bind({
   { '<S-M-X>', ':BufferCloseAllButCurrent<CR>', { desc = 'close all but current' } },
 })
 
--- restore
+-- pick
+KM:bind_one('<leader>bc', ':BufferPickDelete<CR>', { desc = 'close...' })
+
+-- restore --
+
 KM:bind({
   { '<leader>br', ':BufferRestore<CR>', { desc = 'restore' } },
   { '<M-S-B>', ':BufferRestore<CR>', { desc = 'restore' } },
