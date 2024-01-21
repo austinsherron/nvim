@@ -3,7 +3,13 @@ local KeyMapper = require 'utils.core.mapper'
 
 local HintFmttr = require('plugins.extensions.interface.hydra').HintFormatter
 
+local window = Lazy.require 'nvim-window' ---@module 'nvim-window'
+
 local KM = KeyMapper.new({ nowait = true })
+
+-- window ----------------------------------------------------------------------
+
+KM:bind_one("'j", window.pick, { desc = 'jump to window' })
 
 -- zoxide ----------------------------------------------------------------------
 

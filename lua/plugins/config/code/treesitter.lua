@@ -81,6 +81,7 @@ function Treesitter.opts()
       'toml',
       'typescript',
       'vim',
+      'vimdoc',
       'yaml',
     },
     ignore_install = {},
