@@ -43,28 +43,34 @@ local function cd_into_package(selection, prompt_buffer)
   return true
 end
 
+local function make_search_package_files(all)
+  local opts = ternary(all == true, ActionUtils.Constants.FIND_ALL_FILES_OPTS, {})
+
+  return function(selection, _)
+    local plugin_path = selection[1]
+
+    builtins.find_files(Table.combine({
+      cwd = plugin_path,
+      prompt_title = 'Search ' .. Path.basename(plugin_path) .. ' plugin files',
+    }, opts))
+
+    return true
+  end
+end
+
 local function make_keymap()
   return {
     { 'i', '<C-g>', live_grep_packages },
     { 'n', 'fw', live_grep_packages },
+    { 'i', '<C-h>', make_search_package_files(true) },
+    { 'n', 'F', make_search_package_files(true) },
     { 'i', '<C-w>', cd_into_package },
     { 'n', 'cd', cd_into_package },
   }
 end
 
-local function search_package_files(selection, _)
-  local plugin_path = selection[1]
-
-  builtins.find_files({
-    cwd = plugin_path,
-    prompt_title = 'Search ' .. Path.basename(plugin_path) .. ' plugin files',
-  })
-
-  return true
-end
-
 local function make_attachment_action()
-  return ActionUtils.replace_default_action(Safe.ify(search_package_files), make_keymap())
+  return ActionUtils.replace_default_action(Safe.ify(make_search_package_files()), make_keymap())
 end
 
 --- Custom telescope picker for searching "nvundle" (i.e.: plugin directories).

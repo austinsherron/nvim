@@ -20,6 +20,7 @@ local function tree_in_use()
 end
 
 local EMPTY_NODE = { name = '?' }
+local ROOT_NAME = '..'
 
 ---@alias NodeInfo { name: string, absolute_path: string, type: string, parent: NodeInfo|nil }
 
@@ -79,6 +80,11 @@ end
 --- otherwise
 function TreeNode:empty()
   return self == EMPTY_NODE
+end
+
+---@return boolean: true if the node corresponds to the current root node, false otherwise
+function TreeNode:isroot()
+  return self.name == ROOT_NAME
 end
 
 ---@error if abspath is nil

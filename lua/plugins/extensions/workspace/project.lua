@@ -1,8 +1,10 @@
+local Path = require 'toolbox.system.path'
 local ProjectApi = require 'utils.api.project'
 local Session = require 'utils.api.session'
 
 local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
+local builtins = require 'telescope.builtin'
 local telescope = require 'telescope'
 
 local LOGGER = GetLogger 'SESSION'
@@ -30,8 +32,24 @@ local function default_action(selection)
   Session.switch(session)
 end
 
+local function search_all_project_files(selection, _)
+  local project_path = selection.value
+
+  builtins.find_files(Table.combine({
+    cwd = project_path,
+    prompt_title = 'Search all' .. Path.basename(project_path) .. ' project files',
+  }, ActionUtils.Constants.FIND_ALL_FILES_OPTS))
+end
+
+local function make_keymap()
+  return {
+    { 'i', '<C-h>', search_all_project_files },
+    { 'n', 'F', search_all_project_files },
+  }
+end
+
 local function make_attachment_action()
-  return ActionUtils.replace_default_action(Safe.ify(default_action))
+  return ActionUtils.replace_default_action(Safe.ify(default_action), make_keymap())
 end
 
 local function projects_picker()

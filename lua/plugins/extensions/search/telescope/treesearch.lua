@@ -1,3 +1,4 @@
+local ActionUtils = require 'plugins.extensions.search.telescope.actionutils'
 local Path = require 'toolbox.system.path'
 local TMerge = require 'utils.api.vim.tablemerge'
 
@@ -40,7 +41,7 @@ function TreeSearch.do_contextual_search(f, title, opts)
   opts = TMerge.mergeleft({ prompt_title = title }, opts or {})
   local node = TreeNode.at_cursor()
 
-  if node:empty() then
+  if node:empty() or node:isroot() then
     return f(opts)
   end
 
@@ -73,11 +74,7 @@ end
 ---
 ---@see Telescope.contextual_find_files
 function TreeSearch.contextual_find_all_files()
-  return TreeSearch.contextual_find_files({
-    hidden = true,
-    no_ignore = true,
-    no_ignore_parent = true,
-  })
+  return TreeSearch.contextual_find_files(ActionUtils.Constants.FIND_ALL_FILES_OPTS)
 end
 
 --- Calls Telescope.do_contextual_search w/ the `live_grep` telescope builtin.
