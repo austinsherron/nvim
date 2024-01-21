@@ -1,6 +1,5 @@
 local Editor = require 'utils.api.vim.editor'
 local File = require 'toolbox.system.file'
-local Lazy = require 'toolbox.utils.lazy'
 local System = require 'utils.api.vim.system'
 local TreeNode = require 'plugins.extensions.navigation.nvimtree.treenode'
 

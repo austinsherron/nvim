@@ -1,5 +1,3 @@
-local Lazy = require 'toolbox.utils.lazy'
-
 local bufresize = Lazy.require 'bufresize' ---@module 'bufresize'
 
 --- Contains functions for configuring the smart-splits plugin.

@@ -1,7 +1,6 @@
 local Buffer = require 'utils.api.vim.buffer'
 local Env = require 'toolbox.system.env'
 local File = require 'toolbox.system.file'
-local Lazy = require 'toolbox.utils.lazy'
 local Path = require 'toolbox.system.path'
 local Paths = require 'utils.api.vim.path'
 local System = require 'utils.api.vim.system'

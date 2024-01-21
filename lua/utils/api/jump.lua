@@ -1,5 +1,4 @@
 local Introspect = require 'toolbox.meta.introspect'
-local Lazy = require 'toolbox.utils.lazy'
 
 local flash = Lazy.require 'flash'
 

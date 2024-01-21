@@ -1,5 +1,4 @@
 local Grammar = require 'toolbox.utils.grammar'
-local Lazy = require 'toolbox.utils.lazy'
 
 local mason_lspconfig = Lazy.require 'mason-lspconfig' ---@module 'mason-lspconfig'
 local mason_registry = Lazy.require 'mason-registry' ---@module 'mason-registry'
