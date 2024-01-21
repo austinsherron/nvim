@@ -32,6 +32,8 @@ return Plugins('navigation', {
       require('nvim-tree').setup(opts)
     end,
   },
+  ---- nvim-window: jump b/w windows
+  { 'yorickpeterse/nvim-window' },
   ---- zoxide: use zoxide in (n)vim (note: zoxide installation is a prereq)
   { 'nanotee/zoxide.vim' },
 })

@@ -165,12 +165,6 @@ end
 ---
 ---@see Buffer.is_restorable
 function Session.save()
-  -- FIXME: figure out why this doesn't work
-  -- foreach(
-  --   Buffer.getall(Lambda.NOT(Buffer.is_restorable)),
-  --   Buffer.close
-  -- )
-
   local session = Table.safeget(Session.current(), 'file_path')
   persisted.save({ session = session })
 

@@ -73,4 +73,6 @@ return Plugins('appearance', {
     -- nvim-notify since this is a dependency of the latter
     priority = Priority.FIRST,
   },
+  ---- nvim-devicons: editor icons
+  { 'nvim-tree/nvim-web-devicons' },
 })
