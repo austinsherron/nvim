@@ -60,30 +60,34 @@ describe('KeyMapper', function()
       }
       assert.True(Dict.equals(KM:get_merged_options({ silent = true }), expected))
     end)
-    it('should keep values from more recently pushed options, if collisions occur', function()
-      local KM = KeyMapper.new():with(options1):with(options2):with({ nowait = false })
+    it(
+      'should keep values from more recently pushed options, if collisions occur',
+      function()
+        local KM = KeyMapper.new():with(options1):with(options2):with({ nowait = false })
 
-      local expected = {
-        desc = 'does something',
-        desc_prefix = 'some-plugin: ',
-        noremap = true,
-        -- WARN: this effectively duplicates the local constant DEFAULT_OPTIONS
-        nowait = false,
-        silent = false,
-      }
+        local expected = {
+          desc = 'does something',
+          desc_prefix = 'some-plugin: ',
+          noremap = true,
+          -- WARN: this effectively duplicates the local constant DEFAULT_OPTIONS
+          nowait = false,
+          silent = false,
+        }
 
-      local options = {
-        desc = 'does something',
-        silent = false,
-      }
+        local options = {
+          desc = 'does something',
+          silent = false,
+        }
 
-      assert.True(Dict.equals(KM:get_merged_options(options), expected))
-    end)
+        assert.True(Dict.equals(KM:get_merged_options(options), expected))
+      end
+    )
   end)
 
   describe(':get_options(options)', function()
     it('should create a full desc w/ desc_prefix and desc', function()
-      local KM = KeyMapper.new():with(options1):with(options2):with({ desc = 'does something' })
+      local KM =
+        KeyMapper.new():with(options1):with(options2):with({ desc = 'does something' })
 
       local expected = {
         desc = 'some-plugin: does something',

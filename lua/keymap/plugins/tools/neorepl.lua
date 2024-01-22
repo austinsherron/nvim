@@ -32,9 +32,24 @@ function NeoRepl.bind_on_init(bufnr)
     :bind({
       { '<CR>', '<Plug>(neorepl-eval-line)', { desc = 'evaluate line' }, { 'n', 'i' } },
       { '<M-;>', '<Plug>(neorepl-break-line)', { desc = 'break line' }, { 'i' } },
-      { '<BS>', '<Plug>(neorepl-backspace)', { desc = 'backspace (+line breaks)' }, { 'i' } },
-      { '<Up>', '<Plug>(neorepl-hist-prev)', { desc = 'get previous cmd(s)' }, { 'n', 'i' } },
-      { '<Down>', '<Plug>(neorepl-hist-next)', { desc = 'get next cmd(s)' }, { 'n', 'i' } },
+      {
+        '<BS>',
+        '<Plug>(neorepl-backspace)',
+        { desc = 'backspace (+line breaks)' },
+        { 'i' },
+      },
+      {
+        '<Up>',
+        '<Plug>(neorepl-hist-prev)',
+        { desc = 'get previous cmd(s)' },
+        { 'n', 'i' },
+      },
+      {
+        '<Down>',
+        '<Plug>(neorepl-hist-next)',
+        { desc = 'get next cmd(s)' },
+        { 'n', 'i' },
+      },
       -- TODO
       -- { '<leader>re', '<Plug>(neorepl-complete)',  { desc = 'function docstring' }},
     })

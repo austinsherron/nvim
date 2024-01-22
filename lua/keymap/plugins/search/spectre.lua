@@ -33,6 +33,15 @@ KM:bind({
   { '<leader>sh', makeopen 'new', { desc = 'open in split' } },
   { '<leader>sx', spectre_cmd 'close', { desc = 'close' } },
   { '<leader>sw', spectre_cmd('open_visual', true), { desc = 'search current word' } },
-  { '<leader>sw', spectre_cmd('open_visual', true), { desc = 'search current word' }, { 'v' } },
-  { '<leader>sp', spectre_cmd('open_file_search', true), { desc = 'search on current file' } },
+  {
+    '<leader>sw',
+    spectre_cmd('open_visual', true),
+    { desc = 'search current word' },
+    { 'v' },
+  },
+  {
+    '<leader>sp',
+    spectre_cmd('open_file_search', true),
+    { desc = 'search on current file' },
+  },
 })

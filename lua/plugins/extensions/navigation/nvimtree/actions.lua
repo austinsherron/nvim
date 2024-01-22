@@ -23,7 +23,10 @@ function TreeActions.copy_cursor_node_content()
   -- FIXME: this should probably use "not TreeNode:isfile", but that's not working and
   --        it's not immediately clear why
   if TreeNode:isdir() then
-    LOGGER:warn('TreeActions: cannot copy content of node=%s, type="%s": not a file', { node.name, node.type })
+    LOGGER:warn(
+      'TreeActions: cannot copy content of node=%s, type="%s": not a file',
+      { node.name, node.type }
+    )
     LOGGER:debug('TreeActions: node=%s', { node })
     return
   end
@@ -31,7 +34,11 @@ function TreeActions.copy_cursor_node_content()
   local content = File.read(node:getpath())
 
   if Editor.copy(content or '') then
-    LOGGER:info('Successfully copied to clipboard contents of %s', { node.name }, { user_facing = true })
+    LOGGER:info(
+      'Successfully copied to clipboard contents of %s',
+      { node.name },
+      { user_facing = true }
+    )
   else
     LOGGER:warn('Unable to copy to clipboard contents of %s', { node.name })
   end

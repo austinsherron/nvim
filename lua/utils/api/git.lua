@@ -228,7 +228,10 @@ function Config.set(key, value, section, scope)
   section = section or 'core'
   scope = scope or 'global'
 
-  LOGGER:debug('Git.Config.set: setting %s.%s to %s (scope=%s)', { section, key, value, scope })
+  LOGGER:debug(
+    'Git.Config.set: setting %s.%s to %s (scope=%s)',
+    { section, key, value, scope }
+  )
 
   System.run(fmt('git config --%s %s.%s %s', scope, section, key, value))
 end

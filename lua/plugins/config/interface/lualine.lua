@@ -21,11 +21,13 @@ function Lualine.opts()
   return {
     extensions = { 'aerial', 'nvim-tree' },
     winbar = {
-      lualine_a = { {
-        'tabs',
-        mode = 0,
-        use_mode_colors = true,
-      } },
+      lualine_a = {
+        {
+          'tabs',
+          mode = 0,
+          use_mode_colors = true,
+        },
+      },
       lualine_b = {
         'filetype',
         'fileformat',

@@ -68,7 +68,13 @@ end
 
 ---@return string: a string representation of this instance
 function BufferInfo:__tostring()
-  return fmt('Buffer(id=%s, name=%s, type=%s, filetype=%s)', self.id, self.name, self.type, self.filetype)
+  return fmt(
+    'Buffer(id=%s, name=%s, type=%s, filetype=%s)',
+    self.id,
+    self.name,
+    self.type,
+    self.filetype
+  )
 end
 
 --- Contains utilities for interacting w/ (n)vim buffers.
@@ -215,7 +221,11 @@ function Buffer.getall(filter, xfm)
 
   local def_filter, opt_filter = get_buffer_filters(filter)
 
-  return Stream.new(vim.api.nvim_list_bufs()):filter(def_filter):filter(opt_filter):map(xfm):collect()
+  return Stream.new(vim.api.nvim_list_bufs())
+    :filter(def_filter)
+    :filter(opt_filter)
+    :map(xfm)
+    :collect()
 end
 
 --- Perform a buffer query according to opts.
@@ -229,7 +239,10 @@ function Buffer.query(opts)
   local query = opts.query or Lambda.TRUE
   local xfm = opts.xfm or Buffer.info
 
-  return Stream.new(Buffer.getall(opts.filter)):map(xfm):filter(query):collect(opts.collector)
+  return Stream.new(Buffer.getall(opts.filter))
+    :map(xfm)
+    :filter(query)
+    :collect(opts.collector)
 end
 
 --- Sets option values on a buffer.

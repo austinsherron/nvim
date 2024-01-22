@@ -15,7 +15,9 @@ local Session = {}
 
 local function make_delete_session_action()
   local confirm = function(s, _)
-    return Interaction.confirmation_dialog(fmt('Are you sure you want to delete %s ?', s.display(s)))
+    return Interaction.confirmation_dialog(
+      fmt('Are you sure you want to delete %s ?', s.display(s))
+    )
   end
 
   local action = function(s, _)

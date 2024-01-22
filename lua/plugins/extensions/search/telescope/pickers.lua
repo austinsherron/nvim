@@ -70,7 +70,10 @@ local function make_keymap()
 end
 
 local function make_attachment_action()
-  return ActionUtils.replace_default_action(Safe.ify(make_search_package_files()), make_keymap())
+  return ActionUtils.replace_default_action(
+    Safe.ify(make_search_package_files()),
+    make_keymap()
+  )
 end
 
 --- Custom telescope picker for searching "nvundle" (i.e.: plugin directories).
