@@ -9,7 +9,7 @@ o.mouse = nil
 
 o.syntax = 'on'
 o.ruler = true
-o.formatoptions = 'tcrqn2lj'
+o.formatoptions = 'crqn2lj'
 o.inccommand = 'nosplit' -- incremental live completion
 
 -- allows nvim to copy/paste to/from system clipboards

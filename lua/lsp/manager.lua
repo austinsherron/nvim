@@ -13,7 +13,8 @@ local SERVERS_PATH = Env.nvim_root() .. '/lua/lsp/servers'
 local FORMATTERS = {
   lua = { 'stylua' },
   python = { 'black', 'isort' },
-  sh = { 'shfmt' },
+  -- FIXME: not working the way I want it to
+  -- sh = { 'shfmt' },
   -- TODO: no OOB efmls config
   yaml = { 'yamlfmt' },
 }

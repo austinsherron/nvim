@@ -9,7 +9,6 @@ local LspSaga = require 'plugins.config.code.lspsaga'
 local LuaSnip = require 'plugins.config.code.luasnip'
 local Mason = require 'plugins.config.code.mason'
 local Neodev = require 'plugins.config.code.neodev'
-local SnipRun = require 'plugins.config.code.sniprun'
 local SymbolsOutline = require 'plugins.config.code.outline'
 local TreeSJ = require 'plugins.config.code.treesj'
 local Treesitter = require 'plugins.config.code.treesitter'
@@ -122,16 +121,6 @@ return Plugins('code', {
   {
     'python-rope/ropevim',
     enabled = false,
-  },
-  ---- sniprun: run snippets of code on the fly
-  {
-    'michaelb/sniprun',
-    opts = SnipRun.opts(),
-    build = 'bash install.sh',
-
-    config = function(_, opts)
-      require('sniprun').setup(opts)
-    end,
   },
   ---- symbols-outline: code outline using lsp
   {

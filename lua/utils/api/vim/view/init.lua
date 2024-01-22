@@ -32,7 +32,8 @@ local function query_buffers(attrs, tabnr)
     :collect()
 end
 
---- Closes a view for buffers w/ BufferInfo props == attrs--or the current buffer if attrs == nil--in tab w/ id == tabnr.
+--- Closes a view for buffers w/ BufferInfo props == attrs--or the current buffer if
+--- attrs == nil--in tab w/ id == tabnr.
 ---
 ---@param attrs BufferInfo|nil: used to find the view to close by matching buffers to
 --- these attrs

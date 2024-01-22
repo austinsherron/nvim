@@ -8,12 +8,6 @@ KM:with({ desc_prefix = 'mason: ' })
   :bind({ { '<leader>M', ':Mason<CR>', { desc = 'open lsp mgr.' } } })
   :done()
 
--- sniprun ---------------------------------------------------------------------
-
-KM:with({ desc_prefix = 'sniprun: ' })
-  :bind({ { '<leader>R', ':SnipRun<CR>', { desc = 'run' }, { 'v' } } })
-  :done()
-
 -- symbols-outline -------------------------------------------------------------
 
 KM:with({ desc_prefix = 'symbols-outline: ' })
