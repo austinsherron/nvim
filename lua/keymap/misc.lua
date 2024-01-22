@@ -1,4 +1,3 @@
-
 local KeyMapper = require 'utils.core.mapper'
 local View = require 'utils.api.vim.view'
 
@@ -11,5 +10,3 @@ local function close_help()
 end
 
 KM:bind_one('<leader>hq', close_help, { desc = 'close: help windows' })
-
-
