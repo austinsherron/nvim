@@ -71,16 +71,19 @@ function Session.list()
   return Stream.new(sessions):map(SessionInfo.new):filter(filter_session):collect()
 end
 
+local function non_unique_session_msg(dir_path)
+  local dirname = Path.basename(dir_path)
+  return fmt('Found more than one matching session for dir=%s', dirname)
+end
+
 --- Gets the session w/ dir path == dir_path, if any.
 ---
 ---@param dir_path string: the absolute path of the dir that a session is tracking
----@param strict boolean|nil: optional, defaults to true; if true, raises an error if more
---- than one matching session is found
+---@param strict boolean|nil: optional, defaults to false; if true, raises an error if
+--- more than one matching session is found
 ---@return SessionInfo|nil: the session w/ dir path == dir_path, if any
 function Session.get(dir_path, strict)
   LOGGER:debug('get: fetching session for dir_path=%s', { dir_path })
-  strict = Bool.or_default(strict, true)
-
   local matching = Stream.new(Session.list())
     :filter(function(s)
       return s.dir_path == dir_path
@@ -88,8 +91,10 @@ function Session.get(dir_path, strict)
     :filter(filter_session)
     :collect()
 
-  if strict and #matching > 1 then
-    Err.raise('Found more than one matching session for dir=%s', dir_path)
+  if strict == true and #matching > 1 then
+    Err.raise(non_unique_session_msg(dir_path))
+  elseif #matching > 1 then
+    LOGGER:warn(non_unique_session_msg(dir_path))
   end
 
   local session = safeget(matching, 1)

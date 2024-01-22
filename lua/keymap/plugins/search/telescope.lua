@@ -24,7 +24,7 @@ local function make_tscope_cmd(cmd, raw)
 end
 
 KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
-  :with({ hint = HintFmttr.bottom_3(), color = 'teal', esc = true })
+  :with({ hint = HintFmttr.bottom_3(), color = 'blue' })
   :bind({
     { 'a', Builtins.builtin, { desc = 'search telescope built-ins' } },
     { 'b', Builtins.buffers, { desc = 'search buffers' } },

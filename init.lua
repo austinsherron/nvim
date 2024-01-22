@@ -6,18 +6,14 @@ require 'utils.globals' -- import globals before doing anything else
 
 Safe.require 'core.bootstrap' -- "bootstrap" settings must come first
 
----- commands, pre -------------------------------------------------------------
-
-Safe.require 'core.cmd.auto.before' -- some cmds should load before plugins
-
 ---- plugins -------------------------------------------------------------------
 
 -- load plugins as early as reasonably possible
 Safe.require 'plugins'
 
----- commands, post ------------------------------------------------------------
+---- commands ------------------------------------------------------------------
 
-Safe.require 'core.cmd.auto.after' -- some cmds may depend on plugins, so load after
+Safe.require 'core.cmd.auto'
 Safe.require 'core.cmd.user'
 
 ---- config --------------------------------------------------------------------

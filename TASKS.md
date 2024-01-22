@@ -17,7 +17,6 @@
 - [ ] Opening in existing nvim instances (neovim-remote)
 - [ ] Refactoring
 - [ ] Snippets
-- [ ] The Line - a stylized indicator that a line is (almost) too long
 - [ ] Unit test integrations
     - [x] Ability to run from nvim
     - [ ] Ability to view/act on results
@@ -42,13 +41,9 @@
 - [ ] I'm not totally happy w/ my tab/buffer management schemes and my non-workflows that haven't really come to be w/ my current tooling
 - [ ] Incorporate tabs (and windows?) into workflows (not very concrete)
 - [ ] How can I open multiple files at once w/ nvimtree?
-- [ ] Change diff/merge view colors to something that makes for better UX
-- [ ] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre
 - [ ] Add (relative) line numbers by default to diffview, undotree, spectre, etc.
 - [ ] Create lualine extensions for diffview, undotree, and spectre
 - [ ] Add ability to refactor imports on file move
-- [ ] Leap "repeat"/"again" capability, like "n"/"N" in search?
-- [ ] Git interactions from nvimtree (partially there w/ stage/unstage)
 - [ ] Add LuaSnip custom snippets
 - [ ] Enhance styling (i.e.: selective bolding, diff fonts, etc.)
 - [ ] Refactor nvim utils to separate repo? (at least those that would be/are useful for plugins as well)
@@ -58,13 +53,12 @@
 - [ ] Add unit tests
 - [ ] Add more systematic logging
 - [ ] Add more systematic error-handling
-- [ ] Change diagnostic symbols to something snazzier
 - [ ] Add tracebacks to error logging
 - [ ] Add ability to make file "un-executable" from nvim-tree
 - [ ] Configure auto-completion support for neorepl
 - [ ] Add barbar + session integration so buffers are restored in correct order
 - [ ] Integrate scopes.nvim w/ session manager
-- [ ] Configure layouts for individual telescope pickers, based on usability, and extensions, to the extent possible
+- [ ] Configure (layouts) for individual telescope pickers, based on usability, and extensions, to the extent possible
 - [ ] Convert user commands to lua apis?
 - [ ] Add ability to open spectre in a arbitrary splits, own buffer, tab, modal, etc.
 - [ ] Add ability to specify max log size and to "retire" (update name to include date, or something similar) and create a new log file
@@ -84,6 +78,9 @@
 - [ ] Fix issues w/ duplicate sessions (one w/ branch + one w/o)
 - [ ] Fix session save logic that closes non-restorable buffers
 - [ ] Figure out why session seem not to save sometimes, or don't save w/ the right cwd
+- [ ] Fix markdown and vimdoc highlighting
+- [ ] Fix colorizer autocmds
+- [ ] Fix text wrap/line continuation issues
 
 ### Ideas
 
@@ -180,6 +177,7 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Surround
 - [x] Syntax checking (for a small set of languages, guts are there at least)
 - [x] Tab/buffer bar
+- [x] The Line - a stylized indicator that a line is (almost) too long
 - [x] Telescope
 - [x] Undo tree (it works, but could look better... I dunno, wanna continue looking/tinkering)
 
@@ -223,6 +221,11 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] Add ability to close neorepl from outside of its buffer
 - [x] Hydra menu for interacting w/ log files
 - [x] Add mechanism for automatically installing language components, not just lsp servers
+- [x] Change diagnostic symbols to something snazzier
+- [x] Leap "repeat"/"again" capability, like "n"/"N" in search? (got rid of leap in favor of flash)
+- [x] Git interactions from nvimtree (partially there w/ stage/unstage)
+- [x] Change diff/merge view colors to something that makes for better UX (colorscheme dependent unless I want to add/configure highlight groups)
+- [x] Remap available spectre commands: https://github.com/nvim-pack/nvim-spectre (what I have works)
 
 ### Fixes
 

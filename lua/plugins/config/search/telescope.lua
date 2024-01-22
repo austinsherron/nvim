@@ -7,7 +7,7 @@ local DEFAULTS = {
 -- TODO: configure these individually based on usability
 local PICKERS = {
   buffers = { theme = 'ivy' },
-  colorscheme = { theme = 'cursor' },
+  colorscheme = { theme = 'ivy' },
   diagnostics = { layout_strategy = 'horizontal' },
   git_bcommits = { layout_strategy = 'horizontal' },
   git_stash = { layout_strategy = 'horizontal' },
@@ -21,7 +21,7 @@ local PICKERS = {
 -- TODO: configure these individually based on their setup params
 local EXTENSIONS = {
   emoji = {},
-  frecency = {},
+  frecency = { default_workspace = 'CWD' },
   notify = {},
   persisted = {},
   projects = {},

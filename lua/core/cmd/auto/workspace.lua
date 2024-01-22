@@ -14,9 +14,8 @@ local function load_cwd_session()
   return true
 end
 
--- loads session for cwd; taking this responsibility from session manager since I can't
--- get the plugin to do what I want oob, i.e.: load the right session when I open nvim
--- from a specific dir
+-- NOTE:taking this responsibility from session manager since I can't get the plugin to
+--- do what I want oob, i.e.: load the right session when I open nvim from a specific dir
 Autocmd.new()
   :withDesc('Loads session on start for cwd')
   :withEvent('VimEnter')
