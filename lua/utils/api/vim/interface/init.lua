@@ -1,3 +1,4 @@
+local Colors = require 'utils.api.vim.interface.__colors'
 local Highlight = require 'utils.api.vim.interface.__highlight'
 
 --- Contains utilities for interacting w/ nvim ui elements.
@@ -7,19 +8,26 @@ local Interface = {}
 
 ---@note: so Highlight is publicly accessible
 Interface.Highlight = Highlight
+---@note: so Colors is publicly accessible
+Interface.Colors = Colors
 
 --- Sets a highlight group w/ the provided name on the provided buffer.
 ---
 ---@param highlight Highlight: the highlight's definition
----@param bufnr integer|nil: optional, defaults to 0 (global); the id of the buffer on
---- which to set the highlight
-function Interface.set_highlight(highlight, bufnr)
-  bufnr = bufnr or 0
+---@param opts { buf: integer|nil, name: string|nil }|nil: optional; opts include: buf,
+--- the id of the buffer on which to set the highlight (defaults to 0, i.e.: global), and
+--- name, which acts as a name override for the provided highlight
+---
+function Interface.set_highlight(highlight, opts)
+  opts = opts or {}
+
+  local bufnr = opts.buf or 0
+  local name = opts.name or highlight.name
 
   local hg = highlight:build()
-  vim.api.nvim_set_hl(bufnr, highlight.name, hg)
+  vim.api.nvim_set_hl(bufnr, name, hg)
 
-  GetLogger('UI'):debug('Highlight=%s created for bufnr=%s; def=%s', { highlight.name, bufnr, hg })
+  GetLogger('UI'):debug('Highlight=%s created for bufnr=%s; def=%s', { name, bufnr, hg })
 end
 
 local DIAGNOSTIC_SIGNS = {
