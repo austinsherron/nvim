@@ -31,7 +31,11 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 'C', Builtins.colorscheme, { desc = 'search colorschemes' } },
     { 'd', Builtins.diagnostics, { desc = 'search diagnostics' } },
     { 'e', make_tscope_cmd 'emoji', { desc = 'search emojis' } },
-    { 'F', TreeSearch.contextual_find_all_files, { desc = 'search all files (hidden, etc.)' } },
+    {
+      'F',
+      TreeSearch.contextual_find_all_files,
+      { desc = 'search all files (hidden, etc.)' },
+    },
     { 'f', Builtins.find_files, { desc = 'search files' } },
     { 'gc', Builtins.git_bcommits, { desc = 'search git commits' } },
     { 'gs', Builtins.git_stash, { desc = 'search git stashes' } },

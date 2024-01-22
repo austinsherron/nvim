@@ -103,7 +103,12 @@ local function validate(required, config, op)
 end
 
 local function create_buf_cmd(config)
-  vim.api.nvim_buf_create_user_command(config.bufnum, config.name, config.cmd, config.opts)
+  vim.api.nvim_buf_create_user_command(
+    config.bufnum,
+    config.name,
+    config.cmd,
+    config.opts
+  )
 end
 
 local function create_cmd(config)

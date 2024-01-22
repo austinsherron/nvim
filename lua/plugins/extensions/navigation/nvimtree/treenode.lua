@@ -128,7 +128,10 @@ end
 ---@return boolean: true if this instance == o (i.e.: has the same key/value pairs), false
 --- otherwise
 function TreeNode:__eq(o)
-  return Type.is(o, TreeNode) and self.name == o.name and self.abspath == o.abspath and self.type == o.type
+  return Type.is(o, TreeNode)
+    and self.name == o.name
+    and self.abspath == o.abspath
+    and self.type == o.type
 end
 
 local function append_if_not_nil(arr, attr, attrname)

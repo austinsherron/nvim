@@ -101,7 +101,11 @@ local function remapped_defaults(bufnr, api)
       { 'I', api.tree.toggle_hidden_filter, { desc = 'Toggle Dotfiles' } },
       { '<C-s>', TreeActions.silent_open, { desc = 'Open silently' } },
       { 'f', TreeSearch.contextual_find_files, { desc = 'Contexual find files' } },
-      { 'F', TreeSearch.contextual_find_all_files, { desc = 'Contexual find all files' } },
+      {
+        'F',
+        TreeSearch.contextual_find_all_files,
+        { desc = 'Contexual find all files' },
+      },
       -- note: group 'w' w/ other search bindings instead of custom mappings
       { 'w', TreeSearch.contextual_live_grep, { desc = 'Contexual find words' } },
     })

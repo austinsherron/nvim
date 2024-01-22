@@ -31,11 +31,17 @@ local function parse_name(k)
   local parts = String.split(k, '_')
 
   if #parts < 2 then
-    Err.raise('Hydra.HintFormatter: function name should consist of 2/3 tokens separated by "_" (%s)', k)
+    Err.raise(
+      'Hydra.HintFormatter: function name should consist of 2/3 tokens separated by "_" (%s)',
+      k
+    )
   end
 
   if not Num.isstrint(Array.index(parts, -1)) then
-    Err.raise('Hydra.HintFormatter: the function name token after the last "_" must be an int (%s)', k)
+    Err.raise(
+      'Hydra.HintFormatter: the function name token after the last "_" must be an int (%s)',
+      k
+    )
   end
 
   -- get the colnums value from the name; it's the value after the last "_"

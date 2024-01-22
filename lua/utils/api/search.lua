@@ -56,7 +56,8 @@ local function searchopts(opts, type_opts)
   local special, rest = Table.split(opts, { 'force', 'case_sensitive' })
   local confirm = ternary(special.force == true, 'off', 'menu')
 
-  local modifier = ternary(special.case_sensitive == true, 'case-sensitive', 'ignore-case')
+  local modifier =
+    ternary(special.case_sensitive == true, 'case-sensitive', 'ignore-case')
 
   special = {
     confirm = confirm,

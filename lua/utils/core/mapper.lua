@@ -246,7 +246,10 @@ end
 ---@return KeyMapper: self
 function KeyMapper:bind(bindings)
   local type = ternary(self.hydra == nil, 'vim', 'hydra')
-  LOGGER:debug('Processing %s %s key binding(s) for %s', { #bindings, type, self:get_desc() })
+  LOGGER:debug(
+    'Processing %s %s key binding(s) for %s',
+    { #bindings, type, self:get_desc() }
+  )
 
   if self.hydra ~= nil then
     self:do_hydra_binding(bindings)

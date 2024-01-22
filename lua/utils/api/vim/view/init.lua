@@ -25,7 +25,11 @@ local function query_buffers(attrs, tabnr)
 
   local winnrs = Tab.windows(tabnr)
 
-  return Stream.new(winnrs):map(Window.tobuf):map(Buffer.info):filter(buffer_filter(attrs)):collect()
+  return Stream.new(winnrs)
+    :map(Window.tobuf)
+    :map(Buffer.info)
+    :filter(buffer_filter(attrs))
+    :collect()
 end
 
 --- Closes a view for buffers w/ BufferInfo props == attrs--or the current buffer if attrs == nil--in tab w/ id == tabnr.

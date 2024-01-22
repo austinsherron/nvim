@@ -31,7 +31,9 @@ end
 ---@param dir_path string: the dir_path to check
 ---@return boolean: true if a project exists at dir_path, false otherwise
 function Project.exists(dir_path)
-  local project = Stream.new(Project.recents()):filter(Lambda.EQUALS_THIS(dir_path)):collect(Collectors.to_only(false))
+  local project = Stream.new(Project.recents())
+    :filter(Lambda.EQUALS_THIS(dir_path))
+    :collect(Collectors.to_only(false))
 
   return project ~= nil
 end
