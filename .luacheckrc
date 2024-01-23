@@ -1,4 +1,5 @@
 std = 'luajit'
+max_line_length = 90
 read_globals = {
   -- external globals
   'vim',

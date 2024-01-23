@@ -11,6 +11,7 @@ local LOGGER = GetLogger 'LSP'
 local SERVERS_PATH = Env.nvim_root() .. '/lua/lsp/servers'
 
 local FORMATTERS = {
+  go = { 'gci', 'gofumpt' },
   lua = { 'stylua' },
   python = { 'black', 'isort' },
   -- FIXME: not working the way I want it to
@@ -20,10 +21,10 @@ local FORMATTERS = {
 }
 
 local LINTERS = {
-  go = { 'semgrep' },
+  go = { 'golangci-lint' },
   lua = { 'luacheck' },
   python = { 'pylint' },
-  sh = { 'shellcheck' },
+  sh = { 'shellharden' },
   yaml = { 'yamllint' },
 }
 
@@ -94,7 +95,8 @@ end
 --- manually removed through mason.nvim.
 function LspManager.install()
   if not NvimConfig.auto_install_packages() then
-    return LOGGER:warn 'Automatic installation disabled: skipping package installation check'
+    local msg = 'Automatic installation disabled: skipping package installation check'
+    return LOGGER:warn(msg)
   end
 
   install_type(LspManager.servers(), 'lsp servers')
