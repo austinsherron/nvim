@@ -124,6 +124,12 @@ local function get_load_log_msg(opts)
   end
 end
 
+---@return boolean: true if a session should be restore, false otherwise
+function Session.should_restore()
+  -- NOTE: don't load a session if specific file(s) should be opened
+  return vim.fn.argc() == 0
+end
+
 --- Closes all buffers and loads a session based on opts:
 ---
 ---  * If session is present, loads the session file at that path, else...

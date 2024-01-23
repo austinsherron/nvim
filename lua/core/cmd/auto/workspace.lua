@@ -10,8 +10,7 @@ local Session = require 'utils.api.session'
 GetLogger('AUTOCMD'):info 'Creating workspace autocmds'
 
 local function load_cwd_session()
-  -- don't load a session if specific file(s) should be opened
-  if vim.fn.argc() > 0 then
+  if not Session.should_restore() then
     return true
   end
 
