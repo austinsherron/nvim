@@ -19,7 +19,7 @@ return Plugins('search', {
   ---- telescope: fuzzy pop-out search
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.4',
     dependencies = {
       'debugloop/telescope-undo.nvim',
       'nvim-lua/plenary.nvim',

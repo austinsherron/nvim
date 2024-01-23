@@ -60,3 +60,9 @@ I organize my plugins into the following categories:
 44 directories
 ```
 
+## Fresh Install Instructions
+
+- [ ] If there are no packages, the init file will load them all before doing anything else
+- [ ] Exit neovim and source ~/.bashrc
+- [ ] On next startup, things should be more or less functional
+
