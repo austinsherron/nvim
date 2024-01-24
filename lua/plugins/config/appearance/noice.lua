@@ -7,7 +7,7 @@ local Noice = {}
 function Noice.opts()
   return {
     messages = {
-      enabled = false,
+      enabled = true,
     },
     lsp = {
       override = {

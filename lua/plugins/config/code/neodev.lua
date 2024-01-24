@@ -12,6 +12,7 @@ function Neodev.opts()
         'lspconfig',
         'lspsaga.nvim',
         'mason.nvim',
+        'nui.nvim',
         'scope.nvim',
         'telescope.nvim',
       },

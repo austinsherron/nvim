@@ -1,5 +1,10 @@
+local KeyMapper = require 'utils.core.mapper'
+
+local menu = require 'nui.menu'
+
 local confirm = vim.fn.confirm
 
+local QUIT_CHOICE = '__quit__'
 local KEYBOARD_INT = 'Keyboard interrupt'
 local DEFAULT_CHOICES = { 'yes', 'no' }
 local DEFAULT_CHOICE = 2
@@ -42,7 +47,7 @@ local function callinput(opts, custom)
 end
 
 local function make_prompt(prompt, custom)
-  local final_prompt = fmt('%s: ', prompt)
+  local final_prompt = fmt('%s: ', String.capitalize(prompt))
 
   if String.nil_or_empty(custom.default) then
     return final_prompt
@@ -95,10 +100,10 @@ end
 ---@param choices string[]?: possible choices; optional, defaults to { yes, no }
 ---@param default_choice integer?: index of the default choice; optional, defaults to 2
 --- ("no", w/ default choices)
----@param confirmed (fun(ci: integer): o: boolean)?: function that takes as an argument the
---- index of the selected choice and returns true if that choice indicates confirmation;
---- optional, defaults to a function that returns ci == 1 (choice == "yes", w/ default
---- choices)
+---@param confirmed (fun(ci: integer): o: boolean)?: function that takes as an argument
+--- the index of the selected choice and returns true if that choice indicates
+--- confirmation; optional, defaults to a function that returns ci == 1 (choice == "yes",
+--- w/ default choices)
 ---@return boolean: the return value of confirmed: true if confirmed, false otherwise
 function Interaction.confirmation_dialog(msg, choices, default_choice, confirmed)
   choices = choices or DEFAULT_CHOICES
@@ -108,6 +113,143 @@ function Interaction.confirmation_dialog(msg, choices, default_choice, confirmed
   local choices_str = Interaction.fmt_choices(choices)
   local choice = confirm(msg, choices_str, default_choice)
   return confirmed(choice)
+end
+
+local POPUP_OPTIONS = {
+  relative = 'cursor',
+  position = {
+    row = 2,
+    col = 2,
+  },
+  border = {
+    style = 'rounded',
+    highlight = 'FloatBorder',
+    text = {
+      top_align = 'center',
+    },
+  },
+  highlight = 'Normal:Normal',
+}
+
+local KEYMAP = {
+  focus_next = { 'j', '<Down>', '<Tab>' },
+  focus_prev = { 'k', '<Up>', '<S-Tab>' },
+  close = { '<Esc>', '<C-c>' },
+  submit = { '<CR>' },
+}
+
+local SEP = {
+  char = '─',
+  text_align = 'center',
+}
+
+-- TODO: refactor to "ui/cursor/etc." vim api
+local function get_row()
+  local cursor_line = vim.fn.line '.'
+  local first_line = vim.fn.line 'w0'
+  local fold = { up = -7, down = 2 }
+
+  local height = vim.fn.winheight(0)
+  local diff_start = cursor_line - first_line
+
+  local remaining_space = height - (diff_start + 1)
+
+  if remaining_space < 9 then
+    return fold.up
+  end
+
+  return fold.down
+end
+
+local function get_max_len(title, choices)
+  return Stream.new(Array.appended(choices, title))
+    :map(String.len)
+    :collect(Stream.Collectors.max())
+end
+
+local function make_menu_choice(i, choice, max_len, value)
+  value = value or choice
+  choice = String.rpad(choice, ' ', max_len)
+
+  return menu.item(fmt('%s) %s', i, choice), { value = value })
+end
+
+local function update_keymap(key, pos, keymap)
+  keymap[tostring(key)] = pos .. 'G'
+end
+
+local function make_quit_choice(menu_choices, max_len, keymap)
+  local quit_choice = make_menu_choice('q', 'quit', max_len, QUIT_CHOICE)
+  update_keymap('q', Array.len(menu_choices) + 2, keymap)
+
+  return quit_choice
+end
+
+local function make_menu_choices(choices, max_len)
+  local menu_choices = {}
+  local keymap = {}
+
+  for i, choice in ipairs(choices) do
+    local menu_choice = make_menu_choice(i, choice, max_len)
+    Array.append(menu_choices, menu_choice)
+    update_keymap(i, i, keymap)
+  end
+
+  local quit_choice = make_quit_choice(menu_choices, max_len, keymap)
+
+  Array.append(menu_choices, menu.separator '')
+  Array.append(menu_choices, quit_choice)
+
+  return menu_choices, keymap
+end
+
+local function make_bindings(keymap)
+  local bindings = {}
+
+  for key, action in pairs(keymap) do
+    Array.append(bindings, { key, action }, {})
+  end
+
+  return bindings
+end
+
+local function bind_keymap(keymap, bufnr)
+  KeyMapper.new({
+    noremap = false,
+    nowait = true,
+    buffer = bufnr,
+  }):bind(make_bindings(keymap))
+end
+
+local function make_submit_handler(submit)
+  return function(selection)
+    return submit(ternary(selection.value ~= QUIT_CHOICE, selection.value))
+  end
+end
+
+--- Constructs a selection dialog.
+---
+---@param title string: the dialog's title
+---@param choices string[]: possible choices
+---@param submit fun(string): any|nil: function call on submit; the selected item is
+--- passed as the single argument
+function Interaction.selection_dialog(title, choices, submit)
+  POPUP_OPTIONS.position.row = get_row()
+  POPUP_OPTIONS.border.text.top = String.capitalize(title)
+
+  local max_len = get_max_len(title, choices)
+  local menu_choices, keymap = make_menu_choices(choices, max_len)
+
+  local dialog = menu(POPUP_OPTIONS, {
+    size = { width = 50 },
+    lines = menu_choices,
+    separator = SEP,
+    keymap = KEYMAP,
+    on_submit = make_submit_handler(submit),
+  })
+
+  bind_keymap(keymap, menu.bufnr)
+  dialog:mount()
 end
 
 return Interaction
