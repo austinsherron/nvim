@@ -37,6 +37,28 @@ local DIAGNOSTIC_SIGNS = {
   { name = 'DiagnosticSignInfo', icon = '' },
 }
 
+local HIGHLIGHTS = {
+  -- NOTE: my current colorscheme, "nightfox", doesn't seem to provide markdown hl groups
+  Highlight.new('@markup.heading.1.marker'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.2.marker'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.3.marker'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.4.marker'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.5.marker'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.6.marker'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.1'):foreground(Colors.BLUE),
+  Highlight.new('@markup.heading.2'):foreground(Colors.GREEN),
+  Highlight.new('@markup.heading.3'):foreground(Colors.ORANGE),
+  Highlight.new('@markup.heading.4'):foreground(Colors.CYAN),
+  Highlight.new('@markup.heading.5'):foreground(Colors.VIOLET),
+  Highlight.new('@markup.heading.6'):foreground(Colors.VIOLET),
+  Highlight.new('@markup.list'):foreground(Colors.ORANGE),
+  Highlight.new('@markup.list.checked'):foreground(Colors.CYAN),
+  Highlight.new('@markup.list.unchecked'):foreground(Colors.GREEN),
+  Highlight.new('@markup.link.label'):foreground(Colors.ORANGE),
+  Highlight.new('@markup.link.url'):foreground(Colors.YELLOW),
+  Highlight.new('@markup.raw'):foreground(Colors.BLUE),
+}
+
 --- Registers the provided sign w/ nvim.
 ---
 ---@param sign { name: string, icon: string }: the sign to register
@@ -46,7 +68,12 @@ end
 
 --- Initializes interface customizations.
 function Interface.init()
+  -- custom diagnostic signs
   foreach(DIAGNOSTIC_SIGNS, Interface.define_sign)
+  -- custom highlights
+  foreach(HIGHLIGHTS, function(hl)
+    Interface.set_highlight(hl)
+  end)
 end
 
 return Interface

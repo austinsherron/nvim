@@ -10,7 +10,6 @@ function Diffview.opts()
     view = {
       layout = 'diff2_horizontal',
     },
-    ['-'] = false,
   }
 end
 
