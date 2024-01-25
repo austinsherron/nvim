@@ -25,6 +25,7 @@ local LINTERS = {
   lua = { 'luacheck' },
   python = { 'pylint' },
   sh = { 'shellharden' },
+  tf = { 'tflint' },
   yaml = { 'yamllint' },
 }
 
