@@ -50,9 +50,9 @@ function LspKM.bind_after_attach(bufnr)
       { "'h", Lsp.hover_doc, { desc = 'open hover' } },
       { "'s", vim.lsp.buf.signature_help, { desc = 'signature help' } },
       -- workspace inspection/manipulation
-      { "'wa", vim.lsp.buf.add_workspace_folder, { desc = 'add workspace dir' } },
-      { "'wr", vim.lsp.buf.remove_workspace_folder, { desc = 'rm workspace dir' } },
-      { "'wl", inspect_workspace_folders, { desc = 'list workspace dirs' } },
+      { "'Wa", vim.lsp.buf.add_workspace_folder, { desc = 'add workspace dir' } },
+      { "'Wr", vim.lsp.buf.remove_workspace_folder, { desc = 'rm workspace dir' } },
+      { "'Wl", inspect_workspace_folders, { desc = 'list workspace dirs' } },
       -- do...
       { "'r", Lsp.rename, { desc = 'rename' } },
       { "'R", Lsp.replace, { desc = 'replace' } },

@@ -21,7 +21,8 @@ KM:bind({
     { 'n', 'v' },
   },
 
-  -- "match all" search: highlights all matches as you type and keeps them highlighted until cleared (below)
+  -- "match all" search: highlights all matches as you type and keeps them highlighted
+  -- until cleared (below)
   { '<leader>/', call 'match_all', { desc = 'match all search' }, { 'n', 'v' } },
   {
     '<leader>?',
@@ -29,9 +30,10 @@ KM:bind({
     { desc = 'reverse match all search' },
     { 'n', 'v' },
   },
-  { '<leader>hx', call 'clear', { desc = 'clear match highlights' } },
+  { '<leader>hc', call 'clear', { desc = 'clear match highlights' } },
 
-  -- find and replace; the first asks for confirmation before each replace, the second just does it
+  -- find and replace; the first asks for confirmation before each replace, the second
+  -- just does it
   { '<leader>.', call 'replace', { desc = 'find and replace (confirm)' }, { 'n', 'v' } },
   {
     '<leader>>',

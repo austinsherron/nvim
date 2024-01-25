@@ -9,7 +9,7 @@ local KM = KeyMapper.new({ nowait = true })
 
 -- window ----------------------------------------------------------------------
 
-KM:bind_one("'j", window.pick, { desc = 'jump to window' })
+KM:bind_one("'w", window.pick, { desc = 'jump to window' })
 
 -- zoxide ----------------------------------------------------------------------
 

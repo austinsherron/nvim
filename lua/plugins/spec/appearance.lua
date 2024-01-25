@@ -20,7 +20,16 @@ local TsPlugin = Treesitter.TreesitterPlugin
 
 return Plugins('appearance', {
   ---- buf-resize: intuitively resize buffers when terminal dimensions change
-  { 'kwkarlwang/bufresize.nvim' },
+  {
+    'kwkarlwang/bufresize.nvim',
+    -- FIXME: disabled until I can keep sidebar windows (i.e.: nvimtree) from resizing
+    enabled = false,
+    opts = {},
+
+    config = function(_, opts)
+      require('bufresize').setup(opts)
+    end,
+  },
   ---- colorschemes: using a strongly typed wrapper to enforce consistent colorscheme
   ----               plugin attributes
   ColorScheme 'catppuccin/nvim',
