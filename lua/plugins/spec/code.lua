@@ -156,6 +156,8 @@ return Plugins('code', {
       require('treesj').setup(opts)
     end,
   },
+  ---- vim-helm: improved experience for helm + yaml (+ gotmpl + sprig)
+  { 'towolf/vim-helm' },
   ---- yaml-companion: get, set, and auto-detect yaml schemas in buffers
   {
     'someone-stole-my-name/yaml-companion.nvim',
