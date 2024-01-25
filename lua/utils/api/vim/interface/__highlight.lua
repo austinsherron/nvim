@@ -14,7 +14,7 @@ function Highlight.new(name)
   return setmetatable({ name = name, hg = {} }, Highlight)
 end
 
---- Sets this instance's foreground color via the "fg" property.
+--- Sets the hl group's foreground color via the "fg" property.
 ---
 ---@param fg string: a string representation of a color, i.e.: a color name or a hex value
 ---@return Highlight: this instance
@@ -23,12 +23,28 @@ function Highlight:foreground(fg)
   return self
 end
 
---- Sets this instance's background color via the "bg" property.
+--- Sets the hl group's background color via the "bg" property.
 ---
 ---@param bg string: a string representation of a color, i.e.: a color name or a hex value
 ---@return Highlight: this instance
 function Highlight:background(bg)
   self.hg.bg = bg
+  return self
+end
+
+--- Sets the hl group's bold attribute to "true".
+---
+---@return Highlight: this instance
+function Highlight:bold()
+  self.hg.bold = true
+  return self
+end
+
+--- Sets the hl group's italic attribute to "true".
+---
+---@return Highlight: this instance
+function Highlight:italic()
+  self.hg.italic = true
   return self
 end
 

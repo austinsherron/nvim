@@ -88,4 +88,9 @@ function Inspect.tab()
   Notify.info(TAB_TEMPLATE, { tab, winstrs }, { title = 'Current Tab' })
 end
 
+--- Displays info about the highlight group(s) applied to entity under the cursor, if any.
+function Inspect.highlight()
+  vim.api.nvim_command 'TSHighlightCapturesUnderCursor'
+end
+
 return Inspect

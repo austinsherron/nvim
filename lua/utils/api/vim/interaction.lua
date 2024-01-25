@@ -231,8 +231,8 @@ end
 ---
 ---@param title string: the dialog's title
 ---@param choices string[]: possible choices
----@param submit fun(string): any|nil: function call on submit; the selected item is
---- passed as the single argument
+---@param submit fun(selection: string|nil): any|nil: function to call on submit;
+--- selection == nil if "quit" is selected
 function Interaction.selection_dialog(title, choices, submit)
   POPUP_OPTIONS.position.row = get_row()
   POPUP_OPTIONS.border.text.top = String.capitalize(title)

@@ -8,7 +8,9 @@ function Diffview.opts()
   return {
     enhanced_diff_hl = true,
     view = {
-      layout = 'diff2_horizontal',
+      default = {
+        layout = 'diff2_horizontal',
+      },
     },
   }
 end

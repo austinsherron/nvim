@@ -101,12 +101,15 @@ function Window.resize(direction)
   smart_splits['resize_' .. direction]()
 end
 
---- Swaps the current buffer to another window in a direction.
+--- Swaps the current buffer to another window in a direction. The cursor follows the
+--- window unless hold_cursor == true.
 ---
 ---@param direction WindowOpDirection: the direction of the window to which to swap the
 --- current buffer
-function Window.swap(direction)
-  smart_splits['swap_buf_' .. direction]()
+---@param hold_cursor boolean|nil: optional, defaults to false; if true, the cursor won't
+--- follow the swapped window
+function Window.swap(direction, hold_cursor)
+  smart_splits['swap_buf_' .. direction]({ move_cursor = not hold_cursor })
 end
 
 return Window
