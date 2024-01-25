@@ -7,6 +7,7 @@ local KM = KeyMapper.new({ nowait = true })
 
 local function close_help()
   View.close({ filetype = 'help' })
+  View.close({ filetype = 'man' })
 end
 
-KM:bind_one('<leader>hq', close_help, { desc = 'close: help windows' })
+KM:bind_one('<leader>hx', close_help, { desc = 'close: help/man windows' })
