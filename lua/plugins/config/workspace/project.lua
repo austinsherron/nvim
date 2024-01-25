@@ -13,7 +13,6 @@ local function known_exclusions()
     Env.nvundle() .. '/*', -- exclude plugins
     Env.nvim_root_pub() .. '/packages/*', -- exclude "deployed" plugins
     Env.tmux_bundle(), -- exclude tmux plugins
-    Env.work_root() .. '/*/*', -- exclude sub-directories of work projects
   }
 end
 
