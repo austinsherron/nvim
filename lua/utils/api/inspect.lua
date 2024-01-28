@@ -1,4 +1,6 @@
 local Buffer = require 'utils.api.vim.buffer'
+local Interaction = require 'utils.api.vim.interaction'
+local Session = require 'utils.api.session'
 local System = require 'utils.api.vim.system'
 local Tab = require 'utils.api.vim.tab'
 local Window = require 'utils.api.vim.window'
@@ -91,6 +93,52 @@ end
 --- Displays info about the highlight group(s) applied to entity under the cursor, if any.
 function Inspect.highlight()
   vim.api.nvim_command 'TSHighlightCapturesUnderCursor'
+end
+
+local SESSION_TEMPLATE = [[
+Current Session%s:
+
+  - Name: %s
+  - Path: %s
+  - Dir: %s
+
+]]
+
+--- Displays session info, either based on the CWD or global session state.
+function Inspect.session()
+  Interaction.selection_dialog('Session', { 'CWD', 'Global' }, function(selection)
+    if selection == nil then
+      return
+    end
+
+    local global = selection == 'Global'
+
+    local session = Session.current(global)
+    local opts = { title = 'Current Session' }
+
+    if session == nil then
+      return Notify.info('No active session', {}, opts)
+    end
+
+    Notify.info(SESSION_TEMPLATE, {
+      ternary(global == true, ' (Global)', ''),
+      session.name,
+      session.file_path,
+      session.dir_path,
+    }, opts)
+  end)
+end
+
+--- Displays the value of the global variable typed in the prompt.
+function Inspect.global()
+  local name, forcequit = Interaction.input('Global Variable', { required = true })
+
+  if forcequit == true then
+    return
+  end
+
+  local val = String.tostring(vim.g[name])
+  Notify.info('%s=%s', { name, val }, { title = 'Global Variable' })
 end
 
 return Inspect

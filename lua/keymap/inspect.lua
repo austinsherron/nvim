@@ -14,5 +14,7 @@ KM:with_hydra({ name = '🔍 Inspect', body = '<leader>I' })
     { 'b', Inspect.buffer, { desc = 'current buffer' } },
     { 't', Inspect.tab, { desc = 'current tab' } },
     { 'w', Inspect.window, { desc = 'current window' } },
+    { 's', Inspect.session, { desc = 'current session' } },
     { 'h', Inspect.highlight, { desc = 'highlight groups' } },
+    { 'g', Inspect.global, { desc = 'global variable' } },
   })
