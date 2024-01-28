@@ -2,6 +2,7 @@ local Lambda = require 'toolbox.functional.lambda'
 local Stack = require 'toolbox.extensions.stack'
 
 local Constants = require('plugins.extensions.interface.hydra').Constants
+local onerr_getmsg = require('toolbox.error.onerr').getmsg
 
 local Hydra = Lazy.require 'hydra'
 
@@ -10,6 +11,7 @@ local DEFAULT_MODES = { 'n' }
 -- WARN: this is effectively duplicated in this file's unit tests
 local DEFAULT_OPTIONS = { noremap = true, silent = true }
 local DEFAULT_HYDRA_CONFIG = { invoke_on_body = true }
+local NO_MAPPING_ERR = 'E31'
 
 ---@alias BindingOptions { desc_prefix: string|nil, desc: string|nil, nowait: boolean|nil, silent: boolean|nil }
 ---@alias Binding { lhs: string|nil, rhs: string|function|nil, options: BindingOptions|nil, modes: string[]|nil }
@@ -121,7 +123,58 @@ function KeyMapper:get_desc()
   return String.alphanum(self:get_options().desc or '')
 end
 
+local function make_del_binding(lhs)
+  return function(mode)
+    vim.api.nvim_del_keymap(mode, lhs)
+  end
+end
+
+local function make_del_buf_binding(lhs, buffer)
+  return function(mode)
+    vim.api.nvim_buf_del_keymap(buffer, mode, lhs)
+  end
+end
+
+local function make_del_binding(lhs, buffer)
+  if buffer == nil then
+    return make_del_binding(lhs)
+  else
+    return make_del_buf_binding(lhs, buffer)
+  end
+end
+
+local function make_del_binding_fn(lhs, buffer)
+  local del_binding = make_del_binding(lhs, buffer)
+
+  return function(mode)
+    local msg = onerr_getmsg(del_binding, mode)
+
+    if msg == nil then
+      return
+    end
+
+    if msg:getcode() == NO_MAPPING_ERR then
+      LOGGER:warn('No mapping for lhs=%s, mode=%s', { lhs, mode })
+    else
+      Err.raise('Error deleting binding: %s', msg)
+    end
+  end
+end
+
+local function reset_vim_binding(lhs, modes, buffer)
+  local del_binding = make_del_binding_fn(lhs, buffer)
+
+  for _, mode in ipairs(modes) do
+    del_binding(mode)
+  end
+end
+
 -- more or less sourced from https://github.com/brainfucksec/neovim-lua/blob/main/nvim.lua.keymaps.lua
+---
+---@param lhs string
+---@param rhs string|function
+---@param options BindingOptions|nil
+---@param modes string[]|nil
 ---@private
 function KeyMapper:do_vim_binding(lhs, rhs, options, modes)
   options = self:get_options(options)
@@ -131,6 +184,20 @@ function KeyMapper:do_vim_binding(lhs, rhs, options, modes)
   LOGGER:trace('Binding opts=%s, modes=%s', { options, modes })
   vim.keymap.set(modes, lhs, rhs, options)
   LOGGER:debug 'Binding processed successfully'
+end
+
+---@param lhs string
+---@param options BindingOptions|nil
+---@param modes string[]|nil
+---@private
+function KeyMapper:reset_vim_binding(lhs, options, modes)
+  options = self:get_options(options)
+  modes = modes or DEFAULT_MODES
+
+  LOGGER:debug('Removing binding: lhs="%s"', { lhs })
+  LOGGER:trace('Binding opts=%s, modes=%s', { options, modes })
+  reset_vim_binding(lhs, modes, options.buffer)
+  LOGGER:debug 'Binding successfully removed '
 end
 
 ---@private
@@ -260,6 +327,17 @@ function KeyMapper:bind(bindings)
   end
 
   return self
+end
+
+--- Resets the provided key bindings.
+---
+---@param bindings { [1]: string, [2]: BindingOptions|nil, [3]: string[] }[]: array of
+--- bindings to remove; bindings must include a "lhs", and can optionally include binding
+--- opts and/or modes
+function KeyMapper:reset(bindings)
+  foreach(bindings, function(b)
+    self:reset_vim_binding(Table.unpack(b))
+  end)
 end
 
 --- Binds a single key binding.

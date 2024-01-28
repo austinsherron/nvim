@@ -207,24 +207,25 @@ local function make_bindings(keymap)
   local bindings = {}
 
   for key, action in pairs(keymap) do
-    Array.append(bindings, { key, action }, {})
+    Array.append(bindings, { key, action, {}, { 'i' } }, {})
   end
 
   return bindings
-end
-
-local function bind_keymap(keymap, bufnr)
-  KeyMapper.new({
-    noremap = false,
-    nowait = true,
-    buffer = bufnr,
-  }):bind(make_bindings(keymap))
 end
 
 local function make_submit_handler(submit)
   return function(selection)
     return submit(ternary(selection.value ~= QUIT_CHOICE, selection.value))
   end
+end
+
+local function remove_bindings(mapper, bindings)
+  local toremove = map(bindings, function(b)
+    Array.remove_at(b, 2)
+    return b
+  end)
+
+  mapper:reset(toremove)
 end
 
 --- Constructs a selection dialog.
@@ -240,15 +241,21 @@ function Interaction.selection_dialog(title, choices, submit)
   local max_len = get_max_len(title, choices)
   local menu_choices, keymap = make_menu_choices(choices, max_len)
 
+  local mapper = KeyMapper.new({ noremap = false, nowait = true, buffer = menu.bufnr })
+  local bindings = make_bindings(keymap)
+
   local dialog = menu(POPUP_OPTIONS, {
     size = { width = 50 },
     lines = menu_choices,
     separator = SEP,
     keymap = KEYMAP,
     on_submit = make_submit_handler(submit),
+    on_close = function()
+      remove_bindings(mapper, bindings)
+    end,
   })
 
-  bind_keymap(keymap, menu.bufnr)
+  mapper:bind(bindings)
   dialog:mount()
 end
 
