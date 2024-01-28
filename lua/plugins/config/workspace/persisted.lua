@@ -11,7 +11,10 @@ function Persisted.opts()
   return {
     -- FIXME: see FIXME in Session.save
     -- autosave = false,
-    save_dir = Session.sessions_dir(),
+    -- NOTE: same as default, but making it explicit for use in custom integration
+    branch_separator = Session.Contstants.BRANCH_SEP,
+    save_dir = Session.Contstants.SESSIONS_DIR,
+    should_autosave = Session.should_save,
   }
 end
 

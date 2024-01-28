@@ -3,6 +3,7 @@ local Env = require 'toolbox.system.env'
 local File = require 'toolbox.system.file'
 local Path = require 'toolbox.system.path'
 local Paths = require 'utils.api.vim.path'
+local Project = require 'utils.api.project'
 local System = require 'utils.api.vim.system'
 
 local safeget = Table.safeget
@@ -10,7 +11,6 @@ local safeget = Table.safeget
 local persisted = Lazy.require 'persisted' ---@module 'persisted'
 
 local LOGGER = GetLogger 'SESSION'
-local SESSIONS_DIR = Paths.data() .. '/sessions/'
 
 --- Contains information about a session.
 ---
@@ -48,27 +48,16 @@ local Session = {}
 ---@note: to expose SessionInfo
 Session.SessionInfo = SessionInfo
 
----@return string: the path to the directory where sessions are stored
-function Session.sessions_dir()
-  return SESSIONS_DIR
-end
-
 ---@return boolean: true if a session exists for the cwd, false otherwise
 function Session.exists()
   return persisted.session_exists()
-end
-
-local function filter_session()
-  return true
 end
 
 --- Gets existing session.
 ---
 ---@return SessionInfo[]: an array of sessions, if any exist
 function Session.list()
-  local sessions = persisted.list() or {}
-
-  return Stream.new(sessions):map(SessionInfo.new):filter(filter_session):collect()
+  return map(persisted.list() or {}, SessionInfo.new)
 end
 
 local function non_unique_session_msg(dir_path)
@@ -76,25 +65,36 @@ local function non_unique_session_msg(dir_path)
   return fmt('Found more than one matching session for dir=%s', dirname)
 end
 
+local function session_filter(field, selector)
+  return function(s)
+    return s[field] == selector
+  end
+end
+
+--- Parameterizes session retrieval.
+---
+---@class SessionQueryOpts
+---@field field string|nil: optional, defaults to "dir_path"; the session field to use
+--- match a session
+---@field strict boolean|nil: optional, defaults to false; if true, raises an error if
+--- more than one matching session is found
+
 --- Gets the session w/ dir path == dir_path, if any.
 ---
----@param dir_path string: the absolute path of the dir that a session is tracking
----@param strict boolean|nil: optional, defaults to false; if true, raises an error if
---- more than one matching session is found
+---@param selector string: the value to use to match a session; the field matched is
+--- specified in opts.field
+---@param opts SessionQueryOpts|nil: optional; parameterizes session retrieval
 ---@return SessionInfo|nil: the session w/ dir path == dir_path, if any
-function Session.get(dir_path, strict)
-  LOGGER:debug('get: fetching session for dir_path=%s', { dir_path })
-  local matching = Stream.new(Session.list())
-    :filter(function(s)
-      return s.dir_path == dir_path
-    end)
-    :filter(filter_session)
-    :collect()
+function Session.get(selector, opts)
+  opts = opts or {}
 
-  if strict == true and #matching > 1 then
-    Err.raise(non_unique_session_msg(dir_path))
+  local field = opts.field or 'dir_path'
+  local matching = filter(Session.list(), session_filter(field, selector))
+
+  if opts.strict == true and #matching > 1 then
+    Err.raise(non_unique_session_msg(selector))
   elseif #matching > 1 then
-    LOGGER:warn(non_unique_session_msg(dir_path))
+    LOGGER:warn(non_unique_session_msg(selector))
   end
 
   local session = safeget(matching, 1)
@@ -104,8 +104,14 @@ end
 
 --- Gets the session for the cwd.
 ---
+---@param global boolean|nil: optional, defaults to false; if true, will fetch the session
+--- according to the persisted.nvim global variable "vim.g.persisting_session"
 ---@return SessionInfo|nil: the session for the cwd, if any
-function Session.current()
+function Session.current(global)
+  if global == true then
+    return Session.get(vim.g.persisting_session, { field = 'file_path' })
+  end
+
   return Session.get(System.cwd())
 end
 
@@ -128,6 +134,11 @@ end
 function Session.should_restore()
   -- NOTE: don't load a session if specific file(s) should be opened
   return vim.fn.argc() == 0
+end
+
+--- Clears the global variable used by the session manager to track the current session.
+function Session.clear()
+  vim.g.persisting_session = nil
 end
 
 --- Closes all buffers and loads a session based on opts:
@@ -168,6 +179,18 @@ end
 ---@param session string: a path to a session file
 function Session.load_session(session)
   Session.load({ session = session })
+end
+
+--- Uses the current buffer to check if the session should be saved. Intended for use w/
+--- persisted.nvim's "should_autosave" config value.
+---
+---@return boolean: true if the session should be saved, false otherwise
+function Session.should_save()
+  local projects = Project.list()
+  local cwd = System.cwd()
+
+  -- only save a session if the cwd is a project
+  return Array.contains(projects, cwd)
 end
 
 --- Saves the session for the cwd.
@@ -216,5 +239,10 @@ function Session.delete(session)
     LOGGER:info('Successfully deleted session=%s', { name }, { user_facing = true })
   end
 end
+
+Session.Contstants = {
+  BRANCH_SEP = '@@',
+  SESSIONS_DIR = Paths.data() .. '/sessions/',
+}
 
 return Session

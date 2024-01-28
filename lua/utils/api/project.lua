@@ -19,7 +19,7 @@ local Project = {}
 --- works on individual projects
 ---@return string[]: an array of recent projects, if any, optionally transformed by
 --- process
-function Project.recents(process)
+function Project.list(process)
   process = process or Lambda.IDENTITY
 
   local projects = project_nvim.get_recent_projects() or {}
@@ -31,11 +31,7 @@ end
 ---@param dir_path string: the dir_path to check
 ---@return boolean: true if a project exists at dir_path, false otherwise
 function Project.exists(dir_path)
-  local project = Stream.new(Project.recents())
-    :filter(Lambda.EQUALS_THIS(dir_path))
-    :collect(Collectors.to_only(false))
-
-  return project ~= nil
+  return Array.contains(Project.list(), dir_path)
 end
 
 --- Gets the current project, based on the cwd's git root.
@@ -56,7 +52,7 @@ function Project.current(process)
   process = process or Lambda.IDENTITY
 
   local repo_root = Git.repo_root()
-  return Stream.new(Project.recents())
+  return Stream.new(Project.list())
     :filter(Lambda.EQUALS_THIS(repo_root))
     :map(process)
     :collect(Collectors.to_only(false))

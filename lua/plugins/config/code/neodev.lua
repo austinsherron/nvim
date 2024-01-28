@@ -13,6 +13,7 @@ function Neodev.opts()
         'lspsaga.nvim',
         'mason.nvim',
         'nui.nvim',
+        'persisted.nvim',
         'scope.nvim',
         'telescope.nvim',
       },

@@ -3,9 +3,11 @@ local SessionApi = require 'utils.api.session'
 
 local ActionUtils = require('plugins.extensions.search').Telescope.ActionUtils
 
-local actions = require 'telescope.actions'
+local persisted = require 'persisted'
+local session_finder = require 'telescope._extensions.persisted.finders'
 local telescope = require 'telescope'
 
+local AfterSelect = ActionUtils.AfterSelect
 local SessionInfo = SessionApi.SessionInfo
 
 --- Contains functions that implement extended (custom) session manager functionality.
@@ -23,13 +25,14 @@ local function make_delete_session_action()
   local action = function(s, _)
     return SessionApi.delete(s)
   end
-  -- TODO: I can probably do better than to just close the buffer here, but to refresh it
-  -- requires introducing an explicit dependency on the inner workings of the find_files
-  -- telescope builtin; this is just fine for now
-  local after = function(_, _, pb)
-    actions.close(pb)
+
+  local finder = function()
+    -- WARN: I'm duplicating some of the persisted telescope picker logic here... so I can
+    -- have custom deletion key bindings... 🙃
+    return session_finder.session_finder(persisted.list())
   end
 
+  local after = AfterSelect.refresh_prompt(finder)
   return Safe.ify(ActionUtils.make_selection_action(confirm, action, after))
 end
 
@@ -56,7 +59,7 @@ local function sessions_picker()
   telescope.extensions.persisted.persisted({
     attach_mappings = make_attachment_action(),
     layout_strategy = 'vertical',
-    layout_config = { height = 0.4, width = 0.5 },
+    layout_config = { height = 0.3, width = 0.5 },
   })
 end
 

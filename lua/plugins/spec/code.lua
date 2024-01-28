@@ -131,7 +131,7 @@ return Plugins('code', {
       require('symbols-outline').setup(opts)
     end,
   },
-  ---- treesitter: a parser that integrates w/ all kinds of things (i.e.: adds extra color, etc.)
+  ---- treesitter: parser that integrates w/ all kinds of things (i.e.: adds hls, etc.)
   {
     'nvim-treesitter/nvim-treesitter',
     enabled = Treesitter.enabled(),

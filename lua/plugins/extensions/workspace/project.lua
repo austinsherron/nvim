@@ -23,13 +23,16 @@ local function default_action(selection)
 
   local session = Session.get(project_dir)
 
-  if session == nil then
-    LOGGER:warn('No project session found; switching to project=%s', { project_dir })
-    return ProjectApi.switch(project_dir)
+  if session ~= nil then
+    LOGGER:info('Switching to project session=%s', { session.name })
+    return Session.switch(session)
   end
 
-  LOGGER:info('Switching to project session=%s', { session.name })
-  Session.switch(session)
+  LOGGER:warn('No project session found; switching to project=%s', { project_dir })
+
+  -- clear current session from so state isn't saved to the wrong session
+  Session.clear()
+  ProjectApi.switch(project_dir)
 end
 
 local function search_all_project_files(selection, _)
@@ -56,7 +59,7 @@ local function projects_picker()
   telescope.extensions.projects.projects({
     attach_mappings = make_attachment_action(),
     layout_strategy = 'vertical',
-    layout_config = { height = 0.4, width = 0.5 },
+    layout_config = { height = 0.3, width = 0.5 },
   })
 end
 
