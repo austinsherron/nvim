@@ -21,18 +21,16 @@ end
 function LspAutocmds.create()
   GetLogger('AUTOCMD'):info 'Creating lsp autocmds'
 
-  Autocmd
-    .new()
+  Autocmd.new()
     :withDesc('Binds lsp keymap after an lsp attaches to the relevant buffer')
-    -- :withGroup('UserLspConfig')
+    :withGroup('UserLspConfig')
     :withEvent('LspAttach')
     :withCallback(bind_keymap)
     :create()
 
-  Autocmd
-    .new()
+  Autocmd.new()
     :withDesc('Format on save')
-    -- :withGroup('UserLspConfig')
+    :withGroup('UserLspConfig')
     :withEvent('BufWritePost')
     :withCallback(doformat)
     :create()

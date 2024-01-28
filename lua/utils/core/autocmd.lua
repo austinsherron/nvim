@@ -97,6 +97,8 @@ end
 --- see vim.api.nvim_create_augroup
 ---@return AutoCommand: self
 function AutoCommand:withGroup(group, options)
+  options = Table.combine(options or {}, { clear = false })
+
   self.group = create_or_get_group(group, options)
   LOGGER:debug('Created augroup="%s"', { group })
   return self
