@@ -48,6 +48,20 @@ function Highlight:italic()
   return self
 end
 
+--- Sets the hl group's link attribute.
+---
+--- FIXME: this doesn't seem to work
+---
+---@param link Highlight|string: a highlight or a highlight name
+---@return Highlight: this instance
+function Highlight:link(link)
+  self.hg.link = ternary(String.is(link), link, function()
+    return link.name
+  end)
+
+  return self
+end
+
 --- Builds and returns the highlight definition.
 ---
 ---@return table: a highlight definition constructed from this instance

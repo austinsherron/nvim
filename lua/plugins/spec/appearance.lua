@@ -39,6 +39,7 @@ return Plugins('appearance', {
   ColorScheme('EdenEast/nightfox.nvim', Nightfox.config()),
   ColorScheme 'AlexvZyl/nordic.nvim',
   ColorScheme 'rose-pine/neovim',
+  ColorScheme 'srcery-colors/srcery-vim',
   ColorScheme('folke/tokyonight.nvim', TokyoNight.config()),
   ---- dressing.nvim: ui/ux treatments for vim input/select
   {

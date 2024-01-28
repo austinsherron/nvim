@@ -38,34 +38,48 @@ local DIAGNOSTIC_SIGNS = {
 }
 
 local HIGHLIGHTS = {
-  -- NOTE: my current colorscheme, "nightfox", doesn't seem to provide markdown hl groups
-  Highlight.new('@markup.heading.1.marker'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.2.marker'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.3.marker'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.4.marker'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.5.marker'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.6.marker'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.1'):foreground(Colors.BLUE),
-  Highlight.new('@markup.heading.2'):foreground(Colors.GREEN),
-  Highlight.new('@markup.heading.3'):foreground(Colors.BRIGHT_ORANGE),
-  Highlight.new('@markup.heading.4'):foreground(Colors.CYAN),
-  Highlight.new('@markup.heading.5'):foreground(Colors.VIOLET),
-  Highlight.new('@markup.heading.6'):foreground(Colors.VIOLET),
-  Highlight.new('@markup.list'):foreground(Colors.ORANGE),
-  Highlight.new('@markup.list.checked'):foreground(Colors.CYAN),
-  Highlight.new('@markup.list.unchecked'):foreground(Colors.GREEN),
-  Highlight.new('@markup.link.label'):foreground(Colors.BRIGHT_ORANGE),
-  Highlight.new('@markup.link.url'):foreground(Colors.YELLOW),
-  Highlight.new('@markup.italic'):foreground(Colors.VIOLET):italic(),
-  Highlight.new('@markup.strong'):foreground(Colors.PURPLE):bold(),
+  -- for markdown
+  -- NOTE: my current colorscheme, "srcery", doesn't seem to provide markdown hl groups
+  Highlight.new('@markup.heading.1.marker'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.2.marker'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.3.marker'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.4.marker'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.5.marker'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.6.marker'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.1'):foreground(Colors.SRCERY_BLUE):bold(),
+  Highlight.new('@markup.heading.2'):foreground(Colors.SRCERY_GREEN):bold(),
+  Highlight.new('@markup.heading.3'):foreground(Colors.SRCERY_ORANGE),
+  Highlight.new('@markup.heading.4'):foreground(Colors.SRCERY_CYAN),
+  Highlight.new('@markup.heading.5'):foreground(Colors.SRCERY_BRIGHT_MAGENTA),
+  Highlight.new('@markup.heading.6'):foreground(Colors.SRCERY_MAGENTA),
+  Highlight.new('@markup.list'):foreground(Colors.SRCERY_ORANGE),
+  Highlight.new('@markup.list.checked'):foreground(Colors.SRCERY_CYAN),
+  Highlight.new('@markup.list.unchecked'):foreground(Colors.SRCERY_GREEN),
+  Highlight.new('@markup.link.label'):foreground(Colors.SRCERY_ORANGE):bold(),
+  Highlight.new('@markup.link.url'):foreground(Colors.SRCERY_YELLOW):bold(),
+  Highlight.new('@markup.italic'):foreground(Colors.SRCERY_LIGHT_MAGENTA):italic(),
+  Highlight.new('@markup.strong'):foreground(Colors.SRCERY_MAGENTA),
   Highlight.new('@markup.raw'):foreground(Colors.BLUE),
+  Highlight.new('@spell'):foreground(Colors.SRCERY_BRIGHT_YELLOW),
+
+  -- for code
+  Highlight.new('@comment.documentation'):foreground(Colors.SRCERY_BRIGHT_MAGENTA),
+  -- FIXME: these highlight groups are overwritten by _something_, but I'm not sure what
+  Highlight.new('@constant'):foreground(Colors.SRCERY_MAGENTA):bold(),
+  Highlight.new('@function.call'):foreground(Colors.SRCERY_YELLOW),
+  Highlight.new('@function.method.call'):foreground(Colors.SRCERY_BRIGHT_YELLOW),
+  Highlight.new('@variable.member'):foreground(Colors.SRCERY_BRIGHT_MAGENTA),
 }
 
 --- Registers the provided sign w/ nvim.
 ---
 ---@param sign { name: string, icon: string }: the sign to register
 function Interface.define_sign(sign)
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.icon, numhl = '' })
+  vim.fn.sign_define(sign.name, {
+    texthl = sign.name,
+    text = sign.icon,
+    numhl = '',
+  })
 end
 
 --- Initializes interface customizations.

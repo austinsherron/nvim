@@ -6,7 +6,7 @@ local Highlight = Interface.Highlight
 local OptionKey = Buffer.OptionKey
 
 local CONFIG = {
-  lua = { len = 90, color = Colors.CYAN },
+  lua = { len = 90, style = { color = Colors.SRCERY_CYAN } },
 }
 
 --- Utility for configuring color column
@@ -15,9 +15,20 @@ local CONFIG = {
 local ColorColumn = {}
 
 local function set_colcolor(config)
-  Interface.set_highlight(
-    Highlight.new('ColorColumn'):foreground(config.color):background(config.color)
-  )
+  local style = config.style
+  local hl = Highlight.new 'ColorColumn'
+
+  if style.hl ~= nil then
+    hl = style.hl
+  elseif String.not_nil_or_empty(style.link) then
+    hl:link(style.link)
+  elseif String.not_nil_or_empty(style.color) then
+    hl:foreground(style.color):background(style.color)
+  else
+    Err.raise 'ColorColumn: Unrecognized colorcolumn style definition'
+  end
+
+  Interface.set_highlight(hl)
 end
 
 local function enable_colorcol(config)

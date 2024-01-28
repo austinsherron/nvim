@@ -1,6 +1,6 @@
 -- colorscheme -----------------------------------------------------------------
 
-vim.cmd.colorscheme 'nightfox'
+vim.cmd.colorscheme 'srcery'
 
 -- vim interface customizations  -----------------------------------------------
 
