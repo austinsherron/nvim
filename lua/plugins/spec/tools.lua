@@ -70,4 +70,9 @@ return Plugins('tools', {
   },
   ---- plenary.nvim: lua utilities; a dependency for many, many plugins...
   { 'nvim-lua/plenary.nvim' },
+  ---- wakatime: track time spent programming
+  {
+    'wakatime/vim-wakatime',
+    lazy = false,
+  },
 })
