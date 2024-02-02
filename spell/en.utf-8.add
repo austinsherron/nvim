@@ -32,6 +32,7 @@ app1
 app2
 AppImage
 AppImageLauncher
+arg
 ArgParse
 args
 ArgumentTypeError
@@ -200,6 +201,7 @@ cloc
 closeall
 Cloudflare
 cloudfront
+cmake
 cmd
 cmdline
 cmds
@@ -228,6 +230,7 @@ CommonNum
 CommonString
 CommonTable
 comparator
+compat
 completionist
 CompletionSrc
 ComponentType
@@ -257,6 +260,7 @@ creds
 cron
 crontab
 Crontab
+crontabctl
 CrowdStrike
 CSI
 CSV
@@ -394,6 +398,7 @@ errorQuietly
 ErrorQuietly
 esc
 Esc
+evtest
 excludesfile
 executables
 Experian
@@ -444,6 +449,7 @@ formatter
 formatters
 FQN
 FQNs
+FRB
 frecency
 frecent
 friendbyebye
@@ -527,6 +533,7 @@ hoc
 Homebrew
 hostname
 HOSTNAME
+hostrc
 hover
 href
 hrsh7th
@@ -657,8 +664,15 @@ lf
 lhs
 lhsfmt
 li
+libavahi
+libcurl4
+libdnssd
+libice
 librewolf
 LibreWolf
+libsm
+libssl
+libx11
 lifecycle
 lightbulb
 linehl
@@ -882,6 +896,7 @@ OOB
 open
 openmode
 OpenShot
+openssl
 opensuse
 opsec
 optional's
@@ -889,12 +904,14 @@ OptionKey
 OptionType
 orDefault
 os
+osrc
 otherwssie
 OverloadArg
 OverloadDefinition
 OverloadParam
 OverloadTypedArg
 PackageManager
+pamu2fcfg
 param
 parameterizable
 parameterize
@@ -913,6 +930,7 @@ pbcopy
 pbpaste
 pcall
 pcscd
+pdf
 peekall
 perf
 pfx
@@ -922,15 +940,18 @@ PINs
 pip3
 pipefail
 pkgs
+plexmediaserver
 Plgn
 pluginmanager
 PluginMgr
+png
 points
 policykit
 popup
 pos
 positionals
 POSIX
+postfix
 ppa
 pre
 prepend
@@ -969,6 +990,8 @@ PYTHONPATH
 qa
 qbf
 qf
+qtbase5
+qttools5
 quant
 quickfix
 rainbow2
@@ -1134,6 +1157,7 @@ SortOps
 spamtest
 spc
 spectre
+speedtest
 spm
 sql
 SQLAlchemy
@@ -1175,6 +1199,7 @@ stylua
 subchart
 subcommand
 subdir
+subdirs
 submodule
 Submodule
 submodules
@@ -1189,6 +1214,7 @@ SymbolsOutline
 symlink
 symlinks
 Syngenta's
+syngestures
 sys
 system76
 systemctl
@@ -1430,6 +1456,7 @@ xinput
 xlsx
 xmodmap
 xmodmaprc
+xorg
 xpcall
 xplr
 xpm
