@@ -1509,7 +1509,6 @@ metadata
 ConfigMap
 apiVersion
 mapfile
-#eadarry
 readarray
 Hawkeye
 hostrc
@@ -1524,8 +1523,8 @@ cmake
 Xcode
 xorg
 xinit
-#ubdirectories
 helmfiles
 darwin
 sed
 gitlab
+martsplits
