@@ -10,7 +10,8 @@ function SmartSplits.opts()
   return {
     resize_mode = {
       hooks = {
-        on_leave = bufresize.register,
+        -- FIXME: disabled until I can keep sidebar windows (i.e.: nvimtree) from resizing
+        -- on_leave = bufresize.register,
       },
     },
   }

@@ -70,6 +70,15 @@ return Plugins('tools', {
   },
   ---- plenary.nvim: lua utilities; a dependency for many, many plugins...
   { 'nvim-lua/plenary.nvim' },
+  ---- taskwarrior.nvim: nvim ui for taskwarrior
+  {
+    'ribelo/taskwarrior.nvim',
+    opts = {},
+
+    config = function(_, opts)
+      require('neorepl').config(opts)
+    end,
+  },
   ---- wakatime: track time spent programming
   {
     'wakatime/vim-wakatime',

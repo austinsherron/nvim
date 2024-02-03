@@ -26,7 +26,7 @@ local LINTERS = {
   python = { 'pylint' },
   sh = { 'shellharden' },
   tf = { 'tflint' },
-  yaml = { 'yamllint' },
+  -- yaml = { 'yamllint' },
 }
 
 --- Entry point for configuration and management of neovim LSP servers, formatters, and

@@ -35,12 +35,28 @@ function TreeActions.copy_cursor_node_content()
 
   if Editor.copy(content or '') then
     LOGGER:info(
-      'Successfully copied to clipboard contents of %s',
+      'Successfully copied contents of %s',
       { node.name },
       { user_facing = true }
     )
   else
-    LOGGER:warn('Unable to copy to clipboard contents of %s', { node.name })
+    LOGGER:warn('Unable to copy contents of %s', { node.name })
+  end
+end
+
+--- Copies into the system register the absolute path of the file/dir referenced by the
+--- cursor node.
+function TreeActions.copy_cursor_node_path()
+  local node = TreeNode.at_cursor()
+
+  if node:empty() then
+    return
+  end
+
+  if Editor.copy(node:getpath()) then
+    LOGGER:info('Successfully copied path of %s', { node.name }, { user_facing = true })
+  else
+    LOGGER:warn('Unable to copy path of %s', { node.name })
   end
 end
 
