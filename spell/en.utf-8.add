@@ -1527,4 +1527,12 @@ helmfiles
 darwin
 sed
 gitlab
-martsplits
+smartsplits
+os's
+homebrew
+onchange
+chezmoiignore
+SC2068
+SC2086
+SC2048
+LYT

@@ -7,7 +7,8 @@ local Project = {}
 
 local function known_exclusions()
   return {
-    Env.editors_root() .. '/nvim', -- exclude nvim submodule
+    -- TODO: update this path after re-adding nvim submodule to dotfiles repo
+    -- Env.editors_root() .. '/nvim', -- exclude nvim submodule
     Env.external_pkgs() .. '/*', -- exclude external repos
     Env.nvim_root_pub(), -- exclude "deployed" nvim
     Env.nvundle() .. '/*', -- exclude plugins
