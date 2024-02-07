@@ -7,6 +7,7 @@
   plugins
 --]]
 
+local Chezmoi = require 'plugins.config.tools.chezmoi'
 local NeoRepl = require 'plugins.config.tools.neorepl'
 local Treesitter = require 'plugins.config.code.treesitter'
 
@@ -24,6 +25,12 @@ return Plugins('tools', {
     config = function(_, opts)
       require('op').setup(opts)
     end,
+  },
+  ---- chezmoi.vim: proper highlighting for chezmoi managed files
+  {
+    'alker0/chezmoi.vim',
+    lazy = false,
+    config = Chezmoi.config,
   },
   ---- colorizer: high perf color highlighter
   ---- TODO: configure

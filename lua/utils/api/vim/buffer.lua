@@ -1,4 +1,5 @@
 local Lambda = require 'toolbox.functional.lambda'
+local Path = require 'toolbox.system.path'
 local Set = require 'toolbox.extensions.set'
 
 local enum = require('toolbox.extensions.enum').enum
@@ -46,7 +47,8 @@ local OptionKey = enum({
 ---
 ---@class BufferInfo
 ---@field id integer: the buffer's id
----@field name string: the buffer's name
+---@field name string: the buffer's name (its path)
+---@field filename string: the buffer's filename (parent dir removed)
 ---@field type string: the value of the buffer's type option
 ---@field filetype string: the buffer's filetype
 local BufferInfo = {}
@@ -61,6 +63,7 @@ function BufferInfo.new(bufnr, name, type, filetype)
   return setmetatable({
     id = bufnr,
     name = name,
+    filename = Path.basename(name),
     type = type,
     filetype = filetype,
   }, BufferInfo)
