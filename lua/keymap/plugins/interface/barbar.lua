@@ -21,7 +21,7 @@ KM:bind({
 -- select --
 
 -- arbitrary buffer w/ dynamic hot key
-KM:bind_one('<leader>j', ':BufferPick<CR>', { desc = 'jump to...' })
+KM:bind_one("'j", ':BufferPick<CR>', { desc = 'jump to...' })
 
 -- number by buffer index
 KM:bind({
@@ -70,7 +70,7 @@ KM:bind({
 })
 
 -- pick
-KM:bind_one('<leader>bc', ':BufferPickDelete<CR>', { desc = 'close...' })
+KM:bind_one("'x", ':BufferPickDelete<CR>', { desc = 'close...' })
 
 -- restore --
 
