@@ -19,7 +19,7 @@ local KM = KeyMapper.new({
 local function make_tscope_cmd(cmd, raw)
   return function()
     cmd = ternary(raw == true, cmd, 'Telescope ' .. cmd)
-    Safe.call(vim.api.nvim_command, {}, cmd)
+    Safe:call(vim.api.nvim_command, {}, cmd)
   end
 end
 

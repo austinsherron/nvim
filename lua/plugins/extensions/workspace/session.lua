@@ -33,7 +33,7 @@ local function make_delete_session_action()
   end
 
   local after = AfterSelect.refresh_prompt(finder)
-  return Safe.ify(ActionUtils.make_selection_action(confirm, action, after))
+  return Safe:ify(ActionUtils.make_selection_action(confirm, action, after))
 end
 
 local function default_action(selection)
@@ -52,7 +52,7 @@ local function make_keymap()
 end
 
 local function make_attachment_action()
-  return ActionUtils.replace_default_action(Safe.ify(default_action), make_keymap())
+  return ActionUtils.replace_default_action(Safe:ify(default_action), make_keymap())
 end
 
 local function sessions_picker()

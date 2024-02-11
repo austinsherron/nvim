@@ -20,7 +20,7 @@ local function wrap_fn(name, fn_name, fn)
 
     LOGGER:trace('Setup: calling "%s"', { fqdn })
 
-    return Safe.call(fn, { prefix = fqdn }, ...)
+    return Safe:call(fn, { prefix = fqdn }, ...)
   end
 end
 

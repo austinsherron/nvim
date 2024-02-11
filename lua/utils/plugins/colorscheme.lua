@@ -21,7 +21,7 @@ local function configure_if_necessary(cs, config)
 
   cs.opts = config.opts
   cs.config = function(_, opts)
-    Safe.call(function()
+    Safe:call(function()
       require(config.pkg).setup(opts)
     end)
   end

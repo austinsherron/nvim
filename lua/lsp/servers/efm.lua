@@ -7,7 +7,7 @@ local function get_efm_config(type, component)
   local module = fmt('efmls-configs.%ss.%s', type, component)
 
   if Import.does_module_exist(module) then
-    return Safe.require(module)
+    return Safe:require(module)
   end
 
   LOGGER:warn('No efmls-config found for type=%s, component=%s', { type, component })

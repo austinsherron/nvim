@@ -43,22 +43,22 @@ function UserCommand:withBufnum(bufnum)
   return self
 end
 
-local function wrap_cmd_if_necessary(cmd)
+local function wrap_cmd_if_necessary(cmd, ...)
   if String.is(cmd) then
     return cmd
   end
 
-  return Safe.ify(cmd)
+  return Safe:ify(cmd, ...)
 end
 
 --- Adds cmd to instance.
 ---
 ---@param cmd string|function: cmd to add to instance
----@param nargs integer|string|nil: the number of parameters the command accepts; use "?" for
---- variable # of params, or omit if no parameters
+---@param nargs integer|string|nil: the number of parameters the command accepts; use "?"
+--- for variable # of params, or omit if no parameters
 ---@return UserCommand: self
 function UserCommand:withCmd(cmd, nargs, ...)
-  self.cmd = wrap_cmd_if_necessary(cmd)
+  self.cmd = wrap_cmd_if_necessary(cmd, ...)
 
   if nargs ~= nil then
     self:withOpt('nargs', nargs)

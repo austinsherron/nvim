@@ -52,7 +52,7 @@ local function make_keymap()
 end
 
 local function make_attachment_action()
-  return ActionUtils.replace_default_action(Safe.ify(default_action), make_keymap())
+  return ActionUtils.replace_default_action(Safe:ify(default_action), make_keymap())
 end
 
 local function projects_picker()

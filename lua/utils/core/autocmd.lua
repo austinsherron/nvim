@@ -77,7 +77,7 @@ function AutoCommand:withEvents(events)
 end
 
 local function create_or_get_group(group_name, options)
-  return Safe.call(
+  return Safe:call(
     vim.api.nvim_create_augroup,
     { prefix = 'AutoCommand > Group > Create' },
     group_name,
@@ -148,7 +148,7 @@ end
 function AutoCommand:withCallback(callback)
   self.callback = function(...)
     LOGGER:debug(self:log_msg(self.id, 'Running'))
-    return Safe.call(callback, { prefix = 'AutoCommand > Run' }, ...)
+    return Safe:call(callback, { prefix = 'AutoCommand > Run' }, ...)
   end
 
   return self
@@ -214,7 +214,7 @@ end
 ---@error if event and callback or command don't exist in config or in this instance
 function AutoCommand:create(config)
   local id =
-    Safe.call(AutoCommand._create, { prefix = 'AutoCommand > Create' }, self, config)
+    Safe:call(AutoCommand._create, { prefix = 'AutoCommand > Create' }, self, config)
 
   if id ~= nil then
     LOGGER:debug(self:log_msg(id, 'Created'))
@@ -241,7 +241,7 @@ end
 ---@error if id doesn't exist in config or in this instance
 function AutoCommand:delete(config)
   local id =
-    Safe.call(AutoCommand._delete, { prefix = 'AutoCommand > Delete' }, self, config)
+    Safe:call(AutoCommand._delete, { prefix = 'AutoCommand > Delete' }, self, config)
 
   if id ~= nil then
     LOGGER:debug(self:log_msg(id, 'Deleted'))

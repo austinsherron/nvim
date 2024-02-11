@@ -6,7 +6,7 @@ local KM = KeyMapper.new({ nowait = true })
 
 local function diffview(cmd)
   return function()
-    Safe.call(vim.api.nvim_command, {}, 'Diffview' .. cmd)
+    Safe:call(vim.api.nvim_command, {}, 'Diffview' .. cmd)
   end
 end
 

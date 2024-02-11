@@ -2,7 +2,6 @@ local Lambda = require 'toolbox.functional.lambda'
 local Stack = require 'toolbox.extensions.stack'
 
 local Constants = require('plugins.extensions.interface.hydra').Constants
-local onerr_getmsg = require('toolbox.error.onerr').getmsg
 
 local Hydra = Lazy.require 'hydra'
 
@@ -147,7 +146,7 @@ local function make_del_binding_fn(lhs, buffer)
   local del_binding = make_del_binding(lhs, buffer)
 
   return function(mode)
-    local msg = onerr_getmsg(del_binding, mode)
+    local msg = OnErr.getmsg(del_binding, mode)
 
     if msg == nil then
       return
