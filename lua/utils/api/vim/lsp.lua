@@ -179,7 +179,7 @@ function Lsp.get_workspace_folders(inspect)
 
   -- TODO: make this a bit more user friendly/prettier
   local folderstr = '* ' .. String.join(wkspace_folders, '\n* ')
-  Notify.info(folderstr)
+  GetNotify().info(folderstr)
 
   return wkspace_folders
 end

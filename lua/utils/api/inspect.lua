@@ -15,7 +15,7 @@ local Inspect = {}
 
 --- Displays info the cwd.
 function Inspect.cwd()
-  Notify.info('CWD: %s', { System.cwd() }, { title = 'CWD' })
+  GetNotify().info('CWD: %s', { System.cwd() }, { title = 'CWD' })
 end
 
 local BUFFER_TEMPLATE = [[
@@ -44,7 +44,7 @@ function Inspect.buffer()
   local buf = Buffer.info()
   local bufstr = fmtbuf(buf)
 
-  Notify.info(INSPECT_TEMPLATE, { 'buffer', bufstr }, { title = 'Current Buffer' })
+  GetNotify().info(INSPECT_TEMPLATE, { 'buffer', bufstr }, { title = 'Current Buffer' })
 end
 
 local WINDOW_TEMPLATE = [[
@@ -65,7 +65,7 @@ function Inspect.window()
   local winbuf = Window.buffer()
   local winstr = fmtwin(winbuf, '    ')
 
-  Notify.info(INSPECT_TEMPLATE, { 'window', winstr }, { title = 'Current Window' })
+  GetNotify().info(INSPECT_TEMPLATE, { 'window', winstr }, { title = 'Current Window' })
 end
 
 local TAB_TEMPLATE = [[
@@ -87,7 +87,7 @@ function Inspect.tab()
     end)
     :collect(Collectors.joining '\n')
 
-  Notify.info(TAB_TEMPLATE, { tab, winstrs }, { title = 'Current Tab' })
+  GetNotify().info(TAB_TEMPLATE, { tab, winstrs }, { title = 'Current Tab' })
 end
 
 --- Displays info about the highlight group(s) applied to entity under the cursor, if any.
@@ -117,10 +117,10 @@ function Inspect.session()
     local opts = { title = 'Current Session' }
 
     if session == nil then
-      return Notify.info('No active session', {}, opts)
+      return GetNotify().info('No active session', {}, opts)
     end
 
-    Notify.info(SESSION_TEMPLATE, {
+    GetNotify().info(SESSION_TEMPLATE, {
       ternary(global == true, ' (Global)', ''),
       session.name,
       session.file_path,
@@ -138,7 +138,7 @@ function Inspect.global()
   end
 
   local val = String.tostring(vim.g[name])
-  Notify.info('%s=%s', { name, val }, { title = 'Global Variable' })
+  GetNotify().info('%s=%s', { name, val }, { title = 'Global Variable' })
 end
 
 return Inspect
