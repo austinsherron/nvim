@@ -24,7 +24,7 @@ Map = require 'toolbox.utils.map'
 
 -- error handling utils
 OnErr = require('toolbox.error.onerr').new(GetLogger())
-Safe = require('toolbox.error.safe').new(GetLogger())
+Safe = require('toolbox.error.safe').new(OnErr)
 
 -- generally useful, oft imported util functions
 ternary = Bool.ternary
