@@ -28,7 +28,7 @@ local function handle_input_success(ok, res, custom)
   local default = custom.default
 
   if required and String.nil_or_empty(res) and String.nil_or_empty(default) then
-    Notify.warn 'Input is required'
+    GetNotify().warn 'Input is required'
   end
 
   return not ok, ternary(String.not_nil_or_empty(res), res, default)

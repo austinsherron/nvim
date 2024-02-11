@@ -10,9 +10,11 @@ globals = {
   'vim.o',
   'vim.opt',
   '_',
+  -- internal global config entity
+  'NvimConfig',
   -- internal global logging utils
   'GetLogger',
-  'Notify',
+  'GetNotify',
   -- internal global classes
   'Array',
   'Bool',

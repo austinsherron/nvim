@@ -2,8 +2,13 @@
 ---@diagnostic disable: lowercase-global
 
 -- logger factory and notification service
-GetLogger = require 'utils.reporting.loggers'
-Notify = require 'utils.reporting.notify'
+
+NvimConfig = require('toolbox.app.config').new 'nvim'
+
+local loggers = require 'utils.loggers'
+
+GetLogger = loggers.GetLogger
+GetNotify = loggers.GetNotify
 
 -- generally useful, oft imported utils
 Array = require 'toolbox.core.array'
