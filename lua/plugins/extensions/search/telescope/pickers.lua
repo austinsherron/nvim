@@ -71,7 +71,7 @@ end
 
 local function make_attachment_action()
   return ActionUtils.replace_default_action(
-    Safe:ify(make_search_package_files()),
+    Safe.ify(make_search_package_files()),
     make_keymap()
   )
 end

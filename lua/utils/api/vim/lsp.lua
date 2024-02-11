@@ -49,7 +49,7 @@ end
 
 local function run_lspsaga(cmd, ...)
   local fullcmd = lspsaga_cmd(cmd, ...)
-  Safe:call(vim.api.nvim_command, { prefix = 'Running Lspsaga cmd' }, fullcmd)
+  Safe.call(vim.api.nvim_command, { prefix = 'Running Lspsaga cmd' }, fullcmd)
 end
 
 --- Jumps to the previous diagnostic.
@@ -118,7 +118,7 @@ function Lsp.format(opts)
   opts = opts or {}
 
   LOGGER:debug('Running lsp formatting w/ opts=%s', { opts })
-  Safe:call(vim.lsp.buf.format, { prefix = 'LSP' }, opts)
+  Safe.call(vim.lsp.buf.format, { prefix = 'LSP' }, opts)
 end
 
 local function get_replace_arg(prompt)

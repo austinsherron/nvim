@@ -86,7 +86,7 @@ function PackageManager.install(lspconfig_name)
   local cmd = 'MasonInstall ' .. (package_name or lspconfig_name)
 
   LOGGER:info('Installing mason component=%s', { package_name })
-  Safe:call(vim.api.nvim_command, {}, cmd)
+  Safe.call(vim.api.nvim_command, {}, cmd)
 end
 
 return PackageManager

@@ -26,7 +26,7 @@ end
 UserCommand.new()
   :withName('Repl')
   :withCmd(
-    Safe:ify(function(...)
+    Safe.ify(function(...)
       start_lua_repl(...)
     end),
     '?'

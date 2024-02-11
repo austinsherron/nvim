@@ -48,7 +48,7 @@ local function wrap_cmd_if_necessary(cmd, ...)
     return cmd
   end
 
-  return Safe:ify(cmd, ...)
+  return Safe.ify(cmd, ...)
 end
 
 --- Adds cmd to instance.
