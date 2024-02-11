@@ -2,7 +2,6 @@ local File = require 'toolbox.system.file'
 local Path = require 'toolbox.system.path'
 local System = require 'utils.api.vim.system'
 
-local as_bool = require('toolbox.error.onerr').as_bool
 local enum = require('toolbox.extensions.enum').enum
 
 local LOGGER = GetLogger()
@@ -74,7 +73,7 @@ function Git.in_repo()
     return System.run 'git rev-parse --is-inside-work-tree'
   end
 
-  return (as_bool(fn))
+  return (OnErr.as_bool(fn))
 end
 
 ---@return string: the path to the root of the repo we're in currently

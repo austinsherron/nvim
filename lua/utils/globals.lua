@@ -21,8 +21,10 @@ Err = require 'toolbox.error.error'
 Set = require 'toolbox.extensions.set'
 Lazy = require 'toolbox.utils.lazy'
 Map = require 'toolbox.utils.map'
-OnErr = require 'utils.error.onerr'
-Safe = require 'utils.error.safe'
+
+-- error handling utils
+OnErr = require 'toolbox.error.onerr'
+Safe = require 'toolbox.error.safe'
 
 -- generally useful, oft imported util functions
 ternary = Bool.ternary
