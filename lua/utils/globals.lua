@@ -1,10 +1,10 @@
 ---@note: we want global functions w/ lowercased names
 ---@diagnostic disable: lowercase-global
 
--- logger factory and notification service
-
+-- nvim config object
 NvimConfig = require('toolbox.app.config').new 'nvim'
 
+-- logger factory and notification service
 local loggers = require 'utils.loggers'
 
 GetLogger = loggers.GetLogger

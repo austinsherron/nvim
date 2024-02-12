@@ -17,4 +17,5 @@ KM:with_hydra({ name = '🔍 Inspect', body = '<leader>I' })
     { 's', Inspect.session, { desc = 'current session' } },
     { 'h', Inspect.highlight, { desc = 'highlight groups' } },
     { 'g', Inspect.global, { desc = 'global variable' } },
+    { 'e', Inspect.env, { desc = 'env variable' } },
   })

@@ -1,4 +1,5 @@
 local Buffer = require 'utils.api.vim.buffer'
+local Env = require 'toolbox.system.env'
 local Interaction = require 'utils.api.vim.interaction'
 local Session = require 'utils.api.session'
 local System = require 'utils.api.vim.system'
@@ -139,6 +140,17 @@ function Inspect.global()
 
   local val = String.tostring(vim.g[name])
   GetNotify().info('%s=%s', { name, val }, { title = 'Global Variable' })
+end
+--- Displays the value of the env variable typed in the prompt.
+function Inspect.env()
+  local name, forcequit = Interaction.input('Env Variable', { required = true })
+
+  if forcequit == true then
+    return
+  end
+
+  local val = String.tostring(Env[name])
+  GetNotify().info('%s=%s', { name, val }, { title = 'Env Variable' })
 end
 
 return Inspect
