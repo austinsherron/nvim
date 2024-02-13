@@ -9,6 +9,7 @@ globals = {
   'vim.g',
   'vim.o',
   'vim.opt',
+  'hs',
   '_',
   -- internal global config entity
   'NvimConfig',
