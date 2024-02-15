@@ -5,17 +5,20 @@ read_globals = {
   'vim',
 }
 globals = {
-  -- external globals
+  ---- external globals
+  -- vim
   'vim.g',
   'vim.o',
   'vim.opt',
+  -- hammerspoon
+  'hs',
   '_',
-  -- internal global config entity
+  ---- internal global config entity
   'NvimConfig',
-  -- internal global logging utils
+  ---- internal global logging utils
   'GetLogger',
   'GetNotify',
-  -- internal global classes
+  ---- internal global classes
   'Array',
   'Bool',
   'Dict',
@@ -28,7 +31,7 @@ globals = {
   'Map',
   'OnErr',
   'Safe',
-  -- internal global functions
+  ---- internal global functions
   'filter',
   'fmt',
   'foreach',
