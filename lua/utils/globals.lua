@@ -5,7 +5,7 @@
 NvimConfig = require('toolbox.app.config').new 'nvim'
 
 -- logger factory and notification service
-local loggers = require 'utils.loggers'
+local loggers = require 'utils.reporting.loggers'
 
 GetLogger = loggers.GetLogger
 GetNotify = loggers.GetNotify
