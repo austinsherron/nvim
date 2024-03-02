@@ -72,5 +72,4 @@ end
 return {
   GetLogger = getLogger,
   GetNotify = getNotify,
-  Notify = require 'utils.reporting.notify'
 }
