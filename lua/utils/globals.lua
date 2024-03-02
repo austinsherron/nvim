@@ -10,7 +10,7 @@ local loggers = require 'utils.reporting.loggers'
 GetLogger = loggers.GetLogger
 -- GetNotify = loggers.GetNotify
 GetNotify = function()
-  return require 'utils.reporting.notify'
+  return loggers.Notify
 end
 
 -- generally useful, oft imported utils
