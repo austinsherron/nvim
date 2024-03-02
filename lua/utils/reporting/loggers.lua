@@ -1,4 +1,5 @@
 local Lazy = require 'toolbox.utils.lazy'
+local Notify = require 'utils.reporting.notify'
 
 local logger = Lazy.require 'utils.reporting.logger' ---@module 'utils.reporting.logger'
 
@@ -65,7 +66,7 @@ local function getLogger(label)
 end
 
 local function getNotify()
-  return getLogger().notify
+  return Notify
 end
 
 return {
