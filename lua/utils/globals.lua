@@ -9,9 +9,6 @@ local loggers = require 'utils.reporting.loggers'
 
 GetLogger = loggers.GetLogger
 GetNotify = loggers.GetNotify
--- GetNotify = function()
---   return loggers.Notify
--- end
 
 -- generally useful, oft imported utils
 Array = require 'toolbox.core.array'
