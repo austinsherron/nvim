@@ -8,7 +8,10 @@ NvimConfig = require 'utils.config'
 local loggers = require 'utils.reporting.loggers'
 
 GetLogger = loggers.GetLogger
-GetNotify = loggers.GetNotify
+-- GetNotify = loggers.GetNotify
+GetNotify = function()
+  return require 'utils.reporting.notify'
+end
 
 -- generally useful, oft imported utils
 Array = require 'toolbox.core.array'

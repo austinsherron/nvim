@@ -9,10 +9,6 @@ local Window = require 'utils.api.vim.window'
 local Collectors = Stream.Collectors
 local WindowBuffer = Window.WindowBuffer
 
-local function GetNotify()
-  return require 'utils.reporting.notify'
-end
-
 --- Contains utilities for inspecting nvim state.
 ---
 ---@class Inspect
