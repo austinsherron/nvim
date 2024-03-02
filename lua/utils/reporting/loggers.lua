@@ -69,8 +69,6 @@ local function getNotify()
   return Notify
 end
 
-getLogger():warn('notify=%s', require 'utils.reporting.notify')
-
 return {
   GetLogger = getLogger,
   GetNotify = getNotify,
