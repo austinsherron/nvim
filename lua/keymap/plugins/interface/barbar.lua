@@ -6,16 +6,18 @@ local KM = KeyMapper.new({ desc_prefix = 'buffers: ', nowait = true })
 
 -- sequential --
 
--- next
-KM:bind({
-  { '<leader>n', ':BufferNext<CR>', { desc = 'next' } },
-  { '<M-]>', ':BufferNext<CR>', { desc = 'next' } },
-})
-
 -- prev
 KM:bind({
   { '<leader>p', ':BufferPrevious<CR>', { desc = 'previous' } },
   { '<M-[>', ':BufferPrevious<CR>', { desc = 'previous' } },
+  { '<M-o>', ':BufferPrevious<CR>', { desc = 'previous' } },
+})
+
+-- next
+KM:bind({
+  { '<leader>n', ':BufferNext<CR>', { desc = 'next' } },
+  { '<M-]>', ':BufferNext<CR>', { desc = 'next' } },
+  { '<M-p>', ':BufferNext<CR>', { desc = 'next' } },
 })
 
 -- select --
@@ -49,7 +51,6 @@ KM:bind({
   { '<M-8>', ':BufferGoto 8<CR>', { desc = 'go to 8' } },
   { '<M-9>', ':BufferGoto 9<CR>', { desc = 'go to 9' } },
   { '<M-0>', ':BufferLast<CR>', { desc = 'go to last' } },
-  { '<M-p>', ':BufferPick<CR>', { desc = 'go to...' } },
 })
 
 -- core ops --------------------------------------------------------------------
