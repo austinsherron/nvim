@@ -51,7 +51,6 @@ KM:bind({
   { '<M-8>', ':BufferGoto 8<CR>', { desc = 'go to 8' } },
   { '<M-9>', ':BufferGoto 9<CR>', { desc = 'go to 9' } },
   { '<M-0>', ':BufferLast<CR>', { desc = 'go to last' } },
-  { '<M-p>', ':BufferPick<CR>', { desc = 'go to...' } },
 })
 
 -- core ops --------------------------------------------------------------------
