@@ -7,7 +7,7 @@ local PkgMgr = require 'utils.api.packagemgr'
 local Shell = require 'toolbox.system.shell'
 
 local LOGGER = GetLogger 'LSP'
-local SERVERS_PATH = Env.nvim_root() .. '/lua/lsp/servers'
+local SERVERS_PATH = Env.nvim_root_pub() .. '/lua/lsp/servers'
 
 local FORMATTERS = {
   go = { 'gci', 'gofumpt' },
