@@ -10,12 +10,14 @@ local KM = KeyMapper.new({ desc_prefix = 'buffers: ', nowait = true })
 KM:bind({
   { '<leader>n', ':BufferNext<CR>', { desc = 'next' } },
   { '<M-]>', ':BufferNext<CR>', { desc = 'next' } },
+  { '<M-;>', ':BufferNext<CR>', { desc = 'next' } },
 })
 
 -- prev
 KM:bind({
   { '<leader>p', ':BufferPrevious<CR>', { desc = 'previous' } },
   { '<M-[>', ':BufferPrevious<CR>', { desc = 'previous' } },
+  { '<M-l>', ':BufferPrevious<CR>', { desc = 'previous' } },
 })
 
 -- select --
