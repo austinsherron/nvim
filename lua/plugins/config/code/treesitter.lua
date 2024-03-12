@@ -69,6 +69,7 @@ function Treesitter.opts()
       'gosum',
       'hcl',
       'javascript',
+      'jq',
       'json',
       'lua',
       'markdown',
