@@ -28,6 +28,7 @@
 - [ ] Go
 - [ ] Java
 - [ ] JavaScript
+- [ ] Jq
 - [ ] Json
 - [ ] K8S Yaml
 - [ ] Terraform
