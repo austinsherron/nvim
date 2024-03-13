@@ -145,6 +145,17 @@ return Plugins('code', {
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
+  ---- ts-terraform-doc: open terraform docs w/ the help of treesitter
+  {
+    'Afourcat/treesitter-terraform-doc.nvim',
+    enabled = Treesitter.enabled(TsPlugin.TERRAFORM_DOC),
+    -- NOTE: not enough config to warrant a standalone file/class
+    opts = { command_name = 'TFDoc' },
+
+    config = function(_, opts)
+      require('treesitter-terraform-doc').setup(opts)
+    end,
+  },
   ---- TreeSJ: split/join semantic blocks of code
   {
     'Wansmer/treesj',
