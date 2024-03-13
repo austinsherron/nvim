@@ -10,6 +10,7 @@ local LuaSnip = require 'plugins.config.code.luasnip'
 local Mason = require 'plugins.config.code.mason'
 local Neodev = require 'plugins.config.code.neodev'
 local SymbolsOutline = require 'plugins.config.code.outline'
+local TFDoc = require 'plugins.config.code.tfdoc'
 local TreeSJ = require 'plugins.config.code.treesj'
 local Treesitter = require 'plugins.config.code.treesitter'
 
@@ -149,8 +150,7 @@ return Plugins('code', {
   {
     'Afourcat/treesitter-terraform-doc.nvim',
     enabled = Treesitter.enabled(TsPlugin.TERRAFORM_DOC),
-    -- NOTE: not enough config to warrant a standalone file/class
-    opts = { command_name = 'TFDoc' },
+    opts = TFDoc.opts(),
 
     config = function(_, opts)
       require('treesitter-terraform-doc').setup(opts)
