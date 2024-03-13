@@ -1,4 +1,6 @@
 local Env = require 'toolbox.system.env'
+local Path = require 'toolbox.system.path'
+local Shell = require 'toolbox.system.shell'
 
 --- Contains functions for configuring the project plugin.
 ---
@@ -7,24 +9,26 @@ local Project = {}
 
 local function known_exclusions()
   return {
-    -- TODO: update this path after re-adding nvim submodule to dotfiles repo
-    -- Env.editors_root() .. '/nvim', -- exclude nvim submodule
-    Env.external_pkgs() .. '/*', -- exclude external repos
-    Env.nvim_root_pub(), -- exclude "deployed" nvim
-    Env.nvundle() .. '/*', -- exclude plugins
-    Env.nvim_root_pub() .. '/packages/*', -- exclude "deployed" plugins
-    Env.tmux_bundle(), -- exclude tmux plugins
+    '^' .. Path.config(), -- exclude everything in config dir
+    '^' .. Env.dotfiles(), -- exclude dotfile submodules
+    '^' .. Env.external_pkgs(), -- exclude external repos
+    '^' .. Env.nvim_root(), -- exclude nvim plugins
   }
 end
 
-local function exclusions()
-  local exclude_dirs = known_exclusions()
-
-  if String.not_nil_or_empty(Env.work_root()) then
-    Array.append(exclude_dirs, Env.work_root() .. '/*/*')
+local function work_exclusions()
+  if String.nil_or_empty(Env.work_root()) then
+    return {}
   end
 
-  return exclude_dirs
+  -- ensure exclusion work project subdirs
+  return map(Shell.ls(Env.work_root()), function(project)
+    return '^' .. project
+  end)
+end
+
+local function exclusions()
+  return Array.concatenated(known_exclusions(), work_exclusions())
 end
 
 ---@return table: a table that contains configuration values for the project plugin
