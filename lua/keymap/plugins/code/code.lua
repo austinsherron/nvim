@@ -1,4 +1,5 @@
 local KeyMapper = require 'utils.core.mapper'
+local TFDoc = require 'plugins.config.code.tfdoc'
 local View = require 'utils.api.vim.view'
 
 local KM = KeyMapper.new({ nowait = true })
@@ -19,6 +20,14 @@ KM:with({ desc_prefix = 'mason: ' })
 
 KM:with({ desc_prefix = 'symbols-outline: ' })
   :bind({ { '<leader>2', ':SymbolsOutline<CR>', { desc = 'toggle sidebar' } } })
+  :done()
+
+-- tf-doc ---------------------------------------------------------------------
+
+KM:with({ desc_prefix = 'terraform doc: ' })
+  :bind({
+    { '<leader>tf', fmt(':%s<CR>', TFDoc.cmd_name()), { desc = 'open terraform docs' } },
+  })
   :done()
 
 -- treesj ---------------------------------------------------------------------

@@ -10,6 +10,7 @@ local LuaSnip = require 'plugins.config.code.luasnip'
 local Mason = require 'plugins.config.code.mason'
 local Neodev = require 'plugins.config.code.neodev'
 local SymbolsOutline = require 'plugins.config.code.outline'
+local TFDoc = require 'plugins.config.code.tfdoc'
 local TreeSJ = require 'plugins.config.code.treesj'
 local Treesitter = require 'plugins.config.code.treesitter'
 
@@ -143,6 +144,16 @@ return Plugins('code', {
 
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
+    end,
+  },
+  ---- ts-terraform-doc: open terraform docs w/ the help of treesitter
+  {
+    'Afourcat/treesitter-terraform-doc.nvim',
+    enabled = Treesitter.enabled(TsPlugin.TERRAFORM_DOC),
+    opts = TFDoc.opts(),
+
+    config = function(_, opts)
+      require('treesitter-terraform-doc').setup(opts)
     end,
   },
   ---- TreeSJ: split/join semantic blocks of code

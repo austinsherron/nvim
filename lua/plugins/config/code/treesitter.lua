@@ -11,6 +11,7 @@ local TreesitterPlugin = {
   NOICE = 'noice',
   PLAYGROUND = 'playground',
   SURROUND = 'surround',
+  TERRAFORM_DOC = 'terraform-doc',
   TS_RAINBOW = 'ts-rainbow2',
   TREESJ = 'treesj',
 }
@@ -25,6 +26,7 @@ local TS_PLUGIN_ENABLEMENT = {
   [TreesitterPlugin.NOICE] = true,
   [TreesitterPlugin.PLAYGROUND] = true,
   [TreesitterPlugin.SURROUND] = true,
+  [TreesitterPlugin.TERRAFORM_DOC] = true,
   [TreesitterPlugin.TREESJ] = true,
   [TreesitterPlugin.TS_RAINBOW] = true,
 }
