@@ -9,6 +9,8 @@ local Shell = require 'toolbox.system.shell'
 local LOGGER = GetLogger 'LSP'
 local SERVERS_PATH = Env.nvim_root_pub() .. '/lua/lsp/servers'
 
+local FILETYPE_ALIAS = { terraform = 'tf' }
+
 local FORMATTERS = {
   go = { 'gci', 'gofumpt' },
   lua = { 'stylua' },
@@ -57,6 +59,16 @@ function LspManager.formatters(namesonly)
   return get_components(FORMATTERS, namesonly)
 end
 
+--- Checks if lsp manager configures a lang specific formatter.
+---
+---@param lang string: the language to check
+---@return boolean: true if lsp manager configures a lang specific formatter, false
+--- otherwise
+function LspManager.has_formatter(lang)
+  lang = FILETYPE_ALIAS[lang] or lang
+  return FORMATTERS[lang] ~= nil
+end
+
 --- Gets the manifest of linters.
 ---
 ---@param namesonly boolean|nil: optional, defaults to false; if true, returns an array of
@@ -65,6 +77,15 @@ end
 --- of linter names, depending on the value of namesonly
 function LspManager.linters(namesonly)
   return get_components(LINTERS, namesonly)
+end
+
+--- Checks if lsp manager configures a lang specific linter.
+---
+---@param lang string: the language to check
+---@return boolean: true if lsp manager configures a lang specific linter, false otherwise
+function LspManager.has_linter(lang)
+  lang = FILETYPE_ALIAS[lang] or lang
+  return LINTERS[lang] ~= nil
 end
 
 local function get_config_for_server(lsp_server, capabilities)

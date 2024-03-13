@@ -1,4 +1,6 @@
+local Buffer = require 'utils.api.vim.buffer'
 local Interaction = require 'utils.api.vim.interaction'
+local LspManager = require 'lsp.manager'
 
 local LOGGER = GetLogger 'LSP'
 
@@ -10,6 +12,9 @@ local LOGGER = GetLogger 'LSP'
 ---@field async boolean|nil: optional, defaults to false; if true, formatting will run
 --- asynchronously
 ---@field bufnr integer|nil: optional, defaults to current buffer; the buffer to format
+---@field efm_backup boolean|nil: optional, defaults to true; if true and name == efm, run
+--- lsp formatting as backup if a language specific formatter isn't configured for the
+--- buffer's filetype
 
 --- Api wrapper for lsp related vim functionality.
 ---
@@ -110,12 +115,31 @@ function Lsp.code_action()
   run_lspsaga 'code_action'
 end
 
+local function handle_backup_formatting(opts)
+  if opts.efm_backup == false or opts.name ~= 'efm' then
+    return opts
+  end
+
+  local ft = Buffer.info(opts.bufnr).filetype
+
+  if ft == nil then
+    return opts
+  end
+
+  if not LspManager.has_formatter(ft) then
+    LOGGER:debug('falling back to default lsp formatting for ft=%s', { ft })
+    opts.name = nil
+  end
+
+  return opts
+end
+
 --- Formats the current buffer according to opts.
 ---
 ---@param opts LspFormatOpts|nil: optional; name specifies the lsp
 --- server to use to format; async == true will cause formatting to run asynchronously
 function Lsp.format(opts)
-  opts = opts or {}
+  opts = handle_backup_formatting(opts or {})
 
   LOGGER:debug('Running lsp formatting w/ opts=%s', { opts })
   Safe.call(vim.lsp.buf.format, { prefix = 'LSP' }, opts)
