@@ -1,5 +1,5 @@
 local Import = require 'toolbox.utils.import'
-local LspManager = require 'lsp.manager'
+local LspLibrary = require 'lsp.library'
 
 local LOGGER = GetLogger 'EFM'
 
@@ -43,8 +43,8 @@ local function make_component_config(components, type, configs)
 end
 
 local function make_langagues_block()
-  local configs = make_component_config(LspManager.formatters(), 'formatter')
-  return make_component_config(LspManager.linters(), 'linter', configs)
+  local configs = make_component_config(LspLibrary.formatters(), 'formatter')
+  return make_component_config(LspLibrary.linters(), 'linter', configs)
 end
 
 return {

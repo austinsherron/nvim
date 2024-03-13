@@ -1,6 +1,6 @@
 local Buffer = require 'utils.api.vim.buffer'
 local Interaction = require 'utils.api.vim.interaction'
-local LspManager = require 'lsp.manager'
+local LspLibrary = require 'lsp.library'
 
 local LOGGER = GetLogger 'LSP'
 
@@ -126,7 +126,7 @@ local function handle_backup_formatting(opts)
     return opts
   end
 
-  if not LspManager.has_formatter(ft) then
+  if not LspLibrary.has_formatter(ft) then
     LOGGER:debug('falling back to default lsp formatting for ft=%s', { ft })
     opts.name = nil
   end

@@ -1,4 +1,4 @@
-local LspManager = require 'lsp.manager'
+local LspLibrary = require 'lsp.library'
 
 --- Contains functions for configuring the mason plugin.
 ---
@@ -8,7 +8,7 @@ local Mason = {}
 ---@return table: a table that contains configuration values for the mason plugin
 function Mason.opts()
   return {
-    ensure_installed = LspManager.servers(),
+    ensure_installed = LspLibrary.servers(),
   }
 end
 

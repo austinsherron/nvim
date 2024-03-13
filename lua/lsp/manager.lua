@@ -1,92 +1,16 @@
-local Env = require 'toolbox.system.env'
 local Lambda = require 'toolbox.functional.lambda'
 local LspAC = require 'lsp.autocmds'
 local LspKM = require 'lsp.keymap'
-local Path = require 'toolbox.system.path'
+local LspLibrary = require 'lsp.library'
 local PkgMgr = require 'utils.api.packagemgr'
-local Shell = require 'toolbox.system.shell'
 
 local LOGGER = GetLogger 'LSP'
-local SERVERS_PATH = Env.nvim_root_pub() .. '/lua/lsp/servers'
-
-local FILETYPE_ALIAS = { terraform = 'tf' }
-
-local FORMATTERS = {
-  go = { 'gci', 'gofumpt' },
-  lua = { 'stylua' },
-  python = { 'black', 'isort' },
-  -- FIXME: not working the way I want it to
-  -- sh = { 'shfmt' },
-  -- TODO: no OOB efmls config
-  yaml = { 'yamlfmt' },
-}
-
-local LINTERS = {
-  go = { 'golangci-lint' },
-  lua = { 'luacheck' },
-  python = { 'pylint' },
-  sh = { 'shellharden' },
-  tf = { 'tflint' },
-  -- yaml = { 'yamllint' },
-}
 
 --- Entry point for configuration and management of neovim LSP servers, formatters, and
 --- linters.
 ---
 ---@class LspManager
 local LspManager = {}
-
----@return string[]: an array-like table w/ configured lsp servers
-function LspManager.servers()
-  return map(Shell.ls(SERVERS_PATH), Path.trim_extension)
-end
-
-local function get_components(components, namesonly)
-  if namesonly ~= true then
-    return components
-  end
-
-  return Stream.new(Table.values(components)):flatmap(Lambda.IDENTITY):collect()
-end
-
---- Gets the manifest of formatters.
----
----@param namesonly boolean|nil: optional, defaults to false; if true, returns an array of
---- formatter names instead of a map of languages -> formatters
----@return { [string]: string[] }|string[]: a map of languages to formatters, or an array
---- of formatter names, depending on the value of namesonly
-function LspManager.formatters(namesonly)
-  return get_components(FORMATTERS, namesonly)
-end
-
---- Checks if lsp manager configures a lang specific formatter.
----
----@param lang string: the language to check
----@return boolean: true if lsp manager configures a lang specific formatter, false
---- otherwise
-function LspManager.has_formatter(lang)
-  lang = FILETYPE_ALIAS[lang] or lang
-  return FORMATTERS[lang] ~= nil
-end
-
---- Gets the manifest of linters.
----
----@param namesonly boolean|nil: optional, defaults to false; if true, returns an array of
---- linter names instead of a map of languages -> linters
----@return { [string]: string[] }|string[]: a map of languages to linters, or an array
---- of linter names, depending on the value of namesonly
-function LspManager.linters(namesonly)
-  return get_components(LINTERS, namesonly)
-end
-
---- Checks if lsp manager configures a lang specific linter.
----
----@param lang string: the language to check
----@return boolean: true if lsp manager configures a lang specific linter, false otherwise
-function LspManager.has_linter(lang)
-  lang = FILETYPE_ALIAS[lang] or lang
-  return LINTERS[lang] ~= nil
-end
 
 local function get_config_for_server(lsp_server, capabilities)
   local server_conf = require('lsp.servers.' .. lsp_server)
@@ -120,9 +44,9 @@ function LspManager.install()
     return LOGGER:warn(msg)
   end
 
-  install_type(LspManager.servers(), 'lsp servers')
-  install_type(LspManager.formatters(true), 'formatters')
-  install_type(LspManager.linters(true), 'linters')
+  install_type(LspLibrary.servers(), 'lsp servers')
+  install_type(LspLibrary.formatters(true), 'formatters')
+  install_type(LspLibrary.linters(true), 'linters')
 end
 
 --- Entry point to LSP configuration.
@@ -130,7 +54,7 @@ function LspManager.init()
   local lspconfig = require 'lspconfig'
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  for _, server in ipairs(LspManager.servers()) do
+  for _, server in ipairs(LspLibrary.servers()) do
     local conf = get_config_for_server(server, capabilities)
     lspconfig[server].setup(conf)
 
