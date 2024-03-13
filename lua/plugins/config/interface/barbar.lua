@@ -8,7 +8,7 @@ function Barbar.opts()
   return {
     animation = true,
     clickable = false,
-    focus_on_close = 'previous',
+    focus_on_close = 'left',
     no_name_title = 'unnamed',
 
     icons = {
