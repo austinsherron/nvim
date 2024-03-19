@@ -44,13 +44,13 @@ return {
       hint = {
         enable = true,
         arrayIndex = 'Disable',
-        paramName = 'Disable',
+        paramName = 'All',
         paramType = true,
         semicolon = 'Disable',
         setType = false,
       },
       hover = {
-        expandAlias = false,
+        expandAlias = true,
       },
       runtime = {
         pathStrict = true,
