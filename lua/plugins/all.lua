@@ -1,6 +1,7 @@
 return {
   'kwkarlwang/bufresize.nvim',
   'catppuccin/nvim',
+  'eldritch-theme/eldritch-nvim',
   'projekt0n/github-nvim-theme',
   'rebelot/kanagawa.nvim',
   'marko-cerovac/material.nvim',
@@ -95,4 +96,3 @@ return {
   'ahmedkhalf/project.nvim',
   'tiagovla/scope.nvim',
 }
-

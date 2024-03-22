@@ -33,6 +33,7 @@ return Plugins('appearance', {
   ---- colorschemes: using a strongly typed wrapper to enforce consistent colorscheme
   ----               plugin attributes
   ColorScheme 'catppuccin/nvim',
+  ColorScheme 'eldritch-theme/eldritch-nvim',
   ColorScheme 'projekt0n/github-nvim-theme',
   ColorScheme 'rebelot/kanagawa.nvim',
   ColorScheme 'marko-cerovac/material.nvim',

@@ -15,14 +15,6 @@ Autocmd.new()
   :withOpt('command', 'setlocal formatoptions-=cro')
   :create()
 
--- TODO: fix this and add whatever else is necessary to add filetype dependent text wrap
--- and text width rules
-Autocmd.new()
-  :withDesc('Sets text width/wrap formatoptions')
-  :withEvent('BufEnter')
-  :withOpt('command', 'setlocal formatoptions-=t textwidth=90')
-  :create()
-
 Autocmd.new()
   :withDesc('Enables language specific color column')
   :withEvent('BufEnter')
