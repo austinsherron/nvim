@@ -21,7 +21,7 @@ local LINTERS = {
   go = { 'golangci-lint' },
   lua = { 'luacheck' },
   python = { 'pylint' },
-  sh = { 'shellharden' },
+  sh = { 'shellcheck', 'shellharden' },
   tf = { 'tflint' },
   -- yaml = { 'yamllint' },
 }
