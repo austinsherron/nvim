@@ -1,3 +1,4 @@
+local Interaction = require 'utils.api.vim.interaction'
 local KeyMapper = require 'utils.core.mapper'
 
 local KM = KeyMapper.new({ nowait = true })
@@ -10,17 +11,24 @@ local function diffview(cmd)
   end
 end
 
+local function stash()
+  return diffview 'FileHistory -g --range=stash@{0}'
+end
+
+local function something()
+  local todiff = Interaction.input('DiffviewOpen ', { default = '', nofmt = true })
+  return diffview('Open ' .. todiff)
+end
+
 KM:with({ desc_prefix = 'diffview: ' })
   :bind({
     { '<leader>dv', diffview 'Open', { desc = 'open diff/merge view' } },
     { '<leader>dx', diffview 'Close', { desc = 'close diff/merge view' } },
     { '<leader>dh', diffview 'FileHistory', { desc = 'show all history' } },
     { '<leader>df', diffview 'FileHistory %', { desc = 'show file history' } },
-    {
-      '<leader>dS',
-      diffview 'FileHistory -g --range=stash@{0}',
-      { desc = 'open stash diff' },
-    },
+    { '<leader>dm', diffview 'Open master', { desc = 'diff master' } },
+    { '<leader>dS', stash, { desc = 'diff stash@{0}' } },
+    { '<leader>dA', something, { desc = 'diff from user input' } },
   })
   :done()
 
