@@ -47,6 +47,10 @@ local function callinput(opts, custom)
 end
 
 local function make_prompt(prompt, custom)
+  if custom.nofmt == true then
+    return prompt
+  end
+
   local final_prompt = fmt('%s: ', String.capitalize(prompt))
 
   if String.nil_or_empty(custom.default) then
@@ -67,7 +71,7 @@ end
 ---@return string|nil: the user input string, or nil if it was empty/the user canceled
 ---@return boolean: true if the user canceled, false otherwise
 function Interaction.input(prompt, opts)
-  local custom, rest = Table.split(opts or {}, { 'required', 'default' })
+  local custom, rest = Table.split(opts or {}, { 'required', 'default', 'nofmt' })
   opts = Table.combine(rest, { prompt = make_prompt(prompt, custom) })
 
   local forcequit, input = callinput(opts, custom)
