@@ -16,7 +16,7 @@ local function stash()
 end
 
 local function something()
-  local todiff = Interaction.input('DiffviewOpen ', { default = '', nofmt = true })
+  local todiff, _ = Interaction.input('DiffviewOpen ', { default = '', nofmt = true })
   return diffview('Open ' .. todiff)
 end
 
