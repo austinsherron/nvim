@@ -27,8 +27,8 @@ KM:with({ desc_prefix = 'diffview: ' })
     { '<leader>dh', diffview 'FileHistory', { desc = 'show all history' } },
     { '<leader>df', diffview 'FileHistory %', { desc = 'show file history' } },
     { '<leader>dm', diffview 'Open master', { desc = 'diff master' } },
-    { '<leader>dS', stash, { desc = 'diff stash@{0}' } },
-    { '<leader>dA', something, { desc = 'diff from user input' } },
+    { '<leader>dS', stash(), { desc = 'diff stash@{0}' } },
+    { '<leader>dA', something(), { desc = 'diff from user input' } },
   })
   :done()
 
