@@ -16,8 +16,10 @@ local function stash()
 end
 
 local function something()
-  local todiff, _ = Interaction.input('DiffviewOpen ', { default = '', nofmt = true })
-  return diffview('Open ' .. todiff)
+  return function()
+    local todiff, _ = Interaction.input('DiffviewOpen ', { default = '', nofmt = true })
+    return diffview('Open ' .. todiff)()
+  end
 end
 
 KM:with({ desc_prefix = 'diffview: ' })
