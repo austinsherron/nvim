@@ -8,9 +8,11 @@ local function get_tmpl_ft(path, _)
 end
 
 ft.add({
+  filename = {
+    ['.chezmoiignore'] = 'gitignore',
+  },
   pattern = {
-    ['*gitconfig'] = 'gitconfig',
-    ['*gitignore'] = 'gitignore',
-    ['*.tmpl'] = get_tmpl_ft,
+    ['.*gitconfig'] = 'gitconfig',
+    ['.*.tmpl'] = get_tmpl_ft,
   },
 })
