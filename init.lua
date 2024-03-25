@@ -23,6 +23,7 @@ Safe.require 'core.cmd.user'
 
 Safe.require 'keymap'
 Safe.require 'core.settings'
+Safe.require 'core.filetypes'
 Safe.require 'core.appearance' -- colorscheme, etc.
 Safe.require 'lsp' -- language servers, debugger config,, etc.
 
