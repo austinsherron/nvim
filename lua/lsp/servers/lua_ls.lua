@@ -4,7 +4,7 @@ local LOGGER = GetLogger 'LUA_LS'
 
 local function get_internal_wkspace_lib()
   return {
-    Env.code_root() .. '/lib/lua',
+    Env.code_root() .. '/lua-tools/lua',
     Env.code_root() .. '/snippets/lua/',
     Env.config_root_pub() .. '/hammerspoon/Spoons/EmmyLua.spoon/annotations',
   }
