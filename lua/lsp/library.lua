@@ -20,6 +20,7 @@ local FORMATTERS = {
 local LINTERS = {
   go = { 'golangci-lint' },
   lua = { 'luacheck' },
+  make = { 'checkmake' },
   python = { 'pylint' },
   sh = { 'shellcheck', 'shellharden' },
   tf = { 'tflint' },
