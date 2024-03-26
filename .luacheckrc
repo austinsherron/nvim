@@ -1,24 +1,25 @@
-std = 'luajit'
+std = "luajit"
+
+self = false
+
+files["spec"].std = "+busted"
+
+files[".luacheckrc"].ignore = {"111", "112", "131"}
+
 max_line_length = 90
-read_globals = {
-  -- external globals
-  'vim',
-}
+
 globals = {
-  ---- external globals
-  -- vim
+  -- external globals
   'vim.g',
   'vim.o',
   'vim.opt',
-  -- hammerspoon
-  'hs',
-  '_',
-  ---- internal global config entity
+  'vim.filetype',
+  -- internal global config entity
   'NvimConfig',
-  ---- internal global logging utils
+  -- internal global logging utils
   'GetLogger',
   'GetNotify',
-  ---- internal global classes
+  -- internal global classes
   'Array',
   'Bool',
   'Dict',
@@ -31,10 +32,12 @@ globals = {
   'Map',
   'OnErr',
   'Safe',
-  ---- internal global functions
+  -- internal global functions
   'filter',
   'fmt',
   'foreach',
   'map',
   'ternary',
+  -- misc,
+  "-"
 }
