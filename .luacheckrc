@@ -1,10 +1,10 @@
-std = "luajit"
+std = 'luajit'
 
 self = false
 
-files["spec"].std = "+busted"
+files['spec'].std = '+busted'
 
-files[".luacheckrc"].ignore = {"111", "112", "131"}
+files['.luacheckrc'].ignore = { '111', '112', '131' }
 
 max_line_length = 90
 
@@ -12,6 +12,7 @@ globals = {
   -- external globals
   'vim.g',
   'vim.o',
+  'vim.api',
   'vim.opt',
   'vim.filetype',
   -- internal global config entity
@@ -39,5 +40,5 @@ globals = {
   'map',
   'ternary',
   -- misc,
-  "-"
+  '-',
 }
