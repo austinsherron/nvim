@@ -1,3 +1,4 @@
+local Editor = require 'utils.api.vim.editor'
 local KeyMapper = require 'utils.core.mapper'
 local View = require 'utils.api.vim.view'
 
@@ -9,10 +10,16 @@ local KM = KeyMapper.new({ desc_prefix = 'neorepl: ', nowait = true })
 
 -- interactions ----------------------------------------------------------------
 
+local function repl_cmd(view_mode)
+  view_mode = view_mode or Editor.window_aware_split().key
+  return fmt(':Repl %s<CR>', view_mode)
+end
+
 KM:bind({
-  { '<leader>rf', ':Repl e<CR>', { desc = 'open' } },
-  { '<leader>rh', ':Repl split<CR>', { desc = 'open in split' } },
-  { '<leader>rv', ':Repl vsplit<CR>', { desc = 'open in vsplit' } },
+  { '<leader>ro', repl_cmd(), { desc = 'open in split' } },
+  { '<leader>rf', repl_cmd 'e', { desc = 'open' } },
+  { '<leader>rh', repl_cmd 'vsplit', { desc = 'open in split' } },
+  { '<leader>rv', repl_cmd 'split', { desc = 'open in vsplit' } },
   { '<leader>rx', close, { desc = 'close' } },
 }):done()
 

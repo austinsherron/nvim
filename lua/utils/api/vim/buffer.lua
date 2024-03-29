@@ -12,11 +12,11 @@ local RESTORABLE_BUF_TYPES = Set.of('help', 'terminal')
 ---@enum ViewMode
 local ViewMode = enum({
   -- open buffer in vertical split (side-by-side)
-  VSPLIT = { i = 1, key = 'vsplit', label = 'vsplit', binding = 'v' },
+  VSPLIT = { i = 1, key = 'vsplit', label = 'vsplit', binding = 'v', new = 'vnew' },
   -- open buffer in split (over-under)
-  SPLIT = { i = 2, key = 'split', label = 'split', binding = 'h' },
+  SPLIT = { i = 2, key = 'split', label = 'split', binding = 'h', new = 'new' },
   -- open standalone buffer
-  STANDALONE = { i = 3, key = 'e', label = 'buffer', binding = 'f' },
+  STANDALONE = { i = 3, key = 'e', label = 'buffer', binding = 'f', new = 'enew' },
 }, 'STANDALONE')
 
 --- Buffer option keys (names). See :h help-buffer-options.

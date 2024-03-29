@@ -7,6 +7,7 @@ local Trouble = {}
 function Trouble.opts()
   return {
     position = 'bottom',
+    height = 20,
   }
 end
 

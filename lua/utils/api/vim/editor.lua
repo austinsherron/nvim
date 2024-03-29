@@ -1,4 +1,13 @@
+local Tmux = require 'toolbox.api.tmux'
+
 local enum = require('toolbox.extensions.enum').enum
+local ViewMode = require('utils.api.vim.buffer').ViewMode
+
+local VIEW_MODES_BY_DIMENSIONS = {
+  ['204x157'] = ViewMode.SPLIT,
+  ['214x57'] = ViewMode.VSPLIT,
+  ['428x102'] = ViewMode.VSPLIT,
+}
 
 --- Represents different "locations" to which text can be copied.
 ---
@@ -67,6 +76,25 @@ end
 function Editor.copy(text, register)
   register = register or Register.UNNAMED_PLUS
   return vim.fn.setreg(register, text) == 0
+end
+
+--- Gets the view mode associated w/ the current window's dimensions. If no such
+--- association exists, the provided default is returned. If no default is provided, the
+--- default view mode is returned.
+---
+--- WARN: this function uses tmux to get the current window's dimensions. If tmux isn't
+--- running, it won't work as intended.
+---
+---@param default string|ViewMode|nil: optional; the view mode/key of the view mode to
+--- return if there's no view mode associated w/ the current window's dimensions
+---@return ViewMode: the view mode associated w/ the current window's dimensions, if any
+function Editor.window_aware_split(default)
+  default = default or ViewMode:get_default()
+
+  local window_dims = tostring(Tmux.window_dimensions())
+  local view_mode_for_dims = VIEW_MODES_BY_DIMENSIONS[window_dims]
+
+  return view_mode_for_dims or default
 end
 
 return Editor
