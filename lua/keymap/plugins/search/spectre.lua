@@ -6,6 +6,8 @@ local ViewMode = require('utils.api.vim.buffer').ViewMode
 
 local spectre = Lazy.require 'spectre' ---@module 'spectre'
 
+local LOGGER = GetLogger 'KEYMAP'
+
 local KM = KeyMapper.new({
   desc_prefix = 'spectre: ',
   nowait = true,
@@ -31,6 +33,8 @@ local function open(cmd, select_word)
   else
     Err.raise('unrecognized spectre cmd: %s', cmd)
   end
+
+  LOGGER:debug('spectre cmd=%s, view_mode=%s', { cmd, view_mode })
 
   return function()
     --- NOTE: admittedly a hack to change opening position
