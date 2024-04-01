@@ -23,7 +23,7 @@ local function open(cmd, select_word)
   local view_mode
 
   if String.is(cmd) or cmd == nil then
-    view_mode = Editor.window_aware_split()
+    view_mode = Editor.window_aware_split().new
   elseif Type.is(cmd, ViewMode) then
     view_mode = cmd.new
     cmd = view_mode
