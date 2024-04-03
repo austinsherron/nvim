@@ -24,17 +24,33 @@ local ORDER = {
 ---@note: reference ':h cmp-config.sources' for field descriptions
 ---
 ---@class CmpSrc
+---@field private setup { name: string, config: table }|nil
 local CmpSrc = {}
 CmpSrc.__index = CmpSrc
 
-function CmpSrc.new(name, label, trigger_length, options)
+function CmpSrc.new(name, label, trigger_length, options, setup)
   return setmetatable({
     name = name,
     label = label,
     group_index = Array.indexof(ORDER, name),
     trigger_length = trigger_length,
     option = options,
+    setup = setup,
   }, CmpSrc)
+end
+
+---@private
+function CmpSrc:setup_if_necessary()
+  if self.setup == nil then
+    return
+  end
+
+  local name = self.setup.name
+  local config = self.setup.config or {}
+
+  LOGGER:trace('Calling setup for src=%s w/ config=%s', { name, config })
+
+  require(name).setup(config)
 end
 
 --- Custom call metamethod that uses the instance to construct a "source" table in the
@@ -43,11 +59,12 @@ end
 ---@return table: a "source" table in the format expected by cmp
 function CmpSrc:__call()
   -- label isn't needed (or expected) here
-  local config = Table.pick_out(self, Set.only 'label')
+  local config = Table.pick_out(self, Set.of('label', 'setup'))
   -- hard coding this for now
   config.max_item_count = 5
 
   LOGGER:trace('Configuring src=%s, config=%s', { config.name, config })
+  self:setup_if_necessary()
 
   return config
 end
@@ -67,6 +84,7 @@ local Source = {
   CONVCOMMITS = CmpSrc.new('conventionalcommits', '[CC]', 2),
   DICTIONARY = CmpSrc.new('dictionary', '[Dict]', 3),
   EMOJI = CmpSrc.new('emoji', '[Emoji]', 1),
+  GIT = CmpSrc.new('git', '[Git]', 1, nil, { name = 'cmp_git' }),
   LSP = CmpSrc.new('nvim_lsp', '[LSP]', 1),
   LSP_SIGNATURE = CmpSrc.new('nvim_lsp_signature_help', '[Sig]', 1),
   LUASNIP = CmpSrc.new('luasnip', '[LuaSnip]', 1),
@@ -107,6 +125,7 @@ end
 ---@return table[]: configuration for sources used in git commits
 function Src.for_gitcommit()
   return {
+    Source.GIT(),
     Source.PATH(),
     Source.BUFFER(),
     Source.NVIM_LUA(),

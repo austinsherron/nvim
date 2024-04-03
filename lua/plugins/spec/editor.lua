@@ -59,7 +59,7 @@ return Plugins('editor', {
     'davidsierradz/cmp-conventionalcommits',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
-  ---- cmp-dictionary: fuzzy completion words in dictionary
+  ---- cmp-dictionary: fuzzy completion of words in dictionary
   {
     'uga-rosa/cmp-dictionary',
     dependencies = { 'hrsh7th/nvim-cmp' },
@@ -69,12 +69,18 @@ return Plugins('editor', {
     'hrsh7th/cmp-emoji',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
+  ---- cmp-git: fuzzy completions from git + github + gitlab
+  {
+    'petertriho/cmp-git',
+    dependencies = { 'hrsh7th/nvim-cmp' },
+  },
   ---- cmp-lsp: fuzzy completion based on available lsp servers
   {
     'hrsh7th/cmp-nvim-lsp',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
-  ---- cmp-lsp-signature-help: displays function signature hover-help during relevant completion events
+  ---- cmp-lsp-signature-help: displays function signature hover-help during relevant
+  ---- completion events
   {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     dependencies = { 'hrsh7th/nvim-cmp' },
@@ -123,7 +129,8 @@ return Plugins('editor', {
 
     config = Indent.config,
   },
-  ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
+  ---- rainbow delimiters: make delimiter pairs more obvious using the power of the
+  ---- rainbow! 🌈
   {
     'HiPhish/nvim-ts-rainbow2',
     enabled = Treesitter.enabled(TsPlugin.TS_RAINBOW),
@@ -141,8 +148,10 @@ return Plugins('editor', {
       require('nvim-surround').setup()
     end,
   },
-  ---- treesitter-endwise: automatically close various semantic structures, i.e.: if-then-end, etc.
-  ---- TODO: doesn't work at the moment (08/25/2023, after "fixing" treesitter highlight issue)
+  ---- treesitter-endwise: automatically close various semantic structures, i.e.:
+  ---- if-then-end, etc.
+  ---- TODO: doesn't work at the moment (08/25/2023, after "fixing" treesitter highlight
+  ---- issue)
   {
     'RRethy/nvim-treesitter-endwise',
     enabled = Treesitter.enabled(TsPlugin.ENDWISE),
