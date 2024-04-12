@@ -21,7 +21,8 @@ local LINTERS = {
   go = { 'golangci-lint' },
   lua = { 'luacheck' },
   make = { 'checkmake' },
-  python = { 'pylint' },
+  -- FIXME: way to strict, need to configure
+  -- python = { 'pylint' },
   sh = { 'shellcheck', 'shellharden' },
   tf = { 'tflint' },
   -- yaml = { 'yamllint' },
