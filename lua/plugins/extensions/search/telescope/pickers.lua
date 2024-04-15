@@ -92,7 +92,7 @@ end
 
 function Pickers.search_hammerspoon_docs()
   local hs_docs_path = Path.config 'hammerspoon' .. '/Spoons/EmmyLua.spoon/annotations'
-  local find_command = { 'find', hs_docs_path, '-maxdepth', '1', '-type', 'd' }
+  local find_command = { 'find', hs_docs_path, '-maxdepth', '1', '-type', 'f' }
 
   builtins.find_files({
     attach_mappings = make_attachment_action(),
