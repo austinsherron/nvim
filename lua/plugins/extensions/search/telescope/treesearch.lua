@@ -85,4 +85,15 @@ function TreeSearch.contextual_live_grep(opts)
   return TreeSearch.do_contextual_search(builtins.live_grep, 'Live Grep', opts)
 end
 
+--- Same as Telescope.contextual_live_grep but includes all hidden files in the search.
+---
+---@see telescope.builtins.live_grep
+function TreeSearch.contextual_live_grep_all_files()
+  return TreeSearch.do_contextual_search(
+    builtins.live_grep,
+    'Live Grep (All Files)',
+    ActionUtils.Constants.FIND_ALL_FILES_OPTS
+  )
+end
+
 return TreeSearch

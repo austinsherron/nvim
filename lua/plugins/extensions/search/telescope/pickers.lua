@@ -90,4 +90,18 @@ function Pickers.search_packages()
   })
 end
 
+function Pickers.search_hammerspoon_docs()
+  local hs_docs_path = Path.config 'hammerspoon' .. '/spoons/EmmyLua.spoon/annotations'
+  local find_command = { 'find', hs_docs_path, '-maxdepth', '1', '-type', 'd' }
+
+  builtins.find_files({
+    attach_mappings = make_attachment_action(),
+    find_command = find_command,
+    path_display = function(_, path)
+      return Path.basename(path)
+    end,
+    prompt_title = 'Search Plugins',
+  })
+end
+
 return Pickers

@@ -40,6 +40,7 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 'gc', Builtins.git_bcommits, { desc = 'search git commits' } },
     { 'gs', Builtins.git_stash, { desc = 'search git stashes' } },
     { 'h', Builtins.help_tags, { desc = 'search help tags' } },
+    { 'H', Pickers.search_hammerspoon_docs, { desc = 'search hammerspoon docs' } },
     { 'm', Builtins.man_pages, { desc = 'search man pages' } },
     { 'N', Pickers.search_packages, { desc = 'search plugin files' } },
     { 'n', make_tscope_cmd 'notify', { desc = 'search notification history' } },
@@ -50,6 +51,7 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 't', make_tscope_cmd('TodoTelescope', true), { desc = 'search todo comments' } },
     { 'u', make_tscope_cmd 'undo', { desc = 'search undo history' } },
     { 'w', Builtins.live_grep, { desc = 'find words' } },
+    { 'W', TreeSearch.contextual_find_all_files, { desc = 'find words (in all files)' } },
     { 'y', make_tscope_cmd 'yaml_schema', { desc = 'find yaml schemas' } },
     { 'z', make_tscope_cmd 'zoxide list', { desc = 'find zoxide dirs' } },
   })
