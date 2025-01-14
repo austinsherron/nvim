@@ -28,7 +28,7 @@ local TS_PLUGIN_ENABLEMENT = {
   [TreesitterPlugin.SURROUND] = true,
   [TreesitterPlugin.TERRAFORM_DOC] = true,
   [TreesitterPlugin.TREESJ] = true,
-  [TreesitterPlugin.TS_RAINBOW] = true,
+  -- [TreesitterPlugin.TS_RAINBOW] = true,
 }
 
 local TS_ENABLED = true
