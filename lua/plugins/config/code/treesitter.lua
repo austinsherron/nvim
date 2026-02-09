@@ -9,10 +9,9 @@ local TreesitterPlugin = {
   NEOGEN = 'neogen',
   NEOTEST = 'neotest',
   NOICE = 'noice',
-  PLAYGROUND = 'playground',
   SURROUND = 'surround',
   TERRAFORM_DOC = 'terraform-doc',
-  TS_RAINBOW = 'ts-rainbow2',
+  TS_RAINBOW = 'rainbow-delimiters.nvim',
   TREESJ = 'treesj',
 }
 
@@ -24,7 +23,6 @@ local TS_PLUGIN_ENABLEMENT = {
   [TreesitterPlugin.NEOGEN] = true,
   [TreesitterPlugin.NEOTEST] = true,
   [TreesitterPlugin.NOICE] = true,
-  [TreesitterPlugin.PLAYGROUND] = true,
   [TreesitterPlugin.SURROUND] = true,
   [TreesitterPlugin.TERRAFORM_DOC] = true,
   [TreesitterPlugin.TREESJ] = true,

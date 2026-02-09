@@ -125,7 +125,7 @@ return Plugins('editor', {
   },
   ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
   {
-    'HiPhish/nvim-ts-rainbow2',
+    'HiPhish/rainbow-delimiters.nvim',
     enabled = Treesitter.enabled(TsPlugin.TS_RAINBOW),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
@@ -148,11 +148,5 @@ return Plugins('editor', {
     enabled = Treesitter.enabled(TsPlugin.ENDWISE),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event = 'InsertEnter',
-  },
-  ---- treesitter-playground: view treesitter functional info in nvim
-  {
-    'nvim-treesitter/playground',
-    enabled = Treesitter.enabled(TsPlugin.PLAYGROUND),
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 })
