@@ -25,10 +25,10 @@ o.spellfile = vim.fn.stdpath 'config' .. '/spell/en.utf-8.add'
 
 ---- indent settings -----------------------------------------------------------
 
-o.ai = true -- keep indentation from previous line
-o.autoindent = true -- need to set this and above?
-o.si = true -- smart indent
-o.smartlindent = true -- must set both this and above
+o.ai = true          -- keep indentation from previous line
+o.autoindent = true  -- need to set this and above?
+o.si = true          -- smart indent
+o.smartindent = true -- must set both this and above
 
 -- tabs as spaces; default tab size = 4
 o.expandtab = true
@@ -39,7 +39,7 @@ o.tabstop = o.shiftwidth
 ---- search settings -----------------------------------------------------------
 
 o.incsearch = true
-o.hlseach = true
+o.hlsearch = true
 o.ignorecase = true
 o.smartcase = true
 
@@ -48,7 +48,7 @@ o.smartcase = true
 o.showbreak = '↪ ' -- show at line break
 o.scrolloff = 7 -- min 7 lines around cursor
 o.termguicolors = true -- enable truecolor
-o.nu = true -- line numbers
+o.number = true -- line numbers
 o.signcolumn = 'yes' -- display the sign column
 o.cursorline = true -- show the cursor line
 o.linebreak = true -- visually break lines at max width
@@ -59,15 +59,15 @@ opt.listchars = { ['tab'] = '>.', ['trail'] = '.', ['nbsp'] = '‸' }
 
 ---- functional settings -------------------------------------------------------
 
-o.hidden = true -- hide, don't dump, buffers when switching
+o.hidden = true                             -- hide, don't dump, buffers when switching
 opt.completeopt = { 'menuone', 'noselect' } -- preview menu options for auto-completion
-o.report = 0 -- min lines changed to report # lines changed
+o.report = 0                                -- min lines changed to report # lines changed
 
 -- show diffs in vertical splits by default
 opt.diffopt:append({ 'vertical' })
 
 -- recovery files
-o.undofile = true -- enable undo history
+o.undofile = true  -- enable undo history
 o.swapfile = false -- disable swap files
 
 -- ignore certain files when opening buffers from inside neovim
