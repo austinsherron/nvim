@@ -31,10 +31,10 @@ function Interface.set_highlight(highlight, opts)
 end
 
 local DIAGNOSTIC_SIGNS = {
-  { name = 'DiagnosticSignError', icon = '' },
-  { name = 'DiagnosticSignWarn', icon = '' },
-  { name = 'DiagnosticSignHint', icon = '' },
-  { name = 'DiagnosticSignInfo', icon = '' },
+  [vim.diagnostic.severity.ERROR] = '',
+  [vim.diagnostic.severity.WARN] = '',
+  [vim.diagnostic.severity.HINT] = '',
+  [vim.diagnostic.severity.INFO] = '',
 }
 
 local HIGHLIGHTS = {
@@ -71,21 +71,12 @@ local HIGHLIGHTS = {
   Highlight.new('@variable.member'):foreground(Colors.SRCERY_BRIGHT_MAGENTA),
 }
 
---- Registers the provided sign w/ nvim.
----
----@param sign { name: string, icon: string }: the sign to register
-function Interface.define_sign(sign)
-  vim.fn.sign_define(sign.name, {
-    texthl = sign.name,
-    text = sign.icon,
-    numhl = '',
-  })
-end
-
 --- Initializes interface customizations.
 function Interface.init()
   -- custom diagnostic signs
-  foreach(DIAGNOSTIC_SIGNS, Interface.define_sign)
+  vim.diagnostic.config({
+    signs = { text = DIAGNOSTIC_SIGNS },
+  })
   -- custom highlights
   foreach(HIGHLIGHTS, function(hl)
     Interface.set_highlight(hl)

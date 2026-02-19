@@ -22,7 +22,7 @@ Autocmd.new()
 
 Autocmd.new()
   :withDesc('Detaches colorizer from buffer on leave')
-  :withEvent('BufEnter')
+  :withEvent('BufLeave')
   :withCallback(function(ev)
     colorizer.detach_from_buffer(ev.buf)
   end)

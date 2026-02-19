@@ -55,10 +55,12 @@ end
 local function make_hint_opts(position, cols)
   return function()
     return {
-      border = 'rounded',
       fmttr = make_fmt(cols),
       position = position,
       type = 'window',
+      float_opts = {
+        border = 'rounded',
+      },
     }
   end
 end

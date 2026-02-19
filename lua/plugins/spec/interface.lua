@@ -59,7 +59,7 @@ return Plugins('interface', {
   ---- hydra: custom shortcut repetitions, sub-modes, and sub-menus
   ---- TODO: continue to convert specific key binding groups to hydra menus (i.e.: git,
   ----       lsp, misc tools, etc.)
-  { 'anuvyklack/hydra.nvim' },
+  { 'nvimtools/hydra.nvim' },
   ---- lualine: status line; TODO: customize
   {
     'nvim-lualine/lualine.nvim',

@@ -1,4 +1,3 @@
-
 # To-Do Lists
 
 ## To-Do
@@ -6,11 +5,11 @@
 ### Plugins/Tooling
 
 - [x] Auto-completion (revisit for advanced configuration)
-    - [ ] `cmp-conventionalcommits`
-    - [ ] `cmp-dictionary`
+  - [ ] `cmp-conventionalcommits`
+  - [ ] `cmp-dictionary`
 - [ ] Auto-correction of diagnostics/linting errors
 - [ ] Auto-imports
-- [ ] Case Changer (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
+- [ ] Case Changer (i.e.: CamelCaseEr, snake\_case\_er, Title-Er, UPPERER, lowerer, etc.er)
 - [ ] Code actions
 - [ ] Debugger
 - [ ] File templates
@@ -18,9 +17,11 @@
 - [ ] Refactoring
 - [ ] Snippets
 - [ ] Unit test integrations
-    - [x] Ability to run from nvim
-    - [ ] Ability to view/act on results
-    - [ ] Ability to debug and step through execution
+  - [x] Ability to run from nvim
+  - [ ] Ability to view/act on results
+  - [ ] Ability to debug and step through execution
+- [ ] Replace simrat39/symbols-outline.nvim w/ hedyhli/outline.nvim (plugins/spec/code.lua)
+- [ ] Replace folke/neodev.nvim w/ folke/lazydev.nvim (if needed) (plugins/spec/code.lua)
 
 ### LSP Support
 
@@ -72,7 +73,7 @@
 - [ ] Disable cmdline auto-completion for specific commands (ls, for example)
 - [ ] Barbar shouldn't reopen non-editable/help buffers (i.e.: nvimtree, diffview, side panel, etc.)
 - [ ] Bufresize should ignore certain window types (i.e.: nvimtree, diffview, side panel, etc.)
-- [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my "on_bind" global imports...?)
+- [ ] Figure out why neorepl doesn't always seem to have the latest version of code, even when I stop/start nvim (maybe due to my `on_bind` global imports...?)
 - [ ] Fix snippet loading
 - [ ] Fix statusline crowding in specific utility buffers (i.e.: nvimtree, diffview file tree, probably others)
 - [ ] Editorconfig line length constraints aren't being enforced
@@ -88,14 +89,14 @@
 #### Refactor
 
 - [ ] Change parameter position, or otherwise change parameters
-    - [ ] Update docs
-    - [ ] Update call sites
+  - [ ] Update docs
+  - [ ] Update call sites
 - [ ] Make function, method, field, etc public/private/package/protected
-    - [ ] For lua, convert function to/from local
+  - [ ] For lua, convert function to/from local
 - [ ] Easily wrap values in function calls/or arbitrary braces
 - [ ] Easily move functions/methods w/in a file
 - [ ] Moving files w/ path dependent imports changes imports
-- [ ] Change case style (i.e.: CamelCaseEr, snake_case_er, Title-Er, UPPERER, lowerer, etc.er)
+- [ ] Change case style (i.e.: CamelCaseEr, snake\_case\_er, Title-Er, UPPERER, lowerer, etc.er)
 - [ ] Auto-fill completed function params
 - [ ] Deleting a control structure and automatically reindenting interior code
 - [ ] Remove control structure, i.e.: remove loops/if statements/etc, fix indentation/formatting of code contained therein
@@ -110,24 +111,24 @@ Menu in file-explorer (i.e.: nvim-tree) that allows you to choose specific kinds
   - [ ] shell (i.e.: bash)
 - [ ] New lang specific folder structure
   - [ ] Python project (i.e.: w/ project.toml)
-  - [ ] Python module (i.e.: w/ __init__.py)
+  - [ ] Python module (i.e.: w/ **init**.py)
 - [ ] Create missing function/method/var, etc.
 
 #### Buffer/Tab Interaction Feature
 
 - [ ] Pretty status/interaction menu consisting of
-    - [ ] Tabs
-    - [ ] Buffers, grouped by tabs if possible
+  - [ ] Tabs
+  - [ ] Buffers, grouped by tabs if possible
 - [ ] Interactions include
-    - [ ] Navigating to tab
-    - [ ] Navigating to buffer
-    - [ ] Opening/creating tabs
-    - [ ] Opening/creating buffers
-    - [ ] Closing/deleting tabs
-    - [ ] Closing/deleting buffers
-    - [ ] Renaming tabs
-    - [ ] Moving tabs?
-    - [ ] Moving/regrouping buffers?
+  - [ ] Navigating to tab
+  - [ ] Navigating to buffer
+  - [ ] Opening/creating tabs
+  - [ ] Opening/creating buffers
+  - [ ] Closing/deleting tabs
+  - [ ] Closing/deleting buffers
+  - [ ] Renaming tabs
+  - [ ] Moving tabs?
+  - [ ] Moving/regrouping buffers?
 
 #### Inspection Menu
 
@@ -185,7 +186,7 @@ Hydra menu w/ that enables contextual inspections, including:
 #### Won't Do
 
 - [x] Tag generator, viewer, and associated plugins
-    - [x] Generator - gutentags
+  - [x] Generator - gutentags
 
 ### LSP Support
 
@@ -232,7 +233,7 @@ Hydra menu w/ that enables contextual inspections, including:
 
 - [x] !!! Diagnose and fix Treesitter issues (see fb465783acaa09ac0f8c1ab07eac6e22948f8ea3 for resolution notes)
 - [x] Figure out why tabs.lua isn't being read from keymap/, then move from keymap/plugins -> keymap/ (ended up being an issues w/ the way "require paths" were being constructed for recursive calls)
-- [x] Fix lua_ls workspace configuration prompt
+- [x] Fix `lua_ls` workspace configuration prompt
 - [x] Fix leap.nvim repeat functionality (didn't really fix this, but have opted, at least for the moment, to use flash.nvim, instead of leap, as my primary motion plugin)
 - [x] DiffviewClose doesn't consistently close all diffview buffers/windows (the issue ended up being a usability problem really: it's possible for multiple diffview menus to open, and it's not always obvious what's happening when sequentially closing them)
 - [x] Auto-session has issues saving/restoring "special" (maybe literally?) buffers, i.e.: nvim-tree, undotree (presumably), diffview, etc.... (ended up sticking w/ existing session manager plugin)
@@ -244,7 +245,7 @@ Hydra menu w/ that enables contextual inspections, including:
 - [x] nvimtree won't toggle hidden files (can't ever see/interact w/ them)
 - [x] Nvim is complaining that the Lua LSP isn't installed (used mason to install)
 - [x] Something seems to be wrong w/ treesitter plugin setup (opts is nil?) (I think this has been addressed; will know when next update is pushed)
-- [x] Fix gitsigns on_attach (doesn't seem to be getting bound/called)
+- [x] Fix gitsigns `on_attach` (doesn't seem to be getting bound/called)
 - [x] Add more words/better dictionaries ("suggest word(s)" action never actually suggests anything) (ended up being a misconfiguration: spell suggest setting shouldn't have been an int)
 - [x] Update lua files/packages that export functions to encapsulate them in tables
 - [x] Figure out why, even after changing the supposedly relevant vim configs., adding a new line from a comment, above or below the commented line, continues the comment
@@ -261,7 +262,6 @@ Hydra menu w/ that enables contextual inspections, including:
 #### Won't Do
 
 - [x] Figure out auto-session <-> lualine integration issues, i.e.: can't import auto-session.lib (or auto-session at all, really)
-    - [x] I no longer use auto-session (at least for the time being)
+  - [x] I no longer use auto-session (at least for the time being)
 
 ### Ideas
-

@@ -74,16 +74,6 @@ return Plugins('code', {
       require('mason-lspconfig').setup(opts)
     end,
   },
-  ---- neodev: make lsp aware of (n)vim apis and plugins
-  {
-    'folke/neodev.nvim',
-    dependencies = 'neovim/nvim-lspconfig',
-    opts = Neodev.opts(),
-
-    config = function(_, opts)
-      require('neodev').setup(opts)
-    end,
-  },
   ---- nvim lsp-config: makes it easier to configure nvim's built in lsp (code semantics)
   {
     'neovim/nvim-lspconfig',
@@ -123,15 +113,16 @@ return Plugins('code', {
     'python-rope/ropevim',
     enabled = false,
   },
+  ---- TODO: replace w/ hedyhli/outline.nvim
   ---- symbols-outline: code outline using lsp
-  {
-    'simrat39/symbols-outline.nvim',
-    opts = SymbolsOutline.opts(),
-
-    config = function(_, opts)
-      require('symbols-outline').setup(opts)
-    end,
-  },
+  -- {
+  --   'simrat39/symbols-outline.nvim',
+  --   opts = SymbolsOutline.opts(),
+  --
+  --   config = function(_, opts)
+  --     require('symbols-outline').setup(opts)
+  --   end,
+  -- },
   ---- treesitter: parser that integrates w/ all kinds of things (i.e.: adds hls, etc.)
   {
     'nvim-treesitter/nvim-treesitter',
