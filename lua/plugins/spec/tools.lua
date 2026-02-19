@@ -57,7 +57,7 @@ return Plugins('tools', {
   ---- markdown preview: for previewing markdown documents 🤔
   {
     'iamcco/markdown-preview.nvim',
-    build = 'cd app && yarn install',
+    build = 'cd app && npm install',
   },
   ---- neogen: docstring generation
   {

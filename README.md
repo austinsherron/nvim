@@ -1,15 +1,9 @@
 # Neovim
 
-I'm a longtime vim user, recent nvim convert. I'm having a lot of fun (and probably spending too much time 😅) diving into the ecosystem and crafting
-my setup. My goal is to move from IntelliJ to an nvim based, "home-baked" IDE. My current big ticket items are:
+I'm a longtime vim user, nvim convert. I'm having a lot of fun (and probably spending too much time) diving into the ecosystem and crafting my setup.
 
-- [x] Trying to find a file browser that feels right, or that I can hack easily enough to feel natural
-- [x] Getting the bare bones pickers there and natural feeling
 - [ ] Setting up LSP related functionality, including: auto-completion, assisted refactoring, various "jump-to"/find commands, etc.
-- [x] Tightening up git integration; I've installed [diffview.nvim](https://github.com/sindrets/diffview.nvim) and [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), but I need to further configure them. [Neogit](https://github.com/TimUntersberger/neogit) seems promising, for filling in some functional gaps, so I think I'll install that next (ended up installing all of these, but am most happy w/ [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim), highly recommended!)
-- [ ] Installing and incorporating into my workflows one of the many snippets engines out there. I haven't made much use of snippets in the past, so this will be something a bit new for me.
-
-There are definitely more, but this README, like my nvim journey in general, is a work in progress!
+- [ ] Setting up AI/agent related functionality
 
 ## Plugin Organization
 
@@ -59,10 +53,4 @@ I organize my plugins into the following categories:
 
 44 directories
 ```
-
-## Fresh Install Instructions
-
-- [ ] If there are no packages, the init file will load them all before doing anything else
-- [ ] Exit neovim and source ~/.bashrc
-- [ ] On next startup, things should be more or less functional
 

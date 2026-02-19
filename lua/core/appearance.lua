@@ -1,6 +1,6 @@
 -- colorscheme -----------------------------------------------------------------
 
-vim.cmd.colorscheme 'srcery'
+vim.cmd.colorscheme 'material-darker'
 
 -- vim interface customizations  -----------------------------------------------
 
