@@ -1,18 +1,21 @@
---- Contains functions for configuring the symbols-outline plugin.
+--- Contains functions for configuring the outline plugin.
 ---
----@class SymbolsOutline
-local SymbolsOutline = {}
+---@class Outline
+local Outline = {}
 
----@return table: a table that contains configuration values for the symbols-outline
---- plugin
-function SymbolsOutline.opts()
+---@return table: a table that contains configuration values for the outline plugin
+function Outline.opts()
   return {
-    autofold_depth = 1,
-    position = 'right',
+    outline_window = {
+      position = 'right',
+    },
+    symbol_folding = {
+      autofold_depth = 1,
+    },
     keymaps = {
-      close = { '<leader>q' },
+      close = { '<Esc>', 'q', '<leader>q' },
     },
   }
 end
 
-return SymbolsOutline
+return Outline

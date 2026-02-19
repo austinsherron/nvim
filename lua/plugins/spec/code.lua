@@ -9,7 +9,7 @@ local LspSaga = require 'plugins.config.code.lspsaga'
 local LuaSnip = require 'plugins.config.code.luasnip'
 local Mason = require 'plugins.config.code.mason'
 local Neodev = require 'plugins.config.code.neodev'
-local SymbolsOutline = require 'plugins.config.code.outline'
+local Outline = require 'plugins.config.code.outline'
 local TFDoc = require 'plugins.config.code.tfdoc'
 local TreeSJ = require 'plugins.config.code.treesj'
 local Treesitter = require 'plugins.config.code.treesitter'
@@ -113,16 +113,17 @@ return Plugins('code', {
     'python-rope/ropevim',
     enabled = false,
   },
-  ---- TODO: replace w/ hedyhli/outline.nvim
-  ---- symbols-outline: code outline using lsp
-  -- {
-  --   'simrat39/symbols-outline.nvim',
-  --   opts = SymbolsOutline.opts(),
-  --
-  --   config = function(_, opts)
-  --     require('symbols-outline').setup(opts)
-  --   end,
-  -- },
+  ---- outline: code outline using lsp
+  {
+    'hedyhli/outline.nvim',
+    lazy = true,
+    cmd = { 'Outline', 'OutlineOpen' },
+    opts = Outline.opts(),
+
+    config = function(_, opts)
+      require('outline').setup(opts)
+    end,
+  },
   ---- treesitter: parser that integrates w/ all kinds of things (i.e.: adds hls, etc.)
   {
     'nvim-treesitter/nvim-treesitter',

@@ -16,10 +16,10 @@ KM:with({ desc_prefix = 'mason: ' })
   :bind({ { '<leader>Mx', close_mason, { desc = 'close lsp mgr.' } } })
   :done()
 
--- symbols-outline -------------------------------------------------------------
+-- outline --------------------------------------------------------------------
 
-KM:with({ desc_prefix = 'symbols-outline: ' })
-  :bind({ { '<leader>2', ':SymbolsOutline<CR>', { desc = 'toggle sidebar' } } })
+KM:with({ desc_prefix = 'outline: ' })
+  :bind({ { '<leader>2', ':Outline<CR>', { desc = 'toggle sidebar' } } })
   :done()
 
 -- tf-doc ---------------------------------------------------------------------
