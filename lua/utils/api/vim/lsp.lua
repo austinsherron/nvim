@@ -23,7 +23,26 @@ local Lsp = {}
 
 --- Opens a popup w/ info about lsp clients, if any, attached to the current buffer.
 function Lsp.info()
-  vim.api.nvim_command 'LspInfo'
+  vim.cmd 'checkhealth vim.lsp'
+end
+
+--- Registers configuration for a named LSP server. Uses the native vim.lsp.config API
+--- introduced in Neovim 0.11.
+---
+---@param name string: the server name, or '*' for shared defaults
+---@param config table: the configuration table for the server
+function Lsp.configure(name, config)
+  LOGGER:debug('Configuring server=%s: %s', { name, config })
+  vim.lsp.config(name, config)
+end
+
+--- Enables one or more LSP servers. Uses the native vim.lsp.enable API introduced in
+--- Neovim 0.11.
+---
+---@param servers string|string[]: server name(s) to enable
+function Lsp.enable(servers)
+  LOGGER:debug('Enabling servers=%s', { servers })
+  vim.lsp.enable(servers)
 end
 
 --- Checks if the provided lsp server is active in buffer w/ id == bufnr.
@@ -33,7 +52,7 @@ end
 ---@return boolean: true if the provided lsp server is active in buffer w/ id == bufnr,
 --- false otherwise
 function Lsp.isactive(server, bufnr)
-  local lsp = vim.lsp.get_active_clients({
+  local lsp = vim.lsp.get_clients({
     name = server,
     bufnr = bufnr,
   })

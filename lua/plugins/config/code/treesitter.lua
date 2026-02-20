@@ -39,7 +39,7 @@ local Treesitter = {}
 Treesitter.TreesitterPlugin = TreesitterPlugin
 
 --- A central switch to enable/disable treesitter. This is useful for instances
---- in which treesitter or a downstream plugin breaks and needs to be reinstalled,
+--- in which treesitter or a downstream plugin breaks and needs to be reinstalled:
 --- something that has been happening fairly frequently at the time of writing
 --- (09/14/2023).
 ---
@@ -71,6 +71,7 @@ function Treesitter.opts()
       'javascript',
       'jq',
       'json',
+      'just',
       'lua',
       'markdown',
       'markdown_inline',

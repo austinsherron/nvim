@@ -8,7 +8,6 @@ local Fidget = require 'plugins.config.code.fidget'
 local LspSaga = require 'plugins.config.code.lspsaga'
 local LuaSnip = require 'plugins.config.code.luasnip'
 local Mason = require 'plugins.config.code.mason'
-local Neodev = require 'plugins.config.code.neodev'
 local Outline = require 'plugins.config.code.outline'
 local TFDoc = require 'plugins.config.code.tfdoc'
 local TreeSJ = require 'plugins.config.code.treesj'
@@ -79,7 +78,6 @@ return Plugins('code', {
     'neovim/nvim-lspconfig',
     dependencies = {
       'williamboman/mason-lspconfig.nvim',
-      'folke/neodev.nvim',
     },
   },
   ---- nvim navic: for showing code context in status bar(s)
@@ -161,13 +159,19 @@ return Plugins('code', {
   },
   ---- vim-helm: improved experience for helm + yaml (+ gotmpl + sprig)
   { 'towolf/vim-helm' },
-  ---- yaml-companion: get, set, and auto-detect yaml schemas in buffers
+  ---- lazydev: better lua_ls integration for neovim config/plugin development
   {
-    'someone-stole-my-name/yaml-companion.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-    },
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {},
+
+    config = function(_, opts)
+      require('lazydev').setup(opts)
+    end,
+  },
+  ---- schemastore: json/yaml schema catalog for lsp schema validation
+  {
+    'b0o/SchemaStore.nvim',
+    lazy = true,
   },
 })

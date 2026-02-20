@@ -42,15 +42,18 @@ local function make_component_config(components, type, configs)
   return configs
 end
 
-local function make_langagues_block()
+local function make_languages_block()
   local configs = make_component_config(LspLibrary.formatters(), 'formatter')
   return make_component_config(LspLibrary.linters(), 'linter', configs)
 end
 
+local LANGUAGES = make_languages_block()
+
 return {
+  filetypes = Table.keys(LANGUAGES),
   init_options = { documentFormatting = true },
   settings = {
     rootMarkers = { '.git/' },
-    languages = make_langagues_block(),
+    languages = LANGUAGES,
   },
 }

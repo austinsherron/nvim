@@ -78,9 +78,9 @@ function Interface.init()
     signs = { text = DIAGNOSTIC_SIGNS },
   })
   -- custom highlights
-  foreach(HIGHLIGHTS, function(hl)
-    Interface.set_highlight(hl)
-  end)
+  -- foreach(HIGHLIGHTS, function(hl)
+  --   Interface.set_highlight(hl)
+  -- end)
 end
 
 return Interface
