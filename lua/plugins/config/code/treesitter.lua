@@ -31,6 +31,34 @@ local TS_PLUGIN_ENABLEMENT = {
 
 local TS_ENABLED = true
 
+--- Languages for which parsers should be installed.
+---
+---@type string[]
+local ENSURE_INSTALLED = {
+  'bash',
+  'go',
+  'gomod',
+  'gosum',
+  'hcl',
+  'javascript',
+  'jq',
+  'json',
+  'just',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'regex',
+  'query',
+  'sql',
+  'terraform',
+  'toml',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+}
+
 --- Contains functions for configuring the treesitter plugin.
 ---
 ---@class Treesitter
@@ -52,61 +80,22 @@ function Treesitter.enabled(plugin)
   return TS_ENABLED and (plugin == nil or TS_PLUGIN_ENABLEMENT[plugin])
 end
 
----@return table: build (install/update workflow) opts for treesitter plugin
-function Treesitter.build()
-  return { with_sync = true }
+--- Returns the list of languages for which parsers should be installed.
+---
+---@return string[]: parser languages to ensure are installed
+function Treesitter.ensure_installed()
+  return ENSURE_INSTALLED
 end
 
----@return table: configures the treesitter plugin
-function Treesitter.opts()
-  return {
-    -- parser install options
-    auto_install = false,
-    ensure_installed = {
-      'bash',
-      'go',
-      'gomod',
-      'gosum',
-      'hcl',
-      'javascript',
-      'jq',
-      'json',
-      'just',
-      'lua',
-      'markdown',
-      'markdown_inline',
-      'python',
-      'regex',
-      'query',
-      'sql',
-      'terraform',
-      'toml',
-      'typescript',
-      'vim',
-      'vimdoc',
-      'yaml',
-    },
-    ignore_install = {},
-    sync_install = false,
-
-    -- features
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
-    endwise = {
-      enable = true,
-    },
-    highlight = {
-      enable = true,
-    },
-    indent = {
-      enable = true,
-    },
-    rainbow = {
-      enable = true,
-    },
-  }
+--- Configures nvim-treesitter parser installation. Note: as of the nvim-treesitter
+--- rewrite, the plugin only manages parser installation; highlighting and indent
+--- are provided by neovim's built-in vim.treesitter module and are enabled via
+--- autocmd in core/cmd/auto/treesitter.lua.
+---
+---@param _ table: unused plugin reference
+---@param opts table: unused opts (parser installation is handled separately)
+function Treesitter.config(_, opts)
+  require('nvim-treesitter').install(ENSURE_INSTALLED)
 end
 
 return Treesitter

@@ -122,19 +122,13 @@ return Plugins('code', {
       require('outline').setup(opts)
     end,
   },
-  ---- treesitter: parser that integrates w/ all kinds of things (i.e.: adds hls, etc.)
+  ---- treesitter: parser installation; highlighting + indent handled by neovim builtins
   {
     'nvim-treesitter/nvim-treesitter',
     enabled = Treesitter.enabled(),
-    opts = Treesitter.opts(),
-
-    build = function()
-      require('nvim-treesitter.install').update(Treesitter.build())
-    end,
-
-    config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
-    end,
+    lazy = false,
+    build = ':TSUpdate',
+    config = Treesitter.config,
   },
   ---- ts-terraform-doc: open terraform docs w/ the help of treesitter
   {

@@ -11,6 +11,14 @@ local function bind_keymap(ev)
   LspKM.bind_after_attach(ev.buf)
 end
 
+local function disable_semantic_tokens(ev)
+  local client = Lsp.get_client_by_id(ev.data.client_id)
+
+  if client ~= nil then
+    client.server_capabilities.semanticTokensProvider = nil
+  end
+end
+
 local function doformat(ev)
   if Lsp.isactive('efm', ev.buf) then
     Lsp.format({ name = 'efm' })
@@ -26,6 +34,13 @@ function LspAutocmds.create()
     :withGroup('UserLspConfig')
     :withEvent('LspAttach')
     :withCallback(bind_keymap)
+    :create()
+
+  Autocmd.new()
+    :withDesc('Disable LSP semantic tokens so treesitter handles highlighting')
+    :withGroup('UserLspConfig')
+    :withEvent('LspAttach')
+    :withCallback(disable_semantic_tokens)
     :create()
 
   Autocmd.new()
