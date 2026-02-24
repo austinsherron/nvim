@@ -10,7 +10,7 @@ local ColorColumn = require 'utils.core.colorcol'
 GetLogger('AUTOCMD'):info 'Creating settings autocmds'
 
 Autocmd.new()
-  :withDesc("Sets formatoptions so comments don't cotinue on new lines")
+  :withDesc("Sets formatoptions so comments don't continue on new lines")
   :withEvents({ 'BufNewFile', 'BufRead' })
   :withOpt('command', 'setlocal formatoptions-=cro')
   :create()

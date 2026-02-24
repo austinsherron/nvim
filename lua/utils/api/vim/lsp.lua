@@ -64,6 +64,14 @@ function Lsp.isactive(server, bufnr)
   return isactive
 end
 
+--- Gets the provided lsp client by id, if it exists.
+---
+--- @param client_id integer: the id of the client to retrieve
+--- @return vim.lsp.Client|nil: the client, or nil if the provided id is invalid
+function Lsp.get_client_by_id(client_id)
+  return vim.lsp.get_client_by_id(client_id)
+end
+
 local function lspsaga_cmd(cmd, ...)
   local args = String.join(Table.pack(...), ' ')
   local sep = ternary(String.nil_or_empty(args), '', ' ')
@@ -200,7 +208,7 @@ function Lsp.add_workspace_folder()
   vim.lsp.buf.add_workspace_folder()
 end
 
---- Removes a directory to the workspace. When called, this function opens and input
+--- Removes a directory from the workspace. When called, this function opens an input
 --- prompting for the directory to remove. Exiting w/o providing a dirpath cancels the
 --- operation.
 function Lsp.remove_workspace_folder()
