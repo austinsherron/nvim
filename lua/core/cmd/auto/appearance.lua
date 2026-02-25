@@ -5,6 +5,7 @@
 --]]
 
 local Autocmd = require 'utils.core.autocmd'
+local Interface = require 'utils.api.vim.interface'
 
 local colorizer = Lazy.require 'colorizer' ---@module 'colorizer'
 
@@ -26,4 +27,10 @@ Autocmd.new()
   :withCallback(function(ev)
     colorizer.detach_from_buffer(ev.buf)
   end)
+  :create()
+
+Autocmd.new()
+  :withDesc('Creates custom highlights when colorscheme changes')
+  :withEvent('ColorScheme')
+  :withCallback(Interface.set_custom_highlights)
   :create()

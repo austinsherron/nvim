@@ -4,6 +4,7 @@ local enum = require('toolbox.extensions.enum').enum
 ---
 ---@enum Colors
 local Colors = enum({
+  -- INFO: basic colors
   RED = '#E06C75',
   ORANGE = '#D19A66',
   YELLOW = '#E5C07B',
@@ -13,8 +14,20 @@ local Colors = enum({
   VIOLET = '#C678DD',
   PURPLE = '#9D79D6',
 
+  -- INFO: light variants
   LIGHT_ORANGE = '#F6B079',
   LIGHT_CYAN = '#40ffff',
+
+  -- INFO: blacks, whites, grays
+  BLUE_GREY = '#717CB4',
+  LIGHT_GREY = '#D8D8D8',
+
+  -- INFO: special colors
+  MAUVE = '#E0B0FF',
+  MEDIUM_ORCHID = '#BA55D3',
+  PALE_BLUE = '#54637D',
+  SAFETY_BLUE = '#2E4F85',
+  SEA_GREEN = '#9abcb6',
 
   -- NOTE: these colors are copied from the srcery colorscheme's highlight groups
   -- TODO: figure out why linking to these highlight groups doesn't seem to work

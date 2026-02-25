@@ -20,9 +20,7 @@ local HIGHLIGHT_NAMES = Table.values(HIGHLIGHTS, function(v, _)
 end)
 
 local function set_highlights()
-  foreach(HIGHLIGHTS, function(h)
-    Interface.set_highlight(h)
-  end)
+  Interface.set_highlights(HIGHLIGHTS)
 end
 
 local function register_highlights()
