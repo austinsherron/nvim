@@ -23,9 +23,11 @@ local Colors = enum({
   LIGHT_GREY = '#D8D8D8',
 
   -- INFO: special colors
+  MATERIAL_RED = '#F07178',
   MAUVE = '#E0B0FF',
   MEDIUM_ORCHID = '#BA55D3',
   PALE_BLUE = '#54637D',
+  RED_ORANGE = '#F78C6C',
   SAFETY_BLUE = '#2E4F85',
   SEA_GREEN = '#9abcb6',
 

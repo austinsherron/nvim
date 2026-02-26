@@ -33,9 +33,10 @@ local HIGHLIGHTS = {
   Highlight.new('@markup.raw'):foreground(Colors.BLUE),
 
   -- for code
+  Highlight.new('@boolean.python'):foreground(Colors.MATERIAL_RED),
   Highlight.new('@comment'):foreground(Colors.BLUE_GREY),
   Highlight.new('@string.documentation.python'):foreground(Colors.GREEN),
-  Highlight.new('@variable.parameter.python'):foreground(Colors.SRCERY_YELLOW),
+  Highlight.new('@variable.parameter.python'):foreground(Colors.RED_ORANGE),
 }
 
 return {
