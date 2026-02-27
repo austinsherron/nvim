@@ -89,8 +89,6 @@ return Plugins('tools', {
   ---- wakatime: track time spent programming
   {
     'wakatime/vim-wakatime',
-    -- NOTE: not using at the moment
-    enabled = false,
     lazy = false,
   },
 })
