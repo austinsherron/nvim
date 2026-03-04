@@ -4,6 +4,7 @@
   control nvim's ability to understand, generate, and generally interact w/ code
 --]]
 
+local Conform = require 'plugins.config.code.conform'
 local Fidget = require 'plugins.config.code.fidget'
 local LspSaga = require 'plugins.config.code.lspsaga'
 local LuaSnip = require 'plugins.config.code.luasnip'
@@ -18,6 +19,15 @@ local Plugins = require('utils.plugins.plugin').plugins
 local TsPlugin = Treesitter.TreesitterPlugin
 
 return Plugins('code', {
+  ---- conform: formatter runner (format-on-save, per-filetype dispatch)
+  {
+    'stevearc/conform.nvim',
+    opts = Conform.opts(),
+
+    config = function(_, opts)
+      require('conform').setup(opts)
+    end,
+  },
   ---- efm-configs: oob efm configs for formatters and linters
   {
     'creativenull/efmls-configs-nvim',

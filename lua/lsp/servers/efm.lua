@@ -1,3 +1,8 @@
+--[[
+  efm-langserver is a general purpose language server; in this nvim installation, it's
+  used to enable linters
+--]]
+
 local Import = require 'toolbox.utils.import'
 local LspLibrary = require 'lsp.library'
 
@@ -43,15 +48,15 @@ local function make_component_config(components, type, configs)
 end
 
 local function make_languages_block()
-  local configs = make_component_config(LspLibrary.formatters(), 'formatter')
-  return make_component_config(LspLibrary.linters(), 'linter', configs)
+  return make_component_config(LspLibrary.linters(), 'linter')
 end
 
 local LANGUAGES = make_languages_block()
 
 return {
   filetypes = Table.keys(LANGUAGES),
-  init_options = { documentFormatting = true },
+  -- INFO: using conform.nvim for formatting, so disable it here
+  init_options = { documentFormatting = false },
   settings = {
     rootMarkers = { '.git/' },
     languages = LANGUAGES,

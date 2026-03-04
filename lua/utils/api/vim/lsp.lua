@@ -1,20 +1,15 @@
-local Buffer = require 'utils.api.vim.buffer'
 local Interaction = require 'utils.api.vim.interaction'
-local LspLibrary = require 'lsp.library'
+
+local Conform = Safe.require 'conform'
 
 local LOGGER = GetLogger 'LSP'
 
 --- Parameterizes lsp formatting.
 ---
 ---@class LspFormatOpts
----@field name string|nil: optional, defaults to all attached clients; specifies the lsp
---- server to use to format
 ---@field async boolean|nil: optional, defaults to false; if true, formatting will run
 --- asynchronously
 ---@field bufnr integer|nil: optional, defaults to current buffer; the buffer to format
----@field efm_backup boolean|nil: optional, defaults to true; if true and name == efm, run
---- lsp formatting as backup if a language specific formatter isn't configured for the
---- buffer's filetype
 
 --- Api wrapper for lsp related vim functionality.
 ---
@@ -142,34 +137,26 @@ function Lsp.code_action()
   run_lspsaga 'code_action'
 end
 
-local function handle_backup_formatting(opts)
-  if opts.efm_backup == false or opts.name ~= 'efm' then
-    return opts
-  end
-
-  local ft = Buffer.info(opts.bufnr).filetype
-
-  if ft == nil then
-    return opts
-  end
-
-  if not LspLibrary.has_formatter(ft) then
-    LOGGER:debug('falling back to default lsp formatting for ft=%s', { ft })
-    opts.name = nil
-  end
-
-  return opts
-end
-
---- Formats the current buffer according to opts.
+--- Formats the current buffer according to opts. Uses conform.nvim if available, falling
+--- back to native LSP formatting otherwise.
 ---
----@param opts LspFormatOpts|nil: optional; name specifies the lsp
---- server to use to format; async == true will cause formatting to run asynchronously
+---@param opts LspFormatOpts|nil: optional; async == true will cause formatting to run
+--- asynchronously
 function Lsp.format(opts)
-  opts = handle_backup_formatting(opts or {})
+  opts = opts or {}
 
-  LOGGER:debug('Running lsp formatting w/ opts=%s', { opts })
-  Safe.call(vim.lsp.buf.format, { prefix = 'LSP' }, opts)
+  if Conform ~= nil then
+    LOGGER:debug('Running conform formatting w/ opts=%s', { opts })
+
+    Safe.call(Conform.format, { prefix = 'LSP > Format' }, {
+      bufnr = opts.bufnr,
+      async = opts.async or false,
+      lsp_format = 'fallback',
+    })
+  else
+    LOGGER:debug('Running lsp formatting w/ opts=%s', { opts })
+    Safe.call(vim.lsp.buf.format, { prefix = 'LSP' }, opts)
+  end
 end
 
 local function get_replace_arg(prompt)

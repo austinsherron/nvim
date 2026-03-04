@@ -52,7 +52,7 @@ function Cmp.filetype(cmp)
   })
 end
 
--- FIXME: this doesn't seem to work they way I want it to (or think/thought it should)
+-- FIXME: this doesn't seem to work the way I want it to (or think/thought it should)
 local function should_complete_cmdline()
   local cmd = Editor.cmdline()
   local firstword = String.firstword(cmd)

@@ -19,9 +19,11 @@ local function disable_semantic_tokens(ev)
   end
 end
 
-local function doformat(ev)
-  if Lsp.isactive('efm', ev.buf) then
-    Lsp.format({ name = 'efm' })
+local function disable_ruff_hover(ev)
+  local client = Lsp.get_client_by_id(ev.data.client_id)
+
+  if client ~= nil and client.name == 'ruff' then
+    client.server_capabilities.hoverProvider = false
   end
 end
 
@@ -44,10 +46,10 @@ function LspAutocmds.create()
     :create()
 
   Autocmd.new()
-    :withDesc('Format on save')
+    :withDesc('Disable ruff hover so pyright handles hover')
     :withGroup('UserLspConfig')
-    :withEvent('BufWritePost')
-    :withCallback(doformat)
+    :withEvent('LspAttach')
+    :withCallback(disable_ruff_hover)
     :create()
 end
 

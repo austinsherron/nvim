@@ -5,6 +5,8 @@ local LspKM = require 'lsp.keymap'
 local LspLibrary = require 'lsp.library'
 local PkgMgr = require 'utils.api.packagemgr'
 
+local ComponentContext = LspLibrary.ComponentContext
+
 local LOGGER = GetLogger 'LSP'
 
 --- Entry point for configuration and management of neovim LSP servers, formatters, and
@@ -34,8 +36,8 @@ function LspManager.install()
     return LOGGER:warn(msg)
   end
 
-  install_type(LspLibrary.formatters(true), 'formatters')
-  install_type(LspLibrary.linters(true), 'linters')
+  install_type(LspLibrary.formatters(ComponentContext.INSTALL), 'formatters')
+  install_type(LspLibrary.linters(ComponentContext.INSTALL), 'linters')
 end
 
 --- Entry point to LSP configuration.
