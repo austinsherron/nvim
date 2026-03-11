@@ -17,6 +17,7 @@ local ORDER = {
   'spell',
   'emoji',
   'calc',
+  'cmp-dbee',
 }
 
 --- Contains nvim-cmp configuration for an individual source.
@@ -65,6 +66,7 @@ local Source = {
   CALC = CmpSrc.new('calc', '[Calc]', 1),
   CMDLINE = CmpSrc.new('cmdline', '[Cmd]', 3, { ignore_cmds = DISABLED_CMDS }),
   CONVCOMMITS = CmpSrc.new('conventionalcommits', '[CC]', 2),
+  DBEE = CmpSrc.new('dbee', '[Dbee]', 1),
   DICTIONARY = CmpSrc.new('dictionary', '[Dict]', 3),
   EMOJI = CmpSrc.new('emoji', '[Emoji]', 1),
   LSP = CmpSrc.new('nvim_lsp', '[LSP]', 1),
@@ -121,6 +123,15 @@ function Src.for_cmdline()
   return {
     Source.CMDLINE(),
     Source.PATH(),
+  }
+end
+
+---@note: order here informs the order of auto-complete results
+---@return table[]: configuration for sources used in dbee sql buffers
+function Src.for_dbee()
+  return {
+    Source.DBEE(),
+    Source.BUFFER(),
   }
 end
 

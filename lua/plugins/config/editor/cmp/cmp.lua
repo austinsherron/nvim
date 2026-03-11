@@ -50,6 +50,12 @@ function Cmp.filetype(cmp)
     mapping = CmpKM.make_mapping(),
     sources = cmp.config.sources(Src.for_gitcommit()),
   })
+
+  cmp.setup.filetype('sql', {
+    formatting = Cmp.formatting(),
+    mapping = CmpKM.make_mapping(),
+    sources = cmp.config.sources(Src.for_dbee()),
+  })
 end
 
 -- FIXME: this doesn't seem to work the way I want it to (or think/thought it should)

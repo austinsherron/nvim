@@ -59,6 +59,18 @@ return Plugins('editor', {
     'davidsierradz/cmp-conventionalcommits',
     dependencies = { 'hrsh7th/nvim-cmp' },
   },
+  ---- cmp-dbee: fuzzy completion for nvim-dbee sql buffers
+  {
+    'MattiasMTS/cmp-dbee',
+    ---- INFO: use this branch for enhanced dbee auto-completion
+    branch = 'ms/v2',
+    dependencies = { 'hrsh7th/nvim-cmp', 'kndndrj/nvim-dbee' },
+    opts = {},
+
+    config = function(_, opts)
+      require('cmp-dbee').setup(opts)
+    end,
+  },
   ---- cmp-dictionary: fuzzy completion words in dictionary
   {
     'uga-rosa/cmp-dictionary',
@@ -123,7 +135,8 @@ return Plugins('editor', {
 
     config = Indent.config,
   },
-  ---- rainbow delimiters: make delimiter pairs more obvious using the power of the rainbow! 🌈
+  ---- rainbow delimiters: make delimiter pairs more obvious using the power of the
+  ---- rainbow! 🌈
   {
     'HiPhish/rainbow-delimiters.nvim',
     enabled = Treesitter.enabled(TsPlugin.TS_RAINBOW),
@@ -141,8 +154,8 @@ return Plugins('editor', {
       require('nvim-surround').setup()
     end,
   },
-  ---- treesitter-endwise: automatically close various semantic structures, i.e.: if-then-end, etc.
-  ---- TODO: doesn't work at the moment (08/25/2023, after "fixing" treesitter highlight issue)
+  ---- treesitter-endwise: automatically close various semantic structures, i.e.:
+  ---- if-then-end, etc.
   {
     'RRethy/nvim-treesitter-endwise',
     enabled = Treesitter.enabled(TsPlugin.ENDWISE),

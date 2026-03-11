@@ -2,6 +2,14 @@ local KeyMapper = require 'utils.core.mapper'
 
 local KM = KeyMapper.new({ nowait = true })
 
+-- debee -----------------------------------------------------------------------
+
+KM:with({ desc_prefix = 'dbee: ' })
+  :bind({
+    { '<leader>db', ':Dbee toggle<CR>', { desc = 'toggle' } },
+  })
+  :done()
+
 -- link visitor ----------------------------------------------------------------
 
 KM:with({ desc_prefix = 'link-visitor: ' })

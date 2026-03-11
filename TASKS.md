@@ -7,6 +7,9 @@
 - [x] Auto-completion (revisit for advanced configuration)
   - [ ] `cmp-conventionalcommits`
   - [ ] `cmp-dictionary`
+  - [ ] Pull request for `cmp-dbee`
+    - [ ] Completion for columns
+    - [ ] Completion for only the active/current connection
 - [ ] Auto-correction of diagnostics/linting errors
 - [ ] Auto-imports
 - [ ] Case Changer (i.e.: CamelCaseEr, snake\_case\_er, Title-Er, UPPERER, lowerer, etc.er)

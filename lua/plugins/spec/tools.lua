@@ -8,6 +8,7 @@
 --]]
 
 local Chezmoi = require 'plugins.config.tools.chezmoi'
+local Dbee = require 'plugins.config.tools.dbee'
 local NeoRepl = require 'plugins.config.tools.neorepl'
 local Treesitter = require 'plugins.config.code.treesitter'
 
@@ -40,6 +41,20 @@ return Plugins('tools', {
 
     config = function(_, opts)
       require('colorizer').setup(opts)
+    end,
+  },
+  ---- dbee: database explorer/client for nvim
+  {
+    'kndndrj/nvim-dbee',
+    opts = Dbee.opts(),
+    dependencies = { 'MunifTanjim/nui.nvim' },
+
+    build = function()
+      require('dbee').install()
+    end,
+
+    config = function(_, opts)
+      require('dbee').setup(opts)
     end,
   },
   ---- link visitor: open links from nvim
