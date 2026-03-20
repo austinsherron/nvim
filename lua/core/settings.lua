@@ -21,13 +21,14 @@ o.sessionoptions = 'buffers,curdir,folds,globals,help,tabpages,winsize,winpos,te
 
 o.spell = true
 o.spelllang = 'en_us'
+o.spelloptions = 'camel'
 o.spellfile = vim.fn.stdpath 'config' .. '/spell/en.utf-8.add'
 
 ---- indent settings -----------------------------------------------------------
 
-o.ai = true          -- keep indentation from previous line
-o.autoindent = true  -- need to set this and above?
-o.si = true          -- smart indent
+o.ai = true -- keep indentation from previous line
+o.autoindent = true -- need to set this and above?
+o.si = true -- smart indent
 o.smartindent = true -- must set both this and above
 
 -- tabs as spaces; default tab size = 4
@@ -59,15 +60,15 @@ opt.listchars = { ['tab'] = '>.', ['trail'] = '.', ['nbsp'] = '‸' }
 
 ---- functional settings -------------------------------------------------------
 
-o.hidden = true                             -- hide, don't dump, buffers when switching
+o.hidden = true -- hide, don't dump, buffers when switching
 opt.completeopt = { 'menuone', 'noselect' } -- preview menu options for auto-completion
-o.report = 0                                -- min lines changed to report # lines changed
+o.report = 0 -- min lines changed to report # lines changed
 
 -- show diffs in vertical splits by default
 opt.diffopt:append({ 'vertical' })
 
 -- recovery files
-o.undofile = true  -- enable undo history
+o.undofile = true -- enable undo history
 o.swapfile = false -- disable swap files
 
 -- ignore certain files when opening buffers from inside neovim
