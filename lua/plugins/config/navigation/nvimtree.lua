@@ -42,7 +42,7 @@ function NvimTree.opts()
 
     view = {
       relativenumber = true,
-      width = 40,
+      width = 60,
     },
   }
 end
