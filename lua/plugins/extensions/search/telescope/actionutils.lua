@@ -8,7 +8,7 @@ local actions = require 'telescope.actions'
 ---@alias TelescopeAfterSelectFn fun(e: string|nil, s: { value: string }, pb: integer)
 
 --- Contains utilities that abstract away some of the boilerplate of building and
---- customizing telescope search constructs.
+--- customizing telescope search action constructs.
 ---
 ---@class ActionUtils
 local ActionUtils = {}

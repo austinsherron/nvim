@@ -44,6 +44,7 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 'N', Pickers.search_packages, { desc = 'search plugin files' } },
     { 'n', make_tscope_cmd 'notify', { desc = 'search notification history' } },
     { 'p', Project.picker, { desc = 'search projects' } },
+    { 'P', Pickers.search_claude_plans, { desc = 'search claude plans' } },
     { 'r', make_tscope_cmd 'frecency', { desc = 'search "frecent"' } },
     { 's', Session.picker, { desc = 'search sessions' } },
     { 'T', Builtins.treesitter, { desc = 'search treesitter symbols' } },

@@ -1,5 +1,7 @@
 local ActionUtils = require 'plugins.extensions.search.telescope.actionutils'
+local EntryUtils = require 'plugins.extensions.search.telescope.entryutils'
 local Env = require 'toolbox.system.env'
+local File = require 'toolbox.system.file'
 local Path = require 'toolbox.system.path'
 local System = require 'utils.api.vim.system'
 local Tab = require 'utils.api.vim.tab'
@@ -87,6 +89,24 @@ function Pickers.search_packages()
       return Path.basename(path)
     end,
     prompt_title = 'Search Plugins',
+  })
+end
+
+local function make_display_name(path)
+  local first_line = File.read_n(path, 1)
+  return (first_line and #first_line > 0 and #first_line[1] > 0)
+    and String.trim_before(first_line[1], '# ')
+end
+
+--- Custom telescope picker for search Claude plans.
+function Pickers.search_claude_plans()
+  local plans_dir = Env.claude_config_dir() .. '/plans'
+
+  builtins.find_files({
+    cwd = plans_dir,
+    find_command = { 'find', '.', '-maxdepth', '1', '-type', 'f' },
+    entry_maker = EntryUtils.make_entry_maker(make_display_name, plans_dir),
+    prompt_title = 'Search Claude Plans',
   })
 end
 
