@@ -9,6 +9,7 @@ local AutoPairs = require 'plugins.config.editor.autopairs'
 local Boole = require 'plugins.config.editor.boole'
 local Cmp = require 'plugins.config.editor.cmp.cmp'
 local Indent = require 'plugins.config.interface.indent'
+local Rainbow = require 'plugins.config.editor.rainbow'
 local Treesitter = require 'plugins.config.code.treesitter'
 
 local Plugins = require('utils.plugins.plugin').plugins
@@ -141,6 +142,7 @@ return Plugins('editor', {
     'HiPhish/rainbow-delimiters.nvim',
     enabled = Treesitter.enabled(TsPlugin.TS_RAINBOW),
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = Rainbow.config,
   },
   ---- surround: efficient manipulation of brackets, quotes, etc.
   {
