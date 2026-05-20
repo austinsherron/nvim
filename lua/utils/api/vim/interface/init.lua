@@ -2,12 +2,6 @@ local Colors = require 'utils.api.vim.interface.__colors'
 local Constants = require 'utils.api.vim.interface.__constants'
 local Highlight = require 'utils.api.vim.interface.__highlight'
 
---- Namespace for custom highlight overrides; takes precedence over namespace 0 (where
---- colorschemes and plugins define highlights) when activated via nvim_set_hl_ns.
----
----@type integer
-local CUSTOM_NS = vim.api.nvim_create_namespace 'custom_highlights'
-
 --- Contains utilities for interacting w/ nvim ui elements.
 ---
 ---@class Interface
@@ -57,13 +51,11 @@ function Interface.set_highlights(highlights, opts)
   end)
 end
 
---- Sets custom highlight groups and activates custom highlights namespace.
+--- Sets custom highlight groups in the global namespace.
 ---
 --- See Interface.Constants.HIGHLIGHTS.
 function Interface.set_custom_highlights()
-  -- INFO: set active custom highlight namespace so it takes precedence over namespace 0
-  vim.api.nvim_set_hl_ns(CUSTOM_NS)
-  Interface.set_highlights(Interface.Constants.HIGHLIGHTS, { ns = CUSTOM_NS })
+  Interface.set_highlights(Interface.Constants.HIGHLIGHTS)
 end
 
 local function set_diagnostic_signs()
