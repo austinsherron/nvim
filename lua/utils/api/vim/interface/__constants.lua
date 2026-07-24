@@ -37,6 +37,10 @@ local HIGHLIGHTS = {
   Highlight.new('@comment'):foreground(Colors.BLUE_GREY),
   Highlight.new('@string.documentation.python'):foreground(Colors.GREEN),
   Highlight.new('@variable.parameter.python'):foreground(Colors.RED_ORANGE),
+
+  -- colors
+  Highlight.new('CustomColorsMauve'):foreground(Colors.MAUVE),
+  Highlight.new('CustomColorsViolet'):foreground(Colors.VIOLET),
 }
 
 return {

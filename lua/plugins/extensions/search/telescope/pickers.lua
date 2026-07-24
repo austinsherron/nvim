@@ -2,6 +2,7 @@ local ActionUtils = require 'plugins.extensions.search.telescope.actionutils'
 local EntryUtils = require 'plugins.extensions.search.telescope.entryutils'
 local Env = require 'toolbox.system.env'
 local File = require 'toolbox.system.file'
+local Git = require 'utils.api.git'
 local Path = require 'toolbox.system.path'
 local System = require 'utils.api.vim.system'
 local Tab = require 'utils.api.vim.tab'
@@ -92,20 +93,48 @@ function Pickers.search_packages()
   })
 end
 
-local function make_display_name(path)
+local function make_claude_plans_display_value(path)
+  local name = Path.basename(path)
   local first_line = File.read_n(path, 1)
-  return (first_line and #first_line > 0 and #first_line[1] > 0)
-    and String.trim_before(first_line[1], '# ')
+
+  local display_name = (first_line and #first_line > 0 and #first_line[1] > 0)
+      and String.trim_before(first_line[1], '# ')
+    or name
+
+  local modified_time = Safe.call(function()
+    return File.get_modified_time(path)
+  end)
+
+  return {
+    { modified_time or '', 'TelescopeResultsNumber' },
+    { display_name, 'TelescopeResultsIdentifier' },
+    { name, 'TelescopeResultsFunction' },
+  }
 end
+
+local CLAUDE_PLAN_PICKER_DISPLAY_OPTS = {
+  columns = { { width = 20 }, { width = 60 }, { remaining = true } },
+}
 
 --- Custom telescope picker for search Claude plans.
 function Pickers.search_claude_plans()
-  local plans_dir = Env.claude_config_dir() .. '/plans'
+  local repo_name = Git.repo_name()
+  local plans_dir = Path.concat(Env.claude_data_dir(), 'plans', repo_name)
+
+  if not File.is_dir(plans_dir) then
+    GetNotify().warn('No Claude plans directory found for repo=%s', { repo_name })
+    return
+  end
 
   builtins.find_files({
     cwd = plans_dir,
     find_command = { 'find', '.', '-maxdepth', '1', '-type', 'f' },
-    entry_maker = EntryUtils.make_entry_maker(make_display_name, plans_dir),
+    entry_maker = EntryUtils.make_entry_maker(
+      make_claude_plans_display_value,
+      plans_dir,
+      nil,
+      CLAUDE_PLAN_PICKER_DISPLAY_OPTS
+    ),
     prompt_title = 'Search Claude Plans',
   })
 end

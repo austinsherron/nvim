@@ -78,7 +78,10 @@ end
 
 ---@return string: the path to the root of the repo we're in currently
 function Git.repo_root()
-  return String.trim(System.run 'git rev-parse --show-toplevel', '\n')
+  local git_path =
+    String.trim(System.run 'git rev-parse --path-format=absolute --git-common-dir', '\n')
+
+  return Path.dirname(git_path)
 end
 
 --- Gets abspath relative to the current repo root.
