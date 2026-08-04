@@ -41,6 +41,12 @@ local HIGHLIGHTS = {
   -- colors
   Highlight.new('CustomColorsMauve'):foreground(Colors.MAUVE),
   Highlight.new('CustomColorsViolet'):foreground(Colors.VIOLET),
+
+  -- diffview: soften the default bright-blue changed-line/text backgrounds. these
+  -- groups are what diffview remaps DiffChange/DiffText to via winhl, so overriding
+  -- them here keeps native vimdiff/gitsigns untouched
+  Highlight.new('DiffviewDiffChange'):background(Colors.DIFF_CHANGE_BG),
+  Highlight.new('DiffviewDiffText'):background(Colors.DIFF_TEXT_BG),
 }
 
 return {

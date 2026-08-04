@@ -40,6 +40,7 @@ KM:with_hydra({ name = '🔭 Telescope', body = '<leader>f' })
     { 'gc', Builtins.git_bcommits, { desc = 'search git commits' } },
     { 'gs', Builtins.git_stash, { desc = 'search git stashes' } },
     { 'h', Builtins.help_tags, { desc = 'search help tags' } },
+    { 'H', Pickers.search_claude_handoffs, { desc = 'search claude handoffs' } },
     { 'm', Builtins.man_pages, { desc = 'search man pages' } },
     { 'N', Pickers.search_packages, { desc = 'search plugin files' } },
     { 'n', make_tscope_cmd 'notify', { desc = 'search notification history' } },

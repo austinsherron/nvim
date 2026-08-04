@@ -22,6 +22,10 @@ local Colors = enum({
   BLUE_GREY = '#717CB4',
   LIGHT_GREY = '#D8D8D8',
 
+  -- INFO: diff backgrounds (soft, neutral blue-grays)
+  DIFF_CHANGE_BG = '#2E3440',
+  DIFF_TEXT_BG = '#434C5E',
+
   -- INFO: special colors
   MATERIAL_RED = '#F07178',
   MAUVE = '#E0B0FF',

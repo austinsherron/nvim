@@ -20,14 +20,6 @@ KM:with({ desc_prefix = 'link-visitor: ' })
   })
   :done()
 
--- markdown-preview ------------------------------------------------------------
-
-KM:with({ desc_prefix = 'markdown-preview: ' })
-  :bind({
-    { '<leader>P', ':MarkdownPreview<CR>', { desc = 'open markdown preview' } },
-  })
-  :done()
-
 -- neogen ----------------------------------------------------------------------
 
 KM:with({ desc_prefix = 'neogen: ' })

@@ -74,6 +74,15 @@ return Plugins('tools', {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
   },
+  ---- mdx.nvim: mdx (markdown + jsx) support
+  {
+    'davidmh/mdx.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+
+    config = function()
+      require('mdx').setup()
+    end,
+  },
   ---- neogen: docstring generation
   {
     'danymat/neogen',
