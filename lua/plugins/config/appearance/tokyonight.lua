@@ -21,7 +21,8 @@ function TokyoNight.config()
       sidebars = {
         'NvimTree',
         'aerial',
-        'DiffviewFiles',
+        'codediff-explorer',
+        'codediff-history',
         'spectre_panel',
         'qf',
         'undotree',

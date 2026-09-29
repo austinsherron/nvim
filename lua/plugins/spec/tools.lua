@@ -36,7 +36,7 @@ return Plugins('tools', {
   ---- colorizer: high perf color highlighter
   ---- TODO: configure
   {
-    'norcalli/nvim-colorizer.lua',
+    'catgoose/nvim-colorizer.lua',
     opts = {},
 
     config = function(_, opts)
@@ -46,7 +46,11 @@ return Plugins('tools', {
   ---- dbee: database explorer/client for nvim
   {
     'kndndrj/nvim-dbee',
-    opts = Dbee.opts(),
+    -- NOTE: disabled; re-enable if/when I need a db client in nvim
+    enabled = false,
+    ---- NOTE: function form b/c Dbee.opts requires the plugin, which isn't on the
+    ----       rtp while it's disabled
+    opts = Dbee.opts,
     dependencies = { 'MunifTanjim/nui.nvim' },
 
     build = function()

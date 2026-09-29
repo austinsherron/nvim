@@ -3,34 +3,31 @@ local KeyMapper = require 'utils.core.mapper'
 
 local KM = KeyMapper.new({ nowait = true })
 
--- diffview --------------------------------------------------------------------
+-- codediff -------------------------------------------------------------------
 
-local function diffview(cmd)
+---@param cmd string: args to pass to the "CodeDiff" command
+---@return function: a function that runs "CodeDiff" w/ the provided args
+local function codediff(cmd)
   return function()
-    Safe.call(vim.api.nvim_command, {}, 'Diffview' .. cmd)
+    Safe.call(vim.api.nvim_command, {}, ('CodeDiff %s'):format(cmd))
   end
-end
-
-local function stash()
-  return diffview 'FileHistory -g --range=stash@{0}'
 end
 
 local function something()
   return function()
-    local todiff, _ = Interaction.input('DiffviewOpen ', { default = '', nofmt = true })
-    return diffview('Open ' .. todiff)()
+    local toreview, _ = Interaction.input('CodeDiff ', { default = '', nofmt = true })
+    return codediff(toreview)()
   end
 end
 
-KM:with({ desc_prefix = 'diffview: ' })
+KM:with({ desc_prefix = 'codediff: ' })
   :bind({
-    { '<leader>dv', diffview 'Open', { desc = 'open diff/merge view' } },
-    { '<leader>dx', diffview 'Close', { desc = 'close diff/merge view' } },
-    { '<leader>dh', diffview 'FileHistory', { desc = 'show all history' } },
-    { '<leader>df', diffview 'FileHistory %', { desc = 'show file history' } },
-    { '<leader>dm', diffview 'Open master', { desc = 'diff master' } },
-    { '<leader>dS', stash(), { desc = 'diff stash@{0}' } },
-    { '<leader>dA', something(), { desc = 'diff from user input' } },
+    { '<leader>dv', codediff '', { desc = 'review working tree' } },
+    { '<leader>dm', codediff 'master', { desc = 'review against master' } },
+    { '<leader>dh', codediff 'history', { desc = 'browse commit history' } },
+    { '<leader>df', codediff 'history %', { desc = 'browse current file history' } },
+    { '<leader>dS', codediff 'stash@{0}', { desc = 'review stash@{0}' } },
+    { '<leader>dA', something(), { desc = 'review from user input' } },
   })
   :done()
 

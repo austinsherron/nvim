@@ -97,9 +97,22 @@ function Git.repo_name()
   return Path.basename(Git.repo_root())
 end
 
----@return string: the name of the active branch of the repo we're in currently
-function Git.branch_name()
-  return System.run 'git rev-parse --abbrev-ref HEAD'
+--- Gets the name of the active branch of the repo at dir.
+---
+---@note: passing dir is worktree safe: git resolves the branch of the worktree that
+--- owns dir, which the cwd may not be a part of.
+---
+---@param dir string|nil: optional, defaults to the cwd; a path in the repo for which to
+--- get the active branch name
+---@return string: the name of the active branch of the repo at dir
+function Git.branch_name(dir)
+  local cmd = Table.concat({
+    { 'git' },
+    ternary(dir == nil, {}, { '-C', dir }),
+    { 'rev-parse', '--abbrev-ref', 'HEAD' },
+  })
+
+  return String.trim(System.run(cmd), '\n')
 end
 
 ---@return GitFile[]: the statuses of files in the current repo

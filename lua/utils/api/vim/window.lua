@@ -94,6 +94,25 @@ function Window.close(winnr, force)
   vim.api.nvim_win_close(winnr, force)
 end
 
+--- Moves the cursor in the window w/ id == winnr to the given position.
+---
+---@param row integer: the 1-indexed row (line) to which to move the cursor
+---@param col integer: the 0-indexed column to which to move the cursor
+---@param winnr integer|nil: optional, defaults to the current window; the window in which
+--- to move the cursor
+function Window.set_cursor(row, col, winnr)
+  winnr = winnr or Window.current()
+  vim.api.nvim_win_set_cursor(winnr, { row, col })
+end
+
+--- Equalizes the width/height of all windows in the current tab.
+---
+---@note: windows w/ "winfixwidth"/"winfixheight" set (i.e.: sidebars like nvim-tree)
+--- keep their dimensions.
+function Window.equalize()
+  vim.cmd 'wincmd ='
+end
+
 --- Resizes the current window in a direction.
 ---
 ---@param direction WindowOpDirection: the direction in which to resize a window

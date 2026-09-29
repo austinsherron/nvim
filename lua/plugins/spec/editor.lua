@@ -63,6 +63,8 @@ return Plugins('editor', {
   ---- cmp-dbee: fuzzy completion for nvim-dbee sql buffers
   {
     'MattiasMTS/cmp-dbee',
+    -- NOTE: disabled alongside nvim-dbee, on which it depends
+    enabled = false,
     ---- INFO: use this branch for enhanced dbee auto-completion
     branch = 'ms/v2',
     dependencies = { 'hrsh7th/nvim-cmp', 'kndndrj/nvim-dbee' },

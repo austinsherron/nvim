@@ -264,6 +264,37 @@ function Buffer.setoptions(opts)
   end
 end
 
+--- Gets lines from the buffer w/ id == bufnr.
+---
+---@param bufnr integer|nil: optional, defaults to the current buffer; the buffer from
+--- which to get lines
+---@param first integer|nil: optional, defaults to 0; the 0-indexed, inclusive index of
+--- the first line to get
+---@param last integer|nil: optional, defaults to -1 (the end of the buffer); the
+--- 0-indexed, exclusive index of the last line to get
+---@return string[]: the requested lines of the buffer w/ id == bufnr
+function Buffer.getlines(bufnr, first, last)
+  bufnr = bufnr or Buffer.current()
+  return vim.api.nvim_buf_get_lines(bufnr, first or 0, last or -1, false)
+end
+
+--- Replaces the lines in [first, last) of the buffer w/ id == bufnr w/ lines.
+---
+---@note: passing an empty lines array deletes the replaced lines; passing first == last
+--- inserts lines w/o replacing any.
+---
+---@param bufnr integer|nil: optional, defaults to the current buffer; the buffer in which
+--- to set lines
+---@param first integer|nil: optional, defaults to 0; the 0-indexed, inclusive index of
+--- the first line to replace
+---@param last integer|nil: optional, defaults to -1 (the end of the buffer); the
+--- 0-indexed, exclusive index of the last line to replace
+---@param lines string[]: the lines w/ which to replace those in [first, last)
+function Buffer.setlines(bufnr, first, last, lines)
+  bufnr = bufnr or Buffer.current()
+  vim.api.nvim_buf_set_lines(bufnr, first or 0, last or -1, false, lines)
+end
+
 --- Opens a buffer, either transient w/ no file, or for the file at path, if provided.
 ---
 ---@param viewmode ViewMode|nil: optional, defaults to ViewMode.STANDALONE at the time of

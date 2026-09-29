@@ -4,22 +4,23 @@
   enable nvim git interactions/integrations
 --]]
 
-local Diffview = require 'plugins.config.git.diffview'
+local CodeDiff = require 'plugins.config.git.codediff'
 local Gitsigns = require 'plugins.config.git.gitsigns'
 local Lazygit = require 'plugins.config.git.lazygit'
+local Octo = require 'plugins.config.git.octo'
 
 local Plugins = require('utils.plugins.plugin').plugins
 
 return Plugins('git', {
-  ---- diff view: for looking at diffs...
+  ---- codediff: vscode-style diff/review workspace
   {
-    'sindrets/diffview.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    -- FIXME: these don't seem to be respected below...
-    opts = Diffview.opts(),
+    'esmuellert/codediff.nvim',
+    version = '*',
+    cmd = 'CodeDiff',
+    opts = CodeDiff.opts(),
 
     config = function(_, opts)
-      require('diffview').setup(opts)
+      require('codediff').setup(opts)
     end,
   },
   ---- gitsigns: visual cues about what's changed/is changing
@@ -37,5 +38,17 @@ return Plugins('git', {
     dependencies = { 'nvim-lua/plenary.nvim' },
 
     config = Lazygit.config,
+  },
+  ---- octo: github issues/PRs from within nvim
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = Octo.opts(),
+
+    config = Octo.config,
   },
 })

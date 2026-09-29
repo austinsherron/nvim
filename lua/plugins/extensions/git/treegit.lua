@@ -11,11 +11,12 @@ local function path_for_git_op(all)
   return ternary(all, Git.repo_root(), TreeNode.at_cursor():getpath())
 end
 
---- Opens a diff view of the cursor node file(s).
-function TreeGit.diffview()
+--- Opens a review of the cursor node file(s) against HEAD.
+function TreeGit.diff()
   local path = Git.repo_path(path_for_git_op())
+  local cmd = ('CodeDiff HEAD -- %s'):format(vim.fn.fnameescape(path))
 
-  require('diffview').open({ 'HEAD', '--', path })
+  Safe.call(vim.api.nvim_command, {}, cmd)
 end
 
 --- Toggles the git staging status of the cursor node file(s).

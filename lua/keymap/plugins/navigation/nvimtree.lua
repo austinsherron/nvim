@@ -141,7 +141,7 @@ local function custom_mappings(bufnr, api)
         end,
         { desc = 'Unstage repo' },
       },
-      { 'D', TreeGit.diffview, { desc = 'View diff' } },
+      { 'D', TreeGit.diff, { desc = 'View diff' } },
 
       -- misc bindings
       { 'C', TreeActions.copy_cursor_node_content, { desc = 'Copy file content' } },

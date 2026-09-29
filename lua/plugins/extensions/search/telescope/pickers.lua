@@ -116,49 +116,36 @@ local CLAUDE_DOC_PICKER_DISPLAY_OPTS = {
   columns = { { width = 20 }, { width = 60 }, { remaining = true } },
 }
 
---- Custom telescope picker for search Claude plans.
-function Pickers.search_claude_plans()
+local function search_claude_documents(doc_type)
   local repo_name = Git.repo_name()
-  local plans_dir = Path.concat(Env.claude_data_dir(), 'plans', repo_name)
+  local doc_dir = Path.concat(Env.claude_data_dir(), doc_type, repo_name)
 
-  if not File.is_dir(plans_dir) then
-    GetNotify().warn('No Claude plans directory found for repo=%s', { repo_name })
+  if not File.is_dir(doc_dir) then
+    GetNotify().warn('No Claude %s directory found for repo=%s', { doc_type, repo_name })
     return
   end
 
   builtins.find_files({
-    cwd = plans_dir,
+    cwd = doc_dir,
     find_command = { 'find', '.', '-maxdepth', '1', '-type', 'f' },
     entry_maker = EntryUtils.make_entry_maker(
       make_claude_doc_display_value,
-      plans_dir,
+      doc_dir,
       nil,
       CLAUDE_DOC_PICKER_DISPLAY_OPTS
     ),
-    prompt_title = 'Search Claude Plans',
+    prompt_title = 'Search Claude ' .. String.capitalize(doc_type),
   })
 end
 
 --- Custom telescope picker for search Claude plans.
+function Pickers.search_claude_plans()
+  search_claude_documents 'plans'
+end
+
+--- Custom telescope picker for search Claude plans.
 function Pickers.search_claude_handoffs()
-  local handoffs_dir = Path.concat(Env.claude_config_dir(), 'handoffs')
-
-  if not File.is_dir(handoffs_dir) then
-    GetNotify().warn 'No Claude handoffs directory found'
-    return
-  end
-
-  builtins.find_files({
-    cwd = handoffs_dir,
-    find_command = { 'find', '.', '-maxdepth', '1', '-type', 'f' },
-    entry_maker = EntryUtils.make_entry_maker(
-      make_claude_doc_display_value,
-      handoffs_dir,
-      nil,
-      CLAUDE_DOC_PICKER_DISPLAY_OPTS
-    ),
-    prompt_title = 'Search Claude Handoffs',
-  })
+  search_claude_documents 'handoffs'
 end
 
 return Pickers
