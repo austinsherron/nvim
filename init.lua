@@ -2,6 +2,10 @@
 
 require 'utils.globals' -- import globals before doing anything else
 
+---- diagnostics ---------------------------------------------------------------
+
+require('core.exit_trace').setup() -- must wrap vim.call before plugins load
+
 ---- bootstrap -----------------------------------------------------------------
 
 Safe.require 'core.bootstrap' -- "bootstrap" settings must come first
